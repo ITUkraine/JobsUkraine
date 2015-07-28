@@ -13,7 +13,7 @@
 		<h1>Register new candidate</h1>
 		<table>
 			<form:form method="POST" action="regCandidate">
-				<form:form modelAttribute="loginInfo">
+				<form:form modelAttribute="loginInfo" method="POST">
 					<tr>
 						<td>Login:</td>
 						<td><form:input path="login" size="30" /></td>
@@ -24,7 +24,7 @@
 					</tr>
 					<tr>
 				</form:form>
-				<form:form modelAttribute="candidate">
+				<form:form modelAttribute="candidate" method="POST">
 					<tr>
 						<td>Name:</td>
 						<td><form:input path="name" size="30" /></td>
