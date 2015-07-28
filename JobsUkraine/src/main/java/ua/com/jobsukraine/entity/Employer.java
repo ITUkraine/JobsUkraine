@@ -2,6 +2,8 @@ package ua.com.jobsukraine.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Employer {
@@ -9,6 +11,7 @@ public class Employer {
 	@Id
 	private String login;
 
+	private String name;
 	private String email;
 	private String phone;
 	private String adress;
@@ -21,6 +24,10 @@ public class Employer {
 	// type of work the company looking to hire for
 	// country, city they are looking to hire
 
+	@OneToOne
+	@MapsId
+	private User user;
+	
 	public Employer() {
 
 	}
@@ -43,6 +50,14 @@ public class Employer {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -95,8 +110,9 @@ public class Employer {
 
 	@Override
 	public String toString() {
-		return "Employer [login=" + login + ", email=" + email + ", phone=" + phone + ", adress=" + adress
-				+ ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL + "]\n";
+		return "Employer [login=" + login + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress="
+				+ adress + ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL
+				+ "]\n";
 	}
 
 }
