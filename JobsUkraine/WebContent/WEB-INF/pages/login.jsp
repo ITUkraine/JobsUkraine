@@ -8,6 +8,7 @@
 <title>Log In</title>
 </head>
 <body>
+<%@ include file="navigation.jsp" %>
 	<h1>Welcome!</h1>
 <table>
 	<form:form action="" commandName="loginForm">

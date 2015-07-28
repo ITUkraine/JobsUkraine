@@ -16,7 +16,7 @@ public class Candidate extends Person {
 
 	@Column(name = "date")
 	@Temporal(TemporalType.DATE)
-	private Date date = new Date();
+	private Date date;
 
 	@Column(name = "address")
 	private String address;
@@ -24,12 +24,12 @@ public class Candidate extends Person {
 	@Column(name = "primary_skills")
 	private String primarySkills;
 
-	@Column(name = "sity")
-	private String sityWhereLookingForWork;
+	@Column(name = "city")
+	private String cityWhereLookingForWork;
 
 	@Column(name = "date_of_start")
 	@Temporal(TemporalType.DATE)
-	private Date dateStartToWork = new Date();
+	private Date dateStartToWork;
 
 	@Column(name = "experience")
 	private String experience;
@@ -44,7 +44,7 @@ public class Candidate extends Person {
 	private String dreamJob;
 
 	@Column(name = "education ")
-	private String Education;
+	private String education;
 
 	public Candidate() {
 
@@ -57,12 +57,12 @@ public class Candidate extends Person {
 		this.date = date;
 		this.address = address;
 		this.primarySkills = primarySkills;
-		this.sityWhereLookingForWork = sityWhereLookingForWork;
+		this.cityWhereLookingForWork = sityWhereLookingForWork;
 		this.dateStartToWork = dateStartToWork;
 		this.experience = experience;
 		this.cv = cv;
 		this.dreamJob = dreamJob;
-		Education = education;
+		this.education = education;
 	}
 
 	
@@ -92,11 +92,11 @@ public class Candidate extends Person {
 	}
 
 	public String getSityWhereLookingForWork() {
-		return sityWhereLookingForWork;
+		return cityWhereLookingForWork;
 	}
 
 	public void setSityWhereLookingForWork(String sityWhereLookingForWork) {
-		this.sityWhereLookingForWork = sityWhereLookingForWork;
+		this.cityWhereLookingForWork = sityWhereLookingForWork;
 	}
 
 	public Date getDateStartToWork() {
@@ -132,19 +132,19 @@ public class Candidate extends Person {
 	}
 
 	public String getEducation() {
-		return Education;
+		return education;
 	}
 
 	public void setEducation(String education) {
-		Education = education;
+		this.education = education;
 	}
 
 	@Override
 	public String toString() {
 		return "Candidate [ date=" + date + ", address=" + address + ", primarySkills="
-				+ primarySkills + ", sityWhereLookingForWork=" + sityWhereLookingForWork + ", dateStartToWork="
+				+ primarySkills + ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork="
 				+ dateStartToWork + ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob
-				+ ", Education=" + Education + "]\n";
+				+ ", Education=" + education + "]\n";
 	}
 
 }

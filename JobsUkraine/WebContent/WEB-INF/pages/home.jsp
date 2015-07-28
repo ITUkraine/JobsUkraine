@@ -9,13 +9,15 @@
 </head>
 <body>
 	<%@ include file="navigation.jsp" %>
+	<br>
+	<br>
 	<center>
 		<ul id="menu">
 			<li>
-				<a href="goRegCandidate">  Home  </a>
+				<a href="regCandidate">  Reg like candidate  </a>
 			</li>
 			<li>
-				<a href="goRegEmployer">  Employers  </a>
+				<a href="regEmployer">  Reg like employer  </a>
 			</li>
 		</ul>
 	</center>
