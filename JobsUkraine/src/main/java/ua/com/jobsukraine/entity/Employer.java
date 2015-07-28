@@ -1,9 +1,13 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+
+import ua.com.jobsukraine.entity.enums.Categories;
 
 @Entity
 public class Employer {
@@ -21,19 +25,19 @@ public class Employer {
 	private String pictureURL;
 
 	// TODO fields to add
-	// type of work the company looking to hire for
+	private ArrayList<Categories> categories;
 	// country, city they are looking to hire
 
 	@OneToOne
 	@MapsId
 	private User user;
-	
+
 	public Employer() {
 
 	}
 
 	public Employer(String login, String email, String phone, String adress, String description, String website,
-			String pictureURL) {
+			String pictureURL, ArrayList<Categories> categories) {
 		super();
 		this.login = login;
 		this.email = email;
@@ -42,6 +46,7 @@ public class Employer {
 		this.description = description;
 		this.website = website;
 		this.pictureURL = pictureURL;
+		this.categories = categories;
 	}
 
 	public String getLogin() {
@@ -108,11 +113,23 @@ public class Employer {
 		this.pictureURL = pictureURL;
 	}
 
+	public ArrayList<Categories> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(ArrayList<Categories> categories) {
+		this.categories = categories;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Employer [login=" + login + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress="
 				+ adress + ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL
-				+ "]\n";
+				+ ", categories=" + categories + "]\n";
 	}
 
 }
