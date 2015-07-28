@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class LoginInfo {
@@ -13,29 +13,21 @@ public class LoginInfo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@OneToMany
-	private int role_id;
-
 	private String login;
 	private String password;
+
+	@ManyToOne
+	private Role role;
 
 	public LoginInfo() {
 	}
 
-	public LoginInfo(int id, int role_id, String login, String password) {
+	public LoginInfo(int id, Role role_id, String login, String password) {
 		super();
 		this.id = id;
-		this.role_id = role_id;
+
 		this.login = login;
 		this.password = password;
-	}
-
-	public int getRole_id() {
-		return role_id;
-	}
-
-	public void setRole_id(int role_id) {
-		this.role_id = role_id;
 	}
 
 	public String getLogin() {
@@ -60,6 +52,6 @@ public class LoginInfo {
 
 	@Override
 	public String toString() {
-		return "LoginInfo [id=" + id + ", role_id=" + role_id + ", login=" + login + ", password=" + password + "]\n";
+		return "LoginInfo [id=" + id + ", role_id=" + ", login=" + login + ", password=" + password + "]\n";
 	}
 }

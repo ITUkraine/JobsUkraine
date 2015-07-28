@@ -1,19 +1,17 @@
 package ua.com.jobsukraine.entity;
 
-import java.util.ArrayList;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-
-import ua.com.jobsukraine.entity.enums.Categories;
 
 @Entity
 public class Employer {
 
 	@Id
-	private String login;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
 	private String name;
 	private String email;
@@ -25,36 +23,28 @@ public class Employer {
 	private String pictureURL;
 
 	// TODO fields to add
-	private ArrayList<Categories> categories;
+	// private ArrayList<Categories> categories;
 	// country, city they are looking to hire
 
 	@OneToOne
-	@MapsId
-	private User user;
+	private LoginInfo info;
 
 	public Employer() {
 
 	}
 
-	public Employer(String login, String email, String phone, String adress, String description, String website,
-			String pictureURL, ArrayList<Categories> categories) {
+	public Employer(String email, String phone, String adress, String description, String website, String pictureURL) {
 		super();
-		this.login = login;
 		this.email = email;
 		this.phone = phone;
 		this.adress = adress;
 		this.description = description;
 		this.website = website;
 		this.pictureURL = pictureURL;
-		this.categories = categories;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public int getLogin() {
+		return id;
 	}
 
 	public String getName() {
@@ -113,23 +103,10 @@ public class Employer {
 		this.pictureURL = pictureURL;
 	}
 
-	public ArrayList<Categories> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(ArrayList<Categories> categories) {
-		this.categories = categories;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	@Override
 	public String toString() {
-		return "Employer [login=" + login + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress="
-				+ adress + ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL
-				+ ", categories=" + categories + "]\n";
+		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress=" + adress
+				+ ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL + "]\n";
 	}
 
 }
