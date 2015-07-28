@@ -15,4 +15,19 @@ public class HomeController {
 	public String goLogin(){
 		return "login";
 	}
+	
+	@RequestMapping(value="/contacts")
+	public String goContacts(){
+		return "contacts";
+	}
+	
+	@RequestMapping(value="/employers")
+	public String goEmployers(){
+		return "employers";
+	}
+	
+	@RequestMapping(value="/candidates")
+	public String goCandidates(){
+		return "candidates";
+	}
 }
