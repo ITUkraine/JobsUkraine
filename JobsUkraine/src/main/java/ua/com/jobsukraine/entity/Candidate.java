@@ -17,7 +17,57 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "candidate")
 public class Candidate {
+	public Candidate() {
+		
+	}
 	
+	
+	
+
+
+	public Candidate(String name, String lastName, Date date, String email, String mobileNumber, String address, //constructor for regestriation
+			String primarySkills, String sityWhereLookingForWork, Date dateStartToWork) {
+		super();
+		this.name = name;
+		this.lastName = lastName;
+		this.date = date;
+		this.email = email;
+		this.mobileNumber = mobileNumber;
+		this.address = address;
+		this.primarySkills = primarySkills;
+		this.sityWhereLookingForWork = sityWhereLookingForWork;
+		this.dateStartToWork = dateStartToWork;
+	}
+
+
+
+
+
+	public Candidate(User user, String login, String name, String lastName, Date date, String email,		// contr with all fields
+			String mobileNumber, String address, String primarySkills, String sityWhereLookingForWork,
+			Date dateStartToWork, String experience, String cv, String dreamJob, String education) {
+		super();
+		this.user = user;
+		this.login = login;
+		this.name = name;
+		this.lastName = lastName;
+		this.date = date;
+		this.email = email;
+		this.mobileNumber = mobileNumber;
+		this.address = address;
+		this.primarySkills = primarySkills;
+		this.sityWhereLookingForWork = sityWhereLookingForWork;
+		this.dateStartToWork = dateStartToWork;
+		this.experience = experience;
+		this.cv = cv;
+		this.dreamJob = dreamJob;
+		Education = education;
+	}
+
+
+
+
+
 	@OneToOne
 	@MapsId
 	private User user;
@@ -181,6 +231,15 @@ public class Candidate {
 	public void setEducation(String education) {
 		Education = education;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Candidate [name=" + name + ", lastName=" + lastName + ", email=" + email + ", mobileNumber="
+				+ mobileNumber + ", address=" + address + ", primarySkills=" + primarySkills + ", Education="
+				+ Education + "]\n";
+	}
+	
 	
 
 }
