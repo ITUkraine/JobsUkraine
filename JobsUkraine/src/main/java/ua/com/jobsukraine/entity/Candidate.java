@@ -2,6 +2,7 @@ package ua.com.jobsukraine.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,8 +60,8 @@ public class Candidate {
 	@Column(name = "CV")
 	private String cv;
 	
-	@Column(name = "all_skils")
-	private ArrayList<String> allSkisls;
+//	@Column(name = "all_skills")	create category enam or class
+//	private List<String> allSkills; 
 	
 	@Column(name = "dream_job")
 	private String dreamJob;
@@ -164,13 +165,6 @@ public class Candidate {
 		this.cv = cv;
 	}
 
-	public ArrayList<String> getAllSkisls() {
-		return allSkisls;
-	}
-
-	public void setAllSkisls(ArrayList<String> allSkisls) {
-		this.allSkisls = allSkisls;
-	}
 
 	public String getDreamJob() {
 		return dreamJob;
