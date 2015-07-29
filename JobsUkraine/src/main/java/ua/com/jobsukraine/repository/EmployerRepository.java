@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import ua.com.jobsukraine.entity.Employer;
 
-public interface EmployerRepository extends JpaRepository<Employer, String> {
+public interface EmployerRepository extends JpaRepository<Employer, Integer> {
 
 }
