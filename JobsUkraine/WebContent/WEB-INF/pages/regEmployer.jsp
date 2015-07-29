@@ -13,40 +13,40 @@
 <body>
 	<%@ include file="navigation.jsp"%>
 
-	<h1>Register new employer</h1>
-	<table>
+	<h2 align="center" style="color: red ">Register new employer</h2>
+	<table align="center">
 		<form:form modelAttribute="empForm" method="POST" action="regEmployerNew">
 			<tr>
 				<td>Login:</td>
-				<td><form:input path="info.login" size="30" /></td>
+				<td><form:input path="info.login" size="30" placeholder="your login" /></td>
 			</tr>
 			<tr>
-				<td>Pass:</td>
-				<td><form:password path="info.password" size="30" /></td>
+				<td>Password:</td>
+				<td><form:password path="info.password" size="31" placeholder="password"/></td>
 			</tr>
 			<tr>
 				<td>Name:</td>
-				<td><form:input path="name" size="30" /></td>
+				<td><form:input path="name" size="30" placeholder="name"/></td>
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td><form:input path="email" size="30" /></td>
+				<td><form:input path="email" size="30" placeholder="email@url.com"/></td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td><form:input path="phone" size="30" /></td>
+				<td><form:input path="phone" size="30" placeholder="0XX-XX-XX-XX"/></td>
 			</tr>
 			<tr>
-				<td>Adress:</td>
-				<td><form:input path="adress" size="30" /></td>
+				<td>Address:</td>
+				<td><form:input path="adress" size="30" placeholder="City, Street..." /></td>
 			</tr>
 			<tr>
 				<td>Description:</td>
-				<td><form:textarea path="description" size="30" /></td>
+				<td><form:textarea path="description"  rows="3" cols="23" placeholder="something about your company"/></td>
 			</tr>
 			<tr>
 				<td>Website:</td>
-				<td><form:input path="website" size="30" /></td>
+				<td><form:input path="website" size="30" placeholder="http://www.yourwebsite.com"/></td>
 			</tr>
 			<tr>
 				<td>PictureURL:</td>
