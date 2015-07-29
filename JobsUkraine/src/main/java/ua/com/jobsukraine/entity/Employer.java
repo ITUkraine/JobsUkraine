@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Employer {
 
-	private String adress;
+	private String address;
 
 	private String description;
 	private String email;
@@ -37,14 +37,14 @@ public class Employer {
 		super();
 		this.email = email;
 		this.phone = phone;
-		this.adress = adress;
+		this.address = adress;
 		this.description = description;
 		this.website = website;
 		this.pictureURL = pictureURL;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
 	public String getDescription() {
@@ -79,8 +79,8 @@ public class Employer {
 		return website;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public void setDescription(String description) {
@@ -113,7 +113,7 @@ public class Employer {
 
 	@Override
 	public String toString() {
-		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress=" + adress
+		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress=" + address
 				+ ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL + "]\n";
 	}
 
