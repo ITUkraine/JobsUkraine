@@ -1,7 +1,6 @@
 package ua.com.jobsukraine.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,28 +13,28 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class Person {
 
+	@Column(name = "email")
+	private String email;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name = "name")
-	private String name;
+	@OneToOne
+	private LoginInfo info;
 
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "email")
-	private String email;
-
 	@Column(name = "mobileNumber")
 	private String mobileNumber;
 
-	@OneToOne
-	private LoginInfo info;
+	@Column(name = "name")
+	private String name;
 
 	public Person() {
 	}
-	
+
 	public Person(String name, String lastName, String email, String mobileNumber) {
 		super();
 		this.name = name;
@@ -44,40 +43,48 @@ public class Person {
 		this.mobileNumber = mobileNumber;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public int getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public LoginInfo getInfo() {
+		return info;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getName() {
+		return name;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+	public void setInfo(LoginInfo info) {
+		this.info = info;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

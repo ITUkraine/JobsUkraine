@@ -12,12 +12,16 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	
+
 	public Role() {
 	}
 
 	public Role(String name) {
 		this.name = name;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -26,10 +30,6 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	@Override

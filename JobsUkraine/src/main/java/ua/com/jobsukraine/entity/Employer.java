@@ -9,25 +9,25 @@ import javax.persistence.OneToOne;
 @Entity
 public class Employer {
 
+	private String adress;
+
+	private String description;
+	private String email;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
+	@OneToOne
+	private LoginInfo info;
 	private String name;
-	private String email;
-	private String phone;
-	private String adress;
-	private String description;
 
-	private String website; // can be changed to URL
+	private String phone;
 	private String pictureURL;
 
 	// TODO fields to add
 	// private ArrayList<Categories> categories;
 	// country, city they are looking to hire
 
-	@OneToOne
-	private LoginInfo info;
+	private String website; // can be changed to URL
 
 	public Employer() {
 
@@ -43,6 +43,22 @@ public class Employer {
 		this.pictureURL = pictureURL;
 	}
 
+	public String getAdress() {
+		return adress;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public LoginInfo getInfo() {
+		return info;
+	}
+
 	public int getLogin() {
 		return id;
 	}
@@ -51,56 +67,48 @@ public class Employer {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPhone() {
 		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getAdress() {
-		return adress;
-	}
-
-	public void setAdress(String adress) {
-		this.adress = adress;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getWebsite() {
-		return website;
-	}
-
-	public void setWebsite(String website) {
-		this.website = website;
 	}
 
 	public String getPictureURL() {
 		return pictureURL;
 	}
 
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setInfo(LoginInfo info) {
+		this.info = info;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public void setPictureURL(String pictureURL) {
 		this.pictureURL = pictureURL;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	@Override
