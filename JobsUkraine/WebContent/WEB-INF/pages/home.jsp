@@ -11,8 +11,7 @@
 <link>
 </head>
 <body>
-	<%@ include file="nav.jsp"%>
-	<br>
+	<%@ include file="header.jsp"%>
 	<br>
 	<center>
 		<ul>
@@ -20,5 +19,6 @@
 			<li><a href="regEmployer"> Reg like employer </a></li>
 		</ul>
 	</center>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

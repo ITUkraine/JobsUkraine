@@ -11,7 +11,7 @@
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
-	<%@ include file="nav.jsp" %>
-	<h1 align="center">Contacts</h1>
+	<%@ include file="header.jsp"%>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

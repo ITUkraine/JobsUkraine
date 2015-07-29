@@ -7,13 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="shortcut icon" href="<c:url value="/resources/pictures/icon.png" />">
-<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
-	rel="stylesheet">
+<%-- <link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
+	rel="stylesheet"> --%>
 <title>Log In</title>
 </head>
 <body>
-	<%@ include file="nav.jsp"%>
+	<%@ include file="header.jsp"%>
+	<br>
 	<h1 align="center">Enter your login and password</h1>
+	<br>
 	<div align="center">
 		<div class="row">
 			<div class="col-lg-3 col-md-4"></div>
@@ -33,5 +35,6 @@
 			<div class="col-lg-3 col-md-4"></div>
 		</div>
 	</div>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

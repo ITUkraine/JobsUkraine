@@ -11,7 +11,7 @@
 <link rel="shortcut icon" href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
-	<%@ include file="nav.jsp"%>
+	<%@ include file="header.jsp"%>
 
 	<h2 align="center">Register new employer</h2>
 	<table align="center">
@@ -59,5 +59,6 @@
 			</tr>
 		</form:form>
 	</table>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

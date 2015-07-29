@@ -9,7 +9,10 @@
 <link rel="shortcut icon" href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
-	<%@ include file="nav.jsp"%>
+	
+	<%@ include file="header.jsp"%>
 	<h1>Welcome!</h1>
+	<%@ include file="footer.jsp"%>
+	
 </body>
 </html>

@@ -8,10 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registration</title>
-<link rel="shortcut icon" href="<c:url value="/resources/pictures/icon.png" />">
+<link rel="shortcut icon"
+	href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
-	<%@ include file="nav.jsp"%>
+	<%@ include file="header.jsp"%>
 	<center>
 		<h1>Register new candidate</h1>
 		<br>
@@ -90,5 +91,6 @@
 			</form:form>
 		</table>
 	</center>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
