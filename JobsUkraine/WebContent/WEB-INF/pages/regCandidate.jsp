@@ -46,17 +46,19 @@
 					<td><form:input path="address" size="30" /></td>
 				</tr>
 				<tr>
-					<td>City:</td>
-					<td><form:input path="cityForWork" size="30" /></td>
+					<td>City for work:</td>
+					<td><form:input path="cityWhereLookingForWork" size="30" /></td>
 				</tr>
 				<tr>
 					<td>Birthday:</td>
-					<fmt:formatDate value="${candidate.dateOfBirth}" pattern="dd.MM.yyyy" />
+					<fmt:formatDate value="${candidate.dateOfBirth}"
+						pattern="dd.MM.yyyy" />
 					<td><form:input path="dateOfBirth" size="30" /></td>
 				</tr>
 				<tr>
 					<td>Start date:</td>
-					<fmt:formatDate value="${candidate.dateStartToWork}" pattern="dd.MM.yyyy" />
+					<fmt:formatDate value="${candidate.dateStartToWork}"
+						pattern="dd.MM.yyyy" />
 					<td><form:input path="dateStartToWork" size="30" /></td>
 				</tr>
 				<tr>
@@ -77,7 +79,7 @@
 				</tr>
 				<tr>
 					<td>Primary skills</td>
-					<td><form:textarea rows="3" cols="28" path="primarySkills"  /></td>
+					<td><form:textarea rows="3" cols="28" path="primarySkills" /></td>
 				</tr>
 				<tr>
 					<td></td>
