@@ -11,75 +11,12 @@
 	<%@ include file="navigation.jsp"%>
 	<center>
 		<h1>Register new candidate</h1>
-		<table>
-			<form:form method="POST" action="regCandidate" modelAttribute="">
-					<tr>
-						<td>Login:</td>
-						<td><form:input path="info.login" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><form:password path="info.password" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Name:</td>
-						<td><form:input path="name" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Last name:</td>
-						<td><form:input path="lastName" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Email:</td>
-						<td><form:input path="email" size="30" /></td>
-					</tr>
-					<%-- <tr>
-				<td>Birthday:</td>
-				<td><form:input path="date" size="30" /></td>
-			</tr> --%>
-					<tr>
-						<td>Phone:</td>
-						<td><form:input path="mobileNumber" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Address:</td>
-						<td><form:input path="address" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Primary skills:</td>
-						<td><form:textarea path="primarySkills" size="30" /></td>
-					</tr>
-					<tr>
-						<td>City:</td>
-						<td><form:input path="sityWhereLookingForWork" size="30" /></td>
-					</tr>
-					<%-- <tr>
-				<td>Start date:</td>
-				<td><form:input path="dateStartToWork" size="30" /></td>
-			</tr> --%>
-					<tr>
-						<td>Experience:</td>
-						<td><form:input path="experience" size="30" /></td>
-					</tr>
-					<tr>
-						<td>CV:</td>
-						<td><form:input path="cv" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Dream job:</td>
-						<td><form:input path="dreamJob" size="30" /></td>
-					</tr>
-					<tr>
-						<td>Education:</td>
-						<td><form:input path="education" size="30" /></td>
-					</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Register" /></td>
-					<td></td>
-				</tr>
-			</form:form>
-		</table>
+		<form:form action="regCandidate" modelAttribute="candidate" method="post">
+			<form:input path="info.login" />
+			<form:input path="info.password" />
+			<form:input path="cv" />
+			<input type="submit" value="Register" />
+		</form:form>
 	</center>
 </body>
 </html>
