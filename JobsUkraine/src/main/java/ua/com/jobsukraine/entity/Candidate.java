@@ -3,6 +3,7 @@ package ua.com.jobsukraine.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -10,6 +11,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "candidate")
+@DiscriminatorValue("2")
 public class Candidate extends Person {
 
 	@Column(name = "address")
