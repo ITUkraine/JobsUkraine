@@ -43,11 +43,9 @@ public class Category {
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + "]\n";
 	}
-	
+
 	@ManyToMany
-	@JoinTable(name = "Category_Candidate", 
-	joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , 
-	inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
 	private List<Candidate> Candidates;
 
 	public List<Candidate> getCandidates() {
@@ -56,6 +54,18 @@ public class Category {
 
 	public void setCandidates(List<Candidate> Candidates) {
 		this.Candidates = Candidates;
+	}
+	
+	@ManyToMany
+	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "Employer_id", referencedColumnName = "id") )
+	private List<Employer> Employers;
+
+	public List<Employer> getEmployers() {
+		return Employers;
+	}
+
+	public void setEmployers(List<Employer> Employers) {
+		this.Employers = Employers;
 	}
 
 }

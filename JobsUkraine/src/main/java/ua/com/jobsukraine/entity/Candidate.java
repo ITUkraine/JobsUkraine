@@ -146,10 +146,10 @@ public class Candidate extends Person {
 				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
 				+ "]\n";
 	}
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
 	private List<Category> Categorys;
-	
+
 	public List<Category> getCategorys() {
 		return Categorys;
 	}
@@ -157,5 +157,4 @@ public class Candidate extends Person {
 	public void setCategorys(List<Category> Categorys) {
 		this.Categorys = Categorys;
 	}
-
 }
