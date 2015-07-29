@@ -12,19 +12,15 @@
 	<center>
 		<h1>Register new candidate</h1>
 		<table>
-			<form:form method="POST" action="regCandidate">
-				<form:form modelAttribute="loginInfo" method="POST">
+			<form:form method="POST" action="regCandidate" modelAttribute="">
 					<tr>
 						<td>Login:</td>
-						<td><form:input path="login" size="30" /></td>
+						<td><form:input path="info.login" size="30" /></td>
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><form:password path="password" size="30" /></td>
+						<td><form:password path="info.password" size="30" /></td>
 					</tr>
-					<tr>
-				</form:form>
-				<form:form modelAttribute="candidate" method="POST">
 					<tr>
 						<td>Name:</td>
 						<td><form:input path="name" size="30" /></td>
@@ -77,7 +73,6 @@
 						<td>Education:</td>
 						<td><form:input path="education" size="30" /></td>
 					</tr>
-				</form:form>
 				<tr>
 					<td></td>
 					<td><input type="submit" value="Register" /></td>
