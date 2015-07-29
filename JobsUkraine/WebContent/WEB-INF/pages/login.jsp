@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
+	rel="stylesheet">
 <title>Log In</title>
 </head>
 <body>
@@ -12,22 +15,22 @@
 	<br>
 	<h1 align="center">Enter your login and password</h1>
 	<br>
-		<table align="center">
-			<form:form action="login" commandName="loginForm">
-				<tr>
-					<td>Login:</td>
-					<td><form:input path="login" size="30" /></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><form:password path="password" size="30" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td align="center"><input type="submit" value="Log In" /></td>
-					<td></td>
-				</tr>
-			</form:form>
-		</table>
+	<table align="center">
+		<tr>
+			<td><form:form action="login" method="POST"
+					commandName="loginInfo">
+					<div class="form-group" style="width: 300">
+						<label>Login</label> <input type="text" class="form-control"
+							placeholder="Login" name="login">
+					</div>
+					<div class="form-group" style="width: 300">
+						<label>Password</label> <input type="password"
+							class="form-control" placeholder="Password" name="password">
+					</div>
+					<button type="submit" class="btn btn-default">Log In</button>
+				</form:form>
+			<td>
+		</tr>
+	</table>
 </body>
 </html>
