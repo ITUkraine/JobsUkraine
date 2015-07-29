@@ -25,4 +25,9 @@ public class HomeController {
 	public String goCandidates(){
 		return "candidates";
 	}
+	
+	@RequestMapping(value="/aboutUs")
+	public String goAboutUs(){
+		return "aboutUs";
+	}
 }
