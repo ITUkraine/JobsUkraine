@@ -31,8 +31,8 @@ public abstract class Person {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "male")
-	private String male;
+	@Column(name = "sex")
+	private String sex;
 
 	@Column(name = "mobileNumber")
 	private String mobileNumber;
@@ -67,8 +67,8 @@ public abstract class Person {
 		return lastName;
 	}
 
-	public String getMale() {
-		return male;
+	public String getsex() {
+		return sex;
 	}
 
 	public String getMobileNumber() {
@@ -91,8 +91,8 @@ public abstract class Person {
 		this.lastName = lastName;
 	}
 
-	public void setMale(String male) {
-		this.male = male;
+	public void setsex(String sex) {
+		this.sex = sex;
 	}
 
 	public void setMobileNumber(String mobileNumber) {

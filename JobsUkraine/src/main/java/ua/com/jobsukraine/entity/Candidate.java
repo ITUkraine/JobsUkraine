@@ -1,10 +1,13 @@
 package ua.com.jobsukraine.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -142,6 +145,17 @@ public class Candidate extends Person {
 				+ ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork=" + dateStartToWork
 				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
 				+ "]\n";
+	}
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
+	private List<Category> Categorys;
+	
+	public List<Category> getCategorys() {
+		return Categorys;
+	}
+
+	public void setCategorys(List<Category> Categorys) {
+		this.Categorys = Categorys;
 	}
 
 }
