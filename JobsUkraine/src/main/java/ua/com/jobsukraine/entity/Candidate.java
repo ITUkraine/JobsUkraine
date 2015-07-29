@@ -1,15 +1,20 @@
 package ua.com.jobsukraine.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "candidate")
+@DiscriminatorValue("2")
 public class Candidate extends Person {
 
 	@Column(name = "address")
@@ -22,7 +27,6 @@ public class Candidate extends Person {
 	private String cv;
 
 	@Column(name = "date_of_birth")
-	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
 	@Column(name = "date_of_start")
@@ -71,7 +75,7 @@ public class Candidate extends Person {
 		return cv;
 	}
 
-	public Date getDate() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -107,7 +111,7 @@ public class Candidate extends Person {
 		this.cv = cv;
 	}
 
-	public void setDate(Date dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -141,6 +145,17 @@ public class Candidate extends Person {
 				+ ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork=" + dateStartToWork
 				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
 				+ "]\n";
+	}
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
+	private List<Category> Categorys;
+	
+	public List<Category> getCategorys() {
+		return Categorys;
+	}
+
+	public void setCategorys(List<Category> Categorys) {
+		this.Categorys = Categorys;
 	}
 
 }

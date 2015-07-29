@@ -1,9 +1,14 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Category {
@@ -37,6 +42,20 @@ public class Category {
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + "]\n";
+	}
+	
+	@ManyToMany
+	@JoinTable(name = "Category_Candidate", 
+	joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , 
+	inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+	private List<Candidate> Candidates;
+
+	public List<Candidate> getCandidates() {
+		return Candidates;
+	}
+
+	public void setCandidates(List<Candidate> Candidates) {
+		this.Candidates = Candidates;
 	}
 
 }
