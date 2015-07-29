@@ -8,8 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>JobsUkraine</title>
 <link rel="shortcut icon" href="http://s17.postimg.org/o81iqfbnf/icon.png">
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 	<%@ include file="navigation.jsp" %>
+	<h1 align="center">Contacts</h1>
 </body>
 </html>
