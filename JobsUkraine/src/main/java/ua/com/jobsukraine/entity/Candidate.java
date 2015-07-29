@@ -24,7 +24,6 @@ public class Candidate extends Person {
 	private String cv;
 
 	@Column(name = "date_of_birth")
-	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
 	@Column(name = "date_of_start")
@@ -45,7 +44,7 @@ public class Candidate extends Person {
 
 	@Column(name = "primary_skills")
 	private String primarySkills;
-	
+
 	public Candidate() {
 
 	}
@@ -73,7 +72,7 @@ public class Candidate extends Person {
 		return cv;
 	}
 
-	public Date getDate() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -109,7 +108,7 @@ public class Candidate extends Person {
 		this.cv = cv;
 	}
 
-	public void setDate(Date dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
