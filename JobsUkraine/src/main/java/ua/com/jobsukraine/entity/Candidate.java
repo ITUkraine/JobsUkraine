@@ -20,6 +20,9 @@ public class Candidate extends Person {
 	@Column(name = "address")
 	private String address;
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
+	private List<Category> Categories;
+
 	@Column(name = "city")
 	private String cityWhereLookingForWork;
 
@@ -36,11 +39,11 @@ public class Candidate extends Person {
 	@Column(name = "dream_job")
 	private String dreamJob;
 
-	@Column(name = "education ")
-	private String education;
-
 	// @Column(name = "all_skills") create category enam or class
 	// private List<String> allSkills;
+
+	@Column(name = "education ")
+	private String education;
 
 	@Column(name = "experience")
 	private String experience;
@@ -48,29 +51,35 @@ public class Candidate extends Person {
 	@Column(name = "primary_skills")
 	private String primarySkills;
 
-	private String cityForWork;
-
 	public Candidate() {
 
 	}
 
-	public Candidate(String name, String lastName, String email, String mobileNumber, Date dateOfBirth, String address,
-			String primarySkills, String sityWhereLookingForWork, Date dateStartToWork, String experience, String cv,
-			String dreamJob, String education) {
-		super(name, lastName, email, mobileNumber);
-		this.dateOfBirth = dateOfBirth;
+	public Candidate(String address, String cityWhereLookingForWork, String cv, Date dateOfBirth, Date dateStartToWork,
+			String dreamJob, String education, String experience, String primarySkills, List<Category> Categories) {
+		super();
 		this.address = address;
-		this.primarySkills = primarySkills;
-		this.cityWhereLookingForWork = sityWhereLookingForWork;
-		this.dateStartToWork = dateStartToWork;
-		this.experience = experience;
+		this.cityWhereLookingForWork = cityWhereLookingForWork;
 		this.cv = cv;
+		this.dateOfBirth = dateOfBirth;
+		this.dateStartToWork = dateStartToWork;
 		this.dreamJob = dreamJob;
 		this.education = education;
+		this.experience = experience;
+		this.primarySkills = primarySkills;
+		this.Categories = Categories;
 	}
 
 	public String getAddress() {
 		return address;
+	}
+
+	public List<Category> getCategories() {
+		return Categories;
+	}
+
+	public String getCityWhereLookingForWork() {
+		return cityWhereLookingForWork;
 	}
 
 	public String getCv() {
@@ -101,12 +110,16 @@ public class Candidate extends Person {
 		return primarySkills;
 	}
 
-	public String getCityForWork() {
-		return cityForWork;
-	}
-
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public void setCategories(List<Category> Categories) {
+		this.Categories = Categories;
+	}
+
+	public void setCityWhereLookingForWork(String cityWhereLookingForWork) {
+		this.cityWhereLookingForWork = cityWhereLookingForWork;
 	}
 
 	public void setCv(String cv) {
@@ -137,26 +150,11 @@ public class Candidate extends Person {
 		this.primarySkills = primarySkills;
 	}
 
-	public void setCityForWork(String cityForWork) {
-		this.cityForWork = cityForWork;
-	}
-
 	@Override
 	public String toString() {
 		return "Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills=" + primarySkills
-				+ ", sityWhereLookingForWork=" + cityForWork + ", dateStartToWork=" + dateStartToWork
+				+ ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork=" + dateStartToWork
 				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
 				+ "]\n";
-	}
-
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
-	private List<Category> Categorys;
-
-	public List<Category> getCategorys() {
-		return Categorys;
-	}
-
-	public void setCategorys(List<Category> Categorys) {
-		this.Categorys = Categorys;
 	}
 }
