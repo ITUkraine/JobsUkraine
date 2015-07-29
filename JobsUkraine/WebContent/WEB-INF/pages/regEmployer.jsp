@@ -13,7 +13,7 @@
 <body>
 	<%@ include file="navigation.jsp"%>
 
-	<h2 align="center" style="color: red ">Register new employer</h2>
+	<h2 align="center">Register new employer</h2>
 	<table align="center">
 		<form:form modelAttribute="empForm" method="POST" action="regEmployerNew">
 			<tr>
