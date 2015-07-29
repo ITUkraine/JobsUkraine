@@ -10,11 +10,6 @@ public class HomeController {
 	public String goHome(){
 		return "home";
 	}
-
-	@RequestMapping(value="/login")
-	public String goLogin(){
-		return "login";
-	}
 	
 	@RequestMapping(value="/contacts")
 	public String goContacts(){
