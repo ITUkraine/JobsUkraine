@@ -17,6 +17,8 @@ public class Employer {
 
 	private String address;
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Employers")
+	private List<Category> Categorys;
 	private String description;
 	private String email;
 	@Id
@@ -24,14 +26,15 @@ public class Employer {
 	private int id;
 	@OneToOne
 	private LoginInfo info;
-	private String name;
 
+	private String name;
 	private String phone;
-	private String pictureURL;
 
 	// TODO fields to add
 	// private ArrayList<Categories> categories;
 	// country, city they are looking to hire
+
+	private String pictureURL;
 
 	private String website; // can be changed to URL
 
@@ -39,11 +42,11 @@ public class Employer {
 
 	}
 
-	public Employer(String email, String phone, String adress, String description, String website, String pictureURL) {
+	public Employer(String email, String phone, String address, String description, String website, String pictureURL) {
 		super();
 		this.email = email;
 		this.phone = phone;
-		this.address = adress;
+		this.address = address;
 		this.description = description;
 		this.website = website;
 		this.pictureURL = pictureURL;
@@ -51,6 +54,10 @@ public class Employer {
 
 	public String getAddress() {
 		return address;
+	}
+
+	public List<Category> getCategorys() {
+		return Categorys;
 	}
 
 	public String getDescription() {
@@ -89,6 +96,10 @@ public class Employer {
 		this.address = address;
 	}
 
+	public void setCategorys(List<Category> Categorys) {
+		this.Categorys = Categorys;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -119,18 +130,7 @@ public class Employer {
 
 	@Override
 	public String toString() {
-		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", adress=" + address
+		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address
 				+ ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL + "]\n";
-	}
-
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Employers")
-	private List<Category> Categorys;
-
-	public List<Category> getCategorys() {
-		return Categorys;
-	}
-
-	public void setCategorys(List<Category> Categorys) {
-		this.Categorys = Categorys;
 	}
 }
