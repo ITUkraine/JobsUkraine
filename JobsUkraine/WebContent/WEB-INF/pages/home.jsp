@@ -12,7 +12,6 @@
 	<%@ include file="navigation.jsp" %>
 	<br>
 	<br>
-	<h1>Lol</h1>
 	<center>
 		<ul id="menu">
 			<li>

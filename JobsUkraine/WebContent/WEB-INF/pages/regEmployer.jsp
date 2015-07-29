@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><form:password path="info.password" size="31" placeholder="password"/></td>
+				<td><form:password path="info.password" size="30" placeholder="password"/></td>
 			</tr>
 			<tr>
 				<td>Name:</td>
@@ -38,11 +38,11 @@
 			</tr>
 			<tr>
 				<td>Address:</td>
-				<td><form:input path="adress" size="30" placeholder="City, Street..." /></td>
+				<td><form:input path="address" size="30" placeholder="City, Street..." /></td>
 			</tr>
 			<tr>
 				<td>Description:</td>
-				<td><form:textarea path="description"  rows="3" cols="23" placeholder="something about your company"/></td>
+				<td><form:textarea path="description"  rows="3" cols="28" placeholder="something about your company"/></td>
 			</tr>
 			<tr>
 				<td>Website:</td>

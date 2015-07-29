@@ -48,6 +48,8 @@ public class Candidate extends Person {
 	@Column(name = "primary_skills")
 	private String primarySkills;
 
+	private String cityForWork;
+
 	public Candidate() {
 
 	}
@@ -99,8 +101,8 @@ public class Candidate extends Person {
 		return primarySkills;
 	}
 
-	public String getSityWhereLookingForWork() {
-		return cityWhereLookingForWork;
+	public String getCityForWork() {
+		return cityForWork;
 	}
 
 	public void setAddress(String address) {
@@ -135,14 +137,14 @@ public class Candidate extends Person {
 		this.primarySkills = primarySkills;
 	}
 
-	public void setSityWhereLookingForWork(String sityWhereLookingForWork) {
-		this.cityWhereLookingForWork = sityWhereLookingForWork;
+	public void setCityForWork(String cityForWork) {
+		this.cityForWork = cityForWork;
 	}
 
 	@Override
 	public String toString() {
 		return "Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills=" + primarySkills
-				+ ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork=" + dateStartToWork
+				+ ", sityWhereLookingForWork=" + cityForWork + ", dateStartToWork=" + dateStartToWork
 				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
 				+ "]\n";
 	}
