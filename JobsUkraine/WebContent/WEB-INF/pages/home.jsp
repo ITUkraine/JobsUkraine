@@ -6,11 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>JobsUkraine</title>
 <link rel="shortcut icon" href="http://s17.postimg.org/o81iqfbnf/icon.png">
+<link>
 </head>
 <body>
 	<%@ include file="navigation.jsp" %>
 	<br>
 	<br>
+	<h1>Lol</h1>
 	<center>
 		<ul id="menu">
 			<li>
