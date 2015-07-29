@@ -45,7 +45,7 @@ public class Candidate extends Person {
 
 	@Column(name = "primary_skills")
 	private String primarySkills;
-
+	
 	public Candidate() {
 
 	}

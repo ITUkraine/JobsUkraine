@@ -12,11 +12,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "person")
-@DiscriminatorColumn(name="PRSN_TYPE", discriminatorType=DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "PRSN_TYPE", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Person {
 
 	@Column(name = "email")
@@ -31,6 +30,9 @@ public abstract class Person {
 
 	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "male")
+	private String male;
 
 	@Column(name = "mobileNumber")
 	private String mobileNumber;
@@ -65,6 +67,10 @@ public abstract class Person {
 		return lastName;
 	}
 
+	public String getMale() {
+		return male;
+	}
+
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -83,6 +89,10 @@ public abstract class Person {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public void setMale(String male) {
+		this.male = male;
 	}
 
 	public void setMobileNumber(String mobileNumber) {
