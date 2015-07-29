@@ -13,10 +13,11 @@
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
-	<div class="container">
+	<h1 align="center">Enter your login and password</h1>
+	<div align="center">
 		<div class="row">
-			<div class=".col-md-4"></div>
-			<div class=".col-md-4">
+			<div class="col-lg-3 col-md-4"></div>
+			<div class="col-lg-6 col-md-4">
 				<form:form action="login" method="POST" commandName="loginInfo">
 					<div class="form-group" style="width: 300">
 						<label>Login</label> <input type="text" class="form-control"
@@ -29,7 +30,7 @@
 					<button type="submit" class="btn btn-default">Log In</button>
 				</form:form>
 			</div>
-			<div class=".col-md-4"></div>
+			<div class="col-lg-3 col-md-4"></div>
 		</div>
 	</div>
 </body>
