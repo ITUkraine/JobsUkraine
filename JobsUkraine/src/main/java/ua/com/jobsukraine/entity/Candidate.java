@@ -14,9 +14,9 @@ public class Candidate extends Person {
 
 
 
-	@Column(name = "date")
+	@Column(name = "date_of_birth")
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	private Date dateOfBirth;
 
 	@Column(name = "address")
 	private String address;
@@ -50,11 +50,11 @@ public class Candidate extends Person {
 
 	}
 
-	public Candidate(String name, String lastName, String email, String mobileNumber, Date date,
+	public Candidate(String name, String lastName, String email, String mobileNumber, Date dateOfBirth,
 			String address, String primarySkills, String sityWhereLookingForWork, Date dateStartToWork,
 			String experience, String cv, String dreamJob, String education) {
 		super(name, lastName, email, mobileNumber);
-		this.date = date;
+		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.primarySkills = primarySkills;
 		this.cityWhereLookingForWork = sityWhereLookingForWork;
@@ -65,14 +65,12 @@ public class Candidate extends Person {
 		this.education = education;
 	}
 
-	
-
 	public Date getDate() {
-		return date;
+		return dateOfBirth;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getAddress() {
@@ -141,7 +139,7 @@ public class Candidate extends Person {
 
 	@Override
 	public String toString() {
-		return "Candidate [ date=" + date + ", address=" + address + ", primarySkills="
+		return "Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills="
 				+ primarySkills + ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork="
 				+ dateStartToWork + ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob
 				+ ", Education=" + education + "]\n";

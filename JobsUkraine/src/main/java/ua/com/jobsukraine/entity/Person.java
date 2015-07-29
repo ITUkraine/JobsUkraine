@@ -9,7 +9,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @MappedSuperclass
 
 @Table(name = "person")
@@ -30,19 +29,19 @@ public class Person {
 
 	@Column(name = "mobileNumber")
 	private String mobileNumber;
-	
+
 	@OneToOne
 	private LoginInfo info;
 
+	public Person() {
+	}
+	
 	public Person(String name, String lastName, String email, String mobileNumber) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.mobileNumber = mobileNumber;
-	}
-
-	public Person() {
 	}
 
 	public int getId() {
