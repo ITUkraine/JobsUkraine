@@ -46,26 +46,26 @@ public class Category {
 
 	@ManyToMany
 	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
-	private List<Candidate> Candidates;
+	private List<Candidate> candidates;
 
 	public List<Candidate> getCandidates() {
-		return Candidates;
+		return candidates;
 	}
 
-	public void setCandidates(List<Candidate> Candidates) {
-		this.Candidates = Candidates;
+	public void setCandidates(List<Candidate> candidates) {
+		this.candidates = candidates;
 	}
 	
 	@ManyToMany
-	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "Employer_id", referencedColumnName = "id") )
+	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )
 	private List<Employer> employers;
 
 	public List<Employer> getEmployers() {
 		return employers;
 	}
 
-	public void setEmployers(List<Employer> Employers) {
-		this.employers = Employers;
+	public void setEmployers(List<Employer> employers) {
+		this.employers = employers;
 	}
 
 }

@@ -17,7 +17,7 @@ public class Employer {
 
 	private String address;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Employers")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employers")
 	private List<Category> categorys;
 	private String description;
 	private String email;
@@ -96,8 +96,8 @@ public class Employer {
 		this.address = address;
 	}
 
-	public void setCategorys(List<Category> Categorys) {
-		this.categorys = Categorys;
+	public void setCategorys(List<Category> categorys) {
+		this.categorys = categorys;
 	}
 
 	public void setDescription(String description) {

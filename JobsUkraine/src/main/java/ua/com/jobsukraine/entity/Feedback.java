@@ -5,12 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity
 public class Feedback {
 
-	@ManyToOne
-	private Category category;
+//	@ManyToOne
+//	@MapsId
+//	private Category category;
 
 	private String comment;
 	@Id

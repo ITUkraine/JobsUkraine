@@ -22,7 +22,7 @@ public class Candidate extends Person {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
 	private List<Category> categories;
 
 	@Column(name = "city")
