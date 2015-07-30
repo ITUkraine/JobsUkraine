@@ -21,28 +21,18 @@
 	<br>
 	<br>
 	<div class="pure-g">
-		<div class="pure-u-1-5"></div>
-		<div class="pure-u-1-5"></div>
-		<div class="pure-u-1-5">
-			<h1>Registration<br></h1>
-		</div>
-		<div class="pure-u-1-5"></div>
-		<div class="pure-u-1-5"></div>
-	</div>
-	<br>
-	<div class="pure-g">
 		<div class="pure-u-1-4"></div>
-		<div class="pure-u-2-9">
-			<p class="perspective" style="display: inline-block;">			
-					<button onclick="location.href='regCandidate'" class="btn btn-8 btn-8c">I am candidate</button>
+		<div class="pure-u-1-4">
+			<p align="right" class="perspective" style="display: inline-block;">			
+					<button onclick="location.href='regCandidate'" class="btn btn-8 btn-8c">I'm candidate</button>
 			</p>
 		</div>
-		<div class="pure-u-2-9">
+		<div class="pure-u-1-4">
 			<p class="perspective" style="display: inline-block;">
-					<button onclick="location.href='regEmployer'" class="btn btn-8 btn-8d">I am employer</button>
+					<button onclick="location.href='regEmployer'" class="btn btn-8 btn-8d">I'm employer</button>
 			</p>
 		</div>
-		<div class="pure-u-2-9"></div>
+		<div class="pure-u-1-4"></div>
 	</div>
 
 	<%@ include file="footer.jsp"%>
