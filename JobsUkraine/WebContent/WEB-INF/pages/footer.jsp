@@ -11,8 +11,7 @@
 	href="<c:url value="/resources/pictures/icon.png" />">
 <link href="<c:url value="/resources/css/footer-distributed.css" />"
 	rel="stylesheet">
-<link href="<c:url value="/resources/css/demo.css" />"
-	rel="stylesheet">
+<link href="<c:url value="/resources/css/demo.css" />" rel="stylesheet">
 
 
 <!--[if lt IE 9]>
@@ -24,18 +23,24 @@
 	<footer class="footer-distributed">
 
 		<div class="footer-right">
-
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a>
-			<a href="#"><i class="fa fa-github"></i></a>
-
+			<a href="https://www.facebook.com/jobsukraine?fref=ts"><i class="fa fa-facebook"><img
+					style="width: 38px; height: 38px;"
+					src="<c:url value="/resources/css/images/facebook.png" />" /></i></a> <a
+				href="https://twitter.com/infoJobsUkraine"><i class="fa fa-twitter"><img
+					style="width: 38px; height: 38px;"
+					src="<c:url value="/resources/css/images/twitter.png" />" /></i></a> <a
+				href="https://www.linkedin.com/company/9411466"><i class="fa fa-linkedin"><img style="width: 38px; height: 38px;"
+					src="<c:url value="/resources/css/images/linkedin.png" />" /></i></a> <a href="http://vk.com/public91525529"><i
+				class="fa fa-github"><img style="width: 38px; height: 38px;"
+					src="<c:url value="/resources/css/images/vk.png" />" /></i></a>
 		</div>
 
 		<div class="footer-left">
 
 			<p class="footer-links">
-				<a href="/JobsUkraine">Home</a> · <a href="employers">Employers</a> · <a href="candidates">Candidates</a>
-				· <a href="aboutUs">About Us</a> · <a href="contacts">Contact</a>
+				<a href="/JobsUkraine">Home</a> · <a href="employers">Employers</a>
+				· <a href="candidates">Candidates</a> · <a href="aboutUs">About
+					Us</a> · <a href="contacts">Contact</a>
 			</p>
 
 			<p>JobsUkraine &copy; 2015</p>

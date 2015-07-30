@@ -27,7 +27,7 @@ textarea { overflow: auto; }
 
 .myshell { margin: 0 auto; width: 950px; }
 
-.myheader { background: url(images/header.png) repeat-x 0 0; height: 70px; padding: 20px 0 0 0;  }
+.myheader { background: #dfe0e1 url(images/header.png) repeat-x 0 0; height: 70px; padding: 20px 0 0 0;  }
 
 #logo { width: 300px; float: left; }
 #logo a { height: 60px; width: 300px; display: block; background: url(images/logo.png) no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
