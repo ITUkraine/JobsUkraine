@@ -10,7 +10,7 @@
 }
 
 /* General button style (reset) */
-.btn {
+.mybtn {
 	border: none;
 	font-family: inherit;
 	font-size: inherit;
@@ -30,7 +30,7 @@
 	transition: all 0.3s;
 }
 
-.btn:after {
+.mybtn:after {
 	content: '';
 	position: absolute;
 	z-index: -1;
@@ -40,7 +40,7 @@
 }
 
 /* Pseudo elements for icons */
-.btn:before,
+.mybtn:before,
 .icon-heart:after,
 .icon-star:after,
 .icon-plus:after,

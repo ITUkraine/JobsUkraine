@@ -9,28 +9,35 @@
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/forms.css" />">
-	<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/buttons.css" />">
+	href="<c:url value="/resources/css/bootstrap/bootstrap.css" />">
 
 <title>Log In</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
 	<br>
-	<h1 align="center">Enter your login and password</h1>
 	<br>
-	<div align="center">
-		<form:form class="pure-form pure-form-stacked" commandName="loginForm" action="candidateOffice">
-			<fieldset>
-				Login:
-				<form:input path="login" size="40"/> 
-				Password:
-				<form:input path="password" type="password" size="40"/>
-				<br>
-				<button type="submit" class="pure-button pure-button-active" style="width: 120px; height: 30px;">Log In</button>
-			</fieldset>
-		</form:form>
+	<div class="container">
+		<div class="raw">
+			<div class="col-md-4"></div>
+			<div class="form-group col-md-4">
+				<form:form commandName="loginForm" action="candidateOffice">
+					<fieldset>
+						<p>Login:</p>
+						<form:input class="form-control" path="login" size="40" />
+						<p>Password:</p>
+						<form:input class="form-control" path="password" type="password"
+							size="40" />
+						<br>
+						<div align="center">
+							<button type="submit" class="btn btn-default"
+								style="width: 100px;">Log In</button>
+						</div>
+					</fieldset>
+				</form:form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
 	</div>
 	<%@ include file="footer.jsp"%>
 </body>

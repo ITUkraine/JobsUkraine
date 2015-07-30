@@ -2720,10 +2720,16 @@ select[multiple].input-sm {
 .form-group-sm .form-control {
   height: 30px;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   border-radius: 3px;
 }
+
+.form-group p{
+	font-size: 15px;
+	margin-bottom: 3px; 
+}
+
 .form-group-sm select.form-control {
   height: 30px;
   line-height: 30px;
@@ -4213,7 +4219,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 90px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -4332,6 +4338,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand > img {
   display: block;
+  margin-top: 1px;
+   margin-left: 250px;
 }
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
@@ -4534,8 +4542,27 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-right {
     float: right !important;
-    margin-right: -15px;
+    margin-right: 150px;
   }
+  
+   .navbar-right li{
+    margin-top: 25px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+.navbar-right ul li a:hover {
+	color: #77777b;
+}
+
+ /* .navbar-right { float: right; padding-top: 25px; }
+.navbar-right ul { list-style: none; list-style-position: outside; font-size: 14px; text-transform: uppercase; font-weight: bold; }
+.navbar-right ul li { float: left; padding: 0 0 0 44px; }
+.navbar-right ul li a { color: #77777b; }
+.navbar-right ul li a:hover ,
+.navbar-right ul li.active a { color: #2497e0; text-decoration: none; }  */
+  
   .navbar-right ~ .navbar-right {
     margin-right: 0;
   }

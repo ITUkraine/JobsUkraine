@@ -18,23 +18,32 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div align="center">
-		<form:form class="pure-form pure-form-stacked" modelAttribute="empForm"
-			action="addEmployerInfo" method="Post">
-			<fieldset>
+	<div class="container">
+		<div class="raw">
+			<div class="col-md-4"></div>
+			<div class="form-group col-md-4">
+				<form:form modelAttribute="empForm" action="addEmployerInfo"
+					method="Post">
+					<fieldset>
+						<p>Login:</p>
+						<form:input class="form-control" path="info.login" size="40" />
+						<p>Password:</p>
+						<form:input class="form-control" path="info.password"
+							type="password" size="40" />
+						<p>Confirm password:</p>
+						<form:input class="form-control" path="info.confirmPassword"
+							type="password" size="40" />
+						<br>
+						<div align="right">
+							<button type="submit" class="btn btn-default"
+								style="width: 120px;">Next</button>
+						</div>
+					</fieldset>
+				</form:form>
 
-				<h3 align="center">Put your login:</h3>
-				<form:input path="info.login" size="40" />
-				<h3 align="center">Put your password:</h3>
-				<form:input path="info.password" type="password" size="40" />
-				<h3 align="center">Confirm your password:</h3>
-				<form:input path="info.confirmPassword" type="password" size="40" />
-                
-				<button type="submit" class="pure-button pure-button-active"
-					style="width: 120px; height: 30px;">Next</button>
-
-			</fieldset>
-		</form:form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 </body>

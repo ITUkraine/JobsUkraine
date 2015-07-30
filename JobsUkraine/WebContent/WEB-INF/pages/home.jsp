@@ -9,7 +9,7 @@
 <title>JobsUkraine</title>
 <link href="<c:url value="/resources/css/btn/btn.css" />"
 	rel="stylesheet">
-<link href="<c:url value="/resources/css/pure/grids.css" />"
+<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
 	rel="stylesheet">
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
@@ -18,21 +18,26 @@
 <body>
 	<%@ include file="header.jsp"%>
 
-	<br>
-	<br>
-	<div class="pure-g">
-		<div class="pure-u-1-4"></div>
-		<div class="pure-u-1-4">
-			<p align="right" class="perspective" style="display: inline-block;">			
-					<button onclick="location.href='regCandidate'" class="btn btn-8 btn-8c">I'm candidate</button>
-			</p>
+	<div class="container">
+		<div class="col-lg-2 col-md-2"></div>
+		<div class="col-lg-8 col-md-8">
+			<h1 align="center">Registration</h1>
 		</div>
-		<div class="pure-u-1-4">
+		<div class="col-lg-2 col-md-2"></div>
+	</div>
+	<br>
+	<div class="container-fluid">
+		<div class="col-lg-2 col-md-2"></div>
+		<div align="center" class="col-lg-8 col-md-2">
 			<p class="perspective" style="display: inline-block;">
-					<button onclick="location.href='regEmployer'" class="btn btn-8 btn-8d">I'm employer</button>
+				<button onclick="location.href='regCandidate'"
+					class="mybtn btn-8 btn-8c">I'm candidate</button>
 			</p>
+			<p class="perspective" style="display: inline-block;">
+				<button onclick="location.href='regEmployer'"
+					class="mybtn btn-8 btn-8d">I'm employer</button>
 		</div>
-		<div class="pure-u-1-4"></div>
+		<div class="col-lg-2 col-md-2"></div>
 	</div>
 
 	<%@ include file="footer.jsp"%>

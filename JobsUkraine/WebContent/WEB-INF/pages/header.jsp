@@ -13,41 +13,21 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/flexslider.css" />"
 	rel="stylesheet">
-
-<script src="<c:url value="/resources/js/jquery-1.7.2.min.js" />"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/jquery.flexslider-min.js" />"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/functions.js" />"
-	type="text/javascript"></script>
-
-<!--[if lt IE 9]>
-		<script src="js/modernizr.custom.js"></script>
-	<![endif]-->
+<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
+	rel="stylesheet">
 
 </head>
 <body>
-		<header class="myheader">
-			<!-- shell -->
-			<div class="myshell">
-				<h1 id="logo">
-					<a href="/JobsUkraine">JobsUkraine</a>
-				</h1>
-				<!-- navigation -->
-				<nav id="mynavigation">
-					<ul>
-						<li><a href="/JobsUkraine">Home</a></li>
-						<li><a href="employers">Employers</a></li>
-						<li><a href="candidates">Candidates</a></li>
-						<li><a href="login">Log In</a></li>
-						<li><a href="aboutUs">About us</a></li>
-						<li><a href="contacts">Contacts </a></li>
-					</ul>
-				</nav>
-				<!-- navigation -->
-			</div>
-			<!-- end of shell -->
-		</header>
-		<!-- end of header -->
+	<nav class="navbar navbar-default navbar-fixed-*">
+		<div class="navbar-brand"><img src="<c:url value="/resources/css/images/logo.png" />"/></div>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="/JobsUkraine">Home</a></li>
+			<li><a href="employers">Employers</a></li>
+			<li><a href="candidates">Candidates</a></li>
+			<li><a href="login">Log In</a></li>
+			<li><a href="aboutUs">About Us</a></li>
+			<li><a href="contacts">Contacts</a></li>
+		</ul>
+	</nav>
 </body>
 </html>
