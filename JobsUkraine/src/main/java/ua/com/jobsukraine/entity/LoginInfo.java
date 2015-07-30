@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,14 +15,20 @@ public class LoginInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	@NotNull
-	@Size(min=4, max=20)
+	@Size(min = 4, max = 20)
 	private String login;
-	
+
 	@NotNull
-	@Size(min=8, max=20)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
+	@Size(min = 8, max = 20)
 	private String password;
+
+	@NotNull
+	@Pattern(regexp = "[a-zA-Z0-9]+")
+	@Size(min = 8, max = 20)
+	private String confirmPassword;
 
 	@ManyToOne
 	private Role role;
