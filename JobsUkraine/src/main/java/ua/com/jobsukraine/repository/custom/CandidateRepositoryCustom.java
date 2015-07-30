@@ -6,7 +6,7 @@ import ua.com.jobsukraine.entity.Candidate;
 
 public interface CandidateRepositoryCustom {
 
-	public List<Candidate> getRatingByCategory(String category);
+	public List<Candidate> getByCategoryOrderedByRating(String category, int top);
 	
 	public double getRating(String login);
 

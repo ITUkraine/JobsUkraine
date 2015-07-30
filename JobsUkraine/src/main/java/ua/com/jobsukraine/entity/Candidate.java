@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -62,6 +63,9 @@ public class Candidate extends Person {
 	@OneToMany
 	@JoinColumn(name = "candidat_id")
 	private List<Feedback> feedbacks;
+
+	@Transient
+	private double rating;
 
 	public Candidate() {
 
@@ -126,6 +130,14 @@ public class Candidate extends Person {
 		this.address = address;
 	}
 
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
@@ -167,6 +179,6 @@ public class Candidate extends Person {
 		return "Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills=" + primarySkills
 				+ ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork=" + dateStartToWork
 				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
-				+ "]\n";
+				+ ", Rating=" + rating + "]\n";
 	}
 }

@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.repository.custom.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,32 +16,28 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 	private EntityManager em;
 
 	@Override
-	// in work
-	@Deprecated
-	public List<Candidate> getRatingByCategory(String category) {
-		// "SELECT f,c,AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN
-		// c.feedbacks f GROUP BY c.id ORDER BY AVG_Rating DESC WHERE :category
-		// IN (SELECT ) "
+	public List<Candidate> getByCategoryOrderedByRating(String category, int top) {
 		TypedQuery<Object[]> query = em.createQuery(
-				"SELECT c,AVG(f.mark), ctgr AS AVG_Rating FROM Candidate c JOIN c.feedbacks f JOIN c.categories ctgr WHERE :category = ctgr.name GROUP BY c.id ORDER BY AVG_Rating DESC",
+				"SELECT c, AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.info info JOIN c.feedbacks f WHERE f.category.name = :category GROUP BY info.login ORDER BY AVG_Rating DESC",
 				Object[].class);
-		query.setParameter("category", "admin");
+		query.setParameter("category", category);
+		query.setMaxResults(top);
+		List<Candidate> result = new ArrayList<>(top);
 		for (Object o[] : query.getResultList()) {
-			System.out.print(((Candidate) o[0]).getName());
-			System.out.println("avg: " + (Double) o[1]);
-			System.out.println(o[2]);
+			((Candidate) o[0]).setRating((Double) o[1]);
+			result.add((Candidate) o[0]);
 		}
-		// System.out.println(query.getResultList());
+		System.out.println(result);
 		return null;
 	}
-	
-	public double getRating(String login){
-		TypedQuery<Object[]> query = em.createQuery(
+
+	@Override
+	public double getRating(String login) {
+		TypedQuery<Double> query = em.createQuery(
 				"SELECT AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.feedbacks f JOIN c.info info WHERE info.login = :login",
-				Object[].class);
+				Double.class);
 		query.setParameter("login", login);
-		 System.out.println(query.getSingleResult());
-		return 0.0;
+		return query.getSingleResult();
 	}
 
 	@Override
