@@ -1,14 +1,15 @@
 /* CSSTerm.com Simple CSS menu */
 
-.menu_simple ul {
+.menu_simple_right ul {
 	font-size: 18px;
     margin: 0; 
-    padding: ;
-    width:185px;
+    padding: 0;
+    width:317.5px;
     list-style-type: none;
+    float: right;
 }
 
-.menu_simple ul li a {
+.menu_simple_right ul li a {
     text-decoration: none;
     color: #77777b; 
     padding: 10.5px 11px;
@@ -17,7 +18,7 @@
     text-align: center;
 }
 
-.menu_simple ul li img {
+.menu_simple_right ul li img {
     text-decoration: none;
     color: #77777b; 
     padding: 10.5px 27.5px;
@@ -26,7 +27,7 @@
     text-align: center;
 }
 
-.menu_simple ul li p {
+.menu_simple_right ul li p {
     text-decoration: none;
     color: #000000; 
     padding: 10.5px 27.5px;
@@ -35,11 +36,11 @@
     text-align: center;
 }
  
-.menu_simple ul li a:visited {
+.menu_simple_right ul li a:visited {
     color: #77777b;
 }
  
-.menu_simple ul li a:hover, .menu_simple ul li .current {
+.menu_simple_right ul li a:hover, .menu_simple_right ul li .current {
     color: white;
     background-color: #77777b;
 }

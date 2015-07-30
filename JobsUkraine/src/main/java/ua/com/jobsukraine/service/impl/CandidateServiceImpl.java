@@ -40,4 +40,15 @@ public class CandidateServiceImpl implements CandidateService {
 		return cr.findOne(id);
 	}
 
+	@Override
+	public Candidate findByName(String name) {
+		return findByName(name);
+	}
+
+	@Override
+	public Candidate fingByLogin(String login) {
+		return cr.findByLogin(login);
+	}
+
+	
 }

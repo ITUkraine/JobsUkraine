@@ -26,6 +26,7 @@
 					<li><p>${candidate.info.login}</p></li>
 					<li><a href="candidateOffice">Profile</a></li>
 					<li><a href="vacancies">Vacancies</a></li>
+					<li><a href="vacancies">Search</a></li>
 					<li><a href="settings">Settings</a></li>
 				</ul>
 			</div>
@@ -41,16 +42,16 @@
 		<div class="pure-u-5-30">
 			<div class="menu_simple_right">
 				<ul>
-					<li><a href="candidateOffice">Vacancy #1</a></li>
-					<li><a href="vacancies">Vacancy #2</a></li>
-					<li><a href="settings">Vacancy #3</a></li>
-					<li><a href="candidateOffice">Vacancy #4</a></li>
-					<li><a href="vacancies">Vacancy #5</a></li>
-					<li><a href="settings">Vacancy #6</a></li>
-					<li><a href="candidateOffice">Vacancy #7</a></li>
-					<li><a href="candidateOffice">Vacancy #8</a></li>
-					<li><a href="vacancies">Vacancy #9</a></li>
-					<li><a href="settings">Vacancy #10</a></li>
+					<li><a href="candidateOffice">Candidate #1</a></li>
+					<li><a href="vacancies">Candidate #2</a></li>
+					<li><a href="settings">Candidate #3</a></li>
+					<li><a href="candidateOffice">Candidate #4</a></li>
+					<li><a href="vacancies">Candidate #5</a></li>
+					<li><a href="settings">Candidate #6</a></li>
+					<li><a href="candidateOffice">Candidate #7</a></li>
+					<li><a href="candidateOffice">Candidate #8</a></li>
+					<li><a href="vacancies">Candidate #9</a></li>
+					<li><a href="settings">Candidate #10</a></li>
 				</ul>
 			</div>
 		</div>

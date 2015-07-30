@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.LoginInfoService;
 import ua.com.jobsukraine.service.RoleService;
@@ -38,8 +39,14 @@ public class CandidateController {
 		lis.add(candidate.getInfo());
 		cs.add(candidate);
 		return "welcome";
-
 	}
-
+	
+	@RequestMapping(value="/candidateOffice", method=RequestMethod.POST)
+	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, 
+			Map<String,Object> model){
+		model.put("candidate", cs.fingByLogin(loginInfo.getLogin()));
+		System.out.println(loginInfo);
+		return "candidateOffice";
+	}
 	
 }
