@@ -27,8 +27,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 			((Candidate) o[0]).setRating((Double) o[1]);
 			result.add((Candidate) o[0]);
 		}
-		System.out.println(result);
-		return null;
+		return result;
 	}
 
 	@Override
