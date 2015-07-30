@@ -12,6 +12,11 @@ import javax.validation.constraints.Size;
 @Entity
 public class LoginInfo {
 
+	@NotNull
+	@Pattern(regexp = "[a-zA-Z0-9]+")
+	@Size(min = 8, max = 20)
+	private String confirmPassword;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -24,11 +29,6 @@ public class LoginInfo {
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Size(min = 8, max = 20)
 	private String password;
-
-	@NotNull
-	@Pattern(regexp = "[a-zA-Z0-9]+")
-	@Size(min = 8, max = 20)
-	private String confirmPassword;
 
 	@ManyToOne
 	private Role role;
@@ -44,32 +44,40 @@ public class LoginInfo {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public int getId() {
+		return id;
 	}
 
 	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	public String getPassword() {
 		return password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public int getId() {
-		return id;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
