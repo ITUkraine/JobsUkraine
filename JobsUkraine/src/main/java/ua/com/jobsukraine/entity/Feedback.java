@@ -4,14 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Feedback {
 
-//	@ManyToOne
-//	@MapsId
-//	private Category category;
+	@ManyToOne
+	private Category category;
 
 	private String comment;
 	@Id
@@ -29,6 +28,10 @@ public class Feedback {
 		this.comment = comment;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
 	public String getComment() {
 		return comment;
 	}
@@ -41,6 +44,10 @@ public class Feedback {
 		return mark;
 	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
@@ -48,7 +55,7 @@ public class Feedback {
 	public void setMark(Integer mark) {
 		this.mark = mark;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Feedback [id=" + id + ", mark=" + mark + ", comment=" + comment + "]\n";
