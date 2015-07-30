@@ -14,6 +14,25 @@
     padding: 10.5px 11px;
     background-color: #dfe0e1;
     display:block;
+    text-align: center;
+}
+
+.menu_simple ul li img {
+    text-decoration: none;
+    color: #77777b; 
+    padding: 10.5px 27.5px;
+    background-color: #dfe0e1;
+    display:block;
+    text-align: center;
+}
+
+.menu_simple ul li p {
+    text-decoration: none;
+    color: #000000; 
+    padding: 10.5px 27.5px;
+    background-color: #dfe0e1;
+    display:block;
+    text-align: center;
 }
  
 .menu_simple ul li a:visited {

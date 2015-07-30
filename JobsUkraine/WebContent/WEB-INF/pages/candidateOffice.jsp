@@ -15,10 +15,13 @@
 	<%@ include file="header.jsp"%>
 	<div class="pure-g">
 		<div class="pure-u-1-3">
+
 			<div class="menu_simple">
 				<ul>
-					<li><a href="candidateOffice"><img style="width: 100px; height: 150px;"
-					src="<c:url value="/resources/pictures/avatar/jpg" />" /></a></li>
+					<li><img
+							style="width: 130px; height: 120px;"
+							src="<c:url value="/resources/pictures/avatar.png" />" /></li>
+					<li><p>Candidate login</p></li>
 					<li><a href="candidateOffice">Profile</a></li>
 					<li><a href="vacancies">Vacancies</a></li>
 					<li><a href="settings">Settings</a></li>
