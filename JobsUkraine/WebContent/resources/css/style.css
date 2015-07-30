@@ -15,7 +15,7 @@ a { color: #65cbf8; text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }
 a img { border: 0; }
 
-article, aside, details, footer, header, menu, nav, section { display: block; }
+article, aside, details, footer, myheader, menu, nav, section { display: block; }
 input, textarea, select { font-size: 12px; font-family: arial, sans-serif; }
 textarea { overflow: auto; }
 
@@ -25,19 +25,19 @@ textarea { overflow: auto; }
 .right, .alignright { float: right; display: inline; }
 
 
-.shell { margin: 0 auto; width: 950px; }
+.myshell { margin: 0 auto; width: 950px; }
 
-.header { background: url(images/header.png) repeat-x 0 0; height: 70px; padding: 20px 0 0 0;  }
+.myheader { background: url(images/header.png) repeat-x 0 0; height: 70px; padding: 20px 0 0 0;  }
 
 #logo { width: 300px; float: left; }
 #logo a { height: 60px; width: 300px; display: block; background: url(images/logo.png) no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
 
-#navigation { float: right; padding-top: 25px; }
-#navigation ul { list-style: none; list-style-position: outside; font-size: 11px; text-transform: uppercase; font-weight: bold; }
-#navigation ul li { float: left; padding: 0 0 0 44px; }
-#navigation ul li a { color: #77777b; }
-#navigation ul li a:hover ,
-#navigation ul li.active a { color: #2497e0; text-decoration: none; }
+#mynavigation { float: right; padding-top: 25px; }
+#mynavigation ul { list-style: none; list-style-position: outside; font-size: 11px; text-transform: uppercase; font-weight: bold; }
+#mynavigation ul li { float: left; padding: 0 0 0 44px; }
+#mynavigation ul li a { color: #77777b; }
+#mynavigation ul li a:hover ,
+#mynavigation ul li.active a { color: #2497e0; text-decoration: none; }
 
 .main { padding-top: 42px;  }
 .main h2 { font-size: 24px; line-height: 24px;  font-weight: normal; color: #424242; }

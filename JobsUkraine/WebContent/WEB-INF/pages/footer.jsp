@@ -27,10 +27,10 @@
 
 </head>
 <body>
-		<div id="footer-push"></div>
-	<!-- footer -->
+		<!-- <div id="footer-push"></div>
+	footer
 	<div id="footer">
-		<!-- shell -->
+		shell
 		<div class="shell">
 			<div class="widgets">
 				
@@ -85,11 +85,11 @@
 				</div>
 				<div class="cl">&nbsp;</div>
 			</div>
-			<!-- end of widgets -->
+			end of widgets
 
-			<!-- footer-bottom -->
+			footer-bottom
 			<div class="footer-bottom">
-				<!-- footer-nav -->
+				footer-nav
 				<div class="footer-nav">
 					<ul>
 						<li class="active"><a href="#">HOME</a></li>
@@ -99,13 +99,13 @@
 						<li><a href="#">CONTACTS</a> </li>
 					</ul>
 				</div>
-				<!-- end of footer-nav -->
+				end of footer-nav
 				<p class="copy">&copy; JobsUkraine. Design by <a href="http://jobsukraine.com" target="_blank">JobsUkraine</a></p>
 			</div>
-			<!-- end of footer-bottom -->
+			end of footer-bottom
 		</div>
-		<!-- end of shell -->
+		end of shell
 	</div>
-	<!-- end of footer -->
+	end of footer -->
 </body>
 </html>

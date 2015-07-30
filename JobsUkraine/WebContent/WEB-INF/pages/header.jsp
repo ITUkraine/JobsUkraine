@@ -27,14 +27,14 @@
 
 </head>
 <body>
-		<header class="header">
+		<header class="myheader">
 			<!-- shell -->
-			<div class="shell">
+			<div class="myshell">
 				<h1 id="logo">
 					<a href="/JobsUkraine">JobsUkraine</a>
 				</h1>
 				<!-- navigation -->
-				<nav id="navigation">
+				<nav id="mynavigation">
 					<ul>
 						<li><a href="/JobsUkraine">Home</a></li>
 						<li><a href="employers">Employers</a></li>
