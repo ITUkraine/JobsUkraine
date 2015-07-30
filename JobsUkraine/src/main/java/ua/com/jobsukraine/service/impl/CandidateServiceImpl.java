@@ -35,4 +35,9 @@ public class CandidateServiceImpl implements CandidateService {
 		return cr.findAll();
 	}
 
+	@Override
+	public Candidate find(int id) {
+		return cr.findOne(id);
+	}
+
 }

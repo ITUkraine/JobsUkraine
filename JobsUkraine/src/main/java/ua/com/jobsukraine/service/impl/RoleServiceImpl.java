@@ -21,7 +21,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		rr.delete(id);
 	}
 
@@ -38,6 +38,11 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role findByName(String name) {
 		return rr.findByName(name);
+	}
+
+	@Override
+	public Role find(int id) {
+		return rr.findOne(id);
 	}
 
 }

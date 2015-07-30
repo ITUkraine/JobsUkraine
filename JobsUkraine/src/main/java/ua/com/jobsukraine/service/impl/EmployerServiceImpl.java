@@ -37,4 +37,9 @@ public class EmployerServiceImpl  implements EmployerService{
 		return ep.findAll();
 	}
 
+	@Override
+	public Employer find(int id) {
+		return ep.findOne(id);
+	}
+
 }

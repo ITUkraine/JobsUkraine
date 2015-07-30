@@ -35,4 +35,9 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 		return lir.findAll();
 	}
 
+	@Override
+	public LoginInfo find(int id) {
+		return lir.findOne(id);
+	}
+
 }
