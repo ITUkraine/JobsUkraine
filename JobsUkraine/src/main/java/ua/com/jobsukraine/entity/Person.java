@@ -11,6 +11,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,6 +23,7 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "PRSN_TYPE", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Person {
 
+	@Email
 	@Column(name = "email")
 	private String email;
 
@@ -28,15 +34,24 @@ public abstract class Person {
 	@OneToOne
 	private LoginInfo info;
 
+	@NotNull
+	@Size(min = 3, max = 20)
+	@Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
 	@Column(name = "last_name")
 	private String lastName;
 
+	@Pattern(regexp = "×îëîâ³ê|Æ³íêà")
 	@Column(name = "sex")
 	private String sex;
 
+	@NotNull
+	@Pattern(regexp = "(^[0][0-9]{9})")
 	@Column(name = "mobileNumber")
 	private String mobileNumber;
 
+	@NotNull
+	@Size(min = 3, max = 25)
+	@Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
 	@Column(name = "name")
 	private String name;
 
