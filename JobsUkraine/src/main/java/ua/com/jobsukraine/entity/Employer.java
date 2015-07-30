@@ -7,8 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
@@ -18,7 +16,7 @@ public class Employer {
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employers")
-	private List<Category> categorys;
+	private List<Category> categories;
 	private String description;
 	private String email;
 	@Id
@@ -56,8 +54,8 @@ public class Employer {
 		return address;
 	}
 
-	public List<Category> getCategorys() {
-		return categorys;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
 	public String getDescription() {
@@ -96,8 +94,8 @@ public class Employer {
 		this.address = address;
 	}
 
-	public void setCategorys(List<Category> categorys) {
-		this.categorys = categorys;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public void setDescription(String description) {
