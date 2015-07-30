@@ -1,0 +1,24 @@
+
+*{
+	padding:0;
+	margin:0;
+}
+
+html{
+	background-color: #eaf0f2;
+}
+
+body{
+	font:12px/1.5 Arial, Helvetica, sans-serif;
+}
+
+/* In our demo, the footers are fixed to the bottom of the page */
+
+footer{
+	position: fixed;
+	bottom: 0;
+}
+
+@media (max-height:400px){
+	footer { position: static; }
+}
