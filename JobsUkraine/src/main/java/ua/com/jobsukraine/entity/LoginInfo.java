@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class LoginInfo {
@@ -12,8 +14,13 @@ public class LoginInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
+	
+	@NotNull
+	@Size(min=4, max=20)
 	private String login;
+	
+	@NotNull
+	@Size(min=8, max=20)
 	private String password;
 
 	@ManyToOne

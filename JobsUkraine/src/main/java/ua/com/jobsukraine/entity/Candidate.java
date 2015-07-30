@@ -11,31 +11,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "candidate")
 @DiscriminatorValue("2")
 public class Candidate extends Person {
 
+	@NotNull
 	@Column(name = "address")
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
 	private List<Category> categories;
 
+	@NotNull
 	@Column(name = "city")
 	private String cityWhereLookingForWork;
 
 	@Column(name = "CV")
 	private String cv;
 
+	@NotNull
+	@DateTimeFormat
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 
+	@NotNull
+	@DateTimeFormat
 	@Column(name = "date_of_start")
-	@Temporal(TemporalType.DATE)
 	private Date dateStartToWork;
 
 	@Column(name = "dream_job")
@@ -52,7 +58,7 @@ public class Candidate extends Person {
 
 	@Column(name = "primary_skills")
 	private String primarySkills;
-	
+
 	@OneToMany
 	@JoinColumn(name = "candidat_id")
 	private List<Feedback> feedbacks;

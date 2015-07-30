@@ -8,32 +8,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 public class Employer {
 
+	@NotNull
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employers")
 	private List<Category> categories;
+
+	@NotNull
 	private String description;
+
+	@NotNull
+	@Email
 	private String email;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
 	private LoginInfo info;
-
+	@NotNull
 	private String name;
+	@NotNull
+	@Size(min = 5, max = 12)
+	@Pattern(regexp = "[0-9]+")
 	private String phone;
+	@URL
+	private String pictureURL;
 
 	// TODO fields to add
 	// private ArrayList<Categories> categories;
 	// country, city they are looking to hire
 
-	private String pictureURL;
+	@OneToMany(mappedBy = "employer")
+	private List<Vacancy> vacancy;
 
+	@URL
 	private String website; // can be changed to URL
 
 	public Employer() {
@@ -128,7 +148,8 @@ public class Employer {
 
 	@Override
 	public String toString() {
-		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address
-				+ ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL + "]\n";
+		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
+				+ address + ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL
+				+ "]\n";
 	}
 }
