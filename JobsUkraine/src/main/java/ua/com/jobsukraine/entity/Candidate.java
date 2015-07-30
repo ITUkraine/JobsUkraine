@@ -23,7 +23,7 @@ public class Candidate extends Person {
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "Candidates")
-	private List<Category> Categories;
+	private List<Category> categories;
 
 	@Column(name = "city")
 	private String cityWhereLookingForWork;
@@ -62,7 +62,7 @@ public class Candidate extends Person {
 	}
 
 	public Candidate(String address, String cityWhereLookingForWork, String cv, Date dateOfBirth, Date dateStartToWork,
-			String dreamJob, String education, String experience, String primarySkills, List<Category> Categories) {
+			String dreamJob, String education, String experience, String primarySkills, List<Category> categories) {
 		super();
 		this.address = address;
 		this.cityWhereLookingForWork = cityWhereLookingForWork;
@@ -73,7 +73,7 @@ public class Candidate extends Person {
 		this.education = education;
 		this.experience = experience;
 		this.primarySkills = primarySkills;
-		this.Categories = Categories;
+		this.categories = categories;
 	}
 
 	public String getAddress() {
@@ -81,7 +81,7 @@ public class Candidate extends Person {
 	}
 
 	public List<Category> getCategories() {
-		return Categories;
+		return categories;
 	}
 
 	public String getCityWhereLookingForWork() {
@@ -120,8 +120,8 @@ public class Candidate extends Person {
 		this.address = address;
 	}
 
-	public void setCategories(List<Category> Categories) {
-		this.Categories = Categories;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public void setCityWhereLookingForWork(String cityWhereLookingForWork) {

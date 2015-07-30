@@ -58,14 +58,14 @@ public class Category {
 	
 	@ManyToMany
 	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "Employer_id", referencedColumnName = "id") )
-	private List<Employer> Employers;
+	private List<Employer> employers;
 
 	public List<Employer> getEmployers() {
-		return Employers;
+		return employers;
 	}
 
 	public void setEmployers(List<Employer> Employers) {
-		this.Employers = Employers;
+		this.employers = Employers;
 	}
 
 }
