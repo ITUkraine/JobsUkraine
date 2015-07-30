@@ -23,4 +23,9 @@ public class LoginController {
 		System.out.println(loginInfo);
 		return "welcome";
 	}
+	
+	@RequestMapping(value="/candidateOffice")
+	public String goOffice(Map<String,Object> model){
+		return "candidateOffice";
+	}
 }

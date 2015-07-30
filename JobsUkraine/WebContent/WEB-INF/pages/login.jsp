@@ -6,29 +6,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon" href="<c:url value="/resources/pictures/icon.png" />">
-<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
-	rel="stylesheet">
+<link rel="shortcut icon"
+	href="<c:url value="/resources/pictures/icon.png" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/pure/forms.css" />">
+	<link rel="stylesheet"
+	href="<c:url value="/resources/css/pure/buttons.css" />">
+
 <title>Log In</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<!-- <br> 
+	<br>
 	<h1 align="center">Enter your login and password</h1>
-	<br> -->
-	
-				<form:form action="login" method="POST" commandName="loginInfo">
-					<div class="form-group" style="width: 300">
-						<label>Login</label> <input type="text" class="form-control"
-							placeholder="Login" name="login">
-					</div>
-					<div class="form-group" style="width: 300">
-						<label>Password</label> <input type="password"
-							class="form-control" placeholder="Password" name="password">
-					</div>
-					<button type="submit" class="btn btn-default">Log In</button>
-				</form:form>
-			
+	<br>
+	<div align="center">
+		<form:form class="pure-form pure-form-stacked" commandName="loginForm" action="candidateOffice">
+			<fieldset>
+				Login:
+				<form:input path="login" size="40"/> 
+				Password:
+				<form:input path="password" type="password" size="40"/>
+				<br>
+				<button type="submit" class="pure-button pure-button-active" style="width: 120px; height: 30px;">Log In</button>
+			</fieldset>
+		</form:form>
+	</div>
 	<%@ include file="footer.jsp"%>
 </body>
 </html>
