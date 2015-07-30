@@ -27,8 +27,8 @@
 				<form:input path="info.login" size="40" />
 				<h3 align="center">Put your password:</h3>
 				<form:input path="info.password" type="password" size="40" />
-				<%-- <h3 align="center">Confirm your password:</h3>
-				<form:input path="info.password" type="password" size="40" /> --%>
+				<h3 align="center">Confirm your password:</h3>
+				<form:input path="info.confirmPassword" type="password" size="40" />
                 
 				<button type="submit" class="pure-button pure-button-active"
 					style="width: 120px; height: 30px;">Next</button>
