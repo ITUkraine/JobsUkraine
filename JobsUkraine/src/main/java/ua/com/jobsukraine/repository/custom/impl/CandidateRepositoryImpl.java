@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.repository.custom.CandidateRepositoryCustom;
 
 public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
@@ -45,6 +46,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				"SELECT c FROM Candidate c LEFT JOIN c.info info WHERE info.login = :login", Candidate.class);
 		query.setParameter("login", login);
 		return query.getSingleResult();
+	}
+
+	@Override
+	public List<Feedback> getFeedbacks(String login) {
+		TypedQuery<Feedback> query = em.createQuery("SELECT f FROM Candidate c JOIN c.info info JOIN c.feedbacks f WHERE info.login = :login",Feedback.class);
+		query.setParameter("login", login);
+		return query.getResultList();
 	}
 
 }

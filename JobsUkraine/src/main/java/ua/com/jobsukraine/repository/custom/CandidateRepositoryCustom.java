@@ -3,6 +3,7 @@ package ua.com.jobsukraine.repository.custom;
 import java.util.List;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Feedback;
 
 public interface CandidateRepositoryCustom {
 
@@ -11,5 +12,7 @@ public interface CandidateRepositoryCustom {
 	public double getRating(String login);
 
 	public Candidate findByLogin(String login);
+	
+	public List<Feedback> getFeedbacks(String login);
 	
 }
