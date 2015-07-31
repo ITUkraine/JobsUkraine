@@ -23,7 +23,7 @@ import ua.com.jobsukraine.service.RoleService;
 
 @Controller
 @ComponentScan("ua.com.jobsukraine.service")
-@SessionAttributes(types ={ Employer.class})
+@SessionAttributes(types = { Employer.class })
 public class EmployerController {
 
 	@Autowired
@@ -44,31 +44,38 @@ public class EmployerController {
 		return "regemp/RegEmpOne";
 	}
 
-
-	
 	@RequestMapping(value = "/addEmployerInfo", method = RequestMethod.POST)
-	public String addEmployerInfo(@ModelAttribute("empForm")Employer emp) {
+	public String addEmployerInfo(@ModelAttribute("empForm") Employer emp) {
 		System.out.println(emp);
 		return "regemp/RegEmpTwo";
 
 	}
 
 	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
-	public String  addCategory(@ModelAttribute("empForm")Employer emp, Model model) {
-		ArrayList<Category> listCat = (ArrayList<Category>) categoryService.getAll();
+	public String addCategory(@ModelAttribute("empForm") Employer emp,
+			Model model) {
+		ArrayList<Category> listCat = (ArrayList<Category>) categoryService
+				.getAll();
 		model.addAttribute("listCat", listCat);
 		return "regemp/regEmpAddCategory";
 	}
-	
-	
 
-	
 	@RequestMapping(value = "/regEmployerNew", method = RequestMethod.POST)
-	public String register(@ModelAttribute("empForm")Employer empForm, BindingResult result) {
-        
-		empForm.getInfo().setRole(roleService.findByName("employer"));
-		LoginInfoService.add(empForm.getInfo());
-		employerService.add(empForm);
+	public String register(@ModelAttribute("empForm") Employer emp,
+			BindingResult result) {
+
+		emp.getInfo().setRole(roleService.findByName("employer"));
+		LoginInfoService.add(emp.getInfo());
+		employerService.add(emp);
+		List<Employer> elist = new ArrayList<Employer>();
+		elist.add(emp);//TODO 
+		List<Category> list = emp.getCategories();
+		for (Category category : list) {
+			category.setEmployers(elist);
+			System.out.println(category.getName());
+			categoryService.edit(category);
+			System.out.println("************"+category.getCandidates());
+		}
 		return "welcome";
 
 	}
