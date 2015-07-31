@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,8 +37,8 @@ public class Candidate extends Person {
 	private String cv;
 
 	@NotNull
-	@DateTimeFormat
 	@Column(name = "date_of_birth")
+	@Pattern(regexp = "([1-9]{2})(.)([1-9]{2})(.)([1-9]{4})")
 	private Date dateOfBirth;
 
 	@NotNull
