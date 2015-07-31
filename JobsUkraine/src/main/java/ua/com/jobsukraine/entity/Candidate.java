@@ -1,6 +1,5 @@
 package ua.com.jobsukraine.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,8 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "candidate")
@@ -35,12 +33,14 @@ public class Candidate extends Person {
 	private String cv;
 
 	@NotNull
-	@DateTimeFormat(pattern="MM/dd/yyyy") 
-	private Date dateOfBirth;
+	@Column(name = "date_of_birth")
+	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
+	private String dateOfBirth;
 
 	
-	@DateTimeFormat(pattern="MM/dd/yyyy") 
-	private Date  dateStartToWork;
+	@Column(name = "date_start_work")
+	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
+	private String  dateStartToWork;
 
 	@Column(name = "dream_job")
 	private String dreamJob;
@@ -68,7 +68,7 @@ public class Candidate extends Person {
 
 	}
 
-	public Candidate(String address, String cityWhereLookingForWork, String cv, Date dateOfBirth, Date dateStartToWork,
+	public Candidate(String address, String cityWhereLookingForWork, String cv, String dateOfBirth, String dateStartToWork,
 			String dreamJob, String education, String experience, String primarySkills, List<Category> categories) {
 		super();
 		this.address = address;
@@ -99,11 +99,11 @@ public class Candidate extends Person {
 		return cv;
 	}
 
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public Date getDateStartToWork() {
+	public String getDateStartToWork() {
 		return dateStartToWork;
 	}
 
@@ -147,11 +147,11 @@ public class Candidate extends Person {
 		this.cv = cv;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setDateStartToWork(Date dateStartToWork) {
+	public void setDateStartToWork(String dateStartToWork) {
 		this.dateStartToWork = dateStartToWork;
 	}
 
