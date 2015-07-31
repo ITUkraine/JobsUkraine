@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.Email;
 public abstract class Person {
 
 	@Email
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
 	private String email;
 
 	@Id
@@ -46,7 +46,7 @@ public abstract class Person {
 
 	@NotNull
 	@Pattern(regexp = "(^[0][0-9]{9})")
-	@Column(name = "mobileNumber")
+	@Column(name = "mobileNumber", unique=true)
 	private String mobileNumber;
 
 	@NotNull

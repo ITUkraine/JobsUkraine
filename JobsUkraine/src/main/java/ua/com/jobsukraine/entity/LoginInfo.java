@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +38,7 @@ public class LoginInfo {
 	private int id;
 
 	@NotNull
+	@Column(unique=true)
 	@Size(min = 4, max = 20)
 	private String login;
 

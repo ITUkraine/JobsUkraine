@@ -2,6 +2,7 @@ package ua.com.jobsukraine.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -40,6 +41,7 @@ public class Employer {
 	@NotNull
 	private String name;
 	@NotNull
+	@Column(unique=true)
 	@Size(min = 5, max = 12)
 	@Pattern(regexp = "[0-9]+")
 	private String phone;

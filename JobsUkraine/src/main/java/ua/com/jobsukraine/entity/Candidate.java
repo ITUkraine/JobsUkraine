@@ -33,7 +33,6 @@ public class Candidate extends Person {
 	@Column(name = "city")
 	private String cityWhereLookingForWork;
 
-	@Column(name = "CV")
 	private String cv;
 
 	@NotNull
