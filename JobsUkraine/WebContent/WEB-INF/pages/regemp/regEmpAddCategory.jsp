@@ -12,18 +12,15 @@
 <title>Register</title>
 </head>
 <body>
-<%@ include file="../header.jsp"%>
-
-	<div align="center">
-		<form:form
-			modelAttribute="category" action="candidateOffice">
-	
-			<form:checkboxes items="${category}" path="name"/>
-				
-
-		
-		</form:form>
-	</div>
+	<%@ include file="../header.jsp"%>
+	<form:form modelAttribute="listCat" method="POST" action="/something">
+		<c:forEach items="${listCat}" var="category">
+		<%-- 
+			<form:checkbox path="category" value="${category}"
+				label="${category.name}" /> --%>
+			<br style="">${category.name}	
+		</c:forEach>
+	</form:form>
 	<%@ include file="../footer.jsp"%>
 </body>
 </html>

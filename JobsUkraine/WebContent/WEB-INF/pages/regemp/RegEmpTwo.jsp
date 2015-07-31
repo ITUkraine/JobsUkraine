@@ -22,7 +22,7 @@
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
 				<form:form class="pure-form pure-form-stacked"
-					modelAttribute="empForm" action="regEmployerNew" method="POST">
+					modelAttribute="empForm" action="addEmpCategory" method="POST">
 					<fieldset>
 
 						<p>Name</p>
