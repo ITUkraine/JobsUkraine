@@ -13,14 +13,19 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-	<form:form modelAttribute="listCat" method="POST" action="/something">
+	<form:form modelAttribute="listCat" commandName="empForm"  method="POST" action="something">
 		<c:forEach items="${listCat}" var="category">
-		<%-- 
-			<form:checkbox path="category" value="${category}"
-				label="${category.name}" /> --%>
-			<br style="">${category.name}	
+		
+			<form:checkbox path="name" value="${category.name}"
+				label="${category.name}" />
+			
+			<%-- <form:checkbox path="name" value="${category.name}"/>
+			${category.name} --%>
 		</c:forEach>
+		<input type="submit" value="Next">
 	</form:form>
+
+
 	<%@ include file="../footer.jsp"%>
 </body>
 </html>
