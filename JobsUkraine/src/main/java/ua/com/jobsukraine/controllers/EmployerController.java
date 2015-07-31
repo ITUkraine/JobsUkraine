@@ -23,7 +23,7 @@ import ua.com.jobsukraine.service.RoleService;
 
 @Controller
 @ComponentScan("ua.com.jobsukraine.service")
-@SessionAttributes(types ={ Employer.class, Category.class})
+@SessionAttributes(types ={ Employer.class})
 public class EmployerController {
 
 	@Autowired
@@ -53,30 +53,19 @@ public class EmployerController {
 
 	}
 
-	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.GET)
-	public ModelAndView  addCategory() {
-		ModelAndView model = new ModelAndView("regemp/regEmpAddCategory");
+	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
+	public String  addCategory(@ModelAttribute("empForm")Employer emp, Model model) {
 		ArrayList<Category> listCat = (ArrayList<Category>) categoryService.getAll();
-		System.out.println(listCat);
-		System.out.println(listCat.get(1).toString());
-		model.addObject("listCat", listCat);
-		model.addObject("category", new Category());
-		return model;
+		model.addAttribute("listCat", listCat);
+		return "regemp/regEmpAddCategory";
 	}
 	
 	
-	@RequestMapping(value = "/something", method = RequestMethod.POST)
-	public String something(Category cat) {
-		System.out.println("************something"+cat);
-		return "regemp/RegEmpTwo";
 
-	}
 	
 	@RequestMapping(value = "/regEmployerNew", method = RequestMethod.POST)
-	public String register(Employer empForm, BindingResult result) {
+	public String register(@ModelAttribute("empForm")Employer empForm, BindingResult result) {
         
-		System.out.println(empForm);
-		System.out.println(empForm.getInfo().toString());
 		empForm.getInfo().setRole(roleService.findByName("employer"));
 		LoginInfoService.add(empForm.getInfo());
 		employerService.add(empForm);
