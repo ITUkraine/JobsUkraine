@@ -46,12 +46,10 @@
 							<option>male</option>
 							<option>female</option>
 						</form:select>
-
-
+						
 						<p>Birthday</p>
 						<form:input id="datepicker" class="form-control"
-							path="dateOfBirthInString" size="40" />
-
+							path="dateOfBirth" size="40" />
 
 						<p>E-mail</p>
 						<form:input class="form-control" path="email" size="40" />

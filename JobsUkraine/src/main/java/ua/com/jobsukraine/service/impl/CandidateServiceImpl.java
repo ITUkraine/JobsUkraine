@@ -1,7 +1,5 @@
 package ua.com.jobsukraine.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +25,6 @@ public class CandidateServiceImpl implements CandidateService {
 	public Candidate add(Candidate candidate) {
 		candidate.getInfo().setRole(rs.findByName("candidate"));
 		lis.add(candidate.getInfo());
-		try {
-			candidate.setDateOfBirth((new SimpleDateFormat("dd/MM/yyyy").parse(candidate.getDateOfBirthInString()).getTime()));
-			candidate.setDateStartToWork((new SimpleDateFormat("dd/MM/yyyy").parse(candidate.getDateStartToWorkInString()).getTime()));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		return cr.save(candidate);
 	}
 

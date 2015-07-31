@@ -18,66 +18,51 @@ import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
-import ua.com.jobsukraine.service.LoginInfoService;
-import ua.com.jobsukraine.service.RoleService;
 
 @Controller
 @ComponentScan("ua.com.jobsukraine.service")
-@SessionAttributes(types=Candidate.class)
+@SessionAttributes(types = Candidate.class)
 public class CandidateController {
-	
+
 	@Autowired
 	private CandidateService cs;
 	@Autowired
-	private LoginInfoService lis;
-	@Autowired
-	private RoleService rs;
-	@Autowired
 	private CategoryService categoryService;
-	
+
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("candidate", new Candidate());
 		return "regcandidate/RegCandidateOne";
 	}
-	
-	@RequestMapping(value="/candidateOffice", method=RequestMethod.POST)
-	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, 
-			Map<String,Object> model){
+
+	@RequestMapping(value = "/candidateOffice", method = RequestMethod.POST)
+	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
 		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
-		System.out.println(loginInfo);
 		return "candidateOffice";
 	}
-	
-	@RequestMapping(value="/addCandidateInfo", method = RequestMethod.POST )
-    public String addCandidateInfo(Candidate candidate){
-		System.out.println(candidate);
-		System.out.println(candidate.getLastName());
+
+	@RequestMapping(value = "/addCandidateInfo", method = RequestMethod.POST)
+	public String addCandidateInfo(@ModelAttribute("candidate") Candidate candidate) {
 		return "regcandidate/RegCandidateTwo";
-		
+
 	}
-	
-	@RequestMapping(value="/addCandidateInfo2", method = RequestMethod.POST )
-    public String addCandidateInfo2(Candidate candidate){
-		System.out.println(candidate);
+
+	@RequestMapping(value = "/addCandidateInfo2", method = RequestMethod.POST)
+	public String addCandidateInfo2(@ModelAttribute("candidate") Candidate candidate) {
 		return "regcandidate/RegCandidateThree";
-		
+
 	}
-	
-	@RequestMapping(value="/addCandidateCategory", method = RequestMethod.POST)
-    public String addCandidateCategory(Candidate candidate, Model model){
+
+	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
+	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
 		List<Category> listCat = categoryService.getAll();
 		model.addAttribute("category", listCat);
 		return "regcandidate/regCandidateAddCategory";
-		
-	}
-	
-	
-	@RequestMapping(value = "/regCandidateNew", method = RequestMethod.POST)
-	public String register(Candidate candidate, BindingResult result) {
 
-		System.out.println(candidate);
-		System.out.println(candidate.getInfo().toString());
+	}
+
+	@RequestMapping(value = "/regCandidateNew", method = RequestMethod.POST)
+	public String register(@ModelAttribute("candidate") Candidate candidate, BindingResult result) {
 		cs.add(candidate);
 		return "welcome";
 

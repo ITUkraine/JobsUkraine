@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -35,22 +38,15 @@ public class Candidate extends Person {
 
 	@NotNull
 	@Column(name = "date_of_birth")
-	private Long dateOfBirth;
-
-	@Transient
-	private String dateOfBirthInString;
-
-	@Transient
-	private String dateStartToWorkInString;
+	@Temporal(TemporalType.DATE)
+	private Date dateOfBirth;
 
 	@Column(name = "date_start_work")
-	private Long dateStartToWork;
+	@Temporal(TemporalType.DATE)
+	private Date dateStartToWork;
 
 	@Column(name = "dream_job")
 	private String dreamJob;
-
-	// @Column(name = "all_skills") create category enam or class
-	// private List<String> allSkills;
 
 	@Column(name = "education ")
 	private String education;
@@ -58,33 +54,25 @@ public class Candidate extends Person {
 	@Column(name = "experience")
 	private String experience;
 
-	@Column(name = "primary_skills")
-	private String primarySkills;
-
 	@OneToMany
 	@JoinColumn(name = "candidat_id")
 	private List<Feedback> feedbacks;
+
+	@Column(name = "primary_skills")
+	private String primarySkills;
 
 	@Transient
 	private double rating;
 
 	@ManyToMany
 	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
-	private Set <Skill> skills;
-
-	public Set <Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(Set <Skill> skills) {
-		this.skills = skills;
-	}
+	private Set<Skill> skills;
 
 	public Candidate() {
 
 	}
 
-	public Candidate(String address, String cityWhereLookingForWork, String cv, Long dateOfBirth, Long dateStartToWork,
+	public Candidate(String address, String cityWhereLookingForWork, String cv, Date dateOfBirth, Date dateStartToWork,
 			String dreamJob, String education, String experience, String primarySkills, List<Category> categories) {
 		super();
 		this.address = address;
@@ -115,11 +103,11 @@ public class Candidate extends Person {
 		return cv;
 	}
 
-	public Long getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public Long getDateStartToWork() {
+	public Date getDateStartToWork() {
 		return dateStartToWork;
 	}
 
@@ -135,20 +123,24 @@ public class Candidate extends Person {
 		return experience;
 	}
 
-	public String getPrimarySkills() {
-		return primarySkills;
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getPrimarySkills() {
+		return primarySkills;
 	}
 
 	public double getRating() {
 		return rating;
 	}
 
-	public void setRating(double rating) {
-		this.rating = rating;
+	public Set<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public void setCategories(List<Category> categories) {
@@ -163,11 +155,11 @@ public class Candidate extends Person {
 		this.cv = cv;
 	}
 
-	public void setDateOfBirth(Long dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setDateStartToWork(Long dateStartToWork) {
+	public void setDateStartToWork(Date dateStartToWork) {
 		this.dateStartToWork = dateStartToWork;
 	}
 
@@ -183,32 +175,20 @@ public class Candidate extends Person {
 		this.experience = experience;
 	}
 
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+
 	public void setPrimarySkills(String primarySkills) {
 		this.primarySkills = primarySkills;
 	}
 
-	public String getDateOfBirthInString() {
-		return dateOfBirthInString;
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
 
-	public void setDateOfBirthInString(String dateOfBirthInString) {
-		this.dateOfBirthInString = dateOfBirthInString;
-	}
-
-	public String getDateStartToWorkInString() {
-		return dateStartToWorkInString;
-	}
-
-	public void setDateStartToWorkInString(String dateStartToWorkInString) {
-		this.dateStartToWorkInString = dateStartToWorkInString;
-	}
-
-	public List<Feedback> getFeedbacks() {
-		return feedbacks;
-	}
-
-	public void setFeedbacks(List<Feedback> feedbacks) {
-		this.feedbacks = feedbacks;
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
 	}
 
 	@Override

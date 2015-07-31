@@ -33,8 +33,6 @@
 	width: 100%;
 }
 
-
-
 .label {
 	line-height: 3 !important;
 }
@@ -63,7 +61,7 @@
 
 						<p>Start date</p>
 						<form:input id="datepicker" class="form-control"
-							path="dateStartToWorkInString" size="40" />
+							path="dateStartToWork" size="40" />
 
 						<p>Dream job</p>
 						<form:input class="form-control" path="dreamJob" size="40" />
@@ -71,9 +69,7 @@
 						<p>Primary skills</p>
 
 						<form:input size="50" path="primarySkills" class="form-control"
-							data-role="tagsinput"  />
-
-
+							data-role="tagsinput" />
 
 						<br>
 						<div align="right">
