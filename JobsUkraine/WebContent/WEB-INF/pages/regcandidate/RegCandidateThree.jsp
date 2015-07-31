@@ -9,6 +9,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+			dateFormat : 'dd/mm/yy'
+		});
+	});
+</script>
+
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
+<script
+	src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+
+<style type="text/css">
+.bootstrap-tagsinput {
+	width: 100%;
+}
+
+
+
+.label {
+	line-height: 3 !important;
+}
+</style>
+
 <title>Register</title>
 </head>
 <body>
@@ -17,8 +48,8 @@
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form modelAttribute="candidate" action="regCandidateNew"
-					method="POST">
+				<form:form id="bootstrapTagsInputForm" modelAttribute="candidate"
+					action="regCandidateNew" method="POST">
 					<fieldset>
 						<p>Education</p>
 						<form:input class="form-control" path="education" size="40" />
@@ -30,14 +61,20 @@
 						<form:input class="form-control" path="cityWhereLookingForWork"
 							size="40" />
 
-						<%-- <p>Start date</p>
-						<form:input class="form-control" path="dateStartToWork" size="40" /> --%>
+						<p>Start date</p>
+						<form:input id="datepicker" class="form-control"
+							path="dateStartToWork" size="40" />
 
 						<p>Dream job</p>
 						<form:input class="form-control" path="dreamJob" size="40" />
 
 						<p>Primary skills</p>
-						<form:textarea class="form-control" path="primarySkills" />
+
+						<form:input size="50" path="primarySkills" class="form-control"
+							data-role="tagsinput"  />
+
+
+
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"

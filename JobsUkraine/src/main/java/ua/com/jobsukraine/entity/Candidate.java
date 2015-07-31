@@ -34,12 +34,17 @@ public class Candidate extends Person {
 
 	@NotNull
 	@Column(name = "date_of_birth")
-	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
 	private Long dateOfBirth;
 
+	@Transient
+	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
+	private String dateOfBirthInString;
+	
+	@Transient
+	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
+	private String dateStartToWorkInString;
 	
 	@Column(name = "date_start_work")
-	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
 	private Long  dateStartToWork;
 
 	@Column(name = "dream_job")

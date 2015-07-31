@@ -60,7 +60,6 @@ public class CandidateController {
 	@RequestMapping(value="/addCandidateInfo2", method = RequestMethod.POST )
     public String addCandidateInfo2(Candidate candidate){
 		System.out.println(candidate);
-		System.out.println("1"+candidate.getLastName()+"2");;
 		return "regcandidate/RegCandidateThree";
 		
 	}
