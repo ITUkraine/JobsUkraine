@@ -35,12 +35,12 @@ public class Candidate extends Person {
 	@NotNull
 	@Column(name = "date_of_birth")
 	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
-	private String dateOfBirth;
+	private Long dateOfBirth;
 
 	
 	@Column(name = "date_start_work")
 	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
-	private String  dateStartToWork;
+	private Long  dateStartToWork;
 
 	@Column(name = "dream_job")
 	private String dreamJob;
@@ -68,7 +68,7 @@ public class Candidate extends Person {
 
 	}
 
-	public Candidate(String address, String cityWhereLookingForWork, String cv, String dateOfBirth, String dateStartToWork,
+	public Candidate(String address, String cityWhereLookingForWork, String cv, Long dateOfBirth, Long dateStartToWork,
 			String dreamJob, String education, String experience, String primarySkills, List<Category> categories) {
 		super();
 		this.address = address;
@@ -99,11 +99,11 @@ public class Candidate extends Person {
 		return cv;
 	}
 
-	public String getDateOfBirth() {
+	public Long getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public String getDateStartToWork() {
+	public Long getDateStartToWork() {
 		return dateStartToWork;
 	}
 
@@ -147,11 +147,11 @@ public class Candidate extends Person {
 		this.cv = cv;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Long dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setDateStartToWork(String dateStartToWork) {
+	public void setDateStartToWork(Long dateStartToWork) {
 		this.dateStartToWork = dateStartToWork;
 	}
 

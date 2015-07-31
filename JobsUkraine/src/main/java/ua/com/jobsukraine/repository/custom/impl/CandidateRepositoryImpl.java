@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Feedback;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.custom.CandidateRepositoryCustom;
 
 public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
@@ -55,4 +56,10 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		return query.getResultList();
 	}
 
+	public List<Vacancy> getTenActualVacansy (String login)	{
+		TypedQuery<Vacancy> query = em.createQuery("SELECT v FROM", Vacancy.class);
+		query.setParameter("login", login);
+		return null;
+	}
+	
 }
