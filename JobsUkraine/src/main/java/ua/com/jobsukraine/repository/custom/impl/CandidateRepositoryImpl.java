@@ -1,6 +1,7 @@
 package ua.com.jobsukraine.repository.custom.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -51,15 +52,41 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 
 	@Override
 	public List<Feedback> getFeedbacks(String login) {
-		TypedQuery<Feedback> query = em.createQuery("SELECT f FROM Candidate c JOIN c.info info JOIN c.feedbacks f WHERE info.login = :login",Feedback.class);
+		TypedQuery<Feedback> query = em.createQuery(
+				"SELECT f FROM Candidate c JOIN c.info info JOIN c.feedbacks f WHERE info.login = :login",
+				Feedback.class);
 		query.setParameter("login", login);
 		return query.getResultList();
 	}
 
-	public List<Vacancy> getTenActualVacansy (String login)	{
+	public List<Vacancy> getTenActualVacansy(String login) {
 		TypedQuery<Vacancy> query = em.createQuery("SELECT v FROM", Vacancy.class);
 		query.setParameter("login", login);
 		return null;
 	}
-	
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public int getAge(String login) {
+		TypedQuery<Long> query = em.createQuery(
+				"SELECT c.dateOfBirth FROM Candidate c JOIN c.info info WHERE info.login = :login", Long.class);
+		query.setParameter("login", login);
+
+		int yearDiff = 0;
+		try {
+			long dateOfBirth = query.getSingleResult();
+			int yearOfBirth = new Date(dateOfBirth).getYear();
+			yearDiff = new Date().getYear() - yearOfBirth;
+
+			if (new Date(dateOfBirth).getMonth() > new Date().getMonth()
+					&& new Date(dateOfBirth).getDay() > new Date().getDay()) {
+				yearDiff--;
+			}
+
+		} catch (NullPointerException e) {
+		}
+
+		return yearDiff;
+	}
+
 }

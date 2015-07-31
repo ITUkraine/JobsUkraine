@@ -15,4 +15,6 @@ public interface CandidateRepositoryCustom {
 	
 	public List<Feedback> getFeedbacks(String login);
 	
+	public int getAge(String login);
+	
 }
