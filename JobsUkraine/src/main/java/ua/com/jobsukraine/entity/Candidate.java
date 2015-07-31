@@ -39,13 +39,13 @@ public class Candidate extends Person {
 	@Transient
 	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
 	private String dateOfBirthInString;
-	
+
 	@Transient
 	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
 	private String dateStartToWorkInString;
-	
+
 	@Column(name = "date_start_work")
-	private Long  dateStartToWork;
+	private Long dateStartToWork;
 
 	@Column(name = "dream_job")
 	private String dreamJob;
@@ -174,6 +174,30 @@ public class Candidate extends Person {
 
 	public void setPrimarySkills(String primarySkills) {
 		this.primarySkills = primarySkills;
+	}
+
+	public String getDateOfBirthInString() {
+		return dateOfBirthInString;
+	}
+
+	public void setDateOfBirthInString(String dateOfBirthInString) {
+		this.dateOfBirthInString = dateOfBirthInString;
+	}
+
+	public String getDateStartToWorkInString() {
+		return dateStartToWorkInString;
+	}
+
+	public void setDateStartToWorkInString(String dateStartToWorkInString) {
+		this.dateStartToWorkInString = dateStartToWorkInString;
+	}
+
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
 	}
 
 	@Override

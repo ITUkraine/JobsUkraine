@@ -41,9 +41,16 @@
 						<p>Name</p>
 						<form:input class="form-control" path="name" size="40" />
 
-						<%-- <p>Birthday</p>
+						<p>Gender</p>
+						<form:select path="sex" class="form-control" id="sel1">
+							<option>male</option>
+							<option>female</option>
+						</form:select>
+
+
+						<p>Birthday</p>
 						<form:input id="datepicker" class="form-control"
-							path="dateOfBirth" size="40" /> --%>
+							path="dateOfBirthInString" size="40" />
 
 
 						<p>E-mail</p>

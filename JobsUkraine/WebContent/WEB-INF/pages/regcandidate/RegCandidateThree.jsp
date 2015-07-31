@@ -63,7 +63,7 @@
 
 						<p>Start date</p>
 						<form:input id="datepicker" class="form-control"
-							path="dateStartToWork" size="40" />
+							path="dateStartToWorkInString" size="40" />
 
 						<p>Dream job</p>
 						<form:input class="form-control" path="dreamJob" size="40" />

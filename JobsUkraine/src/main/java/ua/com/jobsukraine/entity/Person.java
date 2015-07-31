@@ -40,7 +40,7 @@ public abstract class Person {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Pattern(regexp = "Чоловік|Жінка")
+	@Pattern(regexp = "male|female")
 	@Column(name = "sex")
 	private String sex;
 
@@ -82,7 +82,7 @@ public abstract class Person {
 		return lastName;
 	}
 
-	public String getsex() {
+	public String getSex() {
 		return sex;
 	}
 
@@ -106,7 +106,7 @@ public abstract class Person {
 		this.lastName = lastName;
 	}
 
-	public void setsex(String sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
