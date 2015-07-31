@@ -1,12 +1,14 @@
 package ua.com.jobsukraine.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -68,6 +70,18 @@ public class Candidate extends Person {
 
 	@Transient
 	private double rating;
+
+	@ManyToMany
+	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
+	private Set <Skill> skills;
+
+	public Set <Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set <Skill> skills) {
+		this.skills = skills;
+	}
 
 	public Candidate() {
 
