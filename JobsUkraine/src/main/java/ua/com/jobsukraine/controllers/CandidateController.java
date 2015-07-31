@@ -44,7 +44,7 @@ public class CandidateController {
 	@RequestMapping(value="/candidateOffice", method=RequestMethod.POST)
 	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, 
 			Map<String,Object> model){
-		model.put("candidate", cs.fingByLogin(loginInfo.getLogin()));
+		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
 		System.out.println(loginInfo);
 		return "candidateOffice";
 	}
@@ -52,7 +52,7 @@ public class CandidateController {
 	@RequestMapping(value="/addCandidateInfo", method = RequestMethod.POST )
     public String addCandidateInfo(Candidate candidate){
 		System.out.println(candidate);
-		System.out.println(candidate.getInfo());
+		System.out.println(candidate.getLastName());
 		return "regcandidate/RegCandidateTwo";
 		
 	}
@@ -78,8 +78,6 @@ public class CandidateController {
 
 		System.out.println(candidate);
 		System.out.println(candidate.getInfo().toString());
-		candidate.getInfo().setRole(rs.findByName("candidate"));
-		lis.add(candidate.getInfo());
 		cs.add(candidate);
 		return "welcome";
 

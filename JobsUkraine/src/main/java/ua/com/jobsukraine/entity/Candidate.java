@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "candidate")
@@ -39,11 +38,9 @@ public class Candidate extends Person {
 	private Long dateOfBirth;
 
 	@Transient
-	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
 	private String dateOfBirthInString;
 
 	@Transient
-	@Pattern(regexp = "([1-9]{2})(/)([1-9]{2})(/)([1-9]{4})")
 	private String dateStartToWorkInString;
 
 	@Column(name = "date_start_work")
