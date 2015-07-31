@@ -9,17 +9,13 @@
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
-<link href="<c:url value="/resources/css/flexslider.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/flexslider.css" />"
-	rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
 	rel="stylesheet">
 
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-*">
-		<div class="navbar-brand"><img src="<c:url value="/resources/css/images/logo.png" />"/></div>
+		<div class="navbar-brand"><a href="/JobsUkraine"><img src="<c:url value="/resources/css/images/logo.png" />"/></a></div>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="/JobsUkraine">Home</a></li>
 			<li><a href="employers">Employers</a></li>

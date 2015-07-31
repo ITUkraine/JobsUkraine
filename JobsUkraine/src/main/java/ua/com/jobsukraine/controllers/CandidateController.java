@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
-import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
@@ -37,8 +36,8 @@ public class CandidateController {
 	private CategoryService categoryService;
 	
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
-	public String addCandidate(Map<String, Object> model) {
-		model.put("candidate", new Candidate());
+	public String addCandidate(Model model) {
+		model.addAttribute("candidate", new Candidate());
 		return "regcandidate/RegCandidateOne";
 	}
 	
@@ -53,7 +52,16 @@ public class CandidateController {
 	@RequestMapping(value="/addCandidateInfo", method = RequestMethod.POST )
     public String addCandidateInfo(Candidate candidate){
 		System.out.println(candidate);
+		System.out.println(candidate.getInfo());
 		return "regcandidate/RegCandidateTwo";
+		
+	}
+	
+	@RequestMapping(value="/addCandidateInfo2", method = RequestMethod.POST )
+    public String addCandidateInfo2(Candidate candidate){
+		System.out.println(candidate);
+		System.out.println("1"+candidate.getLastName()+"2");;
+		return "regcandidate/RegCandidateThree";
 		
 	}
 	

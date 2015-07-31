@@ -18,30 +18,41 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div align="center">
-		<form:form class="pure-form pure-form-stacked"
-			modelAttribute="candidate" action="regCandidateNew" method="POST">
-			<fieldset>
+	<div class="container">
+		<div class="raw">
+			<div class="col-md-4"></div>
+			<div class="form-group col-md-4">
+				<form:form modelAttribute="candidate" action="addCandidateInfo2" method="POST">
+					<fieldset>
 
-				<h3 align="center">Put your name:</h3>
-				<form:input path="name" size="40" />
-				
-				<h3 align="center">Put your email:</h3>
-				<form:input path="email" size="40" />
-				
-				<h3 align="center">Put your number:</h3>
-				<form:input path="mobileNumber" size="40" />
-				
-				<h3 align="center">Put your Address:</h3>
-				<form:input path="address" size="40" />
-				
-				<h3 align="center">Primary skills:</h3>
-				<form:textarea path="primarySkills" style="margin: 3px 859.3125px; width: 283px; height: 107px;"/>
-				<button type="submit" class="pure-button pure-button-active"
-					style="width: 120px; height: 30px;">Next</button>
+						<p>Last name</p>
+						<form:input class="form-control" path="lastName" size="40" />
 
-			</fieldset>
-		</form:form>
+						<p>Name</p>
+						<form:input class="form-control" path="name" size="40" />
+
+						<%-- <p>Birthday</p>
+						<form:input class="form-control" path="dateOfBirth" size="40" /> --%>
+
+						<p>E-mail</p>
+						<form:input class="form-control" path="email" size="40" />
+		
+						<p>Address</p>
+						<form:input class="form-control" path="address" size="40" />
+		
+						<p>Mobile phone</p>
+						<form:input class="form-control" path="mobileNumber" size="40" />
+		
+						<br>
+						<div align="right">
+							<button type="submit" class="btn btn-default"
+								style="width: 120px;">Next</button>
+						</div>
+					</fieldset>
+				</form:form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 </body>

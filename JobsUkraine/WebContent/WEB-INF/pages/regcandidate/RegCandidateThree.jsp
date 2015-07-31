@@ -9,30 +9,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/forms.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/buttons.css" />">
 <title>Register</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form modelAttribute="candidate" action="addCandidateInfo"
-					method="Post">
+				<form:form modelAttribute="candidate" action="regCandidateNew"
+					method="POST">
 					<fieldset>
-						<p>Login:</p>
-						<form:input class="form-control" path="info.login" size="40" />
-						<p>Password:</p>
-						<form:input class="form-control" path="info.password"
-							type="password" size="40" />
-						<p>Confirm password:</p>
-						<form:input class="form-control" path="info.confirmPassword"
-							type="password" size="40" />
+						<p>Education</p>
+						<form:input class="form-control" path="education" size="40" />
+
+						<p>Experience</p>
+						<form:input class="form-control" path="experience" size="40" />
+
+						<p>City for work</p>
+						<form:input class="form-control" path="cityWhereLookingForWork"
+							size="40" />
+
+						<%-- <p>Start date</p>
+						<form:input class="form-control" path="dateStartToWork" size="40" /> --%>
+
+						<p>Dream job</p>
+						<form:input class="form-control" path="dreamJob" size="40" />
+
+						<p>Primary skills</p>
+						<form:textarea class="form-control" path="primarySkills" />
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"
@@ -40,7 +45,6 @@
 						</div>
 					</fieldset>
 				</form:form>
-
 			</div>
 			<div class="col-md-4"></div>
 		</div>
