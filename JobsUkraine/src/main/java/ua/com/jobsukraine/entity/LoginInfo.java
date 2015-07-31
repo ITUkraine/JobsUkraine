@@ -5,17 +5,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Entity
-public class LoginInfo {
+import ua.com.jobsukraine.entity.passwordcontol.FieldMatch;
 
-	@NotNull
+@Entity
+@FieldMatch.List({
+    @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
+})
+public class LoginInfo {
+	
+	
+	@Transient
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Size(min = 8, max = 20)
 	private String confirmPassword;
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +39,7 @@ public class LoginInfo {
 	@NotNull
 	@Size(min = 4, max = 20)
 	private String login;
+
 
 	@NotNull
 	@Pattern(regexp = "[a-zA-Z0-9]+")
@@ -44,10 +60,6 @@ public class LoginInfo {
 		this.password = password;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -64,9 +76,6 @@ public class LoginInfo {
 		return role;
 	}
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 
 	public void setLogin(String login) {
 		this.login = login;
