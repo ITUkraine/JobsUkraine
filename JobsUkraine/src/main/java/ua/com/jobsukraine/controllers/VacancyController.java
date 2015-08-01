@@ -1,7 +1,5 @@
 package ua.com.jobsukraine.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,32 +15,27 @@ import ua.com.jobsukraine.service.VacancyService;
 
 @Controller
 public class VacancyController {
-	
+
 	@Autowired
 	private VacancyService vs;
 	@Autowired
 	private CategoryService cs;
-	
-	@RequestMapping(value="/addVacancy")
-	public String goAddVacancyPage(Model model){
+
+	@RequestMapping(value = "/addVacancy")
+	public String goAddVacancyPage(Model model) {
 		model.addAttribute("vacancy", new Vacancy());
 		model.addAttribute("list", cs.getAll());
 		model.addAttribute("item", new Category());
+
 		return "addVacancy";
-		
+
 	}
-	
-	@RequestMapping(value="/addVacancy", method=RequestMethod.POST)
-	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, 
-								BindingResult bindingResult){
-		System.out.println(vacancy);
-		Category category = cs.findByName(vacancy.getCategory().getName());
-		List<Vacancy> arrayList = category.getVacancy();
-		arrayList.add(vacancy);
-		category.setVacancy(arrayList);
+
+	@RequestMapping(value = "/addVacancy", method = RequestMethod.POST)
+	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult) {
 		vs.add(vacancy);
-		cs.add(category);
+		//System.out.println(cs.findByName("Java"));
 		return "home";
-		
+
 	}
 }

@@ -1,9 +1,9 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -79,6 +79,8 @@ public class Category {
 	}
 
 	public List<Vacancy> getVacancy() {
+		if (vacancy == null)
+			vacancy = new ArrayList<>();
 		return vacancy;
 	}
 
