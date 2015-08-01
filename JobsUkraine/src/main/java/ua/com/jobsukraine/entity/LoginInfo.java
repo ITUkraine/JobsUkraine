@@ -29,6 +29,7 @@ public class LoginInfo {
 
 	@NotNull
 	@Column(unique = true)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Size(min = 4, max = 20)
 	private String login;
 

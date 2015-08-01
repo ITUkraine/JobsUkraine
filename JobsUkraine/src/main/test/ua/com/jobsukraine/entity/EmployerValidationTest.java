@@ -2,16 +2,10 @@ package ua.com.jobsukraine.entity;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.URL;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
