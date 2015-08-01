@@ -3,11 +3,14 @@ package ua.com.jobsukraine.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.VacancyRepository;
 import ua.com.jobsukraine.service.VacancyService;
-
+@Service
+@Transactional
 public class VacancyServiceImpl implements VacancyService {
 
 	@Autowired
@@ -15,7 +18,7 @@ public class VacancyServiceImpl implements VacancyService {
 	
 	@Override
 	public Vacancy add(Vacancy obj) {
-		return vr.save(obj);
+		return vr.saveAndFlush(obj);
 	}
 
 	@Override

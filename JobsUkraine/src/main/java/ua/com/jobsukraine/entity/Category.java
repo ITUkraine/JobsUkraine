@@ -3,6 +3,7 @@ package ua.com.jobsukraine.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -77,6 +78,14 @@ public class Category {
 		return result;
 	}
 
+	public List<Vacancy> getVacancy() {
+		return vacancy;
+	}
+
+	public void setVacancy(List<Vacancy> vacancy) {
+		this.vacancy = vacancy;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,7 +105,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return  name;
+		return name;
 	}
 
 }
