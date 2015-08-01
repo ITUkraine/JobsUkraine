@@ -30,8 +30,7 @@ public class EmployerController {
 	private EmployerService employerService;
 	@Autowired
 	private LoginInfoService LoginInfoService;
-	@Autowired
-	private RoleService roleService;
+
 
 	@Autowired
 	private CategoryService categoryService;
@@ -64,17 +63,14 @@ public class EmployerController {
 	public String register(@ModelAttribute("empForm") Employer emp,
 			BindingResult result) {
 
-		emp.getInfo().setRole(roleService.findByName("employer"));
-		LoginInfoService.add(emp.getInfo());
 		employerService.add(emp);
-		List<Employer> elist = new ArrayList<Employer>();
-		elist.add(emp);//TODO 
 		List<Category> list = emp.getCategories();
 		for (Category category : list) {
-			category.setEmployers(elist);
-			System.out.println(category.getName());
+			Category cat = categoryService.findByName(category.getName());
+			List<Employer> listEmp = cat.getEmployers();
+			System.out.println("****"+listEmp);
+			listEmp.add(emp);
 			categoryService.edit(category);
-			System.out.println("************"+category.getCandidates());
 		}
 		return "welcome";
 

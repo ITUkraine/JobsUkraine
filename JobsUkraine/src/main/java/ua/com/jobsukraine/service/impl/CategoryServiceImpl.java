@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService{
 	
 	@Override
 	public Category add(Category obj) {
-		return cr.save(obj);
+		return cr.saveAndFlush(obj);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Category edit(Category obj) {
-		return cr.saveAndFlush(findByName(obj.getName()));
+		return cr.saveAndFlush(obj /*findByName(obj.getName())*/);
 
 	}
 
