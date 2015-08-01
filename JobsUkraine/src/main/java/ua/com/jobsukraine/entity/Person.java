@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.Email;
 public abstract class Person {
 
 	@Email
-	@Column(name = "email", unique=true)
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@Id
@@ -34,9 +34,10 @@ public abstract class Person {
 	@OneToOne
 	private LoginInfo info;
 
+	// comment validation for good of people
 	@NotNull
-	@Size(min = 3, max = 20)
-	@Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
+	// @Size(min = 3, max = 20)
+	// @Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
 	@Column(name = "last_name")
 	private String lastName;
 
@@ -46,12 +47,12 @@ public abstract class Person {
 
 	@NotNull
 	@Pattern(regexp = "(^[0][0-9]{9})")
-	@Column(name = "mobileNumber", unique=true)
+	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
 
 	@NotNull
-	@Size(min = 3, max = 25)
-	@Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
+	// @Size(min = 3, max = 25)
+	// @Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
 	@Column(name = "name")
 	private String name;
 
