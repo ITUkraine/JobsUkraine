@@ -18,7 +18,8 @@
 		<div class="navbar-brand"><a href="/JobsUkraine"><img src="<c:url value="/resources/css/images/logo.png" />"/></a></div>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="/JobsUkraine">Home</a></li>
-			<li><a href="employers">Employers</a></li>
+			<li><a href="vacancies">Vacancies</a></li>
+			<li><a href="addVacancy">Add vacancy</a></li>
 			<li><a href="candidates">Candidates</a></li>
 			<li><a href="login">Log In</a></li>
 			<li><a href="aboutUs">About Us</a></li>
