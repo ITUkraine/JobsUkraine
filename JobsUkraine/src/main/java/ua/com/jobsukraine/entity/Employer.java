@@ -40,12 +40,14 @@ public class Employer {
 	private LoginInfo info;
 	@NotNull
 	private String name;
+	
 	@NotNull
 	@Column(unique=true)
 	@Size(min = 5, max = 12)
 	@Pattern(regexp = "[0-9]+")
 	private String phone;
-	@URL
+	
+//	@URL
 	private String pictureURL;
 
 	// TODO fields to add
@@ -55,7 +57,7 @@ public class Employer {
 	@OneToMany(mappedBy = "employer")
 	private List<Vacancy> vacancy;
 
-	@URL
+	@Size(min = 0, max = 30)
 	private String website; // can be changed to URL
 
 	public Employer() {
