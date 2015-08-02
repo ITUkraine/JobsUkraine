@@ -6,55 +6,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Office</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/menus.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/menuInOfficeLeft.css" />">
-	<link rel="stylesheet"
-	href="<c:url value="/resources/css/menuInOfficeRight.css" />">
-	<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/grids.css" />">
+<link href="<c:url value="/resources/css/btn/btn.css" />"
+	rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
+	rel="stylesheet">
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<div class="pure-g">
-		<div class="pure-u-1-6"> 
-			<div class="menu_simple_left">
-				<ul>
-					<li><img style="width: 130px; height: 120px;"
-						src="<c:url value="/resources/pictures/avatar.png" />" /></li>
-					<li><p>${candidate.info.login}</p></li>
-					<li><a href="candidateOffice">Profile</a></li>
-					<li><a href="vacancies">Vacancies</a></li>
-					<li><a href="vacancies">Search</a></li>
-					<li><a href="settings">Settings</a></li>
-				</ul>
-			</div>
+
+	<div class="container-fluid">
+		<div class="col-lg-1">space</div>
+		<div class="col-lg-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><img alt="avatar" width="100%" height="100%"
+					src="<c:url value="/resources/pictures/icon.png" />"></img></li>
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Vacancies</a></li>
+			</ul>
 		</div>
-		<div class="pure-u-3-5">
-			<br>
-			<p>Last name: ${candidate.lastName}</p>
-			<p>Name: ${candidate.name}</p>
-			<p>Mobile phone: ${candidate.mobileNumber}</p>
-			<p>Address: ${candidate.address}</p>
-			<p>Education: ${candidate.education}</p>
+		<div class="col-lg-6">
+			Main page
 		</div>
-		<div class="pure-u-5-30">
-			<div class="menu_simple_right">
-				<ul>
-					<li><a href="candidateOffice">Candidate #1</a></li>
-					<li><a href="vacancies">Candidate #2</a></li>
-					<li><a href="settings">Candidate #3</a></li>
-					<li><a href="candidateOffice">Candidate #4</a></li>
-					<li><a href="vacancies">Candidate #5</a></li>
-					<li><a href="settings">Candidate #6</a></li>
-					<li><a href="candidateOffice">Candidate #7</a></li>
-					<li><a href="candidateOffice">Candidate #8</a></li>
-					<li><a href="vacancies">Candidate #9</a></li>
-					<li><a href="settings">Candidate #10</a></li>
-				</ul>
-			</div>
+		<div class="col-lg-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a>Vacancies</a></li>
+				<li><a href="#">Vacancies 1</a></li>
+				<li><a href="#">Vacancies 2</a></li>
+			</ul>
 		</div>
+		<div class="col-lg-1">space</div>
 	</div>
 
 	<%@ include file="footer.jsp"%>
