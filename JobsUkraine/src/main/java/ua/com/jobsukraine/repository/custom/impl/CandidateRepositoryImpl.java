@@ -89,4 +89,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		return yearDiff;
 	}
 
+	@Override
+	public List<Vacancy> getAvailableVacancies(String login) {
+		TypedQuery<Vacancy> query = em.createQuery(
+				"SELECT vacancy FROM Candidate c JOIN c.categories ctgr JOIN ctgr.vacancy vacancy WHERE c.info.login = :login",
+				Vacancy.class);
+		query.setParameter("login", login);
+		return query.getResultList();
+	}
+
 }
