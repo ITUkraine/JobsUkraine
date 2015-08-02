@@ -20,27 +20,28 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 public class Employer {
 
-	@NotNull
+	@NotNull (message="This field is mandatory")
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employers")
 	private List<Category> categories;
 
-	@NotNull
+	@NotNull (message="This field is mandatory")
 	private String description;
 
-	@NotNull
-	@Email
+	@NotNull (message="This field is mandatory")
+	@Email 
+	
 	private String email;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
 	private LoginInfo info;
-	@NotNull
+	@NotNull (message="This field is mandatory")
 	private String name;
 	
-	@NotNull
+	@NotNull (message="This field is mandatory")
 	@Column(unique=true)
 	@Size(min = 5, max = 12)
 	@Pattern(regexp = "[0-9]+")
