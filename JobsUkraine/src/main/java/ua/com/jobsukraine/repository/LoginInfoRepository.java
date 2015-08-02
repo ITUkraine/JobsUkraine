@@ -6,4 +6,6 @@ import ua.com.jobsukraine.entity.LoginInfo;
 
 public interface LoginInfoRepository extends JpaRepository<LoginInfo, Integer>{
 
+	LoginInfo findByLogin(String login);
+
 }

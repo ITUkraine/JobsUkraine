@@ -21,7 +21,7 @@
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form commandName="loginForm" action="candidateOffice">
+				<form:form commandName="loginForm" action="loginCheck">
 					<fieldset>
 						<p>Login:</p>
 						<form:input class="form-control" path="login" size="40" />

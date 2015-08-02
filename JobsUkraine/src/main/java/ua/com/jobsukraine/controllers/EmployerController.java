@@ -2,6 +2,7 @@ package ua.com.jobsukraine.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
+import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.LoginInfoService;
@@ -61,6 +63,13 @@ public class EmployerController {
 
 		return "welcome";
 
+	}
+	
+	@RequestMapping(value = "/employerOffice", method = RequestMethod.POST)
+	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
+//		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
+//		model.put("vacancies", cs.getAvailableVacancies(loginInfo.getLogin()));
+		return "employerOffice";
 	}
 
 }

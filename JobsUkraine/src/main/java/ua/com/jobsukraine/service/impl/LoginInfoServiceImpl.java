@@ -40,4 +40,9 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 		return lir.findOne(id);
 	}
 
+	@Override
+	public LoginInfo findByLogin(String login) {
+		return lir.findByLogin(login);
+	}
+
 }
