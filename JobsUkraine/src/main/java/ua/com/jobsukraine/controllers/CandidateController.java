@@ -34,11 +34,10 @@ public class CandidateController {
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("candidate", new Candidate());
-		model.addAttribute("vacancies", new ArrayList<Vacancy>());
 		return "regcandidate/RegCandidateOne";
 	}
 
-	@RequestMapping(value = "/candidateOffice", method = RequestMethod.POST)
+	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
 	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
 		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
 		model.put("vacancies", cs.getAvailableVacancies(loginInfo.getLogin()));

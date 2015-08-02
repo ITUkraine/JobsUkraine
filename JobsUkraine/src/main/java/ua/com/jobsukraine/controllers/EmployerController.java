@@ -65,10 +65,10 @@ public class EmployerController {
 
 	}
 	
-	@RequestMapping(value = "/employerOffice", method = RequestMethod.POST)
+	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
 	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
-//		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
-//		model.put("vacancies", cs.getAvailableVacancies(loginInfo.getLogin()));
+		model.put("msgFromController","msgFromController");
+		model.put("loginForm", loginInfo);
 		return "employerOffice";
 	}
 

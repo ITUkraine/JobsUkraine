@@ -26,6 +26,7 @@
 		</div>
 		<div class="col-lg-6">
 			Main page
+			<p>${msgFromController}</p>
 		</div>
 		<div class="col-lg-2">
 			<ul class="nav nav-pills nav-stacked">
