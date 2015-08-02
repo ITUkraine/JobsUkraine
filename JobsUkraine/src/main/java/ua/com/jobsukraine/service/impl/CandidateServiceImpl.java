@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.CandidateRepository;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
@@ -74,6 +75,11 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public Candidate findByLogin(String login) {
 		return cr.findByLogin(login);
+	}
+
+	@Override
+	public List<Vacancy> getAvailableVacancies(String login) {
+		return cr.getAvailableVacancies(login);
 	}
 
 	

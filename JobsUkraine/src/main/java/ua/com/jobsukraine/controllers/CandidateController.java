@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.LoginInfo;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 
@@ -32,12 +34,14 @@ public class CandidateController {
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("candidate", new Candidate());
+		model.addAttribute("vacancies", new ArrayList<Vacancy>());
 		return "regcandidate/RegCandidateOne";
 	}
 
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.POST)
 	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
 		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
+		model.put("vacancies", cs.getAvailableVacancies(loginInfo.getLogin()));
 		return "candidateOffice";
 	}
 

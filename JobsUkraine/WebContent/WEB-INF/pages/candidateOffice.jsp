@@ -21,20 +21,21 @@
 		<div class="col-lg-2">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active"><img alt="avatar" width="100%" height="100%"
-					src="<c:url value="/resources/pictures/icon.png" />"></img></li>
+					src="<c:url value="/resources/pictures/avatar.png" />"></img></li>
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Vacancies</a></li>
 			</ul>
 		</div>
 		<div class="col-lg-6">
-			Main page
-			<p>${candidate.name}</p>
+			<h3>Main page</h3>
+			<p>${candidate}</p>
 		</div>
 		<div class="col-lg-2">
+			<h3>Vacancies</h3>
 			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><a>Vacancies</a></li>
-				<li><a href="#">Vacancies 1</a></li>
-				<li><a href="#">Vacancies 2</a></li>
+				<c:forEach items="${vacancies}" var="vacancy">
+					<li><a href="#">${vacancy}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		<div class="col-lg-1">space</div>
