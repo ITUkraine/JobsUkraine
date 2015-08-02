@@ -47,7 +47,7 @@
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
 				<form:form id="bootstrapTagsInputForm" modelAttribute="candidate"
-					action="regCandidateNew" method="POST">
+					action="addCandidateCategory" method="POST">
 					<fieldset>
 						<p>Education</p>
 						<form:input class="form-control" path="education" size="40" />

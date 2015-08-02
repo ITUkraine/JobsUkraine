@@ -56,7 +56,7 @@ public class CandidateController {
 	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
 	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
 		List<Category> listCat = categoryService.getAll();
-		model.addAttribute("category", listCat);
+		model.addAttribute("listCat", listCat);
 		return "regcandidate/regCandidateAddCategory";
 
 	}

@@ -18,15 +18,31 @@
 <body>
 <%@ include file="../header.jsp"%>
 
-	<div align="center">
-		<form:form
-			modelAttribute="category" action="candidateOffice">
-	
-			<form:checkboxes items="${category}" path="name"/>
-				
+	<div class="container">
+		<h4 align="center">Add categories which include the activities of
+			your company:</h4>
+		<div class="raw">
+			<div class="col-md-4"></div>
+			<div class="form-group col-md-4">
+				<form:form commandName="candidate" method="POST" action="regCandidateNew">
 
-		
-		</form:form>
+					<div align="center">
+						<form:checkboxes path="categories" items="${listCat}"
+							element="div" cssClass="row-fluid1" />
+					</div>
+					<br>
+
+					<div align="right">
+						<button type="submit" class="btn btn-default"
+							style="width: 120px;">Next</button>
+					</div>
+
+
+				</form:form>
+
+			</div>
+			<div class="col-md-4"></div>
+		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 </body>

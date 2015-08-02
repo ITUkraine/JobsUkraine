@@ -4,14 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.repository.CandidateRepository;
 import ua.com.jobsukraine.service.CandidateService;
+import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.LoginInfoService;
 import ua.com.jobsukraine.service.RoleService;
 
 @Service
+@Transactional
 public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
@@ -20,12 +24,26 @@ public class CandidateServiceImpl implements CandidateService {
 	private LoginInfoService lis;
 	@Autowired
 	private RoleService rs;
+	@Autowired
+	private CategoryService catServ;
 	
 	@Override
 	public Candidate add(Candidate candidate) {
 		candidate.getInfo().setRole(rs.findByName("candidate"));
 		lis.add(candidate.getInfo());
-		return cr.save(candidate);
+		cr.saveAndFlush(candidate);
+		List<Category> list = candidate.getCategories();
+		
+		for (Category category : list) {
+			
+			Category cat = catServ.findByName(category.getName());
+			List<Candidate> listEmp = cat.getCandidates();
+			listEmp.add(candidate);
+			catServ.edit(cat);
+		}
+		
+		return candidate;
+		
 	}
 
 	@Override

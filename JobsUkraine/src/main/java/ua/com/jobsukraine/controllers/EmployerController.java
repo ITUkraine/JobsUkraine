@@ -28,9 +28,7 @@ public class EmployerController {
 
 	@Autowired
 	private EmployerService employerService;
-	@Autowired
-	private LoginInfoService LoginInfoService;
-
+	
 
 	@Autowired
 	private CategoryService categoryService;
@@ -45,33 +43,22 @@ public class EmployerController {
 
 	@RequestMapping(value = "/addEmployerInfo", method = RequestMethod.POST)
 	public String addEmployerInfo(@ModelAttribute("empForm") Employer emp) {
-		System.out.println(emp);
 		return "regemp/RegEmpTwo";
 
 	}
 
 	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
-	public String addCategory(@ModelAttribute("empForm") Employer emp,
-			Model model) {
-		ArrayList<Category> listCat = (ArrayList<Category>) categoryService
-				.getAll();
+	public String addCategory(@ModelAttribute("empForm") Employer emp, Model model) {
+		ArrayList<Category> listCat = (ArrayList<Category>) categoryService.getAll();
 		model.addAttribute("listCat", listCat);
 		return "regemp/regEmpAddCategory";
 	}
 
 	@RequestMapping(value = "/regEmployerNew", method = RequestMethod.POST)
-	public String register(@ModelAttribute("empForm") Employer emp,
-			BindingResult result) {
+	public String register(@ModelAttribute("empForm") Employer emp, BindingResult result) {
 
 		employerService.add(emp);
-		List<Category> list = emp.getCategories();
-		for (Category category : list) {
-			Category cat = categoryService.findByName(category.getName());
-			List<Employer> listEmp = cat.getEmployers();
-			System.out.println("****"+listEmp);
-			listEmp.add(emp);
-			categoryService.edit(category);
-		}
+
 		return "welcome";
 
 	}
