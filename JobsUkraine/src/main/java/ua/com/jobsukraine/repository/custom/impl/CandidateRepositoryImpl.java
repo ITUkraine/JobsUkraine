@@ -25,7 +25,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				Object[].class);
 		query.setParameter("category", category);
 		query.setMaxResults(top);
-		List<Candidate> result = new ArrayList<>(top);
+		List<Candidate> result = new ArrayList<>();
 		for (Object o[] : query.getResultList()) {
 			((Candidate) o[0]).setRating((Double) o[1]);
 			result.add((Candidate) o[0]);
@@ -39,7 +39,25 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				"SELECT AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.feedbacks f JOIN c.info info WHERE info.login = :login",
 				Double.class);
 		query.setParameter("login", login);
-		return query.getSingleResult();
+		try {
+			return query.getSingleResult();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public double getRating(int id) {
+		TypedQuery<Double> query = em.createQuery(
+				"SELECT AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.feedbacks f WHERE c.id = :id", Double.class);
+		query.setParameter("id", id);
+		try {
+			return query.getSingleResult();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	@Override
@@ -57,12 +75,6 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				Feedback.class);
 		query.setParameter("login", login);
 		return query.getResultList();
-	}
-
-	public List<Vacancy> getTenActualVacansy(String login) {
-		TypedQuery<Vacancy> query = em.createQuery("SELECT v FROM", Vacancy.class);
-		query.setParameter("login", login);
-		return null;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -84,6 +96,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 			}
 
 		} catch (NullPointerException e) {
+			e.printStackTrace(); // if no date of birth is founded
 		}
 
 		return yearDiff;

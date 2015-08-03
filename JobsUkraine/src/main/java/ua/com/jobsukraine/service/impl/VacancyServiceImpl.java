@@ -1,7 +1,5 @@
 package ua.com.jobsukraine.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,11 +37,6 @@ public class VacancyServiceImpl implements VacancyService {
 	@Override
 	public Vacancy find(int id) {
 		return vr.findOne(id);
-	}
-
-	@Override
-	public List<Vacancy> getAll() {
-		return vr.findAll();
 	}
 
 }

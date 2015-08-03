@@ -55,11 +55,6 @@ public class EmployerServiceImpl implements EmployerService {
 	}
 
 	@Override
-	public List<Employer> getAll() {
-		return ep.findAll();
-	}
-
-	@Override
 	public Employer find(int id) {
 		return ep.findOne(id);
 	}

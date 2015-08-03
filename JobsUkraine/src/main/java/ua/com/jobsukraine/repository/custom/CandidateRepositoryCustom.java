@@ -11,6 +11,8 @@ public interface CandidateRepositoryCustom {
 	public List<Candidate> getByCategoryOrderedByRating(String category, int top);
 	
 	public double getRating(String login);
+	
+	public double getRating(int id);
 
 	public Candidate findByLogin(String login);
 	

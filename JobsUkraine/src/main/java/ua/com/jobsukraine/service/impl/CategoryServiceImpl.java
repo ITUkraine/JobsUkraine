@@ -12,12 +12,11 @@ import ua.com.jobsukraine.service.CategoryService;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements CategoryService{
-
+public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryRepository cr;
-	
+
 	@Override
 	public Category add(Category obj) {
 		return cr.saveAndFlush(obj);
@@ -25,13 +24,12 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public void delete(int id) {
-
 		cr.delete(id);
 	}
 
 	@Override
 	public Category edit(Category obj) {
-		return cr.saveAndFlush(obj /*findByName(obj.getName())*/);
+		return cr.saveAndFlush(obj /* findByName(obj.getName()) */);
 
 	}
 

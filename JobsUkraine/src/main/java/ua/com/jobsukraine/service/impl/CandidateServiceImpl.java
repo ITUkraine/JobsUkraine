@@ -27,20 +27,20 @@ public class CandidateServiceImpl implements CandidateService {
 	private RoleService rs;
 	@Autowired
 	private CategoryService catServ;
-	
+
 	@Override
 	public Candidate add(Candidate candidate) {
 		candidate.getInfo().setRole(rs.findByName("candidate"));
 		lis.add(candidate.getInfo());
 		cr.saveAndFlush(candidate);
 		List<Category> list = candidate.getCategories();
-		
+
 		for (Category category : list) {
 			category.setCandidatInCategory(candidate);
 			catServ.edit(category);
 		}
 		return candidate;
-		
+
 	}
 
 	@Override
@@ -54,23 +54,24 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List<Candidate> getAll() {
-		return cr.findAll();
-	}
-
-	@Override
 	public Candidate find(int id) {
-		return cr.findOne(id);
+		Candidate c = cr.findOne(id);
+		c.setRating(cr.getRating(id));
+		return c;
 	}
 
 	@Override
 	public Candidate findByName(String name) {
-		return findByName(name);
+		Candidate c = cr.findByName(name);
+		c.setRating(cr.getRating(c.getId()));
+		return c;
 	}
 
 	@Override
 	public Candidate findByLogin(String login) {
-		return cr.findByLogin(login);
+		Candidate c = cr.findByLogin(login);
+		c.setRating(cr.getRating(c.getId()));
+		return c;
 	}
 
 	@Override
@@ -78,5 +79,4 @@ public class CandidateServiceImpl implements CandidateService {
 		return cr.getAvailableVacancies(login);
 	}
 
-	
 }
