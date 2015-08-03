@@ -32,17 +32,16 @@ public class Vacancy {
 	@NotNull
 	private int salary;
 
+	public Vacancy() {
+
+	}
+
 	public Vacancy(Employer employer, Category category, String name, String description, int salary) {
-		super();
 		this.employer = employer;
 		this.category = category;
 		this.name = name;
 		this.description = description;
 		this.salary = salary;
-	}
-
-	public Vacancy() {
-		
 	}
 
 	public Category getCategory() {

@@ -23,7 +23,6 @@ public class Feedback {
 	}
 
 	public Feedback(Integer mark, String comment) {
-		super();
 		this.mark = mark;
 		this.comment = comment;
 	}

@@ -45,9 +45,7 @@ public class LoginInfo {
 	}
 
 	public LoginInfo(int id, Role role_id, String login, String password) {
-		super();
 		this.id = id;
-
 		this.login = login;
 		this.password = password;
 	}

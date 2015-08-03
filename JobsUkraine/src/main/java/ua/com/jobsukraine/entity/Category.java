@@ -1,6 +1,5 @@
 package ua.com.jobsukraine.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -43,7 +42,6 @@ public class Category {
 	}
 
 	public Category(String name) {
-		super();
 		this.name = name;
 	}
 
@@ -63,6 +61,10 @@ public class Category {
 		return name;
 	}
 
+	public List<Vacancy> getVacancy() {
+		return vacancy;
+	}
+
 	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
 	}
@@ -75,44 +77,13 @@ public class Category {
 		this.name = name;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	public List<Vacancy> getVacancy() {
-		if (vacancy == null)
-			vacancy = new ArrayList<>();
-		return vacancy;
-	}
-
 	public void setVacancy(List<Vacancy> vacancy) {
 		this.vacancy = vacancy;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Category other = (Category) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return name;
+		return "Category [id=" + id + ", name=" + name + "]";
 	}
 
 }

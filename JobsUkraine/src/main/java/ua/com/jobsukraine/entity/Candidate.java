@@ -74,7 +74,6 @@ public class Candidate extends Person {
 
 	public Candidate(String address, String cityWhereLookingForWork, String cv, Date dateOfBirth, Date dateStartToWork,
 			String dreamJob, String education, String experience, String primarySkills, List<Category> categories) {
-		super();
 		this.address = address;
 		this.cityWhereLookingForWork = cityWhereLookingForWork;
 		this.cv = cv;

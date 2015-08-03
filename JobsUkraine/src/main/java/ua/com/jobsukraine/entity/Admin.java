@@ -33,7 +33,6 @@ public class Admin extends Person {
 	}
 
 	public Admin(Date dateOfBirth, String cityWherework, String timeStartToWork, String position, String education) {
-		super();
 		this.dateOfBirth = dateOfBirth;
 		this.cityWherework = cityWherework;
 		this.timeStartToWork = timeStartToWork;

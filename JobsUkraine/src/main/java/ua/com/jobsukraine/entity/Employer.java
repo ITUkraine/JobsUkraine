@@ -20,39 +20,35 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 public class Employer {
 
-	@NotNull (message="This field is mandatory")
+	@NotNull(message = "This field is mandatory")
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employers")
 	private List<Category> categories;
 
-	@NotNull (message="This field is mandatory")
+	@NotNull(message = "This field is mandatory")
 	private String description;
 
-	@NotNull (message="This field is mandatory")
-	@Email 
-	
+	@NotNull(message = "This field is mandatory")
+	@Email
+
 	private String email;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
 	private LoginInfo info;
-	@NotNull (message="This field is mandatory")
+	@NotNull(message = "This field is mandatory")
 	private String name;
-	
-	@NotNull (message="This field is mandatory")
-	@Column(unique=true)
+
+	@NotNull(message = "This field is mandatory")
+	@Column(unique = true)
 	@Size(min = 5, max = 12)
 	@Pattern(regexp = "[0-9]+")
 	private String phone;
-	
-//	@URL
-	private String pictureURL;
 
-	// TODO fields to add
-	// private ArrayList<Categories> categories;
-	// country, city they are looking to hire
+	// @URL
+	private String pictureURL;
 
 	@OneToMany(mappedBy = "employer")
 	private List<Vacancy> vacancy;
@@ -65,7 +61,6 @@ public class Employer {
 	}
 
 	public Employer(String email, String phone, String address, String description, String website, String pictureURL) {
-		super();
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
