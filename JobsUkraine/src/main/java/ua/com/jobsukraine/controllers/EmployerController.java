@@ -1,7 +1,6 @@
 package ua.com.jobsukraine.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
-import ua.com.jobsukraine.service.LoginInfoService;
-import ua.com.jobsukraine.service.RoleService;
 
 @Controller
 @ComponentScan("ua.com.jobsukraine.service")

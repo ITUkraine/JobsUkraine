@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
-import ua.com.jobsukraine.repository.CategoryRepository;
 import ua.com.jobsukraine.repository.EmployerRepository;
 import ua.com.jobsukraine.repository.LoginInfoRepository;
 import ua.com.jobsukraine.service.CategoryService;
@@ -35,13 +34,11 @@ public class EmployerServiceImpl implements EmployerService {
 		LoginInfoRep.saveAndFlush(employer.getInfo());
 		ep.saveAndFlush(employer);
 		List<Category> list = employer.getCategories();
-		
+
 		for (Category category : list) {
-			
-			Category cat = catServ.findByName(category.getName());
-			List<Employer> listEmp = cat.getEmployers();
-			listEmp.add(employer);
-			catServ.edit(cat);
+
+			category.setEmployerInCategory(employer);
+			catServ.edit(category);
 		}
 		return employer;
 

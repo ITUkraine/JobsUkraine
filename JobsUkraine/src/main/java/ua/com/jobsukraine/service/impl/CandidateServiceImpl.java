@@ -36,13 +36,9 @@ public class CandidateServiceImpl implements CandidateService {
 		List<Category> list = candidate.getCategories();
 		
 		for (Category category : list) {
-			
-			Category cat = catServ.findByName(category.getName());
-			List<Candidate> listEmp = cat.getCandidates();
-			listEmp.add(candidate);
-			catServ.edit(cat);
+			category.setCandidatInCategory(candidate);
+			catServ.edit(category);
 		}
-		
 		return candidate;
 		
 	}
