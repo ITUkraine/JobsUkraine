@@ -21,20 +21,39 @@
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form commandName="loginForm" action="loginCheck">
-					<fieldset>
-						<p>Login:</p>
-						<form:input class="form-control" path="login" size="40" />
-						<p>Password:</p>
-						<form:input class="form-control" path="password" type="password"
-							size="40" />
-						<br>
-						<div align="center">
-							<button type="submit" class="btn btn-default"
-								style="width: 100px;">Log In</button>
+				<c:url value="/j_spring_security_check" var="loginUrl" />
+				<form action="${loginUrl}" class="form-signin" role="form"
+					method="post">
+					<c:if test="${param.error != null}">
+						<div class="alert alert-danger">
+							Error
 						</div>
-					</fieldset>
-				</form:form>
+
+					</c:if>
+					<c:if test="${param.logout != null}">
+						<div class="alert alert-success text-center">
+							Logout
+						</div>
+
+					</c:if>
+					<div class="row text-center">
+						<h2 class="form-signin-heading">
+							Enter login and password
+						</h2>
+					</div>
+					<input type="text" id="j_username" name="j_username"
+						class="form-control"
+						placeholder="Login" required
+						autofocus /> <input type="password" id="j_password"
+						name="j_password" class="form-control"
+						placeholder="Password" required />
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<button class="btn btn-lg btn-primary btn-block" type="submit">
+						Sign In
+					</button>
+				</form>
 			</div>
 			<div class="col-md-4"></div>
 		</div>

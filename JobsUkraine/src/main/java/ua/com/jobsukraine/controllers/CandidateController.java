@@ -1,7 +1,8 @@
 package ua.com.jobsukraine.controllers;
 
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
-import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 
@@ -36,9 +36,10 @@ public class CandidateController {
 	}
 
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
-	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
-		model.put("candidate", cs.findByLogin(loginInfo.getLogin()));
-		model.put("vacancies", cs.getAvailableVacancies(loginInfo.getLogin()));
+	public String goLogin(HttpServletRequest request, Model model) {
+		String login = (String)request.getSession().getAttribute("username");
+		model.addAttribute("candidate", cs.findByLogin(login));
+		model.addAttribute("vacancies", cs.getAvailableVacancies(login));
 		return "candidateOffice";
 	}
 
