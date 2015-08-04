@@ -26,7 +26,7 @@
 		</div>
 		<div class="col-lg-6">
 			Main page
-			<p>${msgFromController}</p>
+			<p>${employer}</p>
 		</div>
 		<div class="col-lg-2">
 			<h3>Candidates</h3>

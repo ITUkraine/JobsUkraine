@@ -3,6 +3,8 @@ package ua.com.jobsukraine.controllers;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -62,9 +64,11 @@ public class EmployerController {
 	}
 	
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
-	public String goLogin(@ModelAttribute("loginForm") LoginInfo loginInfo, Map<String, Object> model) {
-		model.put("msgFromController","msgFromController");
-		model.put("loginForm", loginInfo);
+	public String goLogin(HttpServletRequest request, Model model) {
+		String login = (String)request.getSession().getAttribute("username");
+		Employer emp = employerService.findByLogin(login);
+		model.addAttribute("employer", emp);
+		model.addAttribute("candidates", employerService.getAvailableCandidates(emp.getCategories(), 10));
 		return "employerOffice";
 	}
 
