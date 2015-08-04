@@ -33,10 +33,10 @@
 			<div class="form-group col-md-4">
 				<form:form commandName="empForm" method="POST" action="regEmployerNew">
 
-					<div align="center">
-						<form:checkboxes path="categories" items="${listCat}"
-							element="div" cssClass="row-fluid1" />
-					</div>
+					
+					<form:checkboxes path="categories" items="${listCat}"
+						itemLabel="name" itemValue="name" element="div"
+						cssClass="row-fluid1" />
 					<br>
 					<br>
 					<p>Put website of your company:</p>

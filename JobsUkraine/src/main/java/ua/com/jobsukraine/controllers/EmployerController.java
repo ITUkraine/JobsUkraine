@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 
@@ -47,8 +48,7 @@ public class EmployerController {
 
 	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("empForm") Employer emp, Model model) {
-		ArrayList<Category> listCat = (ArrayList<Category>) categoryService.getAll();
-		model.addAttribute("listCat", listCat);
+		model.addAttribute("listCat", categoryService.getAll());
 		return "regemp/regEmpAddCategory";
 	}
 

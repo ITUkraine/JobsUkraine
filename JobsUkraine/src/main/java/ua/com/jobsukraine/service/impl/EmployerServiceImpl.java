@@ -1,7 +1,5 @@
 package ua.com.jobsukraine.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,13 +31,13 @@ public class EmployerServiceImpl implements EmployerService {
 		employer.getInfo().setRole(roleRep.findByName("employer"));
 		LoginInfoRep.saveAndFlush(employer.getInfo());
 		ep.saveAndFlush(employer);
-		List<Category> list = employer.getCategories();
-
-		for (Category category : list) {
-
-			category.setEmployerInCategory(employer);
-			catServ.edit(category);
+		
+		for (Category category : employer.getCategories()) {
+			Category cat = catServ.findByName(category.getName());
+			cat.getEmployers().add(employer);
+			catServ.edit(cat);
 		}
+
 		return employer;
 
 	}

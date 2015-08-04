@@ -16,7 +16,7 @@
 <title>Register</title>
 </head>
 <body>
-<%@ include file="../header.jsp"%>
+	<%@ include file="../header.jsp"%>
 
 	<div class="container">
 		<h4 align="center">Add categories which include the activities of
@@ -24,12 +24,12 @@
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form commandName="candidate" method="POST" action="regCandidateNew">
+				<form:form commandName="candidate" method="POST"
+					action="regCandidateNew">
 
-					<div align="center">
-						<form:checkboxes path="categories" items="${listCat}"
-							element="div" cssClass="row-fluid1" />
-					</div>
+					<form:checkboxes path="categories" items="${listCat}"
+						itemLabel="name" itemValue="name" element="div"
+						cssClass="row-fluid1" />
 					<br>
 
 					<div align="right">

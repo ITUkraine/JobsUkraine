@@ -33,12 +33,13 @@ public class CandidateServiceImpl implements CandidateService {
 		candidate.getInfo().setRole(rs.findByName("candidate"));
 		lis.add(candidate.getInfo());
 		cr.saveAndFlush(candidate);
-		List<Category> list = candidate.getCategories();
 
-		for (Category category : list) {
-			category.setCandidatInCategory(candidate);
-			catServ.edit(category);
+		for (Category category : candidate.getCategories()) {
+			Category cat = catServ.findByName(category.getName());
+			cat.getCandidates().add(candidate);
+			catServ.edit(cat);
 		}
+
 		return candidate;
 
 	}

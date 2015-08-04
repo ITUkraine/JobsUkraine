@@ -1,6 +1,5 @@
 package ua.com.jobsukraine.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.LoginInfo;
-import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 
@@ -60,6 +58,7 @@ public class CandidateController {
 	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
 		List<Category> listCat = categoryService.getAll();
 		model.addAttribute("listCat", listCat);
+		model.addAttribute("category", new Category());
 		return "regcandidate/regCandidateAddCategory";
 
 	}
