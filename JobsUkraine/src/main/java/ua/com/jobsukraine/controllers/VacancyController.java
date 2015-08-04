@@ -27,14 +27,13 @@ public class VacancyController {
 		model.addAttribute("list", cs.getAll());
 		model.addAttribute("item", new Category());
 
-		return "addVacancy";
+		return "empOffice/addVacancy";
 
 	}
 
 	@RequestMapping(value = "/addVacancy", method = RequestMethod.POST)
 	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult) {
 		vs.add(vacancy);
-		//System.out.println(cs.findByName("Java"));
 		return "home";
 
 	}

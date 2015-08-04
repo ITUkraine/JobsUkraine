@@ -65,5 +65,10 @@ public class EmployerController {
 		model.addAttribute("candidates", employerService.getAvailableCandidates(emp.getCategories(), 10));
 		return "empOffice/profile";
 	}
+	
+//	@RequestMapping(value="/addVacancy", method = RequestMethod.GET)
+//	public String goAddVacancy(){
+//		return "empOffice/addVacancy";
+//	}
 
 }

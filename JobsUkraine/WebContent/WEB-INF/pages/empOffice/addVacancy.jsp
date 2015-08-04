@@ -21,18 +21,12 @@
 	<div class="container-fluid">
 		<div class="col-lg-1">space</div>
 		<div class="col-lg-1">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><img alt="avatar" width="100%" height="100%"
-					src="<c:url value="/resources/pictures/icon.png" />"></img></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Vacancies</a></li>
-			</ul>
+			<%@ include file="sidebar.jsp"%>
 		</div>
 		<div class="col-lg-1">space</div>
 		<div class="col-lg-4">
 			<div class="form-group">
-				<form:form action="addVacancy"
-					commandName="vacancy" method="POST">
+				<form:form action="addVacancy" commandName="vacancy" method="POST">
 					<fieldset>
 						<p>Name</p>
 						<form:input class="form-control" path="name" size="40" />
@@ -62,11 +56,7 @@
 		</div>
 		<div class="col-lg-1">space</div>
 		<div class="col-lg-2">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><a>Candidates</a></li>
-				<li><a href="#">Candidate 1</a></li>
-				<li><a href="#">Candidate 2</a></li>
-			</ul>
+			<%@ include file="candidatesList.jsp"%>
 		</div>
 		<div class="col-lg-1">space</div>
 	</div>
