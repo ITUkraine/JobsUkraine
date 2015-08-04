@@ -11,7 +11,7 @@ public class GlobalErrorController {
 
 	@ExceptionHandler(Throwable.class)
 	public ModelAndView exception(Exception e) {
-
+		e.printStackTrace();
 		ModelAndView mav = new ModelAndView(DEFAULT_ERROR_VIEW);
 		mav.addObject("name", e.getClass().getSimpleName());
 		mav.addObject("message", e.getMessage());

@@ -19,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category add(Category obj) {
-		return cr.saveAndFlush(obj);
+		return cr.save(obj);
 	}
 
 	@Override

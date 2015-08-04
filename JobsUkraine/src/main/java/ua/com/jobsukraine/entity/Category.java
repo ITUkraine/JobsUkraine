@@ -1,6 +1,5 @@
 package ua.com.jobsukraine.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,14 +12,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Category {
 
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
 	private List<Candidate> candidates;
 
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )
 	private List<Employer> employers;
 
@@ -63,28 +67,6 @@ public class Category {
 
 	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
-	}
-
-	public void setCandidatInCategory(Candidate candidat) {
-		if (candidates == null) {
-			candidates = new ArrayList<>();
-			candidates.add(candidat);
-		} else {
-
-			this.candidates.add(candidat);
-
-		}
-	}
-
-	public void setEmployerInCategory(Employer employer) {
-		if (employers == null) {
-			employers = new ArrayList<>();
-			employers.add(employer);
-		} else {
-
-			this.employers.add(employer);
-
-		}
 	}
 
 	public void setEmployers(List<Employer> employers) {

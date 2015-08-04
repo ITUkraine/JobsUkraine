@@ -10,9 +10,9 @@ import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.CandidateRepository;
+import ua.com.jobsukraine.repository.CategoryRepository;
+import ua.com.jobsukraine.repository.LoginInfoRepository;
 import ua.com.jobsukraine.service.CandidateService;
-import ua.com.jobsukraine.service.CategoryService;
-import ua.com.jobsukraine.service.LoginInfoService;
 import ua.com.jobsukraine.service.RoleService;
 
 @Service
@@ -22,22 +22,25 @@ public class CandidateServiceImpl implements CandidateService {
 	@Autowired
 	private CandidateRepository cr;
 	@Autowired
-	private LoginInfoService lis;
+	private LoginInfoRepository lis;
 	@Autowired
 	private RoleService rs;
 	@Autowired
-	private CategoryService catServ;
+	private CategoryRepository catServ;
 
 	@Override
 	public Candidate add(Candidate candidate) {
 		candidate.getInfo().setRole(rs.findByName("candidate"));
-		lis.add(candidate.getInfo());
-		cr.saveAndFlush(candidate);
-
+		lis.save(candidate.getInfo());
+		cr.save(candidate);
+//TODO
 		for (Category category : candidate.getCategories()) {
-			Category cat = catServ.findByName(category.getName());
-			cat.getCandidates().add(candidate);
-			catServ.edit(cat);
+		Category cat = catServ.findByName(category.getName());
+		cat.getCandidates().add(candidate);
+			/*List<Candidate> candidates = cat.getCandidates();
+			candidates.add(candidate);*/
+			//
+			catServ.saveAndFlush(cat);
 		}
 
 		return candidate;
