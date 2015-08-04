@@ -1,9 +1,16 @@
 package ua.com.jobsukraine.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.repository.EmployerRepository;
@@ -31,7 +38,7 @@ public class EmployerServiceImpl implements EmployerService {
 		employer.getInfo().setRole(roleRep.findByName("employer"));
 		LoginInfoRep.saveAndFlush(employer.getInfo());
 		ep.saveAndFlush(employer);
-		
+
 		for (Category category : employer.getCategories()) {
 			Category cat = catServ.findByName(category.getName());
 			cat.getEmployers().add(employer);
@@ -55,6 +62,32 @@ public class EmployerServiceImpl implements EmployerService {
 	@Override
 	public Employer find(int id) {
 		return ep.findOne(id);
+	}
+
+	@Override
+	public Employer findByLogin(String login) {
+		return ep.findByLogin(login);
+	}
+
+	@Override
+	public List<Candidate> getAvailableCandidates(List<Category> categories, int top) {
+		List<Candidate> allCandidates = new ArrayList<>();
+		for (Category ctgr : categories) {
+			allCandidates.addAll(ep.getAvailableCandidates(ctgr.name, top));
+		}
+		
+		// remove duplicates by id
+		Map<Integer, Candidate> map = new LinkedHashMap<>();
+		for (Candidate ays : allCandidates) {
+		  map.put(ays.getId(), ays);
+		}
+		allCandidates.clear();
+		allCandidates.addAll(map.values());
+		
+		// sort by rating
+		Collections.sort(allCandidates);
+		
+		return allCandidates;
 	}
 
 }

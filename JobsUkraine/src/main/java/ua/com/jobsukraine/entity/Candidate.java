@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "candidate")
 @DiscriminatorValue("2")
-public class Candidate extends Person {
+public class Candidate extends Person implements Comparable<Candidate> {
 
 	@NotNull
 	@Column(name = "address")
@@ -192,9 +192,18 @@ public class Candidate extends Person {
 
 	@Override
 	public String toString() {
-		return "Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills=" + primarySkills
-				+ ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork=" + dateStartToWork
-				+ ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob + ", Education=" + education
-				+ ", Rating=" + rating + "]\n";
+		return super.toString() + " Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills="
+				+ primarySkills + ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork="
+				+ dateStartToWork + ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob
+				+ ", Education=" + education + ", Rating=" + rating + "]\n";
 	}
+
+	@Override
+	public int compareTo(Candidate o) {
+//		if (o.getId() == this.getId())
+//			return (int) (this.getRating() - o.getRating());
+//		// return 0;
+		return (int) (o.getRating() - this.getRating());
+	}
+
 }
