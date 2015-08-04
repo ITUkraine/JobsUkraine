@@ -73,7 +73,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	}
 
 	public Candidate(String address, String cityWhereLookingForWork, String cv, Date dateOfBirth, Date dateStartToWork,
-			String dreamJob, String education, String experience, String primarySkills, List<Category> categories) {
+			String dreamJob, String education, String experience) {
 		this.address = address;
 		this.cityWhereLookingForWork = cityWhereLookingForWork;
 		this.cv = cv;
@@ -82,8 +82,6 @@ public class Candidate extends Person implements Comparable<Candidate> {
 		this.dreamJob = dreamJob;
 		this.education = education;
 		this.experience = experience;
-		this.primarySkills = primarySkills;
-		this.categories = categories;
 	}
 
 	public String getAddress() {

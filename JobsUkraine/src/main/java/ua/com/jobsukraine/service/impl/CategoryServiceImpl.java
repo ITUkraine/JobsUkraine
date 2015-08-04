@@ -19,8 +19,11 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category add(Category obj) {
-		return cr.save(obj);
-	}
+		if (findByName(obj.getName()) == null) {
+			return cr.save(obj);
+		} else {
+			return findByName(obj.getName());
+		}	}
 
 	@Override
 	public void delete(int id) {

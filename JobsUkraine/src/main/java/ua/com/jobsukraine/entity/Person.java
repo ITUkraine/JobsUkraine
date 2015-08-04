@@ -59,7 +59,6 @@ public abstract class Person {
 	}
 
 	public Person(String name, String lastName, String email, String mobileNumber) {
-		super();
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;

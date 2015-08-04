@@ -30,7 +30,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public Candidate add(Candidate candidate) {
-		candidate.getInfo().setRole(rs.findByName("candidate"));
+		candidate.getInfo().setRole(rs.findByName("ROLE_CANDIDATE"));
 		lis.save(candidate.getInfo());
 		cr.save(candidate);
 //TODO

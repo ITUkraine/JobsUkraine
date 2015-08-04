@@ -44,8 +44,7 @@ public class LoginInfo {
 	public LoginInfo() {
 	}
 
-	public LoginInfo(int id, Role role_id, String login, String password) {
-		this.id = id;
+	public LoginInfo(String login, String password) {
 		this.login = login;
 		this.password = password;
 	}

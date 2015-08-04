@@ -14,10 +14,14 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private RoleRepository rr;
-	
+
 	@Override
 	public Role add(Role role) {
-		return rr.save(role);
+		if (findByName(role.getName()) == null) {
+			return rr.save(role);
+		} else {
+			return findByName(role.getName());
+		}
 	}
 
 	@Override

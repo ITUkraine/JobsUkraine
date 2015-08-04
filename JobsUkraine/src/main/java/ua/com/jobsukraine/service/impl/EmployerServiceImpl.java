@@ -35,7 +35,7 @@ public class EmployerServiceImpl implements EmployerService {
 	@Override
 	public Employer add(Employer employer) {
 
-		employer.getInfo().setRole(roleRep.findByName("employer"));
+		employer.getInfo().setRole(roleRep.findByName("ROLE_EMPLOYER"));
 		LoginInfoRep.saveAndFlush(employer.getInfo());
 		ep.saveAndFlush(employer);
 
