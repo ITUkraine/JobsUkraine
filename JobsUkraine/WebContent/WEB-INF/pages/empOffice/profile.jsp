@@ -12,11 +12,11 @@
 	rel="stylesheet">
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="../header.jsp"%>
 
 	<div class="container-fluid">
 		<div class="col-lg-1">space</div>
-		<div class="col-lg-2">
+		<div class="col-lg-1">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active"><img alt="avatar" width="100%" height="100%"
 					src="<c:url value="/resources/pictures/icon.png" />"></img></li>
@@ -28,7 +28,7 @@
 			Main page
 			<p>${employer}</p>
 		</div>
-		<div class="col-lg-2">
+		<div class="col-lg-3">
 			<h3>Candidates</h3>
 			<ul class="nav nav-pills nav-stacked">
 				<c:forEach items="${candidates}" var="candidate">
@@ -39,6 +39,6 @@
 		<div class="col-lg-1">space</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

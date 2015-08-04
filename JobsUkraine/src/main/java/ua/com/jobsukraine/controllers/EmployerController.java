@@ -69,7 +69,7 @@ public class EmployerController {
 		Employer emp = employerService.findByLogin(login);
 		model.addAttribute("employer", emp);
 		model.addAttribute("candidates", employerService.getAvailableCandidates(emp.getCategories(), 10));
-		return "employerOffice";
+		return "empOffice/profile";
 	}
 
 }
