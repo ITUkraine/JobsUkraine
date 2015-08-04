@@ -25,34 +25,27 @@
 				<form action="${loginUrl}" class="form-signin" role="form"
 					method="post">
 					<c:if test="${param.error != null}">
-						<div class="alert alert-danger">
-							Error
-						</div>
+						<div class="alert alert-danger">Invalid login or password</div>
 
 					</c:if>
 					<c:if test="${param.logout != null}">
-						<div class="alert alert-success text-center">
-							Logout
-						</div>
+						<div class="alert alert-success text-center">Logout</div>
 
 					</c:if>
 					<div class="row text-center">
-						<h2 class="form-signin-heading">
-							Enter login and password
-						</h2>
+						<h2 class="form-signin-heading">Enter your login and password</h2>
 					</div>
+					<br>
 					<input type="text" id="j_username" name="j_username"
-						class="form-control"
-						placeholder="Login" required
-						autofocus /> <input type="password" id="j_password"
-						name="j_password" class="form-control"
-						placeholder="Password" required />
-
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-					<button class="btn btn-lg btn-primary btn-block" type="submit">
-						Sign In
-					</button>
+						class="form-control" placeholder="Login" required autofocus />
+						 <br>
+					<input type="password" id="j_password" name="j_password"
+						class="form-control" placeholder="Password" required /> <input
+						type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<br>
+					<div align="center">
+						<button class="btn btn-default" type="submit">Sign In</button>
+					</div>
 				</form>
 			</div>
 			<div class="col-md-4"></div>

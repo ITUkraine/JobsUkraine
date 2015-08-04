@@ -1,9 +1,10 @@
-package ua.com.jobsukraine.service.impl;
+package ua.com.jobsukraine.security;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.LoginInfoService;
 
 @Component
+@ComponentScan(basePackages ="ua.com.jobsukraine.service.impl")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
  
 	@Autowired
@@ -27,6 +29,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
     	
     	LoginInfo user = lis.findByLogin(name);
+    	if(user==null) return null;
         if (name.equals(user.getLogin()) && password.equals(user.getPassword())) {
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
             grantedAuths.add(new SimpleGrantedAuthority(user.getRole().getName()));

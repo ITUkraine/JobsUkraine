@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +37,8 @@ public class CandidateController {
 	}
 
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
-	public String goLogin(HttpServletRequest request, Model model) {
-		String login = (String)request.getSession().getAttribute("username");
+	public String goLogin(Principal principal, Model model) {
+		String login = principal.getName();
 		model.addAttribute("candidate", cs.findByLogin(login));
 		model.addAttribute("vacancies", cs.getAvailableVacancies(login));
 		return "candidateOffice";

@@ -1,4 +1,4 @@
-package ua.com.jobsukraine.config;
+package ua.com.jobsukraine.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,13 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import ua.com.jobsukraine.handler.CustomAuthenticationSuccessHandler;
-import ua.com.jobsukraine.service.impl.CustomAuthenticationProvider;
+import ua.com.jobsukraine.security.handler.CustomAuthenticationSuccessHandler;
 
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages ={"ua.com.jobsukraine.service.impl","ua.com.jobsukraine.handler"})
+@ComponentScan(basePackages ={"ua.com.jobsukraine.security.handler", "ua.com.jobsukraine.security"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired

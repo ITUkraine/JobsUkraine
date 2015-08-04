@@ -1,4 +1,4 @@
-package ua.com.jobsukraine.config;
+package ua.com.jobsukraine.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
