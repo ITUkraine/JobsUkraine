@@ -17,24 +17,14 @@
 	<div class="container-fluid">
 		<div class="col-lg-1">space</div>
 		<div class="col-lg-1">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><img alt="avatar" width="100%" height="100%"
-					src="<c:url value="/resources/pictures/icon.png" />"></img></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Vacancies</a></li>
-			</ul>
+			<%@ include file="sidebar.jsp"%>
 		</div>
 		<div class="col-lg-6">
 			Main page
 			<p>${employer}</p>
 		</div>
 		<div class="col-lg-3">
-			<h3>Candidates</h3>
-			<ul class="nav nav-pills nav-stacked">
-				<c:forEach items="${candidates}" var="candidate">
-					<li><a href="#">${candidate}</a></li>
-				</c:forEach>
-			</ul>
+			<%@ include file="candidatesList.jsp"%>
 		</div>
 		<div class="col-lg-1">space</div>
 	</div>
