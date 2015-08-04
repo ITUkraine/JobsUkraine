@@ -1,6 +1,5 @@
 package ua.com.jobsukraine.repository.custom.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,21 +16,6 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 
 	@PersistenceContext
 	private EntityManager em;
-
-	@Override
-	public List<Candidate> getByCategoryOrderedByRating(String category, int top) {
-		TypedQuery<Object[]> query = em.createQuery(
-				"SELECT c, AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.info info JOIN c.feedbacks f WHERE f.category.name = :category GROUP BY info.login ORDER BY AVG_Rating DESC",
-				Object[].class);
-		query.setParameter("category", category);
-		query.setMaxResults(top);
-		List<Candidate> result = new ArrayList<>();
-		for (Object o[] : query.getResultList()) {
-			((Candidate) o[0]).setRating((Double) o[1]);
-			result.add((Candidate) o[0]);
-		}
-		return result;
-	}
 
 	@Override
 	public double getRating(String login) {
