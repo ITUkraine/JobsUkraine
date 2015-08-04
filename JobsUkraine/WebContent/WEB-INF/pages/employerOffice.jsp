@@ -29,10 +29,11 @@
 			<p>${msgFromController}</p>
 		</div>
 		<div class="col-lg-2">
+			<h3>Candidates</h3>
 			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><a>Vacancies</a></li>
-				<li><a href="#">Vacancies 1</a></li>
-				<li><a href="#">Vacancies 2</a></li>
+				<c:forEach items="${candidates}" var="candidate">
+					<li><a href="#">${candidate}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		<div class="col-lg-1">space</div>
