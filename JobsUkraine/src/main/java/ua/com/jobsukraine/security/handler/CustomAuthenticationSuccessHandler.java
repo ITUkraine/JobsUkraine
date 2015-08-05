@@ -17,13 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	private Map<String, String> redirections;
-
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication)  {
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 		System.out.println(roles);
-		redirections = new HashMap<String,String>();
+		Map<String, String> redirections = new HashMap<String,String>();
 		redirections.put("ROLE_ADMIN","admin");
 		redirections.put("ROLE_EMPLOYER","employerOffice");
 		redirections.put("ROLE_CANDIDATE","candidateOffice");
