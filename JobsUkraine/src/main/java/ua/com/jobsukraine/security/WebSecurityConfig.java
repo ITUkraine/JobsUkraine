@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import ua.com.jobsukraine.security.handler.CustomAuthenticationSuccessHandler;
 
@@ -45,18 +44,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .permitAll()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true);
+                .logoutSuccessUrl("/").invalidateHttpSession(true).and().exceptionHandling().accessDeniedPage("/errors/default");
+                
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	    auth.authenticationProvider(customAuthenticationProvider);
 	}
+
 	
 	@Bean
-	public PasswordEncoder passwordEncoder(){
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
+	public BCryptPasswordEncoder passwordEncoder() throws Exception {
+	  return new BCryptPasswordEncoder();
 	}
 }

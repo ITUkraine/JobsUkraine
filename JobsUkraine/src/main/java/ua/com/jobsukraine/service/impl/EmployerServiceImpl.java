@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,24 +22,29 @@ import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.RoleService;
 
 @Service
+@ComponentScan(basePackages = "ua.com.jobsukraine.security")
 @Transactional
 public class EmployerServiceImpl implements EmployerService {
 
 	@Autowired
-	private EmployerRepository ep;
+	private EmployerRepository er;
 	@Autowired
 	private RoleService roleRep;
 	@Autowired
 	private LoginInfoRepository LoginInfoRep;
 	@Autowired
 	private CategoryService catServ;
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@Override
 	public Employer add(Employer employer) {
-
+		String hashPassword = encoder.encode(employer.getInfo().getPassword());
+		employer.getInfo().setPassword(hashPassword);
+		employer.getInfo().setConfirmPassword(hashPassword);
 		employer.getInfo().setRole(roleRep.findByName("ROLE_EMPLOYER"));
 		LoginInfoRep.saveAndFlush(employer.getInfo());
-		ep.saveAndFlush(employer);
+		er.saveAndFlush(employer);
 
 		for (Category category : employer.getCategories()) {
 			Category cat = catServ.findByName(category.getName());
@@ -51,29 +58,29 @@ public class EmployerServiceImpl implements EmployerService {
 
 	@Override
 	public void delete(int id) {
-		ep.delete(id);
+		er.delete(id);
 	}
 
 	@Override
 	public Employer edit(Employer employer) {
-		return ep.saveAndFlush(employer);
+		return er.saveAndFlush(employer);
 	}
 
 	@Override
 	public Employer find(int id) {
-		return ep.findOne(id);
+		return er.findOne(id);
 	}
 
 	@Override
 	public Employer findByLogin(String login) {
-		return ep.findByLogin(login);
+		return er.findByLogin(login);
 	}
 
 	@Override
 	public List<Candidate> getAvailableCandidates(List<Category> categories, int top) {
 		List<Candidate> allCandidates = new ArrayList<>();
 		for (Category ctgr : categories) {
-			allCandidates.addAll(ep.getAvailableCandidates(ctgr.name, top));
+			allCandidates.addAll(er.getAvailableCandidates(ctgr.name, top));
 		}
 		
 		// remove duplicates by id

@@ -23,7 +23,7 @@ import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.SecurityService;
 
 @Controller
-@ComponentScan(basePackages = { "ua.com.jobsukraine.service", "ua.com.jobsukraine.security.handler",
+@ComponentScan(basePackages = { "ua.com.jobsukraine.service.impl", "ua.com.jobsukraine.security.handler",
 		"ua.com.jobsukraine.security" })
 @SessionAttributes(types = Candidate.class)
 public class CandidateController {
@@ -74,8 +74,9 @@ public class CandidateController {
 	@RequestMapping(value = "regCandidateNew", method = RequestMethod.POST)
 	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("candidate") Candidate candidate) throws IOException {
+		String password = candidate.getInfo().getPassword();
 		cs.add(candidate);
-		ss.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), candidate.getInfo().getPassword());
+		ss.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), password);
 	}
 
 }

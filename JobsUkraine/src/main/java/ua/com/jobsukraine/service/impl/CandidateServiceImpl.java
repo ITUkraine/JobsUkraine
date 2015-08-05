@@ -5,7 +5,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,9 +21,12 @@ import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.RoleService;
 
 @Service
+@ComponentScan(basePackages ="ua.com.jobsukraine.security")
 @Transactional
 public class CandidateServiceImpl implements CandidateService {
 
+
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	@Autowired
 	private CandidateRepository cr;
 	@Autowired
@@ -30,9 +35,13 @@ public class CandidateServiceImpl implements CandidateService {
 	private RoleService rs;
 	@Autowired
 	private CategoryRepository catServ;
+	
 
 	@Override
 	public Candidate add(Candidate candidate) {
+		String hashPassword = encoder.encode(candidate.getInfo().getPassword());
+		candidate.getInfo().setPassword(hashPassword);
+		candidate.getInfo().setConfirmPassword(hashPassword);
 		candidate.getInfo().setRole(rs.findByName("ROLE_CANDIDATE"));
 		lis.save(candidate.getInfo());
 		cr.save(candidate);

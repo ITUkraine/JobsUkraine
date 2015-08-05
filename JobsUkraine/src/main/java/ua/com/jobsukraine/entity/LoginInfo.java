@@ -19,7 +19,7 @@ import ua.com.jobsukraine.entity.passwordcontol.FieldMatch;
 public class LoginInfo {
 
 	@Transient
-	@Size(min = 8, max = 20)
+	@Size(min = 6)
 	private String confirmPassword;
 
 	@Id
@@ -33,7 +33,7 @@ public class LoginInfo {
 	private String login;
 
 	@NotNull
-	@Size(min = 8, max = 20)
+	@Size(min = 6)
 	private String password;
 
 	@ManyToOne
