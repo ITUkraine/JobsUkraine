@@ -26,7 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		
+		http.authorizeRequests().antMatchers("/JobsUkraine", "contacts", "aboutUs").permitAll()
+	    .antMatchers("/admin").hasRole("ADMIN");
 		http.csrf()
                 .disable()
                 .authorizeRequests()
@@ -39,8 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/login?error").successHandler(customAuthenticationSuccessHandler)      
                 .usernameParameter("j_username")
-                .passwordParameter("j_password")                
-                .permitAll();
+                .passwordParameter("j_password").permitAll();
  
         http.logout()
                 .permitAll()

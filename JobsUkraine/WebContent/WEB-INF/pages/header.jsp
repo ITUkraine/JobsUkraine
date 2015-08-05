@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -24,12 +25,8 @@
 			<li><a href="/JobsUkraine">Home</a></li>
 			<li><a href="vacancies">Vacancies</a></li>
 			<li><a href="candidates">Candidates</a></li>
-			<sec:authorize access="!isAuthenticated()">
-				<li><a href="login">Log In</a></li>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<li><a href="logout">Log Out</a></li>
-			</sec:authorize>
+			<li><a href="aboutUs">About Us</a></li>
+			<li><a href="contacts">Contacts</a></li>
 			<sec:authorize
 				access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
 				<li><a href="candidateOffice">Office</a></li>
@@ -37,8 +34,12 @@
 			<sec:authorize access="isAuthenticated() && hasRole('ROLE_EMPLOYER')">
 				<li><a href="employerOffice">Office</a></li>
 			</sec:authorize>
-			<li><a href="aboutUs">About Us</a></li>
-			<li><a href="contacts">Contacts</a></li>
+			<sec:authorize access="!isAuthenticated()">
+				<li><a href="login">Log In</a></li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<li><a href="logout">Log Out</a></li>
+			</sec:authorize>
 		</ul>
 	</nav>
 </body>

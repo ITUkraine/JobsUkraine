@@ -1,6 +1,6 @@
 package ua.com.jobsukraine.controllers;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -58,8 +58,8 @@ public class EmployerController {
 	}
 	
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
-	public String goLogin(HttpServletRequest request, Model model) {
-		String login = (String)request.getSession().getAttribute("username");
+	public String goLogin(Principal principal, Model model) {
+		String login = principal.getName();
 		Employer emp = employerService.findByLogin(login);
 		model.addAttribute("employer", emp);
 		model.addAttribute("candidates", employerService.getAvailableCandidates(emp.getCategories(), 10));
