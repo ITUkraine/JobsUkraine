@@ -23,18 +23,20 @@
 		<div class="col-lg-1">
 			<%@ include file="sidebar.jsp"%>
 		</div>
-		<div class="col-lg-1">space</div>
-		<div class="col-lg-4">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-3">
+			<h2>Add vacancy</h2>
 			<div class="form-group">
-				<form:form action="addVacancy" commandName="vacancy" method="POST">
+				<form:form action="" commandName="vacancy"
+					method="POST">
 					<fieldset>
 						<p>Name</p>
 						<form:input class="form-control" path="name" size="40" />
 
 						<p>Category</p>
 						<form:select class="form-control" id="sel1" path="category">
-							<c:forEach var="item" items="${list}">
-								<option value="${item.name}">${item.name}</option>
+							<c:forEach var="category" items="${list}">
+								<option value="${category.name}">${category.name}</option>
 							</c:forEach>
 						</form:select>
 
@@ -42,8 +44,7 @@
 						<form:textarea class="form-control" path="description" />
 
 						<p>Salary</p>
-						<form:input id="datepicker" class="form-control" path="salary"
-							size="40" />
+						<form:input class="form-control" path="salary" />
 
 						<br>
 						<div align="right">
@@ -54,10 +55,7 @@
 				</form:form>
 			</div>
 		</div>
-		<div class="col-lg-1">space</div>
-		<div class="col-lg-2">
-			<%@ include file="candidatesList.jsp"%>
-		</div>
+		<div class="col-lg-5"><%@ include file="vacanciesList.jsp"%></div>
 		<div class="col-lg-1">space</div>
 	</div>
 

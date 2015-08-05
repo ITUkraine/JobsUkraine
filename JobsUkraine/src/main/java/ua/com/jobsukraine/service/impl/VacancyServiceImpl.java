@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.VacancyRepository;
 import ua.com.jobsukraine.service.CategoryService;
@@ -37,6 +38,13 @@ public class VacancyServiceImpl implements VacancyService {
 	@Override
 	public Vacancy find(int id) {
 		return vr.findOne(id);
+	}
+
+	@Override
+	public Vacancy add(Employer emp, Vacancy obj) {
+		obj.setEmployer(emp);
+		obj.setCategory(cs.findByName(obj.getCategory().getName()));
+		return vr.saveAndFlush(obj);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
+import ua.com.jobsukraine.entity.Vacancy;
 
 public interface EmployerService extends DefaultService<Employer> {
 
@@ -12,4 +13,6 @@ public interface EmployerService extends DefaultService<Employer> {
 	
 	List<Candidate> getAvailableCandidates(List<Category> categories, int top);
 
+	List<Vacancy> getVacancies(String login);
+	
 }

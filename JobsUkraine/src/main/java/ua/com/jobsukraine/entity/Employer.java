@@ -87,7 +87,7 @@ public class Employer {
 		return info;
 	}
 
-	public int getLogin() {
+	public int getId() {
 		return id;
 	}
 

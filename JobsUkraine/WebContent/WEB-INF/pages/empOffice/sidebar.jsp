@@ -9,9 +9,9 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="active"><img alt="avatar" width="100%" height="100%"
 			src="<c:url value="/resources/pictures/icon.png" />"></img></li>
-		<li><a href="employerOffice">Profile</a></li>
-		<li><a href="addVacancy">Add vacancies</a></li>
-		<li><a href="settings">Settings</a></li>
+		<li><a href="/JobsUkraine/employerOffice">Profile</a></li>
+		<li><a href="/JobsUkraine/empOffice/addVacancy">Add vacancies</a></li>
+		<li><a href="/JobsUkraine/settings">Settings</a></li>
 	</ul>
 </body>
 </html>

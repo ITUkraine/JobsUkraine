@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.EmployerRepository;
 import ua.com.jobsukraine.repository.LoginInfoRepository;
 import ua.com.jobsukraine.service.CategoryService;
@@ -95,6 +96,11 @@ public class EmployerServiceImpl implements EmployerService {
 		Collections.sort(allCandidates);
 		
 		return allCandidates;
+	}
+	
+	public List<Vacancy> getVacancies(String login){
+		return er.getVacancies(er.findByInfo(LoginInfoRep.findByLogin(login)).getId());
+		
 	}
 
 }
