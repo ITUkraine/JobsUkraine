@@ -2,7 +2,6 @@ package ua.com.jobsukraine.security.handler;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,21 +17,16 @@ import org.springframework.stereotype.Component;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication)  {
+			Authentication authentication) throws IOException {
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-		System.out.println(roles);
-		Map<String, String> redirections = new HashMap<String,String>();
-		redirections.put("ROLE_ADMIN","admin");
-		redirections.put("ROLE_EMPLOYER","employerOffice");
-		redirections.put("ROLE_CANDIDATE","candidateOffice");
-		Iterator<String> it = roles.iterator();
-		try {
-			String role = it.next();
-			response.sendRedirect(redirections.get(role));
-		} catch (IOException e) {
-			// TODO logs
-			e.printStackTrace();
-		}
+		response.sendRedirect(initRoleMap().get(roles.iterator().next()));
 	}
 
+	private Map<String, String> initRoleMap() {
+		Map<String, String> redirections = new HashMap<String, String>();
+		redirections.put("ROLE_ADMIN", "admin");
+		redirections.put("ROLE_EMPLOYER", "employerOffice");
+		redirections.put("ROLE_CANDIDATE", "candidateOffice");
+		return redirections;
+	}
 }

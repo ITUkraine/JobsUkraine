@@ -1,15 +1,16 @@
 package ua.com.jobsukraine.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +20,11 @@ import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
+import ua.com.jobsukraine.service.SecurityService;
 
 @Controller
-@ComponentScan("ua.com.jobsukraine.service")
+@ComponentScan(basePackages = { "ua.com.jobsukraine.service", "ua.com.jobsukraine.security.handler",
+		"ua.com.jobsukraine.security" })
 @SessionAttributes(types = Candidate.class)
 public class CandidateController {
 
@@ -29,6 +32,8 @@ public class CandidateController {
 	private CandidateService cs;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private SecurityService ss;
 
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
@@ -65,10 +70,12 @@ public class CandidateController {
 
 	}
 
-	@RequestMapping(value = "/regCandidateNew", method = RequestMethod.POST)
-	public String register(@ModelAttribute("candidate") Candidate candidate, BindingResult result) {
-		cs.add(candidate);
-		return "welcome";
 
+	@RequestMapping(value = "regCandidateNew", method = RequestMethod.POST)
+	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("candidate") Candidate candidate) throws IOException {
+		cs.add(candidate);
+		ss.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), candidate.getInfo().getPassword());
 	}
+
 }

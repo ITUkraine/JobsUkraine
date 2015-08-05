@@ -1,12 +1,15 @@
 package ua.com.jobsukraine.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,16 +18,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
+import ua.com.jobsukraine.service.SecurityService;
 
 @Controller
-@ComponentScan("ua.com.jobsukraine.service")
+@ComponentScan(basePackages = { "ua.com.jobsukraine.service", "ua.com.jobsukraine.security.handler",
+		"ua.com.jobsukraine.security" })
 @SessionAttributes(types = { Employer.class })
 public class EmployerController {
 
 	@Autowired
 	private EmployerService employerService;
-	
-
+	@Autowired
+	private SecurityService ss;
 	@Autowired
 	private CategoryService categoryService;
 
@@ -48,15 +53,6 @@ public class EmployerController {
 		return "regemp/regEmpAddCategory";
 	}
 
-	@RequestMapping(value = "/regEmployerNew", method = RequestMethod.POST)
-	public String register(@ModelAttribute("empForm") Employer emp, BindingResult result) {
-
-		employerService.add(emp);
-
-		return "welcome";
-
-	}
-	
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
 		String login = principal.getName();
@@ -65,10 +61,17 @@ public class EmployerController {
 		model.addAttribute("candidates", employerService.getAvailableCandidates(emp.getCategories(), 10));
 		return "empOffice/profile";
 	}
-	
-//	@RequestMapping(value="/addVacancy", method = RequestMethod.GET)
-//	public String goAddVacancy(){
-//		return "empOffice/addVacancy";
-//	}
+
+	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
+	public String goAddVacancy() {
+		return "empOffice/addVacancy";
+	}
+
+	@RequestMapping(value = "regEmployerNew", method = RequestMethod.POST)
+	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("empForm") Employer emp) throws IOException {
+		employerService.add(emp);
+		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), emp.getInfo().getPassword());
+	}
 
 }
