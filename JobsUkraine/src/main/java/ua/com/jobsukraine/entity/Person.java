@@ -45,7 +45,6 @@ public abstract class Person {
 	private String sex;
 
 	@NotNull
-	@Pattern(regexp = "(^[0][0-9]{9})")
 	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
 

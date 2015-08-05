@@ -19,7 +19,6 @@ import ua.com.jobsukraine.entity.passwordcontol.FieldMatch;
 public class LoginInfo {
 
 	@Transient
-	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Size(min = 8, max = 20)
 	private String confirmPassword;
 
@@ -34,7 +33,6 @@ public class LoginInfo {
 	private String login;
 
 	@NotNull
-	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Size(min = 8, max = 20)
 	private String password;
 

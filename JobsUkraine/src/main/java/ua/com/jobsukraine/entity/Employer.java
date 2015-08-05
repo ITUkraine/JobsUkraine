@@ -31,7 +31,6 @@ public class Employer {
 
 	@NotNull(message = "This field is mandatory")
 	@Email
-
 	private String email;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,7 +43,6 @@ public class Employer {
 	@NotNull(message = "This field is mandatory")
 	@Column(unique = true)
 	@Size(min = 5, max = 12)
-	@Pattern(regexp = "[0-9]+")
 	private String phone;
 
 	// @URL
