@@ -6,7 +6,9 @@ import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Vacancy;
 
 public interface CandidateService extends DefaultService<Candidate> {
-	Candidate findByName(String name);
 	Candidate findByLogin(String login);
+	
+	int getAge(String login);
+	
 	List<Vacancy> getAvailableVacancies(String login);
 }

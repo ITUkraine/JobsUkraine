@@ -1,8 +1,11 @@
 package ua.com.jobsukraine.service.impl;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,12 +36,14 @@ public class CandidateServiceImpl implements CandidateService {
 		candidate.getInfo().setRole(rs.findByName("ROLE_CANDIDATE"));
 		lis.save(candidate.getInfo());
 		cr.save(candidate);
-//TODO
+		// TODO
 		for (Category category : candidate.getCategories()) {
-		Category cat = catServ.findByName(category.getName());
-		cat.getCandidates().add(candidate);
-			/*List<Candidate> candidates = cat.getCandidates();
-			candidates.add(candidate);*/
+			Category cat = catServ.findByName(category.getName());
+			cat.getCandidates().add(candidate);
+			/*
+			 * List<Candidate> candidates = cat.getCandidates();
+			 * candidates.add(candidate);
+			 */
 			//
 			catServ.saveAndFlush(cat);
 		}
@@ -59,28 +64,56 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public Candidate find(int id) {
-		Candidate c = cr.findOne(id);
-		c.setRating(cr.getRating(id));
-		return c;
-	}
-
-	@Override
-	public Candidate findByName(String name) {
-		Candidate c = cr.findByName(name);
-		c.setRating(cr.getRating(c.getId()));
+		Candidate c = null;
+		try {
+			c = cr.findOne(id);
+			if (cr.getFeedbacks(id).size() > 0)
+				c.setRating(cr.getGlobalRating(id));
+		} catch (EmptyResultDataAccessException e) {
+		}
 		return c;
 	}
 
 	@Override
 	public Candidate findByLogin(String login) {
-		Candidate c = cr.findByLogin(login);
-		c.setRating(cr.getRating(c.getId()));
+		Candidate c = null;
+		try {
+			c = cr.findByInfo(lis.findByLogin(login));
+			if (cr.getFeedbacks(c.getId()).size() > 0)
+				c.setRating(cr.getGlobalRating(c.getId()));
+		} catch (EmptyResultDataAccessException e) {
+		}
 		return c;
 	}
 
 	@Override
 	public List<Vacancy> getAvailableVacancies(String login) {
-		return cr.getAvailableVacancies(login);
+		List<Vacancy> vacancies = null;
+		try {
+			vacancies = cr.getAvailableVacancies(cr.findByInfo(lis.findByLogin(login)).getId());
+		} catch (EmptyResultDataAccessException e) {
+		}
+		return vacancies;
+	}
+
+	@Override
+	public int getAge(String login) {
+		Candidate c = null;
+		int age = 0;
+		try {
+			c = cr.findByInfo(lis.findByLogin(login));
+			Calendar cal = new GregorianCalendar();
+			cal.setTime(c.getDateOfBirth());
+			Calendar now = new GregorianCalendar();
+			age = now.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+			if ((cal.get(Calendar.MONTH) > now.get(Calendar.MONTH))
+					|| (cal.get(Calendar.MONTH) == now.get(Calendar.MONTH)
+							&& cal.get(Calendar.DAY_OF_MONTH) > now.get(Calendar.DAY_OF_MONTH))) {
+				age--;
+			}
+		} catch (EmptyResultDataAccessException e) {
+		}
+		return age;
 	}
 
 }
