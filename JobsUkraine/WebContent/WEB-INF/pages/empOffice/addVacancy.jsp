@@ -24,7 +24,7 @@
 			<%@ include file="sidebar.jsp"%>
 		</div>
 		<div class="col-lg-1"></div>
-		<div class="col-lg-3">
+		<div class="col-lg-3 panel panel-default">
 			<h2>Add vacancy</h2>
 			<div class="form-group">
 				<form:form action="" commandName="vacancy"

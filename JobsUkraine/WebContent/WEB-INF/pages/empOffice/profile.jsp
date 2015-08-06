@@ -15,28 +15,45 @@
 	<%@ include file="../header.jsp"%>
 
 	<div class="container-fluid" style="color: black;">
-		<div class="col-lg-1">space</div>
+		<div class="col-lg-1"></div>
+
 		<div class="col-lg-1">
 			<%@ include file="sidebar.jsp"%>
 		</div>
+
 		<div class="col-lg-6">
-			<h1>${employer.name }</h1>
-			<h4>
-				<sec:authorize
-					access="isAuthenticated() && !hasRole('ROLE_CANDIDATE')">
-				
+			<br>
+
+			<div class=" col-lg-12 panel panel-default">
+
+				<h1>${employer.name }</h1>
+
+				<h4>
+					<sec:authorize
+						access="isAuthenticated() && !hasRole('ROLE_CANDIDATE')">
 					${employer.email } <br> ${employer.phone } <br>
-					<a href="${employer.website} ">${employer.website}</a>
-				
-			</sec:authorize>
-				<br> ${employer.address }
-			</h4>
-			<p>${employer.description}</p>
+						<a href="${employer.website} ">${employer.website}</a>
+					</sec:authorize>
+					<br> ${employer.address }
+				</h4>
+
+				<p>${employer.description}</p>
+
+			</div>
+
 		</div>
+
 		<div class="col-lg-3">
-			<%@ include file="candidatesList.jsp"%>
+			<br>
+
+			<div class="col-lg-12 panel panel-default">
+				<%@ include file="candidatesList.jsp"%>
+			</div>
+
 		</div>
-		<div class="col-lg-1">space</div>
+
+		<div class="col-lg-1"></div>
+
 	</div>
 
 	<%@ include file="../footer.jsp"%>

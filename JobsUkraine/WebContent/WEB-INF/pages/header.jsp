@@ -23,22 +23,22 @@
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="/JobsUkraine">Home</a></li>
-			<li><a href="vacancies">Vacancies</a></li>
-			<li><a href="candidates">Candidates</a></li>
-			<li><a href="aboutUs">About Us</a></li>
-			<li><a href="contacts">Contacts</a></li>
+			<li><a href="/JobsUkraine/vacancies">Vacancies</a></li>
+			<li><a href="/JobsUkraine/candidates">Candidates</a></li>
+			<li><a href="/JobsUkraine/aboutUs">About Us</a></li>
+			<li><a href="/JobsUkraine/contacts">Contacts</a></li>
 			<sec:authorize
 				access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
-				<li><a href="candidateOffice">Office</a></li>
+				<li><a href="/JobsUkraine/candidateOffice">Office</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated() && hasRole('ROLE_EMPLOYER')">
-				<li><a href="employerOffice">Office</a></li>
+				<li><a href="/JobsUkraine/employerOffice">Office</a></li>
 			</sec:authorize>
 			<sec:authorize access="!isAuthenticated()">
-				<li><a href="login">Log In</a></li>
+				<li><a href="/JobsUkraine/login">Log In</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<li><a href="logout">Log Out</a></li>
+				<li><a href="/JobsUkraine/logout">Log Out</a></li>
 			</sec:authorize>
 		</ul>
 	</nav>

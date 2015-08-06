@@ -6,11 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Error</title>
+<link href="<c:url value="/resources/css/btn/btn.css" />"
+	rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
-	rel="stylesheet" />
+	rel="stylesheet">
+<link rel="shortcut icon"
+	href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
-	<div class="container"
+	<%@ include file="../header.jsp"%>
+	<div class="container-fluid"
 		style="width: 50%; height: 50%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
 		<div class="col-lg-5">
 			<img
@@ -25,5 +30,6 @@
 			</p>
 		</div>
 	</div>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

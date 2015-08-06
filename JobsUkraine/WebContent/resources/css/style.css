@@ -6,12 +6,12 @@ body {
     font-size: 12px;
     line-height: 16px;
     font-family: arial, sans-serif;
-    color: #808080;
-    background: #efefef repeat-x 0 0;
+    color: #3e3e3e;
+    background: #f8f8f8repeat-x 0 0;
     min-width: 950px;
 }
 
-a { color: #65cbf8; text-decoration: none; cursor: pointer; }
+a { text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }
 a img { border: 0; }
 

@@ -19,38 +19,49 @@
 	<%@ include file="header.jsp"%>
 
 	<div class="container">
-		<div class="col-lg-1"></div>
-		<div class="col-lg-8 col-md-8">
-			<h1>Vacancy "${vacancy.name}"</h1>
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+		<br>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1 class="panel-title">Vacancy "${vacancy.name}"</h1>
+				</div>
+				<div class="panel-body">
+					<h3 class="panel-title">Category: ${vacancy.category.name}</h3>
+					<h3 class="panel-title">Salary: ${vacancy.salary}</h3>
+					<h4 class="panel-title">Description:</h4>
+					<p>${vacancy.description}</p>
 
-			<h3>Category: ${vacancy.category.name}</h3>
-			<h3>Salary: ${vacancy.salary}</h3>
-			<h4>Description:</h4>
-			<p>${vacancy.description}</p>
+					<div class="row">
+						<!-- remove mark after test -->
+						<sec:authorize
+							access="isAuthenticated() && !hasRole('ROLE_CANDIDATE')">
+							<div class="col-lg-3">
+								<input class="form-control" type="button"
+									value="Accept (dont work)">
+							</div>
+						</sec:authorize>
 
-			<div class="row">
-				<!-- remove mark after test -->
-				<sec:authorize
-					access="isAuthenticated() && !hasRole('ROLE_CANDIDATE')">
-					<div class="col-lg-3">
-						<input class="form-control" type="button" value="Accept (dont work)">
+						<c:if test="${sameEmployer}">
+							<div class="col-lg-3">
+								<input class="form-control" type="button"
+									value="Edit (dont work)">
+							</div>
+
+							<div class="col-lg-2">
+								<input class="form-control" type="button"
+									onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
+									value="Delete">
+							</div>
+						</c:if>
+
 					</div>
-				</sec:authorize>
-				<c:if test="${sameEmployer}">
-					<div class="col-lg-3">
-						<input class="form-control" type="button" value="Edit (dont work)">
-					</div>
-					<div class="col-lg-3">
-						<input class="form-control" type="button"
-							onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
-							value="Delete">
-					</div>
-				</c:if>
+					<br>
+				</div>
 			</div>
 		</div>
-		<div class="col-lg-1"></div>
+		<div class="col-lg-2"></div>
 	</div>
-	<br>
 
 	<%@ include file="footer.jsp"%>
 </body>
