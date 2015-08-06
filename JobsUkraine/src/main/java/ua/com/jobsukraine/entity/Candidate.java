@@ -198,9 +198,6 @@ public class Candidate extends Person implements Comparable<Candidate> {
 
 	@Override
 	public int compareTo(Candidate o) {
-//		if (o.getId() == this.getId())
-//			return (int) (this.getRating() - o.getRating());
-//		// return 0;
 		return (int) (o.getRating() - this.getRating());
 	}
 

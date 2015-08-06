@@ -12,7 +12,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -23,6 +22,7 @@ import org.hibernate.validator.constraints.Email;
 public abstract class Person {
 
 	@Email
+	@NotNull
 	@Column(name = "email", unique = true)
 	private String email;
 
@@ -33,14 +33,10 @@ public abstract class Person {
 	@OneToOne
 	private LoginInfo info;
 
-	// comment validation for good of people
 	@NotNull
-	// @Size(min = 3, max = 20)
-	// @Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Pattern(regexp = "male|female")
 	@Column(name = "sex")
 	private String sex;
 
@@ -49,8 +45,6 @@ public abstract class Person {
 	private String mobileNumber;
 
 	@NotNull
-	// @Size(min = 3, max = 25)
-	// @Pattern(regexp = "([À-ß¨²É¥ª¯][à-ÿ¸³é´º¿]+)|([A-Z][a-z]+)")
 	@Column(name = "name")
 	private String name;
 
