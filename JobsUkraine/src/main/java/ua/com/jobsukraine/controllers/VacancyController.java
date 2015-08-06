@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Vacancy;
@@ -42,6 +45,26 @@ public class VacancyController {
 			Principal principal) {
 		vs.add(es.findByLogin(principal.getName()), vacancy);
 		return "redirect:/empOffice/addVacancy";
-
 	}
+
+	@RequestMapping(value = "/vacancy/{id}")
+	public ModelAndView showVacancyInfoPage(@PathVariable(value = "id") int id, Principal principal) {
+		ModelAndView mav = new ModelAndView("vacancy");
+		Vacancy vacancy = vs.find(id);
+		// check if entered same employer to enable buttons for edit/delete
+		if (vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()))
+			mav.addObject("sameEmployer", true);
+		else
+			mav.addObject("sameEmployer", false);
+
+		mav.addObject("vacancy", vacancy);
+		return mav;
+	}
+
+	@RequestMapping(value = "/vacancy/delete")
+	public String deleteVacancy(@RequestParam("id") int id) {
+		vs.delete(id);
+		return "redirect:/empOffice/addVacancy";
+	}
+
 }

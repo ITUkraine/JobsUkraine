@@ -44,6 +44,10 @@ public class Vacancy {
 		this.salary = salary;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public Category getCategory() {
 		return category;
 	}

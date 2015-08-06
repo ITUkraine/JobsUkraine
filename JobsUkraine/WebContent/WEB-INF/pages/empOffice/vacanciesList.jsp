@@ -13,7 +13,7 @@
 		style="font-size: 20px"
 		onchange="location = this.options[this.selectedIndex].value;">
 		<c:forEach items="${vacancies}" var="vacancy">
-			<option value="#">${vacancy.name}, ${vacancy.category.name}, ${vacancy.salary }, ${vacancy.description }</option>
+			<option value="/JobsUkraine/vacancy/${vacancy.id} ">${vacancy.name}, ${vacancy.category.name}, ${vacancy.salary }, ${vacancy.description }</option>
 		</c:forEach>
 	</select>
 </body>
