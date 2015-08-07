@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,29 +27,25 @@ import ua.com.jobsukraine.service.RoleService;
 public class EmployerServiceImpl implements EmployerService {
 
 	@Autowired
-	private EmployerRepository er;
+	private EmployerRepository employerRepository;
 	@Autowired
-	private RoleService roleRep;
+	private RoleService roleRepository;
 	@Autowired
-	private LoginInfoRepository LoginInfoRep;
+	private LoginInfoRepository loginInfoRepository;
 	@Autowired
-	private CategoryService catServ;
-	
-	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	private CategoryService categoryService;
+
 
 	@Override
 	public Employer add(Employer employer) {
-		String hashPassword = encoder.encode(employer.getInfo().getPassword());
-		employer.getInfo().setPassword(hashPassword);
-		employer.getInfo().setConfirmPassword(hashPassword);
-		employer.getInfo().setRole(roleRep.findByName("ROLE_EMPLOYER"));
-		LoginInfoRep.saveAndFlush(employer.getInfo());
-		er.saveAndFlush(employer);
+		employer.getInfo().setRole(roleRepository.findByName("ROLE_EMPLOYER"));
+		loginInfoRepository.saveAndFlush(employer.getInfo());
+		employerRepository.saveAndFlush(employer);
 
 		for (Category category : employer.getCategories()) {
-			Category cat = catServ.findByName(category.getName());
+			Category cat = categoryService.findByName(category.getName());
 			cat.getEmployers().add(employer);
-			catServ.edit(cat);
+			categoryService.edit(cat);
 		}
 
 		return employer;
@@ -59,29 +54,29 @@ public class EmployerServiceImpl implements EmployerService {
 
 	@Override
 	public void delete(int id) {
-		er.delete(id);
+		employerRepository.delete(id);
 	}
 
 	@Override
 	public Employer edit(Employer employer) {
-		return er.saveAndFlush(employer);
+		return employerRepository.saveAndFlush(employer);
 	}
 
 	@Override
 	public Employer find(int id) {
-		return er.findOne(id);
+		return employerRepository.findOne(id);
 	}
 
 	@Override
 	public Employer findByLogin(String login) {
-		return er.findByLogin(login);
+		return employerRepository.findByLogin(login);
 	}
 
 	@Override
 	public List<Candidate> getAvailableCandidates(List<Category> categories, int top) {
 		List<Candidate> allCandidates = new ArrayList<>();
 		for (Category ctgr : categories) {
-			allCandidates.addAll(er.getAvailableCandidates(ctgr.name, top));
+			allCandidates.addAll(employerRepository.getAvailableCandidates(ctgr.name, top));
 		}
 		
 		// remove duplicates by id
@@ -99,7 +94,7 @@ public class EmployerServiceImpl implements EmployerService {
 	}
 	
 	public List<Vacancy> getVacancies(String login){
-		return er.getVacancies(er.findByInfo(LoginInfoRep.findByLogin(login)).getId());
+		return employerRepository.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
 		
 	}
 

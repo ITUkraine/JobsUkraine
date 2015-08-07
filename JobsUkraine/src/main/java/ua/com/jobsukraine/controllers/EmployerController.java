@@ -21,7 +21,7 @@ import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.SecurityService;
 
 @Controller
-@ComponentScan(basePackages ="ua.com.jobsukraine.service")
+@ComponentScan(basePackages = "ua.com.jobsukraine.service")
 @SessionAttributes(types = { Employer.class })
 public class EmployerController {
 
@@ -70,6 +70,7 @@ public class EmployerController {
 	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("empForm") Employer emp) throws IOException {
 		String password = emp.getInfo().getPassword();
+		ss.encodePassword(emp.getInfo());
 		employerService.add(emp);
 		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), password);
 	}

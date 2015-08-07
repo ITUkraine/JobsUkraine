@@ -29,11 +29,11 @@ import ua.com.jobsukraine.service.SecurityService;
 public class CandidateController {
 
 	@Autowired
-	private CandidateService cs;
+	private CandidateService candidateService;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	private SecurityService ss;
+	private SecurityService securityService;
 
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
@@ -44,8 +44,8 @@ public class CandidateController {
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
 		String login = principal.getName();
-		model.addAttribute("candidate", cs.findByLogin(login));
-		model.addAttribute("vacancies", cs.getAvailableVacancies(login));
+		model.addAttribute("candidate", candidateService.findByLogin(login));
+		model.addAttribute("vacancies", candidateService.getAvailableVacancies(login));
 		return "candidateOffice";
 	}
 
@@ -75,8 +75,9 @@ public class CandidateController {
 	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("candidate") Candidate candidate) throws IOException {
 		String password = candidate.getInfo().getPassword();
-		cs.add(candidate);
-		ss.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), password);
+		securityService.encodePassword(candidate.getInfo());
+		candidateService.add(candidate);
+		securityService.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), password);
 	}
 
 }

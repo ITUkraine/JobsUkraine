@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,36 +24,31 @@ import ua.com.jobsukraine.service.RoleService;
 @Transactional
 public class CandidateServiceImpl implements CandidateService {
 
-
-	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	@Autowired
-	private CandidateRepository cr;
+	private CandidateRepository candidateRepository;
 	@Autowired
-	private LoginInfoRepository lis;
+	private LoginInfoRepository loginInfoRepository;
 	@Autowired
-	private RoleService rs;
+	private RoleService roleService;
 	@Autowired
-	private CategoryRepository catServ;
+	private CategoryRepository categoryRepository;
 	
 
 	@Override
 	public Candidate add(Candidate candidate) {
-		String hashPassword = encoder.encode(candidate.getInfo().getPassword());
-		candidate.getInfo().setPassword(hashPassword);
-		candidate.getInfo().setConfirmPassword(hashPassword);
-		candidate.getInfo().setRole(rs.findByName("ROLE_CANDIDATE"));
-		lis.save(candidate.getInfo());
-		cr.save(candidate);
+		candidate.getInfo().setRole(roleService.findByName("ROLE_CANDIDATE"));
+		loginInfoRepository.save(candidate.getInfo());
+		candidateRepository.save(candidate);
 		// TODO
 		for (Category category : candidate.getCategories()) {
-			Category cat = catServ.findByName(category.getName());
+			Category cat = categoryRepository.findByName(category.getName());
 			cat.getCandidates().add(candidate);
 			/*
 			 * List<Candidate> candidates = cat.getCandidates();
 			 * candidates.add(candidate);
 			 */
 			//
-			catServ.saveAndFlush(cat);
+			categoryRepository.saveAndFlush(cat);
 		}
 
 		return candidate;
@@ -63,21 +57,21 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public void delete(int id) {
-		cr.delete(id);
+		candidateRepository.delete(id);
 	}
 
 	@Override
 	public Candidate edit(Candidate candidate) {
-		return cr.saveAndFlush(candidate);
+		return candidateRepository.saveAndFlush(candidate);
 	}
 
 	@Override
 	public Candidate find(int id) {
 		Candidate c = null;
 		try {
-			c = cr.findOne(id);
-			if (cr.getFeedbacks(id).size() > 0)
-				c.setRating(cr.getGlobalRating(id));
+			c = candidateRepository.findOne(id);
+			if (candidateRepository.getFeedbacks(id).size() > 0)
+				c.setRating(candidateRepository.getGlobalRating(id));
 		} catch (EmptyResultDataAccessException e) {
 		}
 		return c;
@@ -87,9 +81,9 @@ public class CandidateServiceImpl implements CandidateService {
 	public Candidate findByLogin(String login) {
 		Candidate c = null;
 		try {
-			c = cr.findByInfo(lis.findByLogin(login));
-			if (cr.getFeedbacks(c.getId()).size() > 0)
-				c.setRating(cr.getGlobalRating(c.getId()));
+			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
+			if (candidateRepository.getFeedbacks(c.getId()).size() > 0)
+				c.setRating(candidateRepository.getGlobalRating(c.getId()));
 		} catch (EmptyResultDataAccessException e) {
 		}
 		return c;
@@ -99,7 +93,7 @@ public class CandidateServiceImpl implements CandidateService {
 	public List<Vacancy> getAvailableVacancies(String login) {
 		List<Vacancy> vacancies = null;
 		try {
-			vacancies = cr.getAvailableVacancies(cr.findByInfo(lis.findByLogin(login)).getId());
+			vacancies = candidateRepository.getAvailableVacancies(candidateRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
 		} catch (EmptyResultDataAccessException e) {
 		}
 		return vacancies;
@@ -110,7 +104,7 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate c = null;
 		int age = 0;
 		try {
-			c = cr.findByInfo(lis.findByLogin(login));
+			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
 			Calendar cal = new GregorianCalendar();
 			cal.setTime(c.getDateOfBirth());
 			Calendar now = new GregorianCalendar();
