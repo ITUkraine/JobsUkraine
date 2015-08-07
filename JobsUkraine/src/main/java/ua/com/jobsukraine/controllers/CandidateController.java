@@ -12,12 +12,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.SecurityService;
@@ -78,6 +81,15 @@ public class CandidateController {
 		securityService.encodePassword(candidate.getInfo());
 		candidateService.add(candidate);
 		securityService.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), password);
+	}
+	
+	@RequestMapping(value = "/candidate/{id}")
+	public ModelAndView showCandidateInfoPage(@PathVariable(value = "id") int id) {
+		ModelAndView modelAndView = new ModelAndView("candidate");
+		Candidate candidate = candidateService.find(id);
+		modelAndView.addObject("candidate", candidate);
+		System.out.println(candidate);
+		return modelAndView;
 	}
 
 }
