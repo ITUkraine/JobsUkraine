@@ -1,15 +1,24 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Vacancy {
+
+	@ManyToMany
+	@JoinTable(name = "vacancy_candidate", joinColumns = @JoinColumn(name = "vacancy_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+
+	private Set<Candidate> candidates;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -44,8 +53,8 @@ public class Vacancy {
 		this.salary = salary;
 	}
 
-	public int getId() {
-		return id;
+	public Set<Candidate> getCandidates() {
+		return candidates;
 	}
 
 	public Category getCategory() {
@@ -60,12 +69,20 @@ public class Vacancy {
 		return employer;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public int getSalary() {
 		return salary;
+	}
+
+	public void setCandidates(Set<Candidate> candidates) {
+		this.candidates = candidates;
 	}
 
 	public void setCategory(Category category) {

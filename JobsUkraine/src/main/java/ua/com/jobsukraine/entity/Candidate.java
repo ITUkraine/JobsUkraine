@@ -68,6 +68,10 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
 	private Set<Skill> skills;
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
+
+	private Set<Vacancy> vacancies;
+
 	public Candidate() {
 
 	}
@@ -82,6 +86,11 @@ public class Candidate extends Person implements Comparable<Candidate> {
 		this.dreamJob = dreamJob;
 		this.education = education;
 		this.experience = experience;
+	}
+
+	@Override
+	public int compareTo(Candidate o) {
+		return (int) (o.getRating() - this.getRating());
 	}
 
 	public String getAddress() {
@@ -136,6 +145,10 @@ public class Candidate extends Person implements Comparable<Candidate> {
 		return skills;
 	}
 
+	public Set<Vacancy> getVacancies() {
+		return vacancies;
+	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -188,17 +201,16 @@ public class Candidate extends Person implements Comparable<Candidate> {
 		this.skills = skills;
 	}
 
+	public void setVacancies(Set<Vacancy> vacancies) {
+		this.vacancies = vacancies;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString() + " Candidate [ date=" + dateOfBirth + ", address=" + address + ", primarySkills="
 				+ primarySkills + ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork="
 				+ dateStartToWork + ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob
 				+ ", Education=" + education + ", Rating=" + rating + "]\n";
-	}
-
-	@Override
-	public int compareTo(Candidate o) {
-		return (int) (o.getRating() - this.getRating());
 	}
 
 }
