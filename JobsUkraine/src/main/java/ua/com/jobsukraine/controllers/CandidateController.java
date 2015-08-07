@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
-import ua.com.jobsukraine.entity.Vacancy;
+import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.SecurityService;
@@ -37,7 +37,7 @@ public class CandidateController {
 	private CategoryService categoryService;
 	@Autowired
 	private SecurityService securityService;
-
+	
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("candidate", new Candidate());
@@ -49,6 +49,7 @@ public class CandidateController {
 		String login = principal.getName();
 		model.addAttribute("candidate", candidateService.findByLogin(login));
 		model.addAttribute("vacancies", candidateService.getAvailableVacancies(login));
+		model.addAttribute("feedbacks", candidateService.getFeedbacks(candidateService.findByLogin(login).getId()));
 		return "candidateOffice";
 	}
 
@@ -84,11 +85,15 @@ public class CandidateController {
 	}
 	
 	@RequestMapping(value = "/candidate/{id}")
-	public ModelAndView showCandidateInfoPage(@PathVariable(value = "id") int id) {
+	public ModelAndView showCandidateInfoPage(@PathVariable(value = "id") int id, Principal principal) {
+		if(principal!=null && candidateService.findByLogin(principal.getName()).getId()==id){
+			return new ModelAndView("forward:/candidateOffice");
+		}
 		ModelAndView modelAndView = new ModelAndView("candidate");
-		Candidate candidate = candidateService.find(id);
-		modelAndView.addObject("candidate", candidate);
-		System.out.println(candidate);
+		modelAndView.addObject("candidate", candidateService.find(id));
+		modelAndView.addObject("feedback", new Feedback());
+		modelAndView.addObject("list", categoryService.getAll());
+		modelAndView.addObject("feedbacks", candidateService.getFeedbacks(id));
 		return modelAndView;
 	}
 

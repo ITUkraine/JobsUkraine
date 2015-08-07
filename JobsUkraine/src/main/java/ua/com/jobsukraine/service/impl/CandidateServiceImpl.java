@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
+import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.CandidateRepository;
 import ua.com.jobsukraine.repository.CategoryRepository;
@@ -119,4 +120,8 @@ public class CandidateServiceImpl implements CandidateService {
 		return age;
 	}
 
+	public List<Feedback> getFeedbacks(int id){
+		return candidateRepository.getFeedbacks(id);
+	}
+	
 }

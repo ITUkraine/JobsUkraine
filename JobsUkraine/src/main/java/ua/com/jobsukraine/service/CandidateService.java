@@ -3,6 +3,7 @@ package ua.com.jobsukraine.service;
 import java.util.List;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.entity.Vacancy;
 
 public interface CandidateService extends DefaultService<Candidate> {
@@ -11,4 +12,6 @@ public interface CandidateService extends DefaultService<Candidate> {
 	int getAge(String login);
 	
 	List<Vacancy> getAvailableVacancies(String login);
+	
+	List<Feedback> getFeedbacks(int id);
 }

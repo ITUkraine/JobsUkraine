@@ -29,6 +29,20 @@
 		<div class="col-lg-6">
 			<h3>Main page</h3>
 			<p>${candidate}</p>
+			<div>
+				<div class="panel-heading">
+					<h3>Feedbacks</h3>
+				</div>
+				<c:forEach var="feedback" items="${feedbacks}">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h5>Category: ${feedback.category.name}</h5>
+							<h5>Mark: ${feedback.mark}</h5>
+							<p>Comment: ${feedback.comment}</p>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 		<div class="col-lg-2">
 			<h3>Vacancies</h3>
