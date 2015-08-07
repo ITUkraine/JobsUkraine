@@ -11,11 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import ua.com.jobsukraine.entity.passwordcontol.FieldMatch;
-
 @Entity
-@FieldMatch.List({
-		@FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"), })
 public class LoginInfo {
 
 	@Transient
