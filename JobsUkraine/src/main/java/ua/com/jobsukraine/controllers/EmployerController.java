@@ -11,10 +11,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
@@ -73,6 +76,15 @@ public class EmployerController {
 		ss.encodePassword(emp.getInfo());
 		employerService.add(emp);
 		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), password);
+	}
+	
+	@RequestMapping(value = "/employer/{id}")
+	public ModelAndView showEmployerInfoPage(@PathVariable(value = "id") int id) {
+		ModelAndView modelAndView = new ModelAndView("employer");
+		Employer employer = employerService.find(id);
+		modelAndView.addObject("employer", employer);
+		System.out.println(employer);
+		return modelAndView;
 	}
 
 }
