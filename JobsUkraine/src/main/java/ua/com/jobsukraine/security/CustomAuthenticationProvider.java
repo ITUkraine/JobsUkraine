@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.LoginInfoService;
 
-@Component
+@Component(value="customAuthenticationProvider")
 @ComponentScan(basePackages = { "ua.com.jobsukraine.service.impl", "ua.com.jobsukraine.security" })
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
