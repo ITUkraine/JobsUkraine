@@ -23,20 +23,20 @@ import javax.validation.constraints.NotNull;
 @DiscriminatorValue("2")
 public class Candidate extends Person implements Comparable<Candidate> {
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "address")
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
 	private List<Category> categories;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "city")
 	private String cityWhereLookingForWork;
 
 	private String cv;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "date_of_birth")
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
@@ -67,9 +67,8 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@ManyToMany
 	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
 	private Set<Skill> skills;
-
+	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
-
 	private Set<Vacancy> vacancies;
 
 	public Candidate() {

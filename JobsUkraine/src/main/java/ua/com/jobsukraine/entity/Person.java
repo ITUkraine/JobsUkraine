@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -21,8 +22,8 @@ import org.hibernate.validator.constraints.Email;
 @DiscriminatorColumn(name = "PRSN_TYPE", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Person {
 
-	@Email
-	@NotNull
+	@Email(message = "Wrong email format")
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "email", unique = true)
 	private String email;
 
@@ -33,18 +34,20 @@ public abstract class Person {
 	@OneToOne
 	private LoginInfo info;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "last_name")
 	private String lastName;
 
+	@NotNull(message = "This field is mandatory")
+	@Pattern(regexp = "male|female", message = "Must match \"male\" or \"female\"")
 	@Column(name = "sex")
 	private String sex;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(name = "name")
 	private String name;
 

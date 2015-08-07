@@ -14,22 +14,23 @@ import javax.validation.constraints.Size;
 @Entity
 public class LoginInfo {
 
+	@NotNull(message = "This field is mandatory")
+	@Size(min = 6, message="Password too short")
 	@Transient
-	@Size(min = 6)
 	private String confirmPassword;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(unique = true)
-	@Pattern(regexp = "[a-zA-Z0-9]+")
-	@Size(min = 4, max = 20)
+	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Wrong login format")
+	@Size(min = 4, max = 20, message="Length must be from 4 to 20")
 	private String login;
 
-	@NotNull
-	@Size(min = 6)
+	@NotNull(message = "This field is mandatory")
+	@Size(min = 6, message="Password too short")
 	private String password;
 
 	@ManyToOne

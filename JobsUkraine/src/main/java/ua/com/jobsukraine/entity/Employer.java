@@ -12,7 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -29,29 +28,30 @@ public class Employer {
 	private String description;
 
 	@NotNull(message = "This field is mandatory")
-	@Email
+	@Email(message = "Wrong email format")
+	@Column(unique = true)
 	private String email;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
 	@OneToOne
 	private LoginInfo info;
+
 	@NotNull(message = "This field is mandatory")
 	private String name;
 
 	@NotNull(message = "This field is mandatory")
 	@Column(unique = true)
-	@Size(min = 5, max = 12)
 	private String phone;
 
-	// @URL
 	private String pictureURL;
 
 	@OneToMany(mappedBy = "employer")
 	private List<Vacancy> vacancy;
 
-	@Size(min = 0, max = 30)
-	private String website; // can be changed to URL
+	private String website;
 
 	public Employer() {
 
@@ -82,12 +82,12 @@ public class Employer {
 		return email;
 	}
 
-	public LoginInfo getInfo() {
-		return info;
-	}
-
 	public int getId() {
 		return id;
+	}
+
+	public LoginInfo getInfo() {
+		return info;
 	}
 
 	public String getName() {
