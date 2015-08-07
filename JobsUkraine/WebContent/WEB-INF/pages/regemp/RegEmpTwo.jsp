@@ -9,10 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/forms.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/buttons.css" />">
 <title>Register</title>
 </head>
 <body>
@@ -21,8 +17,8 @@
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form class="pure-form pure-form-stacked"
-					modelAttribute="empForm" action="addEmpCategory" method="POST">
+				<form:form modelAttribute="empForm" action="addEmpCategory"
+					method="POST">
 					<fieldset>
 
 						<p>Name</p>
@@ -38,7 +34,7 @@
 						<form:input class="form-control" path="address" size="40" />
 
 						<p>Description</p>
-						<form:textarea  class="form-control" path="description" />
+						<form:textarea class="form-control" path="description" />
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"
