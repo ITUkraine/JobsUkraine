@@ -1,16 +1,20 @@
 package ua.com.jobsukraine.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
+@Controller
 public class GlobalErrorController {
 
-	public static final String DEFAULT_ERROR_VIEW = "errors/default";
+	private static final String DEFAULT_ERROR_VIEW = "errors/default";
 
 	@ExceptionHandler(Exception.class)
 	public ModelAndView exception(Exception e) {
@@ -31,4 +35,15 @@ public class GlobalErrorController {
 
 		return mav;
 	}
+
+	@RequestMapping(value = "/accessDenied")
+	public ModelAndView handler(HttpServletRequest request, HttpServletResponse response, Exception e) {
+		e.printStackTrace();
+		ModelAndView mav = new ModelAndView("errors/default");
+		mav.addObject("name", response.getStatus());
+		mav.addObject("message", "Access denied to " + request.getRequestURL());
+
+		return mav;
+	}
+	
 }
