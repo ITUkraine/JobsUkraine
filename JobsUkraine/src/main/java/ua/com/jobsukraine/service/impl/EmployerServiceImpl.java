@@ -76,7 +76,7 @@ public class EmployerServiceImpl implements EmployerService {
 		List<Candidate> allCandidates = new ArrayList<>();
 		for (Category ctgr : categories) {
 			// get candidate+his rating->set rating->add to list as one object
-			for (Object o[] : employerRepository.getAvailableCandidates(ctgr.name, top)) {
+			for (Object o[] : employerRepository.getAvailableCandidates(ctgr.name)) {
 				((Candidate) o[0]).setRating((Double) o[1]);
 				allCandidates.add((Candidate) o[0]);
 			}
@@ -93,7 +93,10 @@ public class EmployerServiceImpl implements EmployerService {
 		// sort by rating
 		Collections.sort(allCandidates);
 
-		return allCandidates;
+		if (allCandidates.size() > top)
+			return allCandidates.subList(0, top);
+		else
+			return allCandidates;
 	}
 
 	public List<Vacancy> getVacancies(String login) {
