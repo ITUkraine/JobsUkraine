@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8">
-		<br>
+			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h1 class="panel-title">Vacancy "${vacancy.name}"</h1>
@@ -33,7 +33,7 @@
 					<p>${vacancy.description}</p>
 
 					<div class="row">
-						<!-- remove mark after test -->
+						<!-- !hasRole() -> hasRole() after testing -->
 						<sec:authorize
 							access="isAuthenticated() && !hasRole('ROLE_CANDIDATE')">
 							<div class="col-lg-3">
@@ -42,7 +42,8 @@
 							</div>
 						</sec:authorize>
 
-						<c:if test="${sameEmployer}">
+						<sec:authorize
+							access="isAuthenticated() && (hasRole('ROLE_ADMIN') || ${sameEmployer})">
 							<div class="col-lg-3">
 								<input class="form-control" type="button"
 									value="Edit (dont work)">
@@ -53,7 +54,7 @@
 									onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
 									value="Delete">
 							</div>
-						</c:if>
+						</sec:authorize>
 
 					</div>
 					<br>

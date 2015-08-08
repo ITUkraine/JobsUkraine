@@ -1,0 +1,61 @@
+body {
+	/* The fixed navbar will overlay your other content, 
+	unless you add padding to the top of the <body>. 
+	Try out your own values or use our snippet below. 
+	Tip: By default, the navbar is 50px high.  */
+	padding-bottom: 70px;
+	background-color: #ecffff;
+}
+
+.navbar-default {
+	/* increase to fit logo */
+	height: 80px;
+}
+
+.navbar-nav {
+	/* drag links little bit to the center of navbar */
+	margin-top: 15px;
+	color: white;
+}
+
+.navbar-form {
+	/* should be bigger than .navbar-nav martgin-top */
+	margin-top: 20px;
+}
+
+.navbar-brand {
+	margin-top: -10px;
+}
+
+.container-fluid {
+	font-size: 18px;
+	width: 75%
+}
+
+.navbar-fixed-bottom>.container {
+	margin-top: 15px;
+	color: #999999;
+}
+
+.btn-custom {
+	width: 200px;
+	height: 75px;
+	font-size: 25px;
+}
+
+.h1 {
+	margin-bottom: 20px;
+}
+
+.navbar {
+	/* header/footer color */
+	background-color: #3b3b3b;
+}
+
+.nav.navbar-nav li a {
+    color: white;
+}
+
+.nav.navbar-nav li a:HOVER {
+    color: #bbeafb;
+}

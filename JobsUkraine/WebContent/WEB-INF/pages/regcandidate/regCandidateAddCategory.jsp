@@ -7,12 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/forms.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/buttons.css" />">
 <title>Register</title>
 </head>
 <body>
