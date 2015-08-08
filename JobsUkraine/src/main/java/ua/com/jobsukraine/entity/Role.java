@@ -1,16 +1,14 @@
 package ua.com.jobsukraine.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Role {
+public class Role extends AbstractPersistable<Integer> {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 
 	public Role() {
@@ -18,10 +16,6 @@ public class Role {
 
 	public Role(String name) {
 		this.name = name;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -34,7 +28,7 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + "]\n";
+		return "Role [id=" + this.getId() + ", name=" + name + "]\n";
 	}
 
 }

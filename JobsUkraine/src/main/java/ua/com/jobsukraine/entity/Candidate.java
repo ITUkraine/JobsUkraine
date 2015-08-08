@@ -23,6 +23,8 @@ import javax.validation.constraints.NotNull;
 @DiscriminatorValue("2")
 public class Candidate extends Person implements Comparable<Candidate> {
 
+	private static final long serialVersionUID = 1L;
+
 	@NotNull(message = "This field is mandatory")
 	@Column(name = "address")
 	private String address;
@@ -65,7 +67,9 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	private double rating;
 
 	@ManyToMany
-	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
+	@JoinTable(name = "candidate_skill",
+		joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") ,
+		inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
 	private Set<Skill> skills;
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")

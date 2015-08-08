@@ -3,21 +3,23 @@ package ua.com.jobsukraine.entity;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 @Entity
-public class Vacancy {
+public class Vacancy extends AbstractPersistable<Integer> {
+
+	private static final long serialVersionUID = 1L;
 
 	@ManyToMany
-	@JoinTable(name = "vacancy_candidate", joinColumns = @JoinColumn(name = "vacancy_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
-
+	@JoinTable(name = "vacancy_candidate", 
+		joinColumns = @JoinColumn(name = "vacancy_id", referencedColumnName = "id") , 
+		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
 	private Set<Candidate> candidates;
 
 	@ManyToOne
@@ -30,10 +32,6 @@ public class Vacancy {
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 
 	@NotNull
 	private String name;
@@ -67,10 +65,6 @@ public class Vacancy {
 
 	public Employer getEmployer() {
 		return employer;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -107,7 +101,7 @@ public class Vacancy {
 
 	@Override
 	public String toString() {
-		return "Vacancy [id=" + id + ", employer=" + employer + ", category=" + category + ", name=" + name
+		return "Vacancy [id=" + this.getId() + ", employer=" + employer + ", category=" + category + ", name=" + name
 				+ ", description=" + description + ", salary=" + salary + "]";
 	}
 

@@ -3,9 +3,6 @@ package ua.com.jobsukraine.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -14,23 +11,26 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Category {
+public class Category extends AbstractPersistable<Integer>  {
+
+	private static final long serialVersionUID = 1L;
 
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+	@JoinTable(name = "Category_Candidate", 
+		joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") ,
+		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
 	private List<Candidate> candidates;
 
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )
+	@JoinTable(name = "Category_Employer",
+		joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , 
+		inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )
 	private List<Employer> employers;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int id;
 
 	@NotNull
 	public String name;
@@ -51,10 +51,6 @@ public class Category {
 
 	public List<Employer> getEmployers() {
 		return employers;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -83,7 +79,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "Category [id=" + this.getId() + ", name=" + name + "]";
 	}
 
 }

@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
@@ -15,21 +12,20 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "person")
 @DiscriminatorColumn(name = "PRSN_TYPE", discriminatorType = DiscriminatorType.INTEGER)
-public abstract class Person {
+public abstract class Person extends AbstractPersistable<Integer> {
+
+	private static final long serialVersionUID = 1L;
 
 	@Email(message = "Wrong email format")
 	@NotNull(message = "This field is mandatory")
 	@Column(name = "email", unique = true)
 	private String email;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 
 	@OneToOne
 	private LoginInfo info;
@@ -39,17 +35,17 @@ public abstract class Person {
 	private String lastName;
 
 	@NotNull(message = "This field is mandatory")
-	@Pattern(regexp = "male|female", message = "Must match \"male\" or \"female\"")
-	@Column(name = "sex")
-	private String sex;
-
-	@NotNull(message = "This field is mandatory")
 	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
 
 	@NotNull(message = "This field is mandatory")
 	@Column(name = "name")
 	private String name;
+
+	@NotNull(message = "This field is mandatory")
+	@Pattern(regexp = "male|female", message = "Must match \"male\" or \"female\"")
+	@Column(name = "sex")
+	private String sex;
 
 	public Person() {
 	}
@@ -65,10 +61,6 @@ public abstract class Person {
 		return email;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public LoginInfo getInfo() {
 		return info;
 	}
@@ -77,16 +69,16 @@ public abstract class Person {
 		return lastName;
 	}
 
-	public String getSex() {
-		return sex;
-	}
-
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String getSex() {
+		return sex;
 	}
 
 	public void setEmail(String email) {
@@ -101,10 +93,6 @@ public abstract class Person {
 		this.lastName = lastName;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
@@ -113,10 +101,14 @@ public abstract class Person {
 		this.name = name;
 	}
 
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", mobileNumber="
-				+ mobileNumber + "]\n";
+		return "Person [id=" + this.getId() + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", mobileNumber=" + mobileNumber + "]\n";
 	}
 
 }

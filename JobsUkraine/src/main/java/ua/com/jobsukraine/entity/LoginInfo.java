@@ -2,35 +2,32 @@ package ua.com.jobsukraine.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 @Entity
-public class LoginInfo {
+public class LoginInfo extends AbstractPersistable<Integer> {
+
+	private static final long serialVersionUID = 1L;
 
 	@NotNull(message = "This field is mandatory")
-	@Size(min = 6, message="Password too short")
+	@Size(min = 6, message = "Password too short")
 	@Transient
 	private String confirmPassword;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 
 	@NotNull(message = "This field is mandatory")
 	@Column(unique = true)
 	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Wrong login format")
-	@Size(min = 4, max = 20, message="Length must be from 4 to 20")
+	@Size(min = 4, max = 20, message = "Length must be from 4 to 20")
 	private String login;
 
 	@NotNull(message = "This field is mandatory")
-	@Size(min = 6, message="Password too short")
+	@Size(min = 6, message = "Password too short")
 	private String password;
 
 	@ManyToOne
@@ -46,10 +43,6 @@ public class LoginInfo {
 
 	public String getConfirmPassword() {
 		return confirmPassword;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getLogin() {
@@ -82,6 +75,6 @@ public class LoginInfo {
 
 	@Override
 	public String toString() {
-		return "LoginInfo [id=" + id + ", role_id=" + ", login=" + login + ", password=" + password + "]\n";
+		return "LoginInfo [id=" + this.getId() + ", role_id=" + ", login=" + login + ", password=" + password + "]\n";
 	}
 }

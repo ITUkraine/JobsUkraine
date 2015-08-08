@@ -1,21 +1,19 @@
 package ua.com.jobsukraine.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 @Entity
-public class Feedback {
+public class Feedback extends AbstractPersistable<Integer> {
+
+	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
 	private Category category;
 
 	private String comment;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
 
 	private Integer mark;
 
@@ -33,10 +31,6 @@ public class Feedback {
 
 	public String getComment() {
 		return comment;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public Integer getMark() {
@@ -57,7 +51,7 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "Feedback [id=" + id + ", mark=" + mark + ", comment=" + comment + "]\n";
+		return "Feedback [id=" + this.getId() + ", mark=" + mark + ", comment=" + comment + "]\n";
 	}
 
 }

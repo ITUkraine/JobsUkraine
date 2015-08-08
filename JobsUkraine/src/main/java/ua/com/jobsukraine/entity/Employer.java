@@ -5,18 +5,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Employer {
+public class Employer extends AbstractPersistable<Integer> {
+
+	private static final long serialVersionUID = 1L;
 
 	@NotNull(message = "This field is mandatory")
 	private String address;
@@ -31,10 +31,6 @@ public class Employer {
 	@Email(message = "Wrong email format")
 	@Column(unique = true)
 	private String email;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 
 	@OneToOne
 	private LoginInfo info;
@@ -80,10 +76,6 @@ public class Employer {
 
 	public String getEmail() {
 		return email;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public LoginInfo getInfo() {
@@ -144,7 +136,7 @@ public class Employer {
 
 	@Override
 	public String toString() {
-		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
+		return "Employer [id=" + this.getId() + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
 				+ address + ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL
 				+ "]\n";
 	}

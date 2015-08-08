@@ -12,6 +12,8 @@ import javax.persistence.TemporalType;
 @DiscriminatorValue("1")
 public class Admin extends Person {
 
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "city")
 	private String cityWherework;
 

@@ -4,20 +4,17 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 @Entity
-public class Skill {
+public class Skill extends AbstractPersistable<Integer> {
+
+	private static final long serialVersionUID = 1L;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
 	private Set<Candidate> candidates;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 
 	private String nameOfSkill;
 
@@ -46,7 +43,7 @@ public class Skill {
 
 	@Override
 	public String toString() {
-		return "Skill [id=" + id + ", nameOfSkill=" + nameOfSkill + "]";
+		return "Skill [id=" + this.getId() + ", nameOfSkill=" + nameOfSkill + "]";
 	}
 
 }
