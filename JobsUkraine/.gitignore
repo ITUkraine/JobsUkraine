@@ -1,3 +1,10 @@
 /target/
 
+
 /src/main/resources/app.properties
+
+/bin/
+/.settings/
+.classpath
+.project
+.tern-project
