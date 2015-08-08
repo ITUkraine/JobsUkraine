@@ -35,7 +35,6 @@ public class EmployerServiceImpl implements EmployerService {
 	@Autowired
 	private CategoryService categoryService;
 
-
 	@Override
 	public Employer add(Employer employer) {
 		employer.getInfo().setRole(roleRepository.findByName("ROLE_EMPLOYER"));
@@ -69,33 +68,38 @@ public class EmployerServiceImpl implements EmployerService {
 
 	@Override
 	public Employer findByLogin(String login) {
-		return employerRepository.findByLogin(login);
+		return employerRepository.findByInfo(loginInfoRepository.findByLogin(login));
 	}
 
 	@Override
 	public List<Candidate> getAvailableCandidates(List<Category> categories, int top) {
 		List<Candidate> allCandidates = new ArrayList<>();
 		for (Category ctgr : categories) {
-			allCandidates.addAll(employerRepository.getAvailableCandidates(ctgr.name, top));
+			// get candidate+his rating->set rating->add to list as one object
+			for (Object o[] : employerRepository.getAvailableCandidates(ctgr.name, top)) {
+				((Candidate) o[0]).setRating((Double) o[1]);
+				allCandidates.add((Candidate) o[0]);
+			}
 		}
-		
+
 		// remove duplicates by id
 		Map<Integer, Candidate> map = new LinkedHashMap<>();
 		for (Candidate ays : allCandidates) {
-		  map.put(ays.getId(), ays);
+			map.put(ays.getId(), ays);
 		}
 		allCandidates.clear();
 		allCandidates.addAll(map.values());
-		
+
 		// sort by rating
 		Collections.sort(allCandidates);
-		
+
 		return allCandidates;
 	}
-	
-	public List<Vacancy> getVacancies(String login){
-		return employerRepository.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
-		
+
+	public List<Vacancy> getVacancies(String login) {
+		return employerRepository
+				.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
+
 	}
 
 }
