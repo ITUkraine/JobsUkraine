@@ -29,22 +29,21 @@ body {
 
 .container-fluid {
 	font-size: 18px;
+	/* make header content aligned to center */
 	width: 75%
 }
 
 .navbar-fixed-bottom>.container {
 	margin-top: 15px;
+	/* color of text in footer */
 	color: #999999;
 }
 
 .btn-custom {
+	/* arrow buttons */
 	width: 200px;
 	height: 75px;
 	font-size: 25px;
-}
-
-.h1 {
-	margin-bottom: 20px;
 }
 
 .navbar {
@@ -53,9 +52,37 @@ body {
 }
 
 .nav.navbar-nav li a {
-    color: white;
+	/* color of text in header */
+	color: white;
 }
 
 .nav.navbar-nav li a:HOVER {
-    color: #bbeafb;
+	/* color of text in header when hovered */
+	color: #bbeafb;
+}
+
+.nav-pills li a {
+	/* color of text in side menu */
+	color: black;
+}
+
+.nav-pills li a:HOVER {
+	/* color of pills in side menu when on focus */
+	background-color: #e5e5e5;
+}
+
+.panel-default {
+	box-shadow: 0 1px 5px #585858;
+	border-radius: 0;
+}
+
+.valid-error {
+	/* format of validation error message */
+	color: red;
+	text-align: right;
+}
+
+.form-control {
+	/* allow only vertical resize */
+	resize: vertical;
 }
