@@ -47,24 +47,23 @@
 				<form:form id="bootstrapTagsInputForm" modelAttribute="candidate"
 					action="addCandidateCategory" method="POST">
 					<fieldset>
-						<p>Education</p>
+						<p>Education:</p>
 						<form:input class="form-control" path="education" size="40" />
 
-						<p>Experience</p>
+						<p>Experience:</p>
 						<form:input class="form-control" path="experience" size="40" />
 
-						<p>City for work</p>
-						<form:input class="form-control" path="cityWhereLookingForWork"
-							size="40" />
+						<p>Your address:</p>
+						<form:input class="form-control" path="address" size="40" />
 
 						<p>Start date</p>
 						<form:input id="datepicker" class="form-control"
 							path="dateStartToWork" size="40" />
 
-						<p>Dream job</p>
+						<p>Dream job:</p>
 						<form:input class="form-control" path="dreamJob" size="40" />
 
-						<p>Primary skills</p>
+						<p>Primary skills:</p>
 
 						<form:input size="50" path="primarySkills" class="form-control"
 							data-role="tagsinput" />
@@ -73,6 +72,8 @@
 						<div align="right">
 							<button type="submit" class="btn btn-default"
 								style="width: 120px;">Next</button>
+						    <button type="submit" class="btn btn-default"
+								style="width: 120px;">Skip</button>
 						</div>
 					</fieldset>
 				</form:form>

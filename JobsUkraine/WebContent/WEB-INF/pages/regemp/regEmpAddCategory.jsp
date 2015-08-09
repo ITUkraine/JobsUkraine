@@ -10,18 +10,6 @@
 <link rel="shortcut icon"
 	href="<c:url value="/resources/pictures/icon.png" />">
 <title>Add category</title>
-<style type="text/css">
-/* .row-fluid1 {
-	display: block;
-	width: 100%;
-	min-height: 30px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	float: left;
-	margin-left: 3.4482758620689653%;
-} */
-</style>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -33,10 +21,8 @@
 			<div class="form-group col-md-4">
 				<form:form commandName="empForm" method="POST" action="regEmployerNew">
 
-					
 					<form:checkboxes path="categories" items="${listCat}"
-						itemLabel="name" itemValue="name" element="div"
-						cssClass="row-fluid1" />
+						itemLabel="name" itemValue="name" element="div"/>
 					<br>
 					<br>
 					<p>Put website of your company:</p>

@@ -34,31 +34,29 @@
 					method="POST">
 					<fieldset>
 
-						<p>Last name</p>
+						<p>Last name:</p>
 						<form:input class="form-control" path="lastName" size="40" />
-
-						<p>Name</p>
+                        <div class="valid-error"><form:errors path="lastName"/></div>
+						<p>Name:</p>
 						<form:input class="form-control" path="name" size="40" />
-
-						<p>Gender</p>
+                        <div class="valid-error"><form:errors path="name"/></div>
+						<p>Gender:</p>
 						<form:select path="sex" class="form-control" id="sel1">
 							<option>male</option>
 							<option>female</option>
 						</form:select>
 						
-						<p>Birthday</p>
-						<form:input id="datepicker" class="form-control"
-							path="dateOfBirth" size="40" />
-
-						<p>E-mail</p>
+						<p>Birthday:</p>
+						<form:input id="datepicker" class="form-control" path="dateOfBirth" size="40" />                        
+						<p>E-mail:</p>
 						<form:input class="form-control" path="email" size="40" />
-
-						<p>Address</p>
-						<form:input class="form-control" path="address" size="40" />
-
+                        <div class="valid-error"><form:errors path="email"/></div>
+                        <p>City where you looking for work:</p>
+						<form:input class="form-control" path="cityWhereLookingForWork" size="40" />
+						<div class="valid-error"><form:errors path="cityWhereLookingForWork"/></div>	
 						<p>Mobile phone</p>
 						<form:input class="form-control" path="mobileNumber" size="40" />
-
+						<div class="valid-error"><form:errors path="mobileNumber"/></div>
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"
