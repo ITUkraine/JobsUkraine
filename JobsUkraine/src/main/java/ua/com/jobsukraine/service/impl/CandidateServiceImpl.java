@@ -83,7 +83,7 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate c = null;
 		try {
 			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
-			if (candidateRepository.getFeedbacks(c.getId()).size() > 0)
+			if (candidateRepository.getFeedbacks(c.getId()) != null)
 				c.setRating(candidateRepository.getGlobalRating(c.getId()));
 		} catch (EmptyResultDataAccessException e) {
 		}

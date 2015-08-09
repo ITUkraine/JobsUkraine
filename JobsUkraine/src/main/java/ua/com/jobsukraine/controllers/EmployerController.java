@@ -87,7 +87,6 @@ public class EmployerController {
 		ModelAndView modelAndView = new ModelAndView("employer");
 		Employer employer = employerService.find(id);
 		modelAndView.addObject("employer", employer);
-		System.out.println(employer);
 		return modelAndView;
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,8 @@ public class CandidateController {
 	private CategoryService categoryService;
 	@Autowired
 	private SecurityService securityService;
+	
+	final static Logger logger = Logger.getLogger(CandidateController.class);
 	
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
@@ -86,14 +89,14 @@ public class CandidateController {
 	
 	@RequestMapping(value = "/candidate/{id}")
 	public ModelAndView showCandidateInfoPage(@PathVariable(value = "id") int id, Principal principal) {
-		if(principal!=null && candidateService.findByLogin(principal.getName()).getId()==id){
-			return new ModelAndView("forward:/candidateOffice");
-		}
 		ModelAndView modelAndView = new ModelAndView("candidate");
 		modelAndView.addObject("candidate", candidateService.find(id));
+		System.out.println(candidateService.find(id));
 		modelAndView.addObject("feedback", new Feedback());
 		modelAndView.addObject("list", categoryService.getAll());
+		System.out.println(candidateService.find(id));
 		modelAndView.addObject("feedbacks", candidateService.getFeedbacks(id));
+		System.out.println(candidateService.find(id));
 		return modelAndView;
 	}
 
