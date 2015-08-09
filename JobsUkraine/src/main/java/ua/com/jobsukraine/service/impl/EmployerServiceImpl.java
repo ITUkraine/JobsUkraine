@@ -37,18 +37,16 @@ public class EmployerServiceImpl implements EmployerService {
 	private CategoryService categoryService;
 
 	@Override
-	public Employer add(Employer employer) {
-		employer.getInfo().setRole(roleRepository.findByName("ROLE_EMPLOYER"));
-		loginInfoRepository.saveAndFlush(employer.getInfo());
-		employerRepository.saveAndFlush(employer);
-
-		for (Category category : employer.getCategories()) {
+	public Employer register(Employer emp, LoginInfo info) {
+		info.setRole(roleRepository.findByName("ROLE_EMPLOYER"));
+		List<Category> listcat = new ArrayList<>();
+		for (Category category : emp.getCategories()) {
 			Category cat = categoryService.findByName(category.getName());
-			cat.getEmployers().add(employer);
-			categoryService.edit(cat);
+			listcat.add(cat);
 		}
-
-		return employer;
+		emp.setCategories(listcat);
+		emp.setInfo(info);
+		return employerRepository.save(emp);
 
 	}
 
@@ -105,19 +103,11 @@ public class EmployerServiceImpl implements EmployerService {
 				.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
 
 	}
-
 	@Override
-	public Employer register(Employer emp, LoginInfo info) {
-		info.setRole(roleRepository.findByName("ROLE_EMPLOYER"));
-		List<Category> listcat = new ArrayList<>();
-		for (Category category : emp.getCategories()) {
-			Category cat = categoryService.findByName(category.getName());
-			listcat.add(cat);
-		}
-		emp.setCategories(listcat);
-		loginInfoRepository.save(info);
-		employerRepository.save(emp);
-		return emp;
+	public Employer add(Employer employer) {
+		return employerRepository.saveAndFlush(employer);
+
 	}
+	
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Feedback;
+import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 
 public interface CandidateService extends DefaultService<Candidate> {
@@ -14,4 +15,6 @@ public interface CandidateService extends DefaultService<Candidate> {
 	List<Vacancy> getAvailableVacancies(String login);
 	
 	List<Feedback> getFeedbacks(int id);
+	
+	Candidate register(Candidate candidate, LoginInfo info);
 }

@@ -72,7 +72,6 @@ public class EmployerController {
 			@ModelAttribute("empForm") Employer emp, @ModelAttribute("infoForm") LoginInfo info) throws IOException {
 		String password = info.getPassword();
 		ss.encodePassword(info);
-		emp.setInfo(info);
 		employerService.register(emp, info);
 		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), password);
 	}

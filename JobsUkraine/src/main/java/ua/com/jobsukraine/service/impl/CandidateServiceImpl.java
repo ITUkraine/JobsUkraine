@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.service.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Feedback;
+import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.CandidateRepository;
 import ua.com.jobsukraine.repository.CategoryRepository;
@@ -28,32 +30,23 @@ public class CandidateServiceImpl implements CandidateService {
 	@Autowired
 	private CandidateRepository candidateRepository;
 	@Autowired
-	private LoginInfoRepository loginInfoRepository;
-	@Autowired
 	private RoleService roleService;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
-
+	@Autowired
+	private LoginInfoRepository loginInfoRepository;
+     
 	@Override
-	public Candidate add(Candidate candidate) {
-		candidate.getInfo().setRole(roleService.findByName("ROLE_CANDIDATE"));
-		loginInfoRepository.save(candidate.getInfo());
-		candidateRepository.save(candidate);
-		// TODO
+	public Candidate register(Candidate candidate, LoginInfo info) {
+		info.setRole(roleService.findByName("ROLE_EMPLOYER"));
+		List<Category> listcat = new ArrayList<>();
 		for (Category category : candidate.getCategories()) {
 			Category cat = categoryRepository.findByName(category.getName());
-			cat.getCandidates().add(candidate);
-			/*
-			 * List<Candidate> candidates = cat.getCandidates();
-			 * candidates.add(candidate);
-			 */
-			//
-			categoryRepository.saveAndFlush(cat);
+			listcat.add(cat);
 		}
-
-		return candidate;
-
+		candidate.setCategories(listcat);
+		candidate.setInfo(info);
+		return 	candidateRepository.save(candidate);
 	}
 
 	@Override
@@ -105,6 +98,7 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate c = null;
 		int age = 0;
 		try {
+			
 			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
 			Calendar cal = new GregorianCalendar();
 			cal.setTime(c.getDateOfBirth());
@@ -123,5 +117,13 @@ public class CandidateServiceImpl implements CandidateService {
 	public List<Feedback> getFeedbacks(int id){
 		return candidateRepository.getFeedbacks(id);
 	}
+	
+	@Override
+	public Candidate add(Candidate candidate) {
+		
+		return candidateRepository.save(candidate);
+
+	}
+	
 	
 }
