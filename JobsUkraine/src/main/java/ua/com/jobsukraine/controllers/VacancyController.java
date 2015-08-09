@@ -28,7 +28,10 @@ public class VacancyController {
 	private EmployerService es;
 	@Autowired
 	private VacancyService vs;
-
+	
+	public VacancyController() {
+	}
+	
 	public VacancyController(VacancyService vs, CategoryService cs, EmployerService es) {
 		super();
 		this.vs = vs;
@@ -65,10 +68,7 @@ public class VacancyController {
 		ModelAndView mav = new ModelAndView("vacancy");
 		Vacancy vacancy = vs.find(id);
 		// check if entered same employer to enable buttons for edit/delete
-		if (vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()))
-			mav.addObject("sameEmployer", true);
-		else
-			mav.addObject("sameEmployer", false);
+		mav.addObject("sameEmployer", vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()));
 
 		mav.addObject("vacancy", vacancy);
 		return mav;
