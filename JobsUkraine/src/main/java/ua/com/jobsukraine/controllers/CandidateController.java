@@ -87,7 +87,7 @@ public class CandidateController {
 		String password = info.getPassword();
 		securityService.encodePassword(info);
 		candidateService.register(candidate, info);
-		securityService.autoLoginAfterRegistration(request, response, candidate.getInfo().getLogin(), password);
+		securityService.autoLoginAfterRegistration(request, response, info.getLogin(), password);
 	}
 	
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)

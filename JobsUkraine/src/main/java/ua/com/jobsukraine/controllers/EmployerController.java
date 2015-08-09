@@ -73,7 +73,7 @@ public class EmployerController {
 		String password = info.getPassword();
 		ss.encodePassword(info);
 		employerService.register(emp, info);
-		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), password);
+		ss.autoLoginAfterRegistration(request, response, info.getLogin(), password);
 	}
 
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
