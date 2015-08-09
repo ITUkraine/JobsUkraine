@@ -5,11 +5,13 @@ import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
@@ -50,9 +51,12 @@ public class EmployerController {
 	}
 
 	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
-	public String addCategory(@ModelAttribute("empForm") Employer emp, Model model) {
+	public String addCategory(@Valid @ModelAttribute("empForm") Employer emp, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "regemp/RegEmpTwo";
+		} else{
 		model.addAttribute("listCat", categoryService.getAll());
-		return "regemp/regEmpAddCategory";
+		return "regemp/regEmpAddCategory";}
 	}
 
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)

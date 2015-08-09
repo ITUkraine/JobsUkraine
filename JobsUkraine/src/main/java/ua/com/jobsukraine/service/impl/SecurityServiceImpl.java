@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +27,9 @@ import ua.com.jobsukraine.service.SecurityService;
 @ComponentScan(basePackages = { "ua.com.jobsukraine.security.handler", "ua.com.jobsukraine.security" })
 @Transactional
 public class SecurityServiceImpl implements SecurityService {
-
+	
+	final static Logger logger = Logger.getLogger(SecurityServiceImpl.class);
+	
 	@Autowired
 	@Qualifier(value = "customAuthenticationProvider")
 	private AuthenticationProvider customAuthenticationProvider;
@@ -48,11 +51,12 @@ public class SecurityServiceImpl implements SecurityService {
 		try {
 			customAuthenticationSuccessHandler.onAuthenticationSuccess(request, response, auth);
 		} catch (ServletException e) {
-			// TODO logs
-			e.printStackTrace();
+			
+			logger.debug("THIS IS ServletException",  e);
+	
 		} catch (IOException e) {
-			// TODO logs
-			e.printStackTrace();
+			
+			logger.debug("THIS IS IOException",  e);
 		}
 
 	}

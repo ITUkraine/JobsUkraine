@@ -27,6 +27,8 @@
 						<p>E-mail</p>
 						<form:input class="form-control" path="email" size="40" />
 
+						<form:errors path="email" cssClass="error" />
+					
 						<p>Mobile phone</p>
 						<form:input class="form-control" path="phone" size="40" />
 
