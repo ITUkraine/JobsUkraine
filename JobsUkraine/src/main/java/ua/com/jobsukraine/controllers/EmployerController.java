@@ -20,13 +20,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Employer;
+import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.SecurityService;
 
 @Controller
 @ComponentScan(basePackages = "ua.com.jobsukraine.service")
-@SessionAttributes(types = { Employer.class })
+@SessionAttributes(types = { Employer.class, LoginInfo.class })
 public class EmployerController {
 
 	@Autowired
@@ -39,14 +40,20 @@ public class EmployerController {
 	@RequestMapping(value = "/regEmployer", method = RequestMethod.GET)
 	public String addEmployerLogin(Model model) {
 
-		model.addAttribute("empForm", new Employer());
+		model.addAttribute("infoForm", new LoginInfo());
 
 		return "regemp/RegEmpOne";
 	}
 
 	@RequestMapping(value = "/addEmployerInfo", method = RequestMethod.POST)
-	public String addEmployerInfo(@ModelAttribute("empForm") Employer emp) {
-		return "regemp/RegEmpTwo";
+	public String addEmployerInfo(@Valid @ModelAttribute("infoForm") LoginInfo info, BindingResult result,
+			Model model) {
+		if (result.hasErrors()) {
+			return "regemp/RegEmpOne";
+		} else {
+			model.addAttribute("empForm", new Employer());
+			return "regemp/RegEmpTwo";
+		}
 
 	}
 
@@ -54,9 +61,20 @@ public class EmployerController {
 	public String addCategory(@Valid @ModelAttribute("empForm") Employer emp, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "regemp/RegEmpTwo";
-		} else{
-		model.addAttribute("listCat", categoryService.getAll());
-		return "regemp/regEmpAddCategory";}
+		} else {
+			model.addAttribute("listCat", categoryService.getAll());
+			return "regemp/regEmpAddCategory";
+		}
+	}
+
+	@RequestMapping(value = "regEmployerNew", method = RequestMethod.POST)
+	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("empForm") Employer emp, @ModelAttribute("infoForm") LoginInfo info) throws IOException {
+		String password = info.getPassword();
+		ss.encodePassword(info);
+		emp.setInfo(info);
+		employerService.register(emp, info);
+		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), password);
 	}
 
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
@@ -68,20 +86,6 @@ public class EmployerController {
 		return "empOffice/profile";
 	}
 
-	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
-	public String goAddVacancy() {
-		return "empOffice/addVacancy";
-	}
-
-	@RequestMapping(value = "regEmployerNew", method = RequestMethod.POST)
-	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("empForm") Employer emp) throws IOException {
-		String password = emp.getInfo().getPassword();
-		ss.encodePassword(emp.getInfo());
-		employerService.add(emp);
-		ss.autoLoginAfterRegistration(request, response, emp.getInfo().getLogin(), password);
-	}
-	
 	@RequestMapping(value = "/employer/{id}")
 	public ModelAndView showEmployerInfoPage(@PathVariable(value = "id") int id) {
 		ModelAndView modelAndView = new ModelAndView("employer");
@@ -90,4 +94,8 @@ public class EmployerController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
+	public String goAddVacancy() {
+		return "empOffice/addVacancy";
+	}
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
+import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.EmployerRepository;
 import ua.com.jobsukraine.repository.LoginInfoRepository;
@@ -103,6 +104,20 @@ public class EmployerServiceImpl implements EmployerService {
 		return employerRepository
 				.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
 
+	}
+
+	@Override
+	public Employer register(Employer emp, LoginInfo info) {
+		info.setRole(roleRepository.findByName("ROLE_EMPLOYER"));
+		List<Category> listcat = new ArrayList<>();
+		for (Category category : emp.getCategories()) {
+			Category cat = categoryService.findByName(category.getName());
+			listcat.add(cat);
+		}
+		emp.setCategories(listcat);
+		loginInfoRepository.save(info);
+		employerRepository.save(emp);
+		return emp;
 	}
 
 }
