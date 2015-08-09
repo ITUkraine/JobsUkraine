@@ -8,27 +8,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Office</title>
-<link href="<c:url value="/resources/css/btn/btn.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
-	rel="stylesheet">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 
 	<div class="container-fluid">
-		<div class="col-lg-1">space</div>
-		<div class="col-lg-1">
-			<%@ include file="sidebar.jsp"%>
-		</div>
-		<div class="col-lg-1"></div>
-		<div class="col-lg-3 panel panel-default">
-			<h2>Add vacancy</h2>
-			<div class="form-group">
-				<form:form action="" commandName="vacancy"
-					method="POST">
+		<%@ include file="sidebar.jsp"%>
+		<div class="col-lg-6 panel panel-default">
+			<div class="panel-heading">Add vacancy</div>
+			<div class="form-group panel-body">
+				<form:form action="" commandName="vacancy" method="POST">
 					<fieldset>
 						<p>Name</p>
 						<form:input class="form-control" path="name" size="40" />
@@ -41,7 +30,7 @@
 						</form:select>
 
 						<p>Description</p>
-						<form:textarea class="form-control" path="description" />
+						<form:textarea class="form-control" rows="7" path="description" />
 
 						<p>Salary</p>
 						<form:input class="form-control" path="salary" />
@@ -55,10 +44,8 @@
 				</form:form>
 			</div>
 		</div>
-		<div class="col-lg-5"><%@ include file="vacanciesList.jsp"%></div>
-		<div class="col-lg-1">space</div>
+		<%@ include file="vacanciesList.jsp"%>
 	</div>
-
 
 	<%@ include file="../footer.jsp"%>
 </body>

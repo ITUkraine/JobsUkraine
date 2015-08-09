@@ -7,11 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-	<h3>Candidates</h3>
-	<ul class="nav nav-pills nav-stacked">
-		<c:forEach items="${candidates}" var="candidate">
-			<li><a href="#">${candidate}</a></li>
-		</c:forEach>
-	</ul>
+	<div class="col-lg-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">Potential candidates</div>
+
+			<ul class="nav nav-pills nav-stacked">
+				<c:forEach items="${candidates}" var="candidate">
+					<li><a href="#">${candidate}</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
 </body>
 </html>

@@ -6,11 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap/bootstrap.css" />">
-
 <title>Log In</title>
 </head>
 <body>
