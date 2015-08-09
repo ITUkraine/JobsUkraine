@@ -19,8 +19,8 @@
 		style="width: 50%; height: 50%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
 		<div class="col-lg-5">
 			<img
-				src="http://icetea09.com/wp-content/uploads/2014/05/exception-example.jpg"
-				alt="Exception error image" width="100%" height="100%" />
+				src="<c:url value="/resources/pictures/error.png" />"
+				alt="Exception error image" width="80%" height="80%" />
 		</div>
 		<div class="col-lg-7">
 			<h1 style="font-size: 70px">Oops! Something went wrong</h1>
