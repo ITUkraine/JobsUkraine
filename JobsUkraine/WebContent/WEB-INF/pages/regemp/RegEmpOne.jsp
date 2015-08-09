@@ -22,17 +22,18 @@
 		<div class="raw">
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
-				<form:form modelAttribute="empForm" action="addEmployerInfo"
+				<form:form modelAttribute="infoForm" action="addEmployerInfo"
 					method="Post">
 					<fieldset>
 						<p>Login:</p>
-						<form:input class="form-control" path="info.login" size="40" />
+						<form:input class="form-control" path="login" size="40" />
+						 <div class="valid-error"><form:errors path="login"></form:errors></div>
 						<p>Password:</p>
-						<form:input class="form-control" path="info.password"
-							type="password" size="40" />
+						<form:input class="form-control" path="password" type="password" size="40" />
+						 <div class="valid-error"><form:errors path="password"></form:errors></div>
 						<p>Confirm password:</p>
-						<form:input class="form-control" path="info.confirmPassword"
-							type="password" size="40" />
+						<form:input class="form-control" path="confirmPassword" type="password" size="40" />
+					    <div class="valid-error"><form:errors path="confirmPassword"></form:errors></div>
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"

@@ -23,20 +23,24 @@
 
 						<p>Name</p>
 						<form:input class="form-control" path="name" size="40" />
-
+                        <div class="valid-error"><form:errors path="name"/></div>
+                         
 						<p>E-mail</p>
 						<form:input class="form-control" path="email" size="40" />
-
-						<form:errors path="email" cssClass="error" />
+			            <div class="valid-error"><form:errors path="email"/></div>
 					
 						<p>Mobile phone</p>
 						<form:input class="form-control" path="phone" size="40" />
-
+                        <div class="valid-error"><form:errors path="phone"/></div>
+                     
 						<p>Address</p>
 						<form:input class="form-control" path="address" size="40" />
-
+                         <div class="valid-error"><form:errors path="address"/></div>
+                         
 						<p>Description</p>
 						<form:textarea class="form-control" path="description" />
+						<div class="valid-error"><form:errors path="description"/></div>
+						
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"
