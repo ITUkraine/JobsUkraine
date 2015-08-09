@@ -29,7 +29,10 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Category_Candidate", 
+	joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
 	private List<Category> categories;
 
 	@NotNull(message = "This field is mandatory")

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,7 +23,10 @@ public class Employer extends AbstractPersistable<Integer> {
 	@NotNull(message = "This field is mandatory")
 	private String address;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employers")
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "Category_Employer",
+	joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , 
+	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
 	private List<Category> categories;
 
 	@NotNull(message = "This field is mandatory")

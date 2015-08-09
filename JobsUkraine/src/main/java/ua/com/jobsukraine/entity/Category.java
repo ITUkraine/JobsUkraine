@@ -2,6 +2,7 @@ package ua.com.jobsukraine.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -9,8 +10,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -18,15 +17,13 @@ public class Category extends AbstractPersistable<Integer>  {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "Category_Candidate", 
 		joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") ,
-		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id"))
 	private List<Candidate> candidates;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "Category_Employer",
 		joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , 
 		inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )

@@ -18,6 +18,7 @@ public class LoginInfo extends AbstractPersistable<Integer> {
 	@NotNull(message = "This field is mandatory")
 	@Size(min = 6, message = "Password too short")
 	@Transient
+	
 	private String confirmPassword;
 
 	@NotNull(message = "This field is mandatory")
