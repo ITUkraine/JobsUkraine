@@ -5,12 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style type="text/css">
-body, html {
-	height: 100%;
-}
-</style>
+<title>Candidate</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -63,15 +58,17 @@ body, html {
 
 				</div>
 			</sec:authorize>
-			<c:forEach var="feedback" items="${feedbacks}">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h5>Category: ${feedback.category.name}</h5>
-						<h5>Mark: ${feedback.mark}</h5>
-						<p>Comment: ${feedback.comment}</p>
+			<div>
+				<c:forEach var="feedback" items="${feedbacks}">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h5>Category: ${feedback.category.name}</h5>
+							<h5>Mark: ${feedback.mark}</h5>
+							<p>Comment: ${feedback.comment}</p>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
 		<div class="col-lg-2"></div>
 	</div>
