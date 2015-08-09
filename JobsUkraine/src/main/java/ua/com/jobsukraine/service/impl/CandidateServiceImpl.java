@@ -38,7 +38,7 @@ public class CandidateServiceImpl implements CandidateService {
      
 	@Override
 	public Candidate register(Candidate candidate, LoginInfo info) {
-		info.setRole(roleService.findByName("ROLE_EMPLOYER"));
+		info.setRole(roleService.findByName("ROLE_CANDIDATE"));
 		List<Category> listcat = new ArrayList<>();
 		for (Category category : candidate.getCategories()) {
 			Category cat = categoryRepository.findByName(category.getName());
@@ -46,7 +46,7 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 		candidate.setCategories(listcat);
 		candidate.setInfo(info);
-		return 	candidateRepository.save(candidate);
+		return candidateRepository.save(candidate);
 	}
 
 	@Override
