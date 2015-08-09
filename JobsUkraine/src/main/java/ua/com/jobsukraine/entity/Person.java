@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -23,26 +25,31 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Email(message = "Wrong email format")
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "email", unique = true)
 	private String email;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private LoginInfo info;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "last_name")
 	private String lastName;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "name")
 	private String name;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Pattern(regexp = "male|female", message = "Must match \"male\" or \"female\"")
 	@Column(name = "sex")
 	private String sex;

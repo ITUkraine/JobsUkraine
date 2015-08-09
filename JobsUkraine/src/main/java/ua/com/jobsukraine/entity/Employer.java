@@ -2,6 +2,7 @@ package ua.com.jobsukraine.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -20,30 +22,36 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	private String address;
-
+	
+	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "Category_Employer",
 	joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , 
 	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
 	private List<Category> categories;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	private String description;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Email(message = "Wrong email format")
 	@Column(unique = true)
 	private String email;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private LoginInfo info;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	private String name;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Column(unique = true)
 	private String phone;
 

@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "candidate")
 @DiscriminatorValue("2")
@@ -25,7 +27,8 @@ public class Candidate extends Person implements Comparable<Candidate> {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "This field is mandatory")
+/*	@NotNull
+	@NotEmpty(message = "This field is mandatory")*/
 	@Column(name = "address")
 	private String address;
 
@@ -35,7 +38,8 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
 	private List<Category> categories;
 
-	@NotNull(message = "This field is mandatory")
+	@NotNull
+	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "city")
 	private String cityWhereLookingForWork;
 
