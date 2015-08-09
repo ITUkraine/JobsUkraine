@@ -23,11 +23,31 @@ import ua.com.jobsukraine.service.VacancyService;
 public class VacancyController {
 
 	@Autowired
-	private VacancyService vs;
-	@Autowired
 	private CategoryService cs;
 	@Autowired
 	private EmployerService es;
+	@Autowired
+	private VacancyService vs;
+
+	public VacancyController(VacancyService vs, CategoryService cs, EmployerService es) {
+		super();
+		this.vs = vs;
+		this.cs = cs;
+		this.es = es;
+	}
+
+	@RequestMapping(value = "/vacancy/delete")
+	public String deleteVacancy(@RequestParam("id") int id) {
+		vs.delete(id);
+		return "redirect:/empOffice/addVacancy";
+	}
+
+	@RequestMapping(value = "/empOffice/addVacancy", method = RequestMethod.POST)
+	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult,
+			Principal principal) {
+		vs.add(es.findByLogin(principal.getName()), vacancy);
+		return "redirect:/empOffice/addVacancy";
+	}
 
 	@RequestMapping(value = "/empOffice/addVacancy")
 	public String goAddVacancyPage(Model model, Principal principal) {
@@ -38,13 +58,6 @@ public class VacancyController {
 
 		return "empOffice/addVacancy";
 
-	}
-
-	@RequestMapping(value = "/empOffice/addVacancy", method = RequestMethod.POST)
-	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult,
-			Principal principal) {
-		vs.add(es.findByLogin(principal.getName()), vacancy);
-		return "redirect:/empOffice/addVacancy";
 	}
 
 	@RequestMapping(value = "/vacancy/{id}")
@@ -59,12 +72,6 @@ public class VacancyController {
 
 		mav.addObject("vacancy", vacancy);
 		return mav;
-	}
-
-	@RequestMapping(value = "/vacancy/delete")
-	public String deleteVacancy(@RequestParam("id") int id) {
-		vs.delete(id);
-		return "redirect:/empOffice/addVacancy";
 	}
 
 }
