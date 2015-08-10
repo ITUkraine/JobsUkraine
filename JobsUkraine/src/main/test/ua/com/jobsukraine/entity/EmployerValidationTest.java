@@ -10,6 +10,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,12 +22,16 @@ public class EmployerValidationTest {
 
 	private final static String NOT_NULL_MSG = "This field is mandatory";
 	private final static String WRONG_EMAIL_MSG = "Wrong email format";
+	private final static String WRONG_PHONE_MSG = "Wrong phone format";
 
 	@BeforeClass
 	public static void init() {
 		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
 		validator = vf.getValidator();
-		
+	}
+
+	@Before
+	public void reinit() {
 		employer = new Employer();
 	}
 
@@ -91,7 +96,7 @@ public class EmployerValidationTest {
 
 	@Test
 	public void isPhoneValid() {
-		// valid phone
+		// valid phone -- pattern: ^[0-9\\-\\(\\)]*$
 		employer.setPhone("0936195692");
 		assertTrue(validator.validateProperty(employer, "phone").isEmpty());
 
@@ -113,6 +118,12 @@ public class EmployerValidationTest {
 		employer.setPhone("(032)2510255");
 		assertTrue(validator.validateProperty(employer, "phone").isEmpty());
 
+		// wrong format
+		employer.setPhone("aaaaaa");
+		constraintViolations = validator.validateProperty(employer, "phone");
+		assertFalse(constraintViolations.isEmpty());
+		assertTrue(WRONG_PHONE_MSG.equals(constraintViolations.iterator().next().getMessage()));
+
 		// null
 		employer.setPhone(null);
 		constraintViolations = validator.validateProperty(employer, "phone");
@@ -128,7 +139,7 @@ public class EmployerValidationTest {
 
 		employer.setName("JobsUkraine Inc.");
 		assertTrue(validator.validateProperty(employer, "name").isEmpty());
-		
+
 		employer.setName("JobsUkraine 032");
 		assertTrue(validator.validateProperty(employer, "name").isEmpty());
 

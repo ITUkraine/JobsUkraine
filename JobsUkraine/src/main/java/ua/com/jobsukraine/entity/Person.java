@@ -25,12 +25,12 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Email(message = "Wrong email format")
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "email", unique = true)
 	private String email;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "last_name")
 	private String lastName;
@@ -38,18 +38,18 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoginInfo loginInfo;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Pattern(regexp = "^[0-9\\-\\(\\)]*$", message = "Wrong phone format")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "name")
 	private String name;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Pattern(regexp = "male|female", message = "Must match \"male\" or \"female\"")
 	@Column(name = "sex")

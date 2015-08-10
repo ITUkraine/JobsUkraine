@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -22,7 +23,7 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	private String address;
 
@@ -30,7 +31,7 @@ public class Employer extends AbstractPersistable<Integer> {
 	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	private String description;
 
@@ -43,12 +44,13 @@ public class Employer extends AbstractPersistable<Integer> {
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoginInfo loginInfo;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	private String name;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
+	@Pattern(regexp = "^[0-9\\-\\(\\)]*$", message = "Wrong phone format")
 	@Column(unique = true)
 	private String phone;
 
