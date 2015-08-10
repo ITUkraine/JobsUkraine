@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -59,7 +60,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@Column(name = "experience")
 	private String experience;
 
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name = "candidat_id")
 	private List<Feedback> feedbacks;
 

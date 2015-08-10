@@ -27,6 +27,7 @@ import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
+import ua.com.jobsukraine.service.FeedbackService;
 import ua.com.jobsukraine.service.SecurityService;
 
 @Controller
@@ -40,9 +41,10 @@ public class CandidateController {
 	private CandidateService candidateService;
 	@Autowired
 	private CategoryService categoryService;
-
 	@Autowired
 	private SecurityService securityService;
+	@Autowired
+	private FeedbackService feedbackService;
 
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
@@ -111,6 +113,14 @@ public class CandidateController {
 		modelAndView.addObject("list", categoryService.getAll());
 		modelAndView.addObject("feedbacks", candidate.getFeedbacks());
 		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/candidate/addFeedBack", method = RequestMethod.POST)
+	public String addFeedback(@ModelAttribute("feedback") Feedback feedback,
+			@ModelAttribute("candidate") Candidate candidate) {
+		feedbackService.add(candidate, feedback);
+		logger.debug(feedback);
+		return "redirect:/candidate/"+candidate.getId();
 	}
 
 }

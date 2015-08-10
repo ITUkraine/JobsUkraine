@@ -15,12 +15,12 @@ public class Feedback extends AbstractPersistable<Integer> {
 
 	private String comment;
 
-	private Integer mark;
-
+	private String mark;
+ 
 	public Feedback() {
 	}
 
-	public Feedback(Integer mark, String comment) {
+	public Feedback(String mark, String comment) {
 		this.mark = mark;
 		this.comment = comment;
 	}
@@ -33,7 +33,7 @@ public class Feedback extends AbstractPersistable<Integer> {
 		return comment;
 	}
 
-	public Integer getMark() {
+	public String getMark() {
 		return mark;
 	}
 
@@ -45,7 +45,7 @@ public class Feedback extends AbstractPersistable<Integer> {
 		this.comment = comment;
 	}
 
-	public void setMark(Integer mark) {
+	public void setMark(String mark) {
 		this.mark = mark;
 	}
 
