@@ -2,12 +2,14 @@ package ua.com.jobsukraine.entity;
 
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,10 +29,11 @@ public class Employer extends AbstractPersistable<Integer> {
 	@NotEmpty(message = "This field is mandatory")
 	private String address;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
-
+	
+	@Lob @Basic(fetch=FetchType.LAZY)
 	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	private String description;
