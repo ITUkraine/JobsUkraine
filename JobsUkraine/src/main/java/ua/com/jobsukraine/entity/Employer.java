@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+
 @Entity
 public class Employer extends AbstractPersistable<Integer> {
 
@@ -55,6 +56,22 @@ public class Employer extends AbstractPersistable<Integer> {
 	private String phone;
 
 	private String pictureURL;
+
+	
+	
+	@OneToMany(mappedBy="employer")
+	private List<Feedback> Feedbacks;
+	
+	
+	
+	
+	public List<Feedback> getFeedbacks() {
+		return Feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		Feedbacks = feedbacks;
+	}
 
 	@OneToMany(mappedBy = "employer")
 	private List<Vacancy> vacancy;

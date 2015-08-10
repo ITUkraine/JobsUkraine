@@ -1,6 +1,7 @@
 package ua.com.jobsukraine.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -9,6 +10,20 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Feedback extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
+	@JoinColumn(name="employer_id")
+	private Employer employer;
+	
+	
+	
+	public Employer getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(Employer employer) {
+		this.employer = employer;
+	}
 
 	@ManyToOne
 	private Category category;
