@@ -58,21 +58,30 @@
 
 				</div>
 			</sec:authorize>
-			<div>
-				<c:forEach var="feedback" items="${feedbacks}">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h5>Category: ${feedback.category.name}</h5>
-							<h5>Mark: ${feedback.mark}</h5>
-							<p>Comment: ${feedback.comment}</p>
-							<p>
-								Author: <a href="/JobsUkraine/employer/${feedback.employer.id}">
-									${feedback.employer.name}</a>
-							</p>
-							<p>Date: ${feedback.date}</p>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1 class="panel-title">All feedbacks</h1>
+				</div>
+				<div class="panel-body">
+					<c:forEach var="feedback" items="${candidate.feedbacks}">
+						<div class="panel panel-default">
+							<div class="panel-heading col-lg-12">
+								<div class="col-lg-6">
+									Author: <a href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a>
+								</div>
+								<div class="col-lg-6" align="right">
+									<fmt:formatDate value="${feedback.date}"
+										pattern="dd/MM/yyyy HH:mm:ss" />
+								</div>
+							</div>
+							<div class="panel-heading">
+								Category: ${feedback.category.name}<br> Mark:
+								${feedback.mark}
+							</div>
+							<div class="panel-body">${feedback.comment}</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-2"></div>
