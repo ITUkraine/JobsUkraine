@@ -99,7 +99,7 @@ public class CandidateController {
 		model.addAttribute("candidate", candidate);
 		model.addAttribute("vacancies", candidateService.getAvailableVacancies(login));
 		model.addAttribute("feedbacks", candidate.getFeedbacks());
-		return "candidateOffice";
+		return "candidateOffice/profile";
 	}
 
 	@RequestMapping(value = "/candidate/{id}")
