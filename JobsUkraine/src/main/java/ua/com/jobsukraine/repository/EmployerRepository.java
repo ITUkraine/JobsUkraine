@@ -11,7 +11,7 @@ import ua.com.jobsukraine.entity.Vacancy;
 
 public interface EmployerRepository extends JpaRepository<Employer, Integer> {
 
-	Employer findByInfo(LoginInfo info);
+	Employer findByInfo(LoginInfo loginInfo);
 
 	@Query("SELECT vacancies FROM Employer emp JOIN emp.vacancy vacancies WHERE emp.id = ?1")
 	List<Vacancy> getVacancies(int id);

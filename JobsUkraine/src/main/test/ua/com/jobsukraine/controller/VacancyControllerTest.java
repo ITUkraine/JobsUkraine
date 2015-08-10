@@ -7,6 +7,9 @@ import java.security.Principal;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.Mockito;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -16,7 +19,8 @@ import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.VacancyService;
 
-public class VacancyControllerTest extends AbstractControllerTest {
+@RunWith(JUnit4.class)
+public class VacancyControllerTest {
 
 	final VacancyService vacancyService = mock(VacancyService.class);
 	final BindingResult bindingResult = mock(BindingResult.class);
@@ -51,6 +55,7 @@ public class VacancyControllerTest extends AbstractControllerTest {
 	@Test
 	public void testDeleteVacancy	()	{
 		String result = vacancyController.deleteVacancy(1);
+		Mockito.verify(vacancyService).delete(1);
 		assertEquals(result, "redirect:/empOffice/addVacancy");
 	}
 }

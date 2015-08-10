@@ -25,12 +25,9 @@ public class Employer extends AbstractPersistable<Integer> {
 	@NotNull
 	@NotEmpty(message = "This field is mandatory")
 	private String address;
-	
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name = "Category_Employer",
-	joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , 
-	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
 
 	@NotNull
@@ -43,8 +40,8 @@ public class Employer extends AbstractPersistable<Integer> {
 	@Column(unique = true)
 	private String email;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	private LoginInfo info;
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoginInfo loginInfo;
 
 	@NotNull
 	@NotEmpty(message = "This field is mandatory")
@@ -61,19 +58,6 @@ public class Employer extends AbstractPersistable<Integer> {
 	private List<Vacancy> vacancy;
 
 	private String website;
-
-	public Employer() {
-
-	}
-
-	public Employer(String email, String phone, String address, String description, String website, String pictureURL) {
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.description = description;
-		this.website = website;
-		this.pictureURL = pictureURL;
-	}
 
 	public String getAddress() {
 		return address;
@@ -92,7 +76,7 @@ public class Employer extends AbstractPersistable<Integer> {
 	}
 
 	public LoginInfo getInfo() {
-		return info;
+		return loginInfo;
 	}
 
 	public String getName() {
@@ -128,7 +112,7 @@ public class Employer extends AbstractPersistable<Integer> {
 	}
 
 	public void setInfo(LoginInfo info) {
-		this.info = info;
+		this.loginInfo = info;
 	}
 
 	public void setName(String name) {
@@ -149,8 +133,8 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	@Override
 	public String toString() {
-		return "Employer [id=" + this.getId() + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
-				+ address + ", description=" + description + ", website=" + website + ", pictureURL=" + pictureURL
-				+ "]\n";
+		return "Employer [id=" + this.getId() + ", name=" + name + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", description=" + description + ", website=" + website + ", pictureURL="
+				+ pictureURL + "]\n";
 	}
 }

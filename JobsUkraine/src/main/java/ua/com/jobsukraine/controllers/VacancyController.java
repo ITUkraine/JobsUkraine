@@ -23,40 +23,40 @@ import ua.com.jobsukraine.service.VacancyService;
 public class VacancyController {
 
 	@Autowired
-	private CategoryService cs;
+	private CategoryService categoryService;
 	@Autowired
-	private EmployerService es;
+	private EmployerService employerService;
 	@Autowired
-	private VacancyService vs;
-	
+	private VacancyService vacancyService;
+
 	public VacancyController() {
 	}
-	
-	public VacancyController(VacancyService vs, CategoryService cs, EmployerService es) {
-		super();
-		this.vs = vs;
-		this.cs = cs;
-		this.es = es;
+
+	public VacancyController(VacancyService vacancyService, CategoryService categoryService,
+			EmployerService employerService) {
+		this.vacancyService = vacancyService;
+		this.categoryService = categoryService;
+		this.employerService = employerService;
 	}
 
 	@RequestMapping(value = "/vacancy/delete")
 	public String deleteVacancy(@RequestParam("id") int id) {
-		vs.delete(id);
+		vacancyService.delete(id);
 		return "redirect:/empOffice/addVacancy";
 	}
 
 	@RequestMapping(value = "/empOffice/addVacancy", method = RequestMethod.POST)
 	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult,
 			Principal principal) {
-		vs.add(es.findByLogin(principal.getName()), vacancy);
+		vacancyService.add(employerService.findByLogin(principal.getName()), vacancy);
 		return "redirect:/empOffice/addVacancy";
 	}
 
 	@RequestMapping(value = "/empOffice/addVacancy")
 	public String goAddVacancyPage(Model model, Principal principal) {
 		model.addAttribute("vacancy", new Vacancy());
-		model.addAttribute("vacancies", es.getVacancies(principal.getName()));
-		model.addAttribute("list", cs.getAll());
+		model.addAttribute("vacancies", employerService.getVacancies(principal.getName()));
+		model.addAttribute("list", categoryService.getAll());
 		model.addAttribute("category", new Category());
 
 		return "empOffice/addVacancy";
@@ -65,13 +65,12 @@ public class VacancyController {
 
 	@RequestMapping(value = "/vacancy/{id}")
 	public ModelAndView showVacancyInfoPage(@PathVariable(value = "id") int id, Principal principal) {
-		ModelAndView mav = new ModelAndView("vacancy");
-		Vacancy vacancy = vs.find(id);
-		// check if entered same employer to enable buttons for edit/delete
-		mav.addObject("sameEmployer", vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()));
+		ModelAndView modelAndView = new ModelAndView("vacancy");
+		Vacancy vacancy = vacancyService.find(id);
+		modelAndView.addObject("sameEmployer", vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()));
 
-		mav.addObject("vacancy", vacancy);
-		return mav;
+		modelAndView.addObject("vacancy", vacancy);
+		return modelAndView;
 	}
 
 }

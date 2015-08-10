@@ -19,31 +19,31 @@ public class GlobalErrorController {
 	@ExceptionHandler(Exception.class)
 	public ModelAndView exception(Exception e) {
 		e.printStackTrace();
-		ModelAndView mav = new ModelAndView(DEFAULT_ERROR_VIEW);
-		mav.addObject("name", e.getClass().getSimpleName());
-		mav.addObject("message", e.getMessage());
+		ModelAndView modelAndView = new ModelAndView(DEFAULT_ERROR_VIEW);
+		modelAndView.addObject("name", e.getClass().getSimpleName());
+		modelAndView.addObject("message", e.getMessage());
 
-		return mav;
+		return modelAndView;
 	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ModelAndView handleError404(HttpServletRequest request, Exception e) {
 		e.printStackTrace();
-		ModelAndView mav = new ModelAndView(DEFAULT_ERROR_VIEW);
-		mav.addObject("name", "404");
-		mav.addObject("message", "Page " + request.getRequestURL() + " not found");
+		ModelAndView modelAndView = new ModelAndView(DEFAULT_ERROR_VIEW);
+		modelAndView.addObject("name", "404");
+		modelAndView.addObject("message", "Page " + request.getRequestURL() + " not found");
 
-		return mav;
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/accessDenied")
 	public ModelAndView handler(HttpServletRequest request, HttpServletResponse response, Exception e) {
 		e.printStackTrace();
-		ModelAndView mav = new ModelAndView("errors/default");
-		mav.addObject("name", response.getStatus());
-		mav.addObject("message", "Access denied to " + request.getRequestURL());
+		ModelAndView modelAndView = new ModelAndView("errors/default");
+		modelAndView.addObject("name", response.getStatus());
+		modelAndView.addObject("message", "Access denied to " + request.getRequestURL());
 
-		return mav;
+		return modelAndView;
 	}
 	
 }

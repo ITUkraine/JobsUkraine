@@ -15,40 +15,41 @@ import ua.com.jobsukraine.service.CategoryService;
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	private CategoryRepository cr;
+	private CategoryRepository categoryRepository;
 
 	@Override
-	public Category add(Category obj) {
-		if (findByName(obj.getName()) == null) {
-			return cr.save(obj);
+	public Category add(Category category) {
+		if (findByName(category.getName()) == null) {
+			return categoryRepository.save(category);
 		} else {
-			return findByName(obj.getName());
-		}	}
-
-	@Override
-	public void delete(int id) {
-		cr.delete(id);
+			return findByName(category.getName());
+		}
 	}
 
 	@Override
-	public Category edit(Category obj) {
-		return cr.saveAndFlush(obj /* findByName(obj.getName()) */);
+	public void delete(int id) {
+		categoryRepository.delete(id);
+	}
+
+	@Override
+	public Category edit(Category category) {
+		return categoryRepository.saveAndFlush(category);
 
 	}
 
 	@Override
 	public Category find(int id) {
-		return cr.findOne(id);
+		return categoryRepository.findOne(id);
 	}
 
 	@Override
 	public List<Category> getAll() {
-		return cr.findAll();
+		return categoryRepository.findAll();
 	}
 
 	@Override
 	public Category findByName(String name) {
-		return cr.findByName(name);
+		return categoryRepository.findByName(name);
 	}
 
 }

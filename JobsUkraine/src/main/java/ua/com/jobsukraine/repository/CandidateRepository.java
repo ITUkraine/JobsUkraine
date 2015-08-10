@@ -11,7 +11,7 @@ import ua.com.jobsukraine.entity.Vacancy;
 
 public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 
-	Candidate findByInfo(LoginInfo info);
+	Candidate findByInfo(LoginInfo loginInfo);
 
 	@Query("SELECT AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.feedbacks f WHERE c = ?1")
 	Double getGlobalRating(Candidate candidate);

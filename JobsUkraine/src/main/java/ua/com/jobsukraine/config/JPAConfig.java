@@ -27,50 +27,50 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfig {
 
 	@Autowired
-	Environment env;
+	Environment environment;
 
 	@Bean
 	public DataSource dataSource() {
-		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getProperty("jdbc.url"));
-		dataSource.setUsername(env.getProperty("jdbc.user"));
-		dataSource.setPassword(env.getProperty("jdbc.pass"));
-		return dataSource;
+		final DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
+		driverManagerDataSource.setUrl(environment.getProperty("jdbc.url"));
+		driverManagerDataSource.setUsername(environment.getProperty("jdbc.user"));
+		driverManagerDataSource.setPassword(environment.getProperty("jdbc.pass"));
+		return driverManagerDataSource;
 	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		final LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-		emf.setPersistenceUnitName("emf");
-		emf.setDataSource(dataSource());
-		emf.setPackagesToScan(new String[] { "ua.com.jobsukraine.entity" });
+		final LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		localContainerEntityManagerFactoryBean.setPersistenceUnitName("localContainerEntityManagerFactoryBean");
+		localContainerEntityManagerFactoryBean.setDataSource(dataSource());
+		localContainerEntityManagerFactoryBean.setPackagesToScan(new String[] { "ua.com.jobsukraine.entity" });
 		final JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		emf.setJpaVendorAdapter(vendorAdapter);
-		emf.setJpaPropertyMap(hibernateProperties());
-		return emf;
+		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+		localContainerEntityManagerFactoryBean.setJpaPropertyMap(hibernateProperties());
+		return localContainerEntityManagerFactoryBean;
 	}
 
 
 
 	@Bean
 	public PlatformTransactionManager transactionManager(
-			final EntityManagerFactory emf) {
+			final EntityManagerFactory entityManagerFactory) {
 		final JpaTransactionManager transactionManager = new JpaTransactionManager(
-				emf);
+				entityManagerFactory);
 		return transactionManager;
 	}
     
 
 	
 	public Map<String, String> hibernateProperties() {
-		Map<String, String> hibPro = new HashMap<>();
-		hibPro.put("hibernate.hbm2ddl.auto",env.getProperty("hibernate.hbm2ddl.auto"));
-		hibPro.put("hibernate.dialect",	env.getProperty("hibernate.dialect"));
-		hibPro.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		hibPro.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-		hibPro.put("hibernate.enable_lazy_load_no_trans", env.getProperty("hibernate.enable_lazy_load_no_trans"));
-		return hibPro;
+		Map<String, String> hibernateProperties = new HashMap<>();
+		hibernateProperties.put("hibernate.hbm2ddl.auto",environment.getProperty("hibernate.hbm2ddl.auto"));
+		hibernateProperties.put("hibernate.dialect",	environment.getProperty("hibernate.dialect"));
+		hibernateProperties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+		hibernateProperties.put("hibernate.format_sql", environment.getProperty("hibernate.format_sql"));
+		hibernateProperties.put("hibernate.enable_lazy_load_no_trans", environment.getProperty("hibernate.enable_lazy_load_no_trans"));
+		return hibernateProperties;
 	}
 
 }

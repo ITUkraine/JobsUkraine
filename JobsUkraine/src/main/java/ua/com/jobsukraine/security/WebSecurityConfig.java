@@ -26,23 +26,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/JobsUkraine", "contacts", "aboutUs").permitAll().antMatchers("/admin")
-				.hasRole("ADMIN").and().exceptionHandling().accessDeniedPage("/accessDenied");
-		http.csrf().disable().authorizeRequests().antMatchers("/resources/**", "/**").permitAll().anyRequest()
-				.permitAll();
-
-		http.formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").failureUrl("/login?error")
-				.successHandler(customAuthenticationSuccessHandler).usernameParameter("j_username")
-				.passwordParameter("j_password").permitAll();
-
-		http.logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true);
-
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(customAuthenticationProvider);
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(customAuthenticationProvider);
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.authorizeRequests().antMatchers("/JobsUkraine", "contacts", "aboutUs").permitAll().antMatchers("/admin")
+				.hasRole("ADMIN").and().exceptionHandling().accessDeniedPage("/accessDenied");
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/resources/**", "/**").permitAll().anyRequest()
+				.permitAll();
+
+		httpSecurity.formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").failureUrl("/login?error")
+				.successHandler(customAuthenticationSuccessHandler).usernameParameter("j_username")
+				.passwordParameter("j_password").permitAll();
+
+		httpSecurity.logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true);
+
 	}
 
 	@Bean

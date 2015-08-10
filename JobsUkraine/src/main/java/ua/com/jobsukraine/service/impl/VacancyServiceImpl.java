@@ -15,36 +15,36 @@ import ua.com.jobsukraine.service.VacancyService;
 public class VacancyServiceImpl implements VacancyService {
 
 	@Autowired
-	private VacancyRepository vr;
+	private VacancyRepository vacancyRepository;
 	@Autowired
-	private CategoryService cs;
+	private CategoryService categoryService;
 
 	@Override
 	public Vacancy add(Vacancy obj) {
-		obj.setCategory(cs.findByName(obj.getCategory().getName()));
-		return vr.saveAndFlush(obj);
+		obj.setCategory(categoryService.findByName(obj.getCategory().getName()));
+		return vacancyRepository.saveAndFlush(obj);
 	}
 
 	@Override
 	public void delete(int id) {
-		vr.delete(id);
+		vacancyRepository.delete(id);
 	}
 
 	@Override
 	public Vacancy edit(Vacancy obj) {
-		return vr.saveAndFlush(obj);
+		return vacancyRepository.saveAndFlush(obj);
 	}
 
 	@Override
 	public Vacancy find(int id) {
-		return vr.findOne(id);
+		return vacancyRepository.findOne(id);
 	}
 
 	@Override
 	public Vacancy add(Employer emp, Vacancy obj) {
 		obj.setEmployer(emp);
-		obj.setCategory(cs.findByName(obj.getCategory().getName()));
-		return vr.saveAndFlush(obj);
+		obj.setCategory(categoryService.findByName(obj.getCategory().getName()));
+		return vacancyRepository.saveAndFlush(obj);
 	}
 
 }
