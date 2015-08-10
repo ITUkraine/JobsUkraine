@@ -30,7 +30,7 @@ body {
 .container-fluid {
 	font-size: 18px;
 	/* make header content aligned to center */
-	width: 75%
+	width: 60%;
 }
 
 .navbar-fixed-bottom>.container {
@@ -72,7 +72,7 @@ body {
 }
 
 .panel-default {
-	box-shadow: 0 1px 5px #585858;
+	box-shadow: 0 1px 5px #aeaeae;
 	border-radius: 0;
 }
 
@@ -94,3 +94,9 @@ body {
 
 .label {
 	line-height: 3 !important;
+}
+
+/* wrap text in div */
+div {
+	word-wrap: break-word;
+}
