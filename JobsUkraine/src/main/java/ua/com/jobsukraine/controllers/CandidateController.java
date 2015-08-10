@@ -93,22 +93,21 @@ public class CandidateController {
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
 		String login = principal.getName();
-		model.addAttribute("candidate", candidateService.findByLogin(login));
+		Candidate candidate = candidateService.findByLogin(login);
+		model.addAttribute("candidate", candidate);
 		model.addAttribute("vacancies", candidateService.getAvailableVacancies(login));
-		model.addAttribute("feedbacks", candidateService.getFeedbacks(candidateService.findByLogin(login).getId()));
+		model.addAttribute("feedbacks", candidate.getFeedbacks());
 		return "candidateOffice";
 	}
 
 	@RequestMapping(value = "/candidate/{id}")
 	public ModelAndView showCandidateInfoPage(@PathVariable(value = "id") int id, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView("candidate");
-		modelAndView.addObject("candidate", candidateService.find(id));
-		System.out.println(candidateService.find(id));
+		Candidate candidate = candidateService.find(id);
+		modelAndView.addObject("candidate", candidate);
 		modelAndView.addObject("feedback", new Feedback());
 		modelAndView.addObject("list", categoryService.getAll());
-		System.out.println(candidateService.find(id));
-		modelAndView.addObject("feedbacks", candidateService.getFeedbacks(id));
-		System.out.println(candidateService.find(id));
+		modelAndView.addObject("feedbacks", candidate.getFeedbacks());
 		return modelAndView;
 	}
 

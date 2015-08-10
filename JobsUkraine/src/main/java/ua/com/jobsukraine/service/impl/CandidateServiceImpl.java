@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
-import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.CandidateRepository;
@@ -64,8 +63,9 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate c = null;
 		try {
 			c = candidateRepository.findOne(id);
-			if (candidateRepository.getFeedbacks(id).size() > 0)
-				c.setRating(candidateRepository.getGlobalRating(id));
+			if (c.getFeedbacks().size() > 0) {
+				c.setRating(candidateRepository.getGlobalRating(c));
+			}
 		} catch (EmptyResultDataAccessException e) {
 		}
 		return c;
@@ -76,8 +76,9 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate c = null;
 		try {
 			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
-			if (candidateRepository.getFeedbacks(c.getId()).size() > 0)
-				c.setRating(candidateRepository.getGlobalRating(c.getId()));
+			if (c.getFeedbacks().size() > 0) {
+				c.setRating(candidateRepository.getGlobalRating(c));
+			}
 		} catch (EmptyResultDataAccessException e) {
 		}
 		return c;
@@ -114,10 +115,6 @@ public class CandidateServiceImpl implements CandidateService {
 		return age;
 	}
 
-	public List<Feedback> getFeedbacks(int id){
-		return candidateRepository.getFeedbacks(id);
-	}
-	
 	@Override
 	public Candidate add(Candidate candidate) {
 		
