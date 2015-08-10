@@ -86,3 +86,11 @@ body {
 	/* allow only vertical resize */
 	resize: vertical;
 }
+
+/*tagsinput*/
+.bootstrap-tagsinput {
+	width: 100%;
+}
+
+.label {
+	line-height: 3 !important;
