@@ -1,5 +1,7 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,8 @@ public class Feedback extends AbstractPersistable<Integer> {
 
 	private String mark;
 
+	private Date date = new Date();
+	
 	public Feedback() {
 	}
 
@@ -65,6 +69,14 @@ public class Feedback extends AbstractPersistable<Integer> {
 	@Override
 	public String toString() {
 		return "Feedback [id=" + this.getId() + ", mark=" + mark + ", comment=" + comment + "]\n";
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

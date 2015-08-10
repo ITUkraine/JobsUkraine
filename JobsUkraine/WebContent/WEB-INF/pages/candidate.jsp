@@ -65,6 +65,11 @@
 							<h5>Category: ${feedback.category.name}</h5>
 							<h5>Mark: ${feedback.mark}</h5>
 							<p>Comment: ${feedback.comment}</p>
+							<p>
+								Author: <a href="/JobsUkraine/employer/${feedback.employer.id}">
+									${feedback.employer.name}</a>
+							</p>
+							<p>Date: ${feedback.date}</p>
 						</div>
 					</div>
 				</c:forEach>

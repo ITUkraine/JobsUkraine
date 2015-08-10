@@ -117,8 +117,8 @@ public class CandidateController {
 	
 	@RequestMapping(value = "/candidate/addFeedBack", method = RequestMethod.POST)
 	public String addFeedback(@ModelAttribute("feedback") Feedback feedback,
-			@ModelAttribute("candidate") Candidate candidate) {
-		feedbackService.add(candidate, feedback);
+			@ModelAttribute("candidate") Candidate candidate, Principal principal) {
+		feedbackService.add(candidate, feedback, principal);
 		logger.debug(feedback);
 		return "redirect:/candidate/"+candidate.getId();
 	}
