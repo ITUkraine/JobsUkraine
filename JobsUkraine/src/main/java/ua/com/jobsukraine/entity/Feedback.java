@@ -12,26 +12,16 @@ public class Feedback extends AbstractPersistable<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
-	@JoinColumn(name="employer_id")
-	private Employer employer;
-	
-	
-	
-	public Employer getEmployer() {
-		return employer;
-	}
-
-	public void setEmployer(Employer employer) {
-		this.employer = employer;
-	}
-
-	@ManyToOne
 	private Category category;
 
 	private String comment;
 
+	@ManyToOne
+	@JoinColumn(name = "employer_id")
+	private Employer employer;
+
 	private String mark;
- 
+
 	public Feedback() {
 	}
 
@@ -48,6 +38,10 @@ public class Feedback extends AbstractPersistable<Integer> {
 		return comment;
 	}
 
+	public Employer getEmployer() {
+		return employer;
+	}
+
 	public String getMark() {
 		return mark;
 	}
@@ -58,6 +52,10 @@ public class Feedback extends AbstractPersistable<Integer> {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public void setEmployer(Employer employer) {
+		this.employer = employer;
 	}
 
 	public void setMark(String mark) {

@@ -18,7 +18,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-
 @Entity
 public class Employer extends AbstractPersistable<Integer> {
 
@@ -42,6 +41,9 @@ public class Employer extends AbstractPersistable<Integer> {
 	@Column(unique = true)
 	private String email;
 
+	@OneToMany(mappedBy = "employer")
+	private List<Feedback> Feedbacks;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoginInfo loginInfo;
 
@@ -56,22 +58,6 @@ public class Employer extends AbstractPersistable<Integer> {
 	private String phone;
 
 	private String pictureURL;
-
-	
-	
-	@OneToMany(mappedBy="employer")
-	private List<Feedback> Feedbacks;
-	
-	
-	
-	
-	public List<Feedback> getFeedbacks() {
-		return Feedbacks;
-	}
-
-	public void setFeedbacks(List<Feedback> feedbacks) {
-		Feedbacks = feedbacks;
-	}
 
 	@OneToMany(mappedBy = "employer")
 	private List<Vacancy> vacancy;
@@ -92,6 +78,10 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public List<Feedback> getFeedbacks() {
+		return Feedbacks;
 	}
 
 	public LoginInfo getInfo() {
@@ -128,6 +118,10 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		Feedbacks = feedbacks;
 	}
 
 	public void setInfo(LoginInfo info) {
