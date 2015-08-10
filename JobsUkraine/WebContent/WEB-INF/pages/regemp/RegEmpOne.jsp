@@ -6,13 +6,7 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/forms.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/pure/buttons.css" />">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
 <title>Register</title>
 </head>
 <body>

@@ -6,8 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Contacts</title>
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
 	<%@ include file="header.jsp"%>

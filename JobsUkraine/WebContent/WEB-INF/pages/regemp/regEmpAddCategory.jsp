@@ -7,9 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
-<title>Add category</title>
+<title>Register</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>

@@ -7,34 +7,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#datepicker").datepicker({
-			dateFormat : 'dd/mm/yy'
-		});
-	});
-</script>
+<script src="<c:url value="/resources/js/datepicker.js" />"></script>
 
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
 <script
 	src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
-
-<style type="text/css">
-.bootstrap-tagsinput {
-	width: 100%;
-}
-
-.label {
-	line-height: 3 !important;
-}
-</style>
 
 <title>Register</title>
 </head>

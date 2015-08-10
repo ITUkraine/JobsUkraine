@@ -7,12 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Vacancy</title>
-<link href="<c:url value="/resources/css/btn/btn.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap/bootstrap.css" />"
-	rel="stylesheet">
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
 <link>
 </head>
 <body>

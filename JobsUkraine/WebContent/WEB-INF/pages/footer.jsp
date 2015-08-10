@@ -4,9 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Navigation</title>
-<link rel="shortcut icon"
-	href="<c:url value="/resources/pictures/icon.png" />">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-bottom">
