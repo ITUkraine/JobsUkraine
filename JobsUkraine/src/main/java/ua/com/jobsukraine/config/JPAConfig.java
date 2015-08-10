@@ -68,6 +68,8 @@ public class JPAConfig {
 		hibPro.put("hibernate.hbm2ddl.auto",env.getProperty("hibernate.hbm2ddl.auto"));
 		hibPro.put("hibernate.dialect",	env.getProperty("hibernate.dialect"));
 		hibPro.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		hibPro.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+		hibPro.put("hibernate.enable_lazy_load_no_trans", env.getProperty("hibernate.enable_lazy_load_no_trans"));
 		return hibPro;
 	}
 
