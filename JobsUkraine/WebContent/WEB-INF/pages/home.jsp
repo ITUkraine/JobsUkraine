@@ -17,16 +17,18 @@
 
 	<div class="container">
 		<br> <br> <br> <br> <br> <br>
-		<div>
-			<h1 align="center">Registration</h1>
-		</div>
-		<div align="center">
-			<button type="button" onclick="location.href='regEmployer'"
-				class="btn btn-primary btn-custom btn-arrow-left">Employer</button>
-			<button type="button" class="btn btn-default btn-circle btn-xl">OR</button>
-			<button type="button" onclick="location.href='regCandidate'"
-				class="btn btn-warning btn-custom btn-arrow-right">Candidate</button>
-		</div>
+		<sec:authorize access="!isAuthenticated()">
+			<div>
+				<h1 align="center">Registration</h1>
+			</div>
+			<div align="center">
+				<button type="button" onclick="location.href='regEmployer'"
+					class="btn btn-primary btn-custom btn-arrow-left">Employer</button>
+				<button type="button" disabled class="btn-circle">OR</button>
+				<button type="button" onclick="location.href='regCandidate'"
+					class="btn btn-warning btn-custom btn-arrow-right">Candidate</button>
+			</div>
+		</sec:authorize>
 	</div>
 
 	<%@ include file="footer.jsp"%>
