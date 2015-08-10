@@ -11,31 +11,31 @@ import ua.com.jobsukraine.service.LoginInfoService;
 public class LoginInfoServiceImpl implements LoginInfoService {
 
 	@Autowired
-	private LoginInfoRepository lir;
+	private LoginInfoRepository liLoginInfoRepository;
 
 	@Override
 	public LoginInfo add(LoginInfo loginInfo) {
-		return lir.save(loginInfo);
+		return liLoginInfoRepository.save(loginInfo);
 	}
 
 	@Override
 	public void delete(int id) {
-		lir.delete(id);
+		liLoginInfoRepository.delete(id);
 	}
 
 	@Override
 	public LoginInfo edit(LoginInfo loginInfo) {
-		return lir.saveAndFlush(loginInfo);
+		return liLoginInfoRepository.saveAndFlush(loginInfo);
 	}
 
 	@Override
 	public LoginInfo find(int id) {
-		return lir.findOne(id);
+		return liLoginInfoRepository.findOne(id);
 	}
 
 	@Override
 	public LoginInfo findByLogin(String login) {
-		return lir.findByLogin(login);
+		return liLoginInfoRepository.findByLogin(login);
 	}
 
 }

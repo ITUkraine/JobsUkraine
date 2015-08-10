@@ -30,15 +30,16 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	@Column(name = "email", unique = true)
 	private String email;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	private LoginInfo info;
-
 	@NotNull
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "last_name")
 	private String lastName;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoginInfo loginInfo;
+
 	@NotNull
+	@Pattern(regexp = "^[0-9\\-\\(\\)]*$", message = "Wrong phone format")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "mobileNumber", unique = true)
 	private String mobileNumber;
@@ -69,7 +70,7 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	}
 
 	public LoginInfo getInfo() {
-		return info;
+		return loginInfo;
 	}
 
 	public String getLastName() {
@@ -93,7 +94,7 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	}
 
 	public void setInfo(LoginInfo info) {
-		this.info = info;
+		this.loginInfo = info;
 	}
 
 	public void setLastName(String lastName) {

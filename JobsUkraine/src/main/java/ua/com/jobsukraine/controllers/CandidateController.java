@@ -32,28 +32,37 @@ import ua.com.jobsukraine.service.SecurityService;
 @Controller
 @ComponentScan(basePackages = { "ua.com.jobsukraine.service.impl", "ua.com.jobsukraine.security.handler",
 		"ua.com.jobsukraine.security" })
-@SessionAttributes(types = {Candidate.class, LoginInfo.class})
+@SessionAttributes(types = { Candidate.class, LoginInfo.class })
 public class CandidateController {
 
+	final static Logger logger = Logger.getLogger(CandidateController.class);
 	@Autowired
 	private CandidateService candidateService;
 	@Autowired
 	private CategoryService categoryService;
+
 	@Autowired
 	private SecurityService securityService;
-	
-	final static Logger logger = Logger.getLogger(CandidateController.class);
-	
+
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("infoForm", new LoginInfo());
 		return "regcandidate/RegCandidateOne";
 	}
 
+	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
+	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
+		List<Category> listCategory = categoryService.getAll();
+		model.addAttribute("listCat", listCategory);
+		model.addAttribute("category", new Category());
+		return "regcandidate/regCandidateAddCategory";
+
+	}
 
 	@RequestMapping(value = "/addCandidateInfo", method = RequestMethod.POST)
-	public String addCandidateInfo(@Valid @ModelAttribute("infoForm") LoginInfo info,BindingResult result, Model model) {
-		if (result.hasErrors()) {
+	public String addCandidateInfo(@Valid @ModelAttribute("infoForm") LoginInfo loginInfo, BindingResult bindingResult,
+			Model model) {
+		if (bindingResult.hasErrors()) {
 			return "regcandidate/RegCandidateOne";
 		} else {
 			model.addAttribute("candidate", new Candidate());
@@ -63,8 +72,9 @@ public class CandidateController {
 	}
 
 	@RequestMapping(value = "/addCandidateInfo2", method = RequestMethod.POST)
-	public String addCandidateInfo2(@Valid @ModelAttribute("candidate") Candidate candidate,BindingResult result ) {
-		if (result.hasErrors()) {
+	public String addCandidateInfo2(@Valid @ModelAttribute("candidate") Candidate candidate,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			return "regcandidate/RegCandidateTwo";
 		} else {
 			return "regcandidate/RegCandidateThree";
@@ -72,24 +82,16 @@ public class CandidateController {
 
 	}
 
-	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
-	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
-		List<Category> listCat = categoryService.getAll();
-		model.addAttribute("listCat", listCat);
-		model.addAttribute("category", new Category());
-		return "regcandidate/regCandidateAddCategory";
-
-	}
-
 	@RequestMapping(value = "regCandidateNew", method = RequestMethod.POST)
-	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("infoForm") LoginInfo info,
-			@ModelAttribute("candidate") Candidate candidate) throws IOException {
-		String password = info.getPassword();
-		securityService.encodePassword(info);
-		candidateService.register(candidate, info);
-		securityService.autoLoginAfterRegistration(request, response, info.getLogin(), password);
+	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate)
+					throws IOException {
+		String password = loginInfo.getPassword();
+		securityService.encodePassword(loginInfo);
+		candidateService.register(candidate, loginInfo);
+		securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
 	}
-	
+
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
 		String login = principal.getName();

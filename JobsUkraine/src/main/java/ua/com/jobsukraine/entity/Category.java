@@ -13,20 +13,16 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Category extends AbstractPersistable<Integer>  {
+public class Category extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name = "Category_Candidate", 
-		joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") ,
-		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id"))
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
 	private List<Candidate> candidates;
 
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name = "Category_Employer",
-		joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , 
-		inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") )
 	private List<Employer> employers;
 
 	@NotNull
