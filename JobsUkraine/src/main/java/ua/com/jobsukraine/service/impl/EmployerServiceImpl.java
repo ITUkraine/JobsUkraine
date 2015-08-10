@@ -28,25 +28,17 @@ import ua.com.jobsukraine.service.RoleService;
 public class EmployerServiceImpl implements EmployerService {
 
 	@Autowired
-	private EmployerRepository employerRepository;
+	private CategoryService categoryService;
 	@Autowired
-	private RoleService roleRepository;
+	private EmployerRepository employerRepository;
 	@Autowired
 	private LoginInfoRepository loginInfoRepository;
 	@Autowired
-	private CategoryService categoryService;
+	private RoleService roleRepository;
 
 	@Override
-	public Employer register(Employer emp, LoginInfo info) {
-		info.setRole(roleRepository.findByName("ROLE_EMPLOYER"));
-		List<Category> listcat = new ArrayList<>();
-		for (Category category : emp.getCategories()) {
-			Category cat = categoryService.findByName(category.getName());
-			listcat.add(cat);
-		}
-		emp.setCategories(listcat);
-		emp.setInfo(info);
-		return employerRepository.save(emp);
+	public Employer add(Employer employer) {
+		return employerRepository.saveAndFlush(employer);
 
 	}
 
@@ -74,14 +66,13 @@ public class EmployerServiceImpl implements EmployerService {
 	public List<Candidate> getAvailableCandidates(List<Category> categories, int top) {
 		List<Candidate> allCandidates = new ArrayList<>();
 		for (Category ctgr : categories) {
-			// get candidate+his rating->set rating->add to list as one object
+
 			for (Object o[] : employerRepository.getAvailableCandidates(ctgr.name)) {
 				((Candidate) o[0]).setRating((Double) o[1]);
 				allCandidates.add((Candidate) o[0]);
 			}
 		}
 
-		// remove duplicates by id
 		Map<Integer, Candidate> map = new LinkedHashMap<>();
 		for (Candidate ays : allCandidates) {
 			map.put(ays.getId(), ays);
@@ -89,7 +80,6 @@ public class EmployerServiceImpl implements EmployerService {
 		allCandidates.clear();
 		allCandidates.addAll(map.values());
 
-		// sort by rating
 		Collections.sort(allCandidates);
 
 		if (allCandidates.size() > top)
@@ -103,11 +93,19 @@ public class EmployerServiceImpl implements EmployerService {
 				.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
 
 	}
+
 	@Override
-	public Employer add(Employer employer) {
-		return employerRepository.saveAndFlush(employer);
+	public Employer register(Employer emp, LoginInfo info) {
+		info.setRole(roleRepository.findByName("ROLE_EMPLOYER"));
+		List<Category> listcat = new ArrayList<>();
+		for (Category category : emp.getCategories()) {
+			Category cat = categoryService.findByName(category.getName());
+			listcat.add(cat);
+		}
+		emp.setCategories(listcat);
+		emp.setInfo(info);
+		return employerRepository.save(emp);
 
 	}
-	
 
 }

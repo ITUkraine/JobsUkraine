@@ -29,23 +29,17 @@ public class CandidateServiceImpl implements CandidateService {
 	@Autowired
 	private CandidateRepository candidateRepository;
 	@Autowired
-	private RoleService roleService;
-	@Autowired
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private LoginInfoRepository loginInfoRepository;
+	@Autowired
+	private RoleService roleService;
      
 	@Override
-	public Candidate register(Candidate candidate, LoginInfo info) {
-		info.setRole(roleService.findByName("ROLE_CANDIDATE"));
-		List<Category> listcat = new ArrayList<>();
-		for (Category category : candidate.getCategories()) {
-			Category cat = categoryRepository.findByName(category.getName());
-			listcat.add(cat);
-		}
-		candidate.setCategories(listcat);
-		candidate.setInfo(info);
+	public Candidate add(Candidate candidate) {
+		
 		return candidateRepository.save(candidate);
+
 	}
 
 	@Override
@@ -85,16 +79,6 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List<Vacancy> getAvailableVacancies(String login) {
-		List<Vacancy> vacancies = null;
-		try {
-			vacancies = candidateRepository.getAvailableVacancies(candidateRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
-		} catch (EmptyResultDataAccessException e) {
-		}
-		return vacancies;
-	}
-
-	@Override
 	public int getAge(String login) {
 		Candidate c = null;
 		int age = 0;
@@ -116,10 +100,26 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public Candidate add(Candidate candidate) {
-		
-		return candidateRepository.save(candidate);
+	public List<Vacancy> getAvailableVacancies(String login) {
+		List<Vacancy> vacancies = null;
+		try {
+			vacancies = candidateRepository.getAvailableVacancies(candidateRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
+		} catch (EmptyResultDataAccessException e) {
+		}
+		return vacancies;
+	}
 
+	@Override
+	public Candidate register(Candidate candidate, LoginInfo info) {
+		info.setRole(roleService.findByName("ROLE_CANDIDATE"));
+		List<Category> listcat = new ArrayList<>();
+		for (Category category : candidate.getCategories()) {
+			Category cat = categoryRepository.findByName(category.getName());
+			listcat.add(cat);
+		}
+		candidate.setCategories(listcat);
+		candidate.setInfo(info);
+		return candidateRepository.save(candidate);
 	}
 	
 	

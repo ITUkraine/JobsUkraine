@@ -27,15 +27,11 @@ public class Candidate extends Person implements Comparable<Candidate> {
 
 	private static final long serialVersionUID = 1L;
 
-/*	@NotNull
-	@NotEmpty(message = "This field is mandatory")*/
 	@Column(name = "address")
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "Category_Candidate", 
-	joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
 
 	@NotNull
@@ -74,11 +70,9 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	private double rating;
 
 	@ManyToMany
-	@JoinTable(name = "candidate_skill",
-		joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") ,
-		inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
+	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
 	private Set<Skill> skills;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
 	private Set<Vacancy> vacancies;
 

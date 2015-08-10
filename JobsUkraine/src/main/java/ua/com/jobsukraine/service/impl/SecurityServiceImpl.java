@@ -27,9 +27,9 @@ import ua.com.jobsukraine.service.SecurityService;
 @ComponentScan(basePackages = { "ua.com.jobsukraine.security.handler", "ua.com.jobsukraine.security" })
 @Transactional
 public class SecurityServiceImpl implements SecurityService {
-	
+
 	final static Logger logger = Logger.getLogger(SecurityServiceImpl.class);
-	
+
 	@Autowired
 	@Qualifier(value = "customAuthenticationProvider")
 	private AuthenticationProvider customAuthenticationProvider;
@@ -37,33 +37,33 @@ public class SecurityServiceImpl implements SecurityService {
 	@Qualifier(value = "customAuthenticationSuccessHandler")
 	private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 	@Autowired
-	private BCryptPasswordEncoder encoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public void autoLoginAfterRegistration(HttpServletRequest request, HttpServletResponse response, String username,
 			String password) {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-		Authentication auth = customAuthenticationProvider.authenticate(token);
-		SecurityContextHolder.getContext().setAuthentication(auth);
+		Authentication authentication = customAuthenticationProvider.authenticate(token);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
 				SecurityContextHolder.getContext());
 
 		try {
-			customAuthenticationSuccessHandler.onAuthenticationSuccess(request, response, auth);
+			customAuthenticationSuccessHandler.onAuthenticationSuccess(request, response, authentication);
 		} catch (ServletException e) {
-			
-			logger.debug("THIS IS ServletException",  e);
-	
+
+			logger.debug("THIS IS ServletException", e);
+
 		} catch (IOException e) {
-			
-			logger.debug("THIS IS IOException",  e);
+
+			logger.debug("THIS IS IOException", e);
 		}
 
 	}
 
 	@Override
 	public void encodePassword(LoginInfo loginInfo) {
-		loginInfo.setPassword(encoder.encode(loginInfo.getPassword()));
+		loginInfo.setPassword(bCryptPasswordEncoder.encode(loginInfo.getPassword()));
 	}
 
 }

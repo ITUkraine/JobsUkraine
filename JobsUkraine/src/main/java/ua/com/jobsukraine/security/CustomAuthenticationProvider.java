@@ -17,24 +17,24 @@ import org.springframework.stereotype.Component;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.LoginInfoService;
 
-@Component(value="customAuthenticationProvider")
+@Component(value = "customAuthenticationProvider")
 @ComponentScan(basePackages = { "ua.com.jobsukraine.service.impl", "ua.com.jobsukraine.security" })
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	private LoginInfoService lis;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
-	private BCryptPasswordEncoder encoder;
+	private LoginInfoService loginInfoService;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 
-		LoginInfo user = lis.findByLogin(name);
+		LoginInfo user = loginInfoService.findByLogin(name);
 		if (user == null)
 			return null;
-		if (name.equals(user.getLogin()) && encoder.matches(password, user.getPassword())) {
+		if (name.equals(user.getLogin()) && bCryptPasswordEncoder.matches(password, user.getPassword())) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<>();
 			grantedAuths.add(new SimpleGrantedAuthority(user.getRole().getName()));
 			Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);

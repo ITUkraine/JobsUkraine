@@ -13,28 +13,22 @@ import ua.com.jobsukraine.entity.Role;
 @Transactional
 public class InitService {
 	@Autowired
-	private RoleService roleServ;
+	private RoleService roleService;
 
 	@Autowired
-	private CategoryService catServ;
-
-	
-
+	private CategoryService catService;
 
 	@PostConstruct
 	public void init() {
 
-		// Creating and saving roles to db
+		roleService.add(new Role("ROLE_ADMIN"));
+		roleService.add(new Role("ROLE_EMPLOYER"));
+		roleService.add(new Role("ROLE_CANDIDATE"));
 
-		roleServ.add(new Role("ROLE_ADMIN"));
-		roleServ.add(new Role("ROLE_EMPLOYER"));
-		roleServ.add(new Role("ROLE_CANDIDATE"));
-
-		// creating and saving categories to db
-		catServ.add(new Category("Java"));
-		catServ.add(new Category("HTML"));
-		catServ.add(new Category("CSS"));
-		catServ.add(new Category("Pyton"));
-		catServ.add(new Category("Spring"));
+		catService.add(new Category("Java"));
+		catService.add(new Category("HTML"));
+		catService.add(new Category("CSS"));
+		catService.add(new Category("Pyton"));
+		catService.add(new Category("Spring"));
 	}
 }

@@ -27,17 +27,13 @@ public class Admin extends Person {
 	@Column(name = "position")
 	private String position;
 
-	@Column(name = "time_start_work")
-	private String timeStartToWork;
-
 	public Admin() {
 
 	}
 
-	public Admin(Date dateOfBirth, String cityWherework, String timeStartToWork, String position, String education) {
+	public Admin(Date dateOfBirth, String cityWherework, String position, String education) {
 		this.dateOfBirth = dateOfBirth;
 		this.cityWherework = cityWherework;
-		this.timeStartToWork = timeStartToWork;
 		this.position = position;
 		this.education = education;
 	}
@@ -58,10 +54,6 @@ public class Admin extends Person {
 		return position;
 	}
 
-	public String getTimeStartToWork() {
-		return timeStartToWork;
-	}
-
 	public void setCityWherework(String cityWherework) {
 		this.cityWherework = cityWherework;
 	}
@@ -78,14 +70,10 @@ public class Admin extends Person {
 		this.position = position;
 	}
 
-	public void setTimeStartToWork(String timeStartToWork) {
-		this.timeStartToWork = timeStartToWork;
-	}
-
 	@Override
 	public String toString() {
-		return "Admin [dateOfBirth=" + dateOfBirth + ", cityWherework=" + cityWherework + ", timeStartToWork="
-				+ timeStartToWork + ", position=" + position + ", education=" + education + "]";
+		return "Admin [dateOfBirth=" + dateOfBirth + ", cityWherework=" + cityWherework + ", position=" + position
+				+ ", education=" + education + "]";
 	}
 
 }

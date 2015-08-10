@@ -31,11 +31,34 @@ import ua.com.jobsukraine.service.SecurityService;
 public class EmployerController {
 
 	@Autowired
+	private CategoryService categoryService;
+	@Autowired
 	private EmployerService employerService;
 	@Autowired
-	private SecurityService ss;
-	@Autowired
-	private CategoryService categoryService;
+	private SecurityService securityService;
+
+	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
+	public String addCategory(@Valid @ModelAttribute("empForm") Employer emp, BindingResult bindingResult,
+			Model model) {
+		if (bindingResult.hasErrors()) {
+			return "regemp/RegEmpTwo";
+		} else {
+			model.addAttribute("listCat", categoryService.getAll());
+			return "regemp/regEmpAddCategory";
+		}
+	}
+
+	@RequestMapping(value = "/addEmployerInfo", method = RequestMethod.POST)
+	public String addEmployerInfo(@Valid @ModelAttribute("infoForm") LoginInfo info, BindingResult bindingResult,
+			Model model) {
+		if (bindingResult.hasErrors()) {
+			return "regemp/RegEmpOne";
+		} else {
+			model.addAttribute("empForm", new Employer());
+			return "regemp/RegEmpTwo";
+		}
+
+	}
 
 	@RequestMapping(value = "/regEmployer", method = RequestMethod.GET)
 	public String addEmployerLogin(Model model) {
@@ -45,43 +68,26 @@ public class EmployerController {
 		return "regemp/RegEmpOne";
 	}
 
-	@RequestMapping(value = "/addEmployerInfo", method = RequestMethod.POST)
-	public String addEmployerInfo(@Valid @ModelAttribute("infoForm") LoginInfo info, BindingResult result,
-			Model model) {
-		if (result.hasErrors()) {
-			return "regemp/RegEmpOne";
-		} else {
-			model.addAttribute("empForm", new Employer());
-			return "regemp/RegEmpTwo";
-		}
-
-	}
-
-	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
-	public String addCategory(@Valid @ModelAttribute("empForm") Employer emp, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "regemp/RegEmpTwo";
-		} else {
-			model.addAttribute("listCat", categoryService.getAll());
-			return "regemp/regEmpAddCategory";
-		}
-	}
-
 	@RequestMapping(value = "regEmployerNew", method = RequestMethod.POST)
 	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("empForm") Employer emp, @ModelAttribute("infoForm") LoginInfo info) throws IOException {
 		String password = info.getPassword();
-		ss.encodePassword(info);
+		securityService.encodePassword(info);
 		employerService.register(emp, info);
-		ss.autoLoginAfterRegistration(request, response, info.getLogin(), password);
+		securityService.autoLoginAfterRegistration(request, response, info.getLogin(), password);
+	}
+
+	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
+	public String goAddVacancy() {
+		return "empOffice/addVacancy";
 	}
 
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
 		String login = principal.getName();
-		Employer emp = employerService.findByLogin(login);
-		model.addAttribute("employer", emp);
-		model.addAttribute("candidates", employerService.getAvailableCandidates(emp.getCategories(), 10));
+		Employer employer = employerService.findByLogin(login);
+		model.addAttribute("employer", employer);
+		model.addAttribute("candidates", employerService.getAvailableCandidates(employer.getCategories(), 10));
 		return "empOffice/profile";
 	}
 
@@ -91,10 +97,5 @@ public class EmployerController {
 		Employer employer = employerService.find(id);
 		modelAndView.addObject("employer", employer);
 		return modelAndView;
-	}
-
-	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
-	public String goAddVacancy() {
-		return "empOffice/addVacancy";
 	}
 }

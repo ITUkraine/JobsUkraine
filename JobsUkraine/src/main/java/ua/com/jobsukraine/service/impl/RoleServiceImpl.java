@@ -13,12 +13,12 @@ import ua.com.jobsukraine.service.RoleService;
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
-	private RoleRepository rr;
+	private RoleRepository roleRepository;
 
 	@Override
 	public Role add(Role role) {
 		if (findByName(role.getName()) == null) {
-			return rr.save(role);
+			return roleRepository.save(role);
 		} else {
 			return findByName(role.getName());
 		}
@@ -26,27 +26,27 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public void delete(int id) {
-		rr.delete(id);
+		roleRepository.delete(id);
 	}
 
 	@Override
 	public Role edit(Role role) {
-		return rr.saveAndFlush(role);
+		return roleRepository.saveAndFlush(role);
 	}
 
 	@Override
 	public List<Role> getAll() {
-		return rr.findAll();
+		return roleRepository.findAll();
 	}
 
 	@Override
 	public Role findByName(String name) {
-		return rr.findByName(name);
+		return roleRepository.findByName(name);
 	}
 
 	@Override
 	public Role find(int id) {
-		return rr.findOne(id);
+		return roleRepository.findOne(id);
 	}
 
 }

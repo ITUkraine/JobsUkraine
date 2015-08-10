@@ -18,11 +18,4 @@ public class LoginController {
 		return "login";
 	}
 
-	
-	/*@RequestMapping(value = "/j_spring_security_check", method=RequestMethod.POST)
-	public String whereToGo() {
-		System.out.println("WAW");
-		return "candidateOffice";
-	}
-*/
 }
