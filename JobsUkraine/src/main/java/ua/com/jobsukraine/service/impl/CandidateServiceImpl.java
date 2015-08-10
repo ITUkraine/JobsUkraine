@@ -69,7 +69,7 @@ public class CandidateServiceImpl implements CandidateService {
 	public Candidate findByLogin(String login) {
 		Candidate c = null;
 		try {
-			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
+			c = candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
 			if (c.getFeedbacks().size() > 0) {
 				c.setRating(candidateRepository.getGlobalRating(c));
 			}
@@ -84,7 +84,7 @@ public class CandidateServiceImpl implements CandidateService {
 		int age = 0;
 		try {
 			
-			c = candidateRepository.findByInfo(loginInfoRepository.findByLogin(login));
+			c = candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
 			Calendar cal = new GregorianCalendar();
 			cal.setTime(c.getDateOfBirth());
 			Calendar now = new GregorianCalendar();
@@ -103,7 +103,7 @@ public class CandidateServiceImpl implements CandidateService {
 	public List<Vacancy> getAvailableVacancies(String login) {
 		List<Vacancy> vacancies = null;
 		try {
-			vacancies = candidateRepository.getAvailableVacancies(candidateRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
+			vacancies = candidateRepository.getAvailableVacancies(candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login)).getId());
 		} catch (EmptyResultDataAccessException e) {
 		}
 		return vacancies;

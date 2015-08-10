@@ -59,7 +59,7 @@ public class EmployerServiceImpl implements EmployerService {
 
 	@Override
 	public Employer findByLogin(String login) {
-		return employerRepository.findByInfo(loginInfoRepository.findByLogin(login));
+		return employerRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class EmployerServiceImpl implements EmployerService {
 
 	public List<Vacancy> getVacancies(String login) {
 		return employerRepository
-				.getVacancies(employerRepository.findByInfo(loginInfoRepository.findByLogin(login)).getId());
+				.getVacancies(employerRepository.findByLoginInfo(loginInfoRepository.findByLogin(login)).getId());
 
 	}
 
