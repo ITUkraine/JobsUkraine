@@ -34,7 +34,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "city")
 	private String cityWhereLookingForWork;

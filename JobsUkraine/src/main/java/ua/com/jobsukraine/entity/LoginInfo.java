@@ -15,18 +15,18 @@ public class LoginInfo extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Size(min = 6, message = "Password too short")
 	@Transient
 	private String confirmPassword;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Column(unique = true)
 	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Wrong login format")
 	@Size(min = 4, max = 20, message = "Length must be from 4 to 20")
 	private String login;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@Size(min = 6, message = "Password too short")
 	private String password;
 
