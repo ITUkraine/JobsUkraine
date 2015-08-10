@@ -30,10 +30,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(customAuthenticationProvider);
 	}
 
+	//and().exceptionHandling().accessDeniedPage("/login");
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeRequests().antMatchers("/JobsUkraine", "contacts", "aboutUs").permitAll().antMatchers("/admin")
-				.hasRole("ADMIN").and().exceptionHandling().accessDeniedPage("/accessDenied");
+		
+		httpSecurity.authorizeRequests().
+		antMatchers("/admin").hasRole("ADMIN").
+		antMatchers("/empOffice/*","/employerOffice").hasRole("EMPLOYER").
+		antMatchers("/candidateOffice/*","/candidateOffice").hasRole("CANDIDATE").
+		and().exceptionHandling().accessDeniedPage("/login");
+		
 		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/resources/**", "/**").permitAll().anyRequest()
 				.permitAll();
 
