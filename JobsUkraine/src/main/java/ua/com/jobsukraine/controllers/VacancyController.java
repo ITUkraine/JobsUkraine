@@ -22,21 +22,29 @@ import ua.com.jobsukraine.service.VacancyService;
 @Controller
 public class VacancyController {
 
+	private Category category;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
 	private EmployerService employerService;
+
+	private Vacancy vacancy;
 	@Autowired
 	private VacancyService vacancyService;
 
 	public VacancyController() {
+		vacancy = new Vacancy();
+		category = new Category();
+
 	}
 
 	public VacancyController(VacancyService vacancyService, CategoryService categoryService,
-			EmployerService employerService) {
+			EmployerService employerService, Vacancy vacancy, Category category) {
 		this.vacancyService = vacancyService;
 		this.categoryService = categoryService;
 		this.employerService = employerService;
+		this.vacancy = vacancy;
+		this.category = category;
 	}
 
 	@RequestMapping(value = "/vacancy/delete")
@@ -54,10 +62,10 @@ public class VacancyController {
 
 	@RequestMapping(value = "/empOffice/addVacancy")
 	public String goAddVacancyPage(Model model, Principal principal) {
-		model.addAttribute("vacancy", new Vacancy());
+		model.addAttribute("vacancy", vacancy);
 		model.addAttribute("vacancies", employerService.getVacancies(principal.getName()));
 		model.addAttribute("list", categoryService.getAll());
-		model.addAttribute("category", new Category());
+		model.addAttribute("category", category);
 
 		return "empOffice/addVacancy";
 
@@ -66,9 +74,8 @@ public class VacancyController {
 	@RequestMapping(value = "/vacancy/{id}")
 	public ModelAndView showVacancyInfoPage(@PathVariable(value = "id") int id, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView("vacancy");
-		Vacancy vacancy = vacancyService.find(id);
+		vacancy = vacancyService.find(id);
 		modelAndView.addObject("sameEmployer", vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()));
-
 		modelAndView.addObject("vacancy", vacancy);
 		return modelAndView;
 	}

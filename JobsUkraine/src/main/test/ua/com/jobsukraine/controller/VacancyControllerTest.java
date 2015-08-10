@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import ua.com.jobsukraine.controllers.VacancyController;
+import ua.com.jobsukraine.entity.Category;
+import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
@@ -22,40 +24,44 @@ import ua.com.jobsukraine.service.VacancyService;
 @RunWith(JUnit4.class)
 public class VacancyControllerTest {
 
-	final VacancyService vacancyService = mock(VacancyService.class);
-	final BindingResult bindingResult = mock(BindingResult.class);
-	final CategoryService categoryService = mock(CategoryService.class);
-	final EmployerService employerService=mock(EmployerService.class);
-	Vacancy vacancyCorrect = new Vacancy();
-	final Vacancy vacancy = new Vacancy();
-	VacancyController vacancyController;
-	final Principal principal=mock(Principal.class);
+	final private VacancyService vacancyService = mock(VacancyService.class);
+	final private BindingResult bindingResult = mock(BindingResult.class);
+	final private CategoryService categoryService = mock(CategoryService.class);
+	final private EmployerService employerService = mock(EmployerService.class);
+	private Vacancy vacancy = new Vacancy();
+	private VacancyController vacancyController;
+	final private Principal principal = mock(Principal.class);
+	final private Category category = new Category();
 
 	@Before
 	public void initVacancyCorrect() {
-		vacancyController = new VacancyController(vacancyService, categoryService, employerService);
-		vacancyCorrect.setDescription("1000");
-		vacancyCorrect.setName("IT");
-		vacancyCorrect.setSalary(1000);
+		vacancyController = new VacancyController(vacancyService, categoryService, employerService, vacancy, category);
+
 	}
-	
+
 	@Test
 	public void testGoAddVacancyPage() throws Exception {
 		Model model = mock(Model.class);
 		String result = vacancyController.goAddVacancyPage(model, principal);
+		Mockito.verify(model).addAttribute("vacancy", vacancy);
+		Mockito.verify(model).addAttribute("vacancies", employerService.getVacancies(principal.getName()));
+		Mockito.verify(model).addAttribute("list", categoryService.getAll());
+		Mockito.verify(model).addAttribute("category", category);
 		assertEquals(result, "empOffice/addVacancy");
 	}
-	
-	@Test 
-	public void testGoAddVacancy ()	{
-		String result = vacancyController.goAddVacancy(vacancyCorrect, bindingResult, principal);
+
+	@Test
+	public void testGoAddVacancy() {
+		String result = vacancyController.goAddVacancy(vacancy, bindingResult, principal);
+		Mockito.verify(vacancyService).add(employerService.findByLogin(principal.getName()), vacancy);
 		assertEquals(result, "redirect:/empOffice/addVacancy");
 	}
 
 	@Test
-	public void testDeleteVacancy	()	{
+	public void testDeleteVacancy() {
 		String result = vacancyController.deleteVacancy(1);
 		Mockito.verify(vacancyService).delete(1);
 		assertEquals(result, "redirect:/empOffice/addVacancy");
 	}
+
 }
