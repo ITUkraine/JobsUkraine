@@ -31,7 +31,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Category_Candidate", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
 
