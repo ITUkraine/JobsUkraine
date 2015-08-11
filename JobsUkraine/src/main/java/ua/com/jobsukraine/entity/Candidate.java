@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "candidate")
@@ -44,10 +45,12 @@ public class Candidate extends Person implements Comparable<Candidate> {
 
 	@NotNull(message = "This field is mandatory")
 	@Column(name = "date_of_birth")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
 	@Column(name = "date_start_work")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dateStartToWork;
 

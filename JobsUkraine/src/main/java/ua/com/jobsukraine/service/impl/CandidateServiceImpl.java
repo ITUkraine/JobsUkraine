@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,6 +27,7 @@ import ua.com.jobsukraine.service.RoleService;
 @Transactional
 public class CandidateServiceImpl implements CandidateService {
 
+	private static final Logger logger = Logger.getLogger(CategoryServiceImpl.class);
 	@Autowired
 	private CandidateRepository candidateRepository;
 	@Autowired
@@ -36,10 +38,8 @@ public class CandidateServiceImpl implements CandidateService {
 	private RoleService roleService;
      
 	@Override
-	public Candidate add(Candidate candidate) {
-		
+	public Candidate add(Candidate candidate) {	
 		return candidateRepository.save(candidate);
-
 	}
 
 	@Override
@@ -54,44 +54,41 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public Candidate find(int id) {
-		Candidate c = null;
+		Candidate candidate = null;
 		try {
-			c = candidateRepository.findOne(id);
-			if (c.getFeedbacks().size() > 0) {
-				c.setRating(candidateRepository.getGlobalRating(c));
+			candidate = candidateRepository.findOne(id);
+			if (candidate.getFeedbacks().size() > 0) {
+				candidate.setRating(candidateRepository.getGlobalRating(candidate));
 			}
 		} catch (EmptyResultDataAccessException e) {
 		}
-		return c;
+		return candidate;
 	}
 
 	@Override
 	public Candidate findByLogin(String login) {
-		Candidate c = null;
+		Candidate candidate = null;
 		try {
-			c = candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
-			if (c.getFeedbacks().size() > 0) {
-				c.setRating(candidateRepository.getGlobalRating(c));
+			candidate = candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
+			if (candidate.getFeedbacks().size() > 0) {
+				candidate.setRating(candidateRepository.getGlobalRating(candidate));
 			}
 		} catch (EmptyResultDataAccessException e) {
 		}
-		return c;
+		return candidate;
 	}
 
 	@Override
-	public int getAge(String login) {
-		Candidate c = null;
+	public int getAge(Candidate candidate) {
 		int age = 0;
 		try {
-			
-			c = candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
-			Calendar cal = new GregorianCalendar();
-			cal.setTime(c.getDateOfBirth());
+			Calendar calendar = new GregorianCalendar();
+			calendar.setTime(candidate.getDateOfBirth());
 			Calendar now = new GregorianCalendar();
-			age = now.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
-			if ((cal.get(Calendar.MONTH) > now.get(Calendar.MONTH))
-					|| (cal.get(Calendar.MONTH) == now.get(Calendar.MONTH)
-							&& cal.get(Calendar.DAY_OF_MONTH) > now.get(Calendar.DAY_OF_MONTH))) {
+			age = now.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
+			if ((calendar.get(Calendar.MONTH) > now.get(Calendar.MONTH))
+					|| (calendar.get(Calendar.MONTH) == now.get(Calendar.MONTH)
+							&& calendar.get(Calendar.DAY_OF_MONTH) > now.get(Calendar.DAY_OF_MONTH))) {
 				age--;
 			}
 		} catch (EmptyResultDataAccessException e) {
@@ -100,11 +97,12 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List<Vacancy> getAvailableVacancies(String login) {
+	public List<Vacancy> getAvailableVacancies(Candidate candidate) {
 		List<Vacancy> vacancies = null;
 		try {
-			vacancies = candidateRepository.getAvailableVacancies(candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login)).getId());
+			vacancies = candidateRepository.getAvailableVacancies(candidate);
 		} catch (EmptyResultDataAccessException e) {
+			logger.error("Candidate doesn't have available vacancies", e);
 		}
 		return vacancies;
 	}

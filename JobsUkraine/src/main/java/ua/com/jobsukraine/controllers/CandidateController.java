@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,6 @@ import ua.com.jobsukraine.service.SecurityService;
 @SessionAttributes(types = { Candidate.class, LoginInfo.class })
 public class CandidateController {
 
-	final static Logger logger = Logger.getLogger(CandidateController.class);
 	@Autowired
 	private CandidateService candidateService;
 	@Autowired
@@ -52,14 +50,7 @@ public class CandidateController {
 		return "regcandidate/RegCandidateOne";
 	}
 
-	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
-	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
-		List<Category> listCategory = categoryService.getAll();
-		model.addAttribute("listCat", listCategory);
-		model.addAttribute("category", new Category());
-		return "regcandidate/regCandidateAddCategory";
-
-	}
+	
 
 	@RequestMapping(value = "/addCandidateInfo", method = RequestMethod.POST)
 	public String addCandidateInfo(@Valid @ModelAttribute("infoForm") LoginInfo loginInfo, BindingResult bindingResult,
@@ -83,24 +74,33 @@ public class CandidateController {
 		}
 
 	}
+	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
+	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
+		model.addAttribute("listCat", categoryService.getAll());
+		return "regcandidate/regCandidateAddCategory";
 
+	}
 	@RequestMapping(value = "regCandidateNew", method = RequestMethod.POST)
-	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate)
+	public String doAutoLogin(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate, Model model)
 					throws IOException {
+		if (candidate.getCategories()==null) {
+			model.addAttribute("msg", "Please, select at least one category");
+			model.addAttribute("listCat", categoryService.getAll());
+			return "regcandidate/regCandidateAddCategory";
+		} else {
 		String password = loginInfo.getPassword();
 		securityService.encodePassword(loginInfo);
 		candidateService.register(candidate, loginInfo);
 		securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
+		return null;}
 	}
 
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
-		String login = principal.getName();
-		Candidate candidate = candidateService.findByLogin(login);
+		Candidate candidate = candidateService.findByLogin(principal.getName());
 		model.addAttribute("candidate", candidate);
-		model.addAttribute("vacancies", candidateService.getAvailableVacancies(login));
-		model.addAttribute("feedbacks", candidate.getFeedbacks());
+		model.addAttribute("vacancies", candidateService.getAvailableVacancies(candidate));
 		return "candidateOffice/profile";
 	}
 
@@ -111,7 +111,6 @@ public class CandidateController {
 		modelAndView.addObject("candidate", candidate);
 		modelAndView.addObject("feedback", new Feedback());
 		modelAndView.addObject("list", categoryService.getAll());
-		modelAndView.addObject("feedbacks", candidate.getFeedbacks());
 		return modelAndView;
 	}
 	
@@ -119,7 +118,6 @@ public class CandidateController {
 	public String addFeedback(@ModelAttribute("feedback") Feedback feedback,
 			@ModelAttribute("candidate") Candidate candidate, Principal principal) {
 		feedbackService.add(candidate, feedback, principal);
-		logger.debug(feedback);
 		return "redirect:/candidate/"+candidate.getId();
 	}
 
