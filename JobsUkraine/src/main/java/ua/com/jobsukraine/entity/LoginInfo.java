@@ -10,7 +10,10 @@ import javax.validation.constraints.Size;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import ua.com.jobsukraine.annotations.UniqueLoginInfo;
+
 @Entity
+@UniqueLoginInfo(message = "This login allready exists")
 public class LoginInfo extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
