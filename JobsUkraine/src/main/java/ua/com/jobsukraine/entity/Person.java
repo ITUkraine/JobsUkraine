@@ -41,7 +41,7 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	@NotNull(message = "This field is mandatory")
 	@Pattern(regexp = "^[0-9\\-\\(\\)]*$", message = "Wrong phone format")
 	@NotEmpty(message = "This field is mandatory")
-	@Column(name = "mobileNumber", unique = true)
+	@Column(name = "mobileNumber")
 	private String mobileNumber;
 
 	@NotNull(message = "This field is mandatory")

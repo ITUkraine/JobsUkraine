@@ -16,15 +16,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import ua.com.jobsukraine.annotations.UniqueCandidate;
+
 @Entity
 @Table(name = "candidate")
 @DiscriminatorValue("2")
+@UniqueCandidate(message = "Candidate with such email allready exists")
 public class Candidate extends Person implements Comparable<Candidate> {
 
 	private static final long serialVersionUID = 1L;
@@ -76,7 +78,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
 	private Set<Skill> skills;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidates")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "candidates")
 	private Set<Vacancy> vacancies;
 
 	public Candidate() {
