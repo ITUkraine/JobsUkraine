@@ -16,9 +16,9 @@ public class HomeController {
 		return "contacts";
 	}
 
-	@RequestMapping(value = "/employers")
+	@RequestMapping(value = "/vacancies")
 	public String goEmployers() {
-		return "employers";
+		return "vacancies";
 	}
 
 	@RequestMapping(value = "/candidates")
@@ -30,6 +30,5 @@ public class HomeController {
 	public String goAboutUs() {
 		return "aboutUs";
 	}
-	
-	
+
 }

@@ -23,7 +23,7 @@
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<a class="navbar-brand"><img
+				<a class="navbar-brand" href="/JobsUkraine/"><img
 					src="<c:url value="/resources/css/images/logo-cut.png" />" /></a>
 			</div>
 
