@@ -22,7 +22,6 @@ import ua.com.jobsukraine.service.VacancyService;
 @Controller
 public class VacancyController {
 
-	private Category category;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
@@ -32,19 +31,18 @@ public class VacancyController {
 	@Autowired
 	private VacancyService vacancyService;
 
+
 	public VacancyController() {
-		vacancy = new Vacancy();
-		category = new Category();
 
 	}
 
 	public VacancyController(VacancyService vacancyService, CategoryService categoryService,
-			EmployerService employerService, Vacancy vacancy, Category category) {
+			EmployerService employerService, Vacancy vacancy) {
 		this.vacancyService = vacancyService;
 		this.categoryService = categoryService;
 		this.employerService = employerService;
 		this.vacancy = vacancy;
-		this.category = category;
+
 	}
 
 	@RequestMapping(value = "/vacancy/delete")
@@ -62,10 +60,10 @@ public class VacancyController {
 
 	@RequestMapping(value = "/empOffice/addVacancy")
 	public String goAddVacancyPage(Model model, Principal principal) {
-		model.addAttribute("vacancy", vacancy);
+		model.addAttribute("vacancy", new Vacancy());
 		model.addAttribute("vacancies", employerService.getVacancies(principal.getName()));
 		model.addAttribute("list", categoryService.getAll());
-		model.addAttribute("category", category);
+		model.addAttribute("category", new Category());
 
 		return "empOffice/addVacancy";
 
@@ -75,7 +73,6 @@ public class VacancyController {
 	public ModelAndView showVacancyInfoPage(@PathVariable(value = "id") int id, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView("vacancy");
 		vacancy = vacancyService.find(id);
-		modelAndView.addObject("sameEmployer", vacancy.getEmployer().getInfo().getLogin().equals(principal.getName()));
 		modelAndView.addObject("vacancy", vacancy);
 		return modelAndView;
 	}

@@ -12,10 +12,9 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.controllers.VacancyController;
-import ua.com.jobsukraine.entity.Category;
-import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
@@ -28,25 +27,22 @@ public class VacancyControllerTest {
 	final private BindingResult bindingResult = mock(BindingResult.class);
 	final private CategoryService categoryService = mock(CategoryService.class);
 	final private EmployerService employerService = mock(EmployerService.class);
-	private Vacancy vacancy = new Vacancy();
+	final private Vacancy vacancy = new Vacancy();
 	private VacancyController vacancyController;
-	final private Principal principal = mock(Principal.class);
-	final private Category category = new Category();
+	private Principal principal = mock(Principal.class);
 
 	@Before
 	public void initVacancyCorrect() {
-		vacancyController = new VacancyController(vacancyService, categoryService, employerService, vacancy, category);
-
+		vacancyController = new VacancyController(vacancyService, categoryService, employerService, vacancy);
+		principal = mock(Principal.class);
 	}
 
 	@Test
 	public void testGoAddVacancyPage() throws Exception {
 		Model model = mock(Model.class);
 		String result = vacancyController.goAddVacancyPage(model, principal);
-		Mockito.verify(model).addAttribute("vacancy", vacancy);
 		Mockito.verify(model).addAttribute("vacancies", employerService.getVacancies(principal.getName()));
 		Mockito.verify(model).addAttribute("list", categoryService.getAll());
-		Mockito.verify(model).addAttribute("category", category);
 		assertEquals(result, "empOffice/addVacancy");
 	}
 
@@ -62,6 +58,14 @@ public class VacancyControllerTest {
 		String result = vacancyController.deleteVacancy(1);
 		Mockito.verify(vacancyService).delete(1);
 		assertEquals(result, "redirect:/empOffice/addVacancy");
+	}
+	
+	@Test
+	public void testShowVacancyInfoPage() {
+		ModelAndView modelAndView = vacancyController.showVacancyInfoPage(1,principal);
+		String  result = modelAndView.getViewName();
+		assertEquals(result, "vacancy");
+		
 	}
 
 }
