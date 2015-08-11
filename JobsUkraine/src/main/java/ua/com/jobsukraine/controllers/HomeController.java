@@ -37,7 +37,6 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView("candidates");
 		List<Candidate> candidates = candidateService.getAll();
 		Collections.sort(candidates);
-		System.out.println(candidates);
 		modelAndView.addObject("candidates", candidates);
 		return modelAndView;
 	}
