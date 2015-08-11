@@ -12,10 +12,29 @@
 		<div class="panel-body">
 			<c:forEach items="${candidates}" var="candidate">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="/JobsUkraine/candidate/${candidate.id}">${candidate }</a>
+					<div class="panel-heading col-lg-12">
+						<div class="col-lg-4">
+							<img alt="avatar" width="60px" height="60px"
+								src="<c:url value="/resources/pictures/avatar.png" />"></img>
+						</div>
+						<div class="col-lg-8">
+							<h5 align="right">Rating: ${candidate.rating}</h5>
+							<a style="font-size: 16px;"
+								href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
+								${candidate.name} </a>
+						</div>
 					</div>
-					<div class="panel-body"></div>
+					<div class="panel-body">
+						<br>
+						<p>Age: ${candidate.dateOfBirth}</p>
+						<p>
+							Categories:
+							<c:forEach var="category" items="${candidate.categories}">
+									${category.name}<c:if test="${!loop.last}">, </c:if>
+							</c:forEach>
+						</p>
+						<p>Skills: ${candidate.primarySkills}</p>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
