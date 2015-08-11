@@ -16,7 +16,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 	@Query("SELECT AVG(f.mark) AS AVG_Rating FROM Candidate c JOIN c.feedbacks f WHERE c = ?1")
 	Double getGlobalRating(Candidate candidate);
 
-	@Query("SELECT vacancy FROM Candidate c JOIN c.categories ctgr JOIN ctgr.vacancy vacancy WHERE c.id = ?1")
-	List<Vacancy> getAvailableVacancies(int id);
+	@Query("SELECT vacancy FROM Candidate c JOIN c.categories ctgr JOIN ctgr.vacancy vacancy WHERE c = ?1")
+	List<Vacancy> getAvailableVacancies(Candidate candidate);
 
 }
