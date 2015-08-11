@@ -19,4 +19,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 	@Query("SELECT vacancy FROM Candidate c JOIN c.categories ctgr JOIN ctgr.vacancy vacancy WHERE c = ?1")
 	List<Vacancy> getAvailableVacancies(Candidate candidate);
 
+	List<Candidate> findAll();
+
+	Candidate findByEmail(String email);
 }
