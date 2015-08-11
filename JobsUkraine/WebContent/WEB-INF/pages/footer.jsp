@@ -8,13 +8,13 @@
 <body>
 	<nav class="navbar navbar-default navbar-fixed-bottom">
 		<div class="container">
-			<div class="col-lg-2">
+			<div class="col-lg-3">
 				JobsUkraine <br> <a href="mailto:info@jobsukraine.com.ua">info@jobsukraine.com.ua</a>
 			</div>
 			<div class="col-lg-2">
 				Tel: +380 97 73 00 963 <br>Skype: jobsukraine
 			</div>
-			<div class="col-lg-5"></div>
+			<div class="col-lg-4"></div>
 			<div class="col-lg-3">
 				<a href="https://www.facebook.com/jobsukraine?fref=ts"><img
 					src="<c:url value="/resources/css/images/footer-icons/facebook.png" />" /></a>
