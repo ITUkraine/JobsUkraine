@@ -50,14 +50,7 @@ public class CandidateController {
 		return "regcandidate/RegCandidateOne";
 	}
 
-	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
-	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
-		List<Category> listCategory = categoryService.getAll();
-		model.addAttribute("listCat", listCategory);
-		model.addAttribute("category", new Category());
-		return "regcandidate/regCandidateAddCategory";
-
-	}
+	
 
 	@RequestMapping(value = "/addCandidateInfo", method = RequestMethod.POST)
 	public String addCandidateInfo(@Valid @ModelAttribute("infoForm") LoginInfo loginInfo, BindingResult bindingResult,
@@ -81,15 +74,26 @@ public class CandidateController {
 		}
 
 	}
+	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
+	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
+		model.addAttribute("listCat", categoryService.getAll());
+		return "regcandidate/regCandidateAddCategory";
 
+	}
 	@RequestMapping(value = "regCandidateNew", method = RequestMethod.POST)
-	public void doAutoLogin(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate)
+	public String doAutoLogin(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate, Model model)
 					throws IOException {
+		if (candidate.getCategories()==null) {
+			model.addAttribute("msg", "Please, select at least one category");
+			model.addAttribute("listCat", categoryService.getAll());
+			return "regcandidate/regCandidateAddCategory";
+		} else {
 		String password = loginInfo.getPassword();
 		securityService.encodePassword(loginInfo);
 		candidateService.register(candidate, loginInfo);
 		securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
+		return null;}
 	}
 
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
