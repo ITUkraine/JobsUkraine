@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Feedback extends AbstractPersistable<Integer> {
+public class Feedback extends AbstractPersistable<Integer>implements Comparable<Feedback> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class Feedback extends AbstractPersistable<Integer> {
 	private String mark;
 
 	private Date date = new Date();
-	
+
 	public Feedback() {
 	}
 
@@ -77,6 +77,19 @@ public class Feedback extends AbstractPersistable<Integer> {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	@Override
+	public int compareTo(Feedback feedback) {
+		long t1 = feedback.getDate().getTime();
+		long t2 = this.getDate().getTime();
+		if (t2 > t1) {
+			return -1;
+		} else if (t1 > t2) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 }

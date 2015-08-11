@@ -2,6 +2,7 @@ package ua.com.jobsukraine.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,6 +101,7 @@ public class CandidateController {
 	public String goLogin(Principal principal, Model model) {
 		Candidate candidate = candidateService.findByLogin(principal.getName());
 		model.addAttribute("candidate", candidate);
+		Collections.sort(candidate.getFeedbacks());
 		model.addAttribute("vacancies", candidateService.getAvailableVacancies(candidate));
 		return "candidateOffice/profile";
 	}
@@ -109,6 +111,7 @@ public class CandidateController {
 		ModelAndView modelAndView = new ModelAndView("candidate");
 		Candidate candidate = candidateService.find(id);
 		modelAndView.addObject("candidate", candidate);
+		Collections.sort(candidate.getFeedbacks());
 		modelAndView.addObject("feedback", new Feedback());
 		modelAndView.addObject("list", categoryService.getAll());
 		return modelAndView;
