@@ -57,10 +57,20 @@ public class CandidateController {
 	public String addCandidateInfo(@Valid @ModelAttribute("infoForm") LoginInfo loginInfo, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return "regcandidate/RegCandidateOne";
+			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
+				model.addAttribute("msg", "Passwords must be identical");} 
+				return "regcandidate/RegCandidateOne";
+
 		} else {
-			model.addAttribute("candidate", new Candidate());
-			return "regcandidate/RegCandidateTwo";
+			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
+				model.addAttribute("msg", "Passwords must be identical");
+				return "regcandidate/RegCandidateOne";
+				
+			} else {
+				model.addAttribute("candidate", new Candidate());
+				return "regcandidate/RegCandidateTwo";
+			}
+			
 		}
 
 	}

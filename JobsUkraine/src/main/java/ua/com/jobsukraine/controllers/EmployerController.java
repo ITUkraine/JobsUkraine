@@ -47,10 +47,16 @@ public class EmployerController {
 	public String addEmployerInfo(@Valid @ModelAttribute("infoForm") LoginInfo loginInfo, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return "regemp/RegEmpOne";
+			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
+				model.addAttribute("msg", "Passwords must be identical");}
+				return "regemp/RegEmpOne";
 		} else {
-			model.addAttribute("empForm", new Employer());
-			return "regemp/RegEmpTwo";
+			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
+				model.addAttribute("msg", "Passwords must be identical");
+				return "regemp/RegEmpOne";}
+			else{
+				model.addAttribute("empForm", new Employer());
+				return "regemp/RegEmpTwo";}
 		}
 	}
 
