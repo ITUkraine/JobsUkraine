@@ -121,6 +121,7 @@ public class CandidateController {
 	public String addFeedback(@ModelAttribute("feedback") Feedback feedback,
 			@ModelAttribute("candidate") Candidate candidate, Principal principal) {
 		feedbackService.add(candidate, feedback, principal);
+		candidateService.updateGlobalRating(candidate);
 		return "redirect:/candidate/"+candidate.getId();
 	}
 
