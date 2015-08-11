@@ -7,11 +7,18 @@ import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 
 public interface CandidateService extends DefaultService<Candidate> {
+	
 	Candidate findByLogin(String login);
+	
+	Candidate findByEmail(String email);
 	
 	int getAge(Candidate candidate);
 	
 	List<Vacancy> getAvailableVacancies(Candidate candidate);
 	
 	Candidate register(Candidate candidate, LoginInfo info);
+	
+	List<Candidate> getAll();
+	
+	Candidate updateGlobalRating(Candidate candidate);
 }

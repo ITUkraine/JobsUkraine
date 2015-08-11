@@ -67,15 +67,12 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public Candidate findByLogin(String login) {
-		Candidate candidate = null;
-		try {
-			candidate = candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
-			if (candidate.getFeedbacks().size() > 0) {
-				candidate.setRating(candidateRepository.getGlobalRating(candidate));
-			}
-		} catch (EmptyResultDataAccessException e) {
-		}
-		return candidate;
+		return candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
+	}
+	
+	@Override
+	public Candidate findByEmail(String email) {
+		return candidateRepository.findByEmail(email);
 	}
 
 	@Override
@@ -118,6 +115,17 @@ public class CandidateServiceImpl implements CandidateService {
 		candidate.setCategories(listcat);
 		candidate.setInfo(info);
 		return candidateRepository.save(candidate);
+	}
+
+	@Override
+	public List<Candidate> getAll() {
+		return candidateRepository.findAll();
+	}
+
+	@Override
+	public Candidate updateGlobalRating(Candidate candidate) {
+		candidate.setRating(candidateRepository.getGlobalRating(candidate));
+		return candidateRepository.saveAndFlush(candidate);
 	}
 	
 	
