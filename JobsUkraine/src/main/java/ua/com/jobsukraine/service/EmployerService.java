@@ -9,6 +9,8 @@ import ua.com.jobsukraine.entity.Vacancy;
 
 public interface EmployerService extends DefaultService<Employer> {
 
+	Employer findByEmail(String email);
+	
 	Employer findByLogin(String login);
 	
 	List<Candidate> getAvailableCandidates(Employer employer, int top);

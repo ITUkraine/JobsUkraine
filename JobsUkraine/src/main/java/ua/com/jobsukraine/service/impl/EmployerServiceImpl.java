@@ -61,6 +61,12 @@ public class EmployerServiceImpl implements EmployerService {
 	public Employer findByLogin(String login) {
 		return employerRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
 	}
+	
+	@Override
+	public Employer findByEmail(String email) {
+		return employerRepository.findByEmail(email);
+	}
+
 
 	@Override
 	public List<Candidate> getAvailableCandidates(Employer employer, int top) {

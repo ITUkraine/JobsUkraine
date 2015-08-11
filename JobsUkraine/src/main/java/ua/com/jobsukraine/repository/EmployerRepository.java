@@ -19,4 +19,6 @@ public interface EmployerRepository extends JpaRepository<Employer, Integer> {
 
 	@Query("SELECT c,AVG(feedbacks.mark) as AVG_Rating FROM Candidate c JOIN c.feedbacks feedbacks JOIN feedbacks.category ctgr WHERE ctgr = ?1 GROUP BY c.id ORDER BY AVG_Rating DESC")
 	List<Object[]> getAvailableCandidates(Category category);
+
+	Employer findByEmail(String email);
 }
