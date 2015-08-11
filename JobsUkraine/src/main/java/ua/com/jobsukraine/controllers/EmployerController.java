@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
+import ua.com.jobsukraine.exceptions.CustomMessageException;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.SecurityService;
@@ -36,13 +36,10 @@ public class EmployerController {
 	private EmployerService employerService;
 	@Autowired
 	private SecurityService securityService;
-	
 
 	@RequestMapping(value = "/regEmployer", method = RequestMethod.GET)
 	public String addEmployerLogin(Model model) {
-
 		model.addAttribute("infoForm", new LoginInfo());
-
 		return "regemp/RegEmpOne";
 	}
 
@@ -55,9 +52,8 @@ public class EmployerController {
 			model.addAttribute("empForm", new Employer());
 			return "regemp/RegEmpTwo";
 		}
-
 	}
-	
+
 	@RequestMapping(value = "/addEmpCategory", method = RequestMethod.POST)
 	public String addCategory(@Valid @ModelAttribute("empForm") Employer employer, BindingResult bindingResult,
 			Model model) {
@@ -69,12 +65,11 @@ public class EmployerController {
 		}
 	}
 
-	
-
 	@RequestMapping(value = "regEmployerNew", method = RequestMethod.POST)
 	public String doAutoLogin(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("empForm") Employer employer, @ModelAttribute("infoForm") LoginInfo loginInfo, Model model) throws IOException {
-		if (employer.getCategories()==null) {
+			@ModelAttribute("empForm") Employer employer, @ModelAttribute("infoForm") LoginInfo loginInfo, Model model)
+					throws IOException {
+		if (employer.getCategories() == null) {
 			model.addAttribute("msg", "Please, select at least one category");
 			model.addAttribute("listCat", categoryService.getAll());
 			return "regemp/regEmpAddCategory";
@@ -85,8 +80,6 @@ public class EmployerController {
 			securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
 			return null;
 		}
-		
-		
 	}
 
 	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
@@ -96,10 +89,9 @@ public class EmployerController {
 
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
-		String login = principal.getName();
-		Employer employer = employerService.findByLogin(login);
+		Employer employer = employerService.findByLogin(principal.getName());
 		model.addAttribute("employer", employer);
-		model.addAttribute("candidates", employerService.getAvailableCandidates(employer.getCategories(), 10));
+		model.addAttribute("candidates", employerService.getAvailableCandidates(employer, 10));
 		return "empOffice/profile";
 	}
 
@@ -107,13 +99,10 @@ public class EmployerController {
 	public ModelAndView showEmployerInfoPage(@PathVariable(value = "id") int id) {
 		ModelAndView modelAndView = new ModelAndView("employer");
 		Employer employer = employerService.find(id);
+		if (employer == null) {
+			throw new CustomMessageException("No employer founded");
+		}
 		modelAndView.addObject("employer", employer);
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/employerOffice/edit")
-	public ModelAndView edit() {
-		ModelAndView modelAndView = new ModelAndView("empOffice/edit");
 		return modelAndView;
 	}
 }

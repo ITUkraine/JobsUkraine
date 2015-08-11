@@ -36,7 +36,6 @@ public class VacancyController {
 	private LoginInfoService loginInfoService;
 
 	public VacancyController() {
-
 	}
 
 	public VacancyController(VacancyService vacancyService, CategoryService categoryService,
@@ -45,7 +44,6 @@ public class VacancyController {
 		this.categoryService = categoryService;
 		this.employerService = employerService;
 		this.vacancy = vacancy;
-
 	}
 
 	@RequestMapping(value = "/vacancy/delete")
@@ -67,7 +65,7 @@ public class VacancyController {
 	@RequestMapping(value = "/empOffice/addVacancy")
 	public String goAddVacancyPage(Model model, Principal principal) {
 		model.addAttribute("vacancy", new Vacancy());
-		model.addAttribute("vacancies", employerService.getVacancies(principal.getName()));
+		model.addAttribute("vacancies", employerService.getVacancies(employerService.findByLogin(principal.getName())));
 		model.addAttribute("list", categoryService.getAll());
 		model.addAttribute("category", new Category());
 
