@@ -38,7 +38,7 @@ public class Employer extends AbstractPersistable<Integer> {
 	@NotEmpty(message = "This field is mandatory")
 	private String description;
 
-	@NotNull
+	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Email(message = "Wrong email format")
 	@Column(unique = true)
