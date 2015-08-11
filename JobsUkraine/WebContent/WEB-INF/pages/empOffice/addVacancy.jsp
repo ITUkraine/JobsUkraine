@@ -12,8 +12,10 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div class="container-fluid">
-		<%@ include file="sidebar.jsp"%>
+	<div class="container">
+		<div class="col-lg-2">
+			<%@ include file="sidebar.jsp"%>
+		</div>
 		<div class="col-lg-6 panel panel-default">
 			<div class="panel-heading">Add vacancy</div>
 			<div class="form-group panel-body">
@@ -44,7 +46,9 @@
 				</form:form>
 			</div>
 		</div>
-		<%@ include file="vacanciesList.jsp"%>
+		<div class="col-lg-4">
+			<%@ include file="vacanciesList.jsp"%>
+		</div>
 	</div>
 
 	<%@ include file="../footer.jsp"%>

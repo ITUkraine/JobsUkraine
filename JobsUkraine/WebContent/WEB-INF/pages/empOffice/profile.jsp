@@ -10,8 +10,10 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div class="container-fluid">
-		<%@ include file="sidebar.jsp"%>
+	<div class="container">
+		<div class="col-lg-2">
+			<%@ include file="sidebar.jsp"%>
+		</div>
 		<div class="col-lg-6">
 			<div class=" col-lg-12 panel panel-default">
 				<div class="panel-heading">
@@ -30,7 +32,9 @@
 				</div>
 			</div>
 		</div>
-		<%@ include file="candidatesList.jsp"%>
+		<div class="col-lg-4">
+			<%@ include file="potentialCandidates.jsp"%>
+		</div>
 	</div>
 
 	<%@ include file="../footer.jsp"%>

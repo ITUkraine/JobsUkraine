@@ -98,4 +98,10 @@ public class EmployerController {
 		modelAndView.addObject("employer", employer);
 		return modelAndView;
 	}
+
+	@RequestMapping(value = "/employerOffice/edit")
+	public ModelAndView edit() {
+		ModelAndView modelAndView = new ModelAndView("empOffice/edit");
+		return modelAndView;
+	}
 }
