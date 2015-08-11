@@ -12,7 +12,6 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.controllers.VacancyController;
 import ua.com.jobsukraine.entity.Vacancy;
@@ -55,17 +54,11 @@ public class VacancyControllerTest {
 
 	@Test
 	public void testDeleteVacancy() {
-		String result = vacancyController.deleteVacancy(1);
+		String result = vacancyController.deleteVacancy(1, principal);
 		Mockito.verify(vacancyService).delete(1);
 		assertEquals(result, "redirect:/empOffice/addVacancy");
 	}
 	
-	@Test
-	public void testShowVacancyInfoPage() {
-		ModelAndView modelAndView = vacancyController.showVacancyInfoPage(1,principal);
-		String  result = modelAndView.getViewName();
-		assertEquals(result, "vacancy");
-		
-	}
-
+	
+	
 }
