@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Vacancy;
+import ua.com.jobsukraine.exceptions.CustomMessageException;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
+import ua.com.jobsukraine.service.LoginInfoService;
 import ua.com.jobsukraine.service.VacancyService;
 
 @Controller
@@ -30,7 +32,8 @@ public class VacancyController {
 	private Vacancy vacancy;
 	@Autowired
 	private VacancyService vacancyService;
-
+	@Autowired
+	private LoginInfoService loginInfoService;
 
 	public VacancyController() {
 
@@ -46,8 +49,11 @@ public class VacancyController {
 	}
 
 	@RequestMapping(value = "/vacancy/delete")
-	public String deleteVacancy(@RequestParam("id") int id) {
+	public String deleteVacancy(@RequestParam("id") int id, Principal principal) {
 		vacancyService.delete(id);
+		if (loginInfoService.findByLogin(principal.getName()).getRole().getName().equals("ROLE_ADMIN")) {
+			return "redirect:/vacancies";
+		}
 		return "redirect:/empOffice/addVacancy";
 	}
 
@@ -73,6 +79,9 @@ public class VacancyController {
 	public ModelAndView showVacancyInfoPage(@PathVariable(value = "id") int id, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView("vacancy");
 		vacancy = vacancyService.find(id);
+		if (vacancy == null) {
+			throw new CustomMessageException("No vacancy founded");
+		}
 		modelAndView.addObject("vacancy", vacancy);
 		return modelAndView;
 	}
