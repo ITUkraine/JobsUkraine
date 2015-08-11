@@ -29,8 +29,9 @@
 							<div class="panel-heading">
 								${vacancy.description}
 								<div align="right">
-									<button class="btn btn-default">edit(->)</button>
-									<button class="btn btn-default">delete(doesn't work)</button>
+									<input class="form-control" type="button"
+										onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
+										value="Delete">
 								</div>
 							</div>
 						</div>

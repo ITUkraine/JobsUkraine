@@ -39,8 +39,7 @@
 
 						<br>
 						<div align="right">
-							<button type="submit" class="btn btn-default"
-								style="width: 120px;">Add</button>
+							<button type="submit" class="btn btn-default">Add</button>
 						</div>
 					</fieldset>
 				</form:form>

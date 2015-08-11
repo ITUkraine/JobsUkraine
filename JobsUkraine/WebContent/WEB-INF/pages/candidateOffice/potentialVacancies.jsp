@@ -26,11 +26,7 @@
 						</div>
 						<div id="collapse${vacancy.id}" class="panel-collapse collapse">
 							<div class="panel-heading" style="word-wrap: break-word;">
-								${vacancy.description}
-								<div align="right">
-									<button class="btn btn-default">accept(doesn't work)</button>
-								</div>
-							</div>
+								${vacancy.description}</div>
 						</div>
 					</div>
 				</c:forEach>

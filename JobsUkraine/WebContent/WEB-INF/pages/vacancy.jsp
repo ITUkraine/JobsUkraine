@@ -27,23 +27,17 @@
 					<p>${vacancy.description}</p>
 
 					<div class="row">
-						<!-- !hasRole() -> hasRole() after testing -->
 						<sec:authorize
-							access="isAuthenticated() && !hasRole('ROLE_CANDIDATE')">
+							access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
 							<div class="col-lg-3">
 								<input class="form-control" type="button"
 									value="Accept (dont work)">
 							</div>
 						</sec:authorize>
 
-						<sec:authorize
-							access="isAuthenticated() && (hasRole('ROLE_ADMIN') || ${sameEmployer})">
-							<div class="col-lg-3">
-								<input class="form-control" type="button"
-									value="Edit (dont work)">
-							</div>
-
-							<div class="col-lg-2">
+						<sec:authorize access="isAuthenticated() && hasRole('ROLE_ADMIN')">
+							<div class="col-lg-8"></div>
+							<div class="col-lg-4">
 								<input class="form-control" type="button"
 									onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
 									value="Delete">

@@ -11,7 +11,6 @@
 			<li class="active"><img alt="avatar" width="100%"
 				src="<c:url value="/resources/pictures/icon.png" />"></img></li>
 			<li><a href="/JobsUkraine/employerOffice">Profile</a></li>
-			<li><a href="/JobsUkraine/employerOffice/edit">Edit</a></li>
 			<li><a href="/JobsUkraine/empOffice/addVacancy">My vacancies</a></li>
 		</ul>
 	</div>
