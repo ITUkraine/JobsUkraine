@@ -20,17 +20,15 @@
 			<div class="form-group col-md-4">
 				<form:form commandName="candidate" method="POST"
 					action="regCandidateNew">
-
+                     <div class="valid-error"><p>${msg}</p></div>
 					<form:checkboxes path="categories" items="${listCat}"
-						itemLabel="name" itemValue="name" element="div"
-						cssClass="row-fluid1" />
+						itemLabel="name" itemValue="name" element="div"/>
 					<br>
 
 					<div align="right">
 						<button type="submit" class="btn btn-default"
 							style="width: 120px;">Next</button>
 					</div>
-
 
 				</form:form>
 

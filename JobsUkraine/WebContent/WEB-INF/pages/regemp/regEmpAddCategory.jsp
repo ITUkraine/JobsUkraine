@@ -18,7 +18,7 @@
 			<div class="col-md-4"></div>
 			<div class="form-group col-md-4">
 				<form:form commandName="empForm" method="POST" action="regEmployerNew">
-
+                     <div class="valid-error"><p>${msg}</p></div>
 					<form:checkboxes path="categories" items="${listCat}"
 						itemLabel="name" itemValue="name" element="div"/>
 					<br>

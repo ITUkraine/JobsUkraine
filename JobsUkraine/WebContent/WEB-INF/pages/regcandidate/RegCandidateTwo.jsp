@@ -41,7 +41,8 @@
 						</form:select>
 						
 						<p>Birthday:</p>
-						<form:input id="datepicker" class="form-control" path="dateOfBirth" size="40" />                        
+						<form:input id="datepicker" class="form-control" path="dateOfBirth" size="40" />
+					    <div class="valid-error"><form:errors path="dateOfBirth"/></div>                      
 						<p>E-mail:</p>
 						<form:input class="form-control" path="email" size="40" />
                         <div class="valid-error"><form:errors path="email"/></div>
