@@ -15,13 +15,40 @@
 		<div class="col-lg-8">
 			<br>
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1 class="panel-title">${candidate.lastName}
-						${candidate.name}</h1>
+				<div class="panel-heading col-lg-12">
+					<div class="col-lg-9">
+						<img alt="avatar" width="100px" height="100px" style="margin-right: 20px;"
+							src="<c:url value="/resources/pictures/avatar.png" />"></img> 
+							<strong style="font-size: 24px;">${candidate.lastName} ${candidate.name} </strong>
+					</div>
+					<div class="col-lg-3">
+						<h4 align="right">Rating: ${candidate.rating}</h4>
+					</div>
 				</div>
 				<div class="panel-body">
-					<p>${candidate}</p>
 					<br>
+					<p>City: ${candidate.cityWhereLookingForWork}</p>
+					<p>Gender: ${candidate.sex}</p>
+					<p>
+						Date of birth:
+						<fmt:formatDate value="${candidate.dateOfBirth}"
+							pattern="dd/MM/yyyy" />
+					</p>
+					<p>
+						Categories:
+						<c:forEach var="category" items="${candidate.categories}">
+									${category.name}<c:if test="${!loop.last}">, </c:if>
+						</c:forEach>
+					</p>
+					<p>Skills: ${candidate.primarySkills}</p>
+					<p>Address: ${candidate.address}</p>
+					<p>Date start work: ${candidate.dateStartToWork}</p>
+					<p>Dream job: ${candidate.dreamJob}</p>
+					<p>Education: ${candidate.education}</p>
+					<p>Experience: ${candidate.experience}</p>
+					<p><strong>Contacts:</strong></p>
+					<p>Email: ${candidate.email}</p>
+					<p>Mobile phone: ${candidate.mobileNumber}</p>
 				</div>
 			</div>
 			<sec:authorize access="hasRole('ROLE_EMPLOYER')">
