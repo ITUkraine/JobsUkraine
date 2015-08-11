@@ -70,7 +70,6 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@Column(name = "primary_skills")
 	private String primarySkills;
 
-	@Transient
 	private double rating;
 
 	@ManyToMany
