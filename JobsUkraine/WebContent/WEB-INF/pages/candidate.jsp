@@ -101,9 +101,11 @@
 										pattern="dd/MM/yyyy HH:mm:ss" />
 								</div>
 							</div>
+							<div class="panel-heading"></div>
 							<div class="panel-heading">
-								Category: ${feedback.category.name}<br> Mark:
-								${feedback.mark}
+									<br>
+									<p>Category: ${feedback.category.name}</p>
+									<p>Mark: ${feedback.mark}</p>
 							</div>
 							<div class="panel-body">${feedback.comment}</div>
 						</div>

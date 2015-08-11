@@ -16,14 +16,42 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3>${candidate.name}${candidate.lastName}</h3>
-				</div>
-				<div class="panel-heading">
-					<h4>${candidate.email}${candidate }</h4>
+				<div class="panel-heading col-lg-12">
+					<div class="col-lg-9">
+						<strong style="font-size: 24px;">${candidate.lastName}
+							${candidate.name} </strong>
+					</div>
+					<div class="col-lg-3">
+						<h4 align="right">Rating: ${candidate.rating}</h4>
+					</div>
+
 				</div>
 				<div class="panel-body">
-					<p>${candidate.primarySkills}</p>
+					<br>
+					<p>City: ${candidate.cityWhereLookingForWork}</p>
+					<p>Gender: ${candidate.sex}</p>
+					<p>
+						Date of birth:
+						<fmt:formatDate value="${candidate.dateOfBirth}"
+							pattern="dd/MM/yyyy" />
+					</p>
+					<p>
+						Categories:
+						<c:forEach var="category" items="${candidate.categories}">
+									${category.name}<c:if test="${!loop.last}">, </c:if>
+						</c:forEach>
+					</p>
+					<p>Skills: ${candidate.primarySkills}</p>
+					<p>Address: ${candidate.address}</p>
+					<p>Date start work: ${candidate.dateStartToWork}</p>
+					<p>Dream job: ${candidate.dreamJob}</p>
+					<p>Education: ${candidate.education}</p>
+					<p>Experience: ${candidate.experience}</p>
+					<p>
+						<strong>Contacts:</strong>
+					</p>
+					<p>Email: ${candidate.email}</p>
+					<p>Mobile phone: ${candidate.mobileNumber}</p>
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -42,9 +70,11 @@
 										pattern="dd/MM/yyyy HH:mm:ss" />
 								</div>
 							</div>
+							<div class="panel-heading"></div>
 							<div class="panel-heading">
-								Category: ${feedback.category.name}<br> Mark:
-								${feedback.mark}
+									<br>
+									<p>Category: ${feedback.category.name}</p>
+									<p>Mark: ${feedback.mark}</p>
 							</div>
 							<div class="panel-body">${feedback.comment}</div>
 						</div>
