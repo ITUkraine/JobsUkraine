@@ -28,6 +28,8 @@
 						<p>Confirm password:</p>
 						<form:input class="form-control" path="confirmPassword" type="password" size="40" />
 					    <div class="valid-error"><form:errors path="confirmPassword"></form:errors></div>
+					    							<div class="valid-error"><p>${msg}</p></div>
+					    
 						<br>
 						<div align="right">
 							<button type="submit" class="btn btn-default"
