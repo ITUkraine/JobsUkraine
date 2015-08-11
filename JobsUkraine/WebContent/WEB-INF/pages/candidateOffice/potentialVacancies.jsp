@@ -19,12 +19,11 @@
 					<div class="panel panel-default" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a data-toggle="collapse" data-target="#collapse${vacancy.id}"
-									href="#collapse${vacancy.id}"> ${vacancy.name},
-									${vacancy.category.name}, ${vacancy.salary } </a>
+								<a data-toggle="collapse" data-target="#${vacancy.id}" href="#">
+									${vacancy.name}, ${vacancy.category.name}, ${vacancy.salary } </a>
 							</h4>
 						</div>
-						<div id="collapse${vacancy.id}" class="panel-collapse collapse">
+						<div id="${vacancy.id}" class="panel-collapse collapse">
 							<div class="panel-heading" style="word-wrap: break-word;">
 								${vacancy.description}</div>
 						</div>
