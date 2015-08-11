@@ -29,24 +29,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(customAuthenticationProvider);
 	}
-
-	//and().exceptionHandling().accessDeniedPage("/login");
 	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		
 		httpSecurity.authorizeRequests().
+		antMatchers("/login").anonymous().
 		antMatchers("/admin").hasRole("ADMIN").
 		antMatchers("/empOffice/*","/employerOffice").hasRole("EMPLOYER").
 		antMatchers("/candidateOffice/*","/candidateOffice").hasRole("CANDIDATE").
-		and().exceptionHandling().accessDeniedPage("/login");
+		and().exceptionHandling().accessDeniedPage("/accessDenied");
 		
 		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/resources/**", "/**").permitAll().anyRequest()
 				.permitAll();
 
 		httpSecurity.formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").failureUrl("/login?error")
 				.successHandler(customAuthenticationSuccessHandler).usernameParameter("j_username")
-				.passwordParameter("j_password").permitAll();
+				.passwordParameter("j_password");
 
 		httpSecurity.logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true);
 
