@@ -1,6 +1,6 @@
 package ua.com.jobsukraine.annotations;
 
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target({TYPE})
+@Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {UniqueCandidateValidator.class})
-public @interface UniqueCandidate  {
+@Constraint(validatedBy = {UniqueCandidateEmailValidator.class})
+public @interface UniqueCandidateEmail  {
     String message();
 	
 	Class<?>[] groups() default { };

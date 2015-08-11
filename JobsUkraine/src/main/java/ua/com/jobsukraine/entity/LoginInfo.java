@@ -10,10 +10,10 @@ import javax.validation.constraints.Size;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import ua.com.jobsukraine.annotations.UniqueLoginInfo;
+import ua.com.jobsukraine.annotations.UniqueLoginInfoLogin;
 
 @Entity
-@UniqueLoginInfo(message = "This login allready exists")
+/*@UniqueLoginInfo(message = "This login allready exists")*/
 public class LoginInfo extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +27,7 @@ public class LoginInfo extends AbstractPersistable<Integer> {
 	@Column(unique = true)
 	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Wrong login format")
 	@Size(min = 4, max = 20, message = "Length must be from 4 to 20")
+	@UniqueLoginInfoLogin(message = "This login already exists")
 	private String login;
 
 	@NotNull(message = "This field is mandatory")

@@ -16,6 +16,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import ua.com.jobsukraine.annotations.UniqueCandidateEmail;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "person")
@@ -28,6 +30,7 @@ public abstract class Person extends AbstractPersistable<Integer> {
 	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Column(name = "email", unique = true)
+	@UniqueCandidateEmail(message = "Candidate with such email allready exists")
 	private String email;
 
 	@NotNull(message = "This field is mandatory")

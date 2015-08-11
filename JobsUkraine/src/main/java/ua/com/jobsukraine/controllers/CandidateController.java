@@ -3,7 +3,6 @@ package ua.com.jobsukraine.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Collections;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Candidate;
-import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Feedback;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
@@ -62,14 +60,14 @@ public class CandidateController {
 				return "regcandidate/RegCandidateOne";
 
 		} else {
-			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
+			/*if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
 				model.addAttribute("msg", "Passwords must be identical");
 				return "regcandidate/RegCandidateOne";
 				
-			} else {
+			} else {*/
 				model.addAttribute("candidate", new Candidate());
 				return "regcandidate/RegCandidateTwo";
-			}
+		/*	}*/
 			
 		}
 

@@ -20,10 +20,9 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import ua.com.jobsukraine.annotations.UniqueEmployer;
+import ua.com.jobsukraine.annotations.UniqueEmployerEmail;
 
 @Entity
-@UniqueEmployer(message = "Employer with such email allready exists")
 public class Employer extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +44,7 @@ public class Employer extends AbstractPersistable<Integer> {
 	@NotEmpty(message = "This field is mandatory")
 	@Email(message = "Wrong email format")
 	@Column(unique = true)
+	@UniqueEmployerEmail(message = "Employer with such email allready exists")
 	private String email;
 
 	@OneToMany(mappedBy = "employer")
@@ -60,6 +60,7 @@ public class Employer extends AbstractPersistable<Integer> {
 	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	@Pattern(regexp = "^[0-9\\-\\(\\)]*$", message = "Wrong phone format")
+	@Column(unique = true)
 	private String phone;
 
 	private String pictureURL;

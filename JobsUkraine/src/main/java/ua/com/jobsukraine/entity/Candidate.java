@@ -21,12 +21,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import ua.com.jobsukraine.annotations.UniqueCandidate;
-
 @Entity
 @Table(name = "candidate")
 @DiscriminatorValue("2")
-@UniqueCandidate(message = "Candidate with such email allready exists")
 public class Candidate extends Person implements Comparable<Candidate> {
 
 	private static final long serialVersionUID = 1L;
