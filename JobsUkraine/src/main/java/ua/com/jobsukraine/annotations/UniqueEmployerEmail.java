@@ -13,6 +13,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = { UniqueEmployerEmailValidator.class })
 public @interface UniqueEmployerEmail {
+	
 	String message();
 
 	Class<?>[]groups() default {};
