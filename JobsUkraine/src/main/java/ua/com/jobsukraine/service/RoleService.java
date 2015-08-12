@@ -4,7 +4,9 @@ import java.util.List;
 
 import ua.com.jobsukraine.entity.Role;
 
-public interface RoleService extends DefaultService<Role> {
+public interface RoleService{
+	
+	Role save(Role role);
 	
 	Role findByName(String name);
 

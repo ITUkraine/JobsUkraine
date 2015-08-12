@@ -33,7 +33,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		feedback.setCategory(categoryService.findByName(feedback.getCategory().getName()));
 		candidate.getFeedbacks().add(feedback);
 		feedbackRepository.saveAndFlush(feedback);
-		candidateService.edit(candidate);
+		candidateService.save(candidate);
 		return feedback;
 	}
 

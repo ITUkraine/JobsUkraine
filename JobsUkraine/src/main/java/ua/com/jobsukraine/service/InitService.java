@@ -21,14 +21,14 @@ public class InitService {
 	@PostConstruct
 	public void init() {
 
-		roleService.add(new Role("ROLE_ADMIN"));
-		roleService.add(new Role("ROLE_EMPLOYER"));
-		roleService.add(new Role("ROLE_CANDIDATE"));
+		roleService.save(new Role("ROLE_ADMIN"));
+		roleService.save(new Role("ROLE_EMPLOYER"));
+		roleService.save(new Role("ROLE_CANDIDATE"));
 
-		catService.add(new Category("Java"));
-		catService.add(new Category("HTML"));
-		catService.add(new Category("CSS"));
-		catService.add(new Category("Pyton"));
-		catService.add(new Category("Spring"));
+		catService.save(new Category("Java"));
+		catService.save(new Category("HTML"));
+		catService.save(new Category("CSS"));
+		catService.save(new Category("Pyton"));
+		catService.save(new Category("Spring"));
 	}
 }

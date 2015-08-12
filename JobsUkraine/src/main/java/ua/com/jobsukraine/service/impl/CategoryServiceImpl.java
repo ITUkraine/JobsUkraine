@@ -18,28 +18,12 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public Category add(Category category) {
+	public Category save(Category category) {
 		if (findByName(category.getName()) == null) {
 			return categoryRepository.save(category);
 		} else {
 			return findByName(category.getName());
 		}
-	}
-
-	@Override
-	public void delete(int id) {
-		categoryRepository.delete(id);
-	}
-
-	@Override
-	public Category edit(Category category) {
-		return categoryRepository.saveAndFlush(category);
-
-	}
-
-	@Override
-	public Category find(int id) {
-		return categoryRepository.findOne(id);
 	}
 
 	@Override

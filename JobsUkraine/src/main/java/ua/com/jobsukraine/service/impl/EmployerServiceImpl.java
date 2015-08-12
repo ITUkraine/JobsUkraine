@@ -37,18 +37,7 @@ public class EmployerServiceImpl implements EmployerService {
 	private RoleService roleRepository;
 
 	@Override
-	public Employer add(Employer employer) {
-		return employerRepository.saveAndFlush(employer);
-
-	}
-
-	@Override
-	public void delete(int id) {
-		employerRepository.delete(id);
-	}
-
-	@Override
-	public Employer edit(Employer employer) {
+	public Employer save(Employer employer) {
 		return employerRepository.saveAndFlush(employer);
 	}
 

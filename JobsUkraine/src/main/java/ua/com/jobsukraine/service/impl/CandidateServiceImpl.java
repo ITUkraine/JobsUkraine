@@ -38,31 +38,13 @@ public class CandidateServiceImpl implements CandidateService {
 	private RoleService roleService;
      
 	@Override
-	public Candidate add(Candidate candidate) {	
+	public Candidate save(Candidate candidate) {	
 		return candidateRepository.save(candidate);
 	}
 
 	@Override
-	public void delete(int id) {
-		candidateRepository.delete(id);
-	}
-
-	@Override
-	public Candidate edit(Candidate candidate) {
-		return candidateRepository.saveAndFlush(candidate);
-	}
-
-	@Override
 	public Candidate find(int id) {
-		Candidate candidate = null;
-		try {
-			candidate = candidateRepository.findOne(id);
-			if (candidate.getFeedbacks().size() > 0) {
-				candidate.setRating(candidateRepository.getGlobalRating(candidate));
-			}
-		} catch (EmptyResultDataAccessException e) {
-		}
-		return candidate;
+		return candidateRepository.findOne(id);
 	}
 
 	@Override

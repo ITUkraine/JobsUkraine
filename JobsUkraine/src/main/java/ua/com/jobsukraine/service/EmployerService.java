@@ -7,8 +7,12 @@ import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 
-public interface EmployerService extends DefaultService<Employer> {
+public interface EmployerService{
 
+	Employer save(Employer employer);
+	
+	Employer find(int id);
+	
 	Employer findByEmail(String email);
 	
 	Employer findByLogin(String login);

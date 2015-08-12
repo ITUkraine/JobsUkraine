@@ -16,22 +16,12 @@ public class RoleServiceImpl implements RoleService {
 	private RoleRepository roleRepository;
 
 	@Override
-	public Role add(Role role) {
+	public Role save(Role role) {
 		if (findByName(role.getName()) == null) {
 			return roleRepository.save(role);
 		} else {
 			return findByName(role.getName());
 		}
-	}
-
-	@Override
-	public void delete(int id) {
-		roleRepository.delete(id);
-	}
-
-	@Override
-	public Role edit(Role role) {
-		return roleRepository.saveAndFlush(role);
 	}
 
 	@Override
@@ -42,11 +32,6 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role findByName(String name) {
 		return roleRepository.findByName(name);
-	}
-
-	@Override
-	public Role find(int id) {
-		return roleRepository.findOne(id);
 	}
 
 }
