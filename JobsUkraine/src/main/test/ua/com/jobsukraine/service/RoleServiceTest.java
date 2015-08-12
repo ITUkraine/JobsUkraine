@@ -3,6 +3,10 @@ package ua.com.jobsukraine.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -31,13 +35,32 @@ public class RoleServiceTest {
 		Role role = new Role("ROLE_ADMIN");
 		assertNull(role.getId());
 
-		Role addedRole = roleService.add(role);
+		Role addedRole = roleService.save(role);
 		assertNotNull(role.getId());
 		assertEquals(role.getName(), addedRole.getName());
 
-		Role addedSameRoleOneMoreTime = roleService.add(role);
+		Role addedSameRoleOneMoreTime = roleService.save(role);
 		assertEquals(addedRole.getId(), addedSameRoleOneMoreTime.getId());
 	}
 
+	@Test
+	public void isAllRolesGetted() {
+		List<Role> addedRoles = new ArrayList<>();
+		addedRoles.add(roleService.save(new Role("ROLE_ADMIN")));
+		addedRoles.add(roleService.save(new Role("ROLE_CANDIDATE")));
+
+		List<Role> roles = roleService.getAll();
+		assertTrue(roles.size() == 2);
+
+		assertTrue(addedRoles.containsAll(roles));
+	}
+
+	@Test
+	public void isRoleFindedByName() {
+		Role addedRole = roleService.save(new Role("ROLE_ADMIN"));
+		assertNotNull(addedRole.getId());
+
+		assertEquals(addedRole, roleService.findByName(addedRole.getName()));
+	}
+
 }
- 
