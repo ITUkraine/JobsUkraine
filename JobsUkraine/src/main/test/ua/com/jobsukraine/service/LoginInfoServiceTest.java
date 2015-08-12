@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.com.jobsukraine.config.HSQLTestConfig;
 import ua.com.jobsukraine.config.TestConfig;
@@ -20,7 +19,6 @@ import ua.com.jobsukraine.entity.LoginInfo;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { HSQLTestConfig.class, TestConfig.class })
 @Transactional
-@TransactionConfiguration(defaultRollback = true)
 public class LoginInfoServiceTest {
 
 	@Autowired

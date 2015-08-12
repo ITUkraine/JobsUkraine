@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -18,31 +17,25 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.com.jobsukraine.config.HSQLTestConfig;
 import ua.com.jobsukraine.config.TestConfig;
 import ua.com.jobsukraine.entity.Candidate;
-import ua.com.jobsukraine.entity.Category;
-import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { HSQLTestConfig.class, TestConfig.class })
 @Transactional
-@TransactionConfiguration
 public class CandidateServiceTest {
 
 	@Autowired
 	private CandidateService candidateService;
-	@Autowired 
-	private VacancyService vacancyService;
-	
+
 	private LoginInfo loginInfo;
 	private Candidate candidate;
 	private Vacancy vacancy;
-	private Employer employer;
+
 	@Before
 	public void init() {
 		candidate = new Candidate();
@@ -58,13 +51,11 @@ public class CandidateServiceTest {
 		loginInfo.setConfirmPassword("123123123");
 		loginInfo.setPassword("123123123");
 		candidate.setInfo(loginInfo);
-		
-		
-	    vacancy = new Vacancy();
+
+		vacancy = new Vacancy();
 		vacancy.setName("Senior");
 		vacancy.setDescription("Good job");
 		vacancy.setSalary(1000);
-		  
 	}
 
 	@Test
@@ -87,7 +78,6 @@ public class CandidateServiceTest {
 		Candidate addedCandidate = candidateService.save(candidate);
 		Candidate findedCandidate = candidateService.findByLogin(addedCandidate.getInfo().getLogin());
 		assertEquals(addedCandidate.getInfo().getLogin(), findedCandidate.getInfo().getLogin());
-
 	}
 
 	@Test
@@ -95,20 +85,17 @@ public class CandidateServiceTest {
 		Candidate addedCandidate = candidateService.save(candidate);
 		Candidate findedCandidate = candidateService.findByEmail(addedCandidate.getEmail());
 		assertEquals(addedCandidate.getEmail(), findedCandidate.getEmail());
-
 	}
-	
+
 	@Test
 	public void isCandidateAge() {
-	     int age = 45;
-	     int candidateAge = candidateService.getAge(candidate);
-	     assertEquals(age, candidateAge);
-	     
+		int age = 45;
+		int candidateAge = candidateService.getAge(candidate);
+		assertEquals(age, candidateAge);
 	}
-	
+
 	@Test
-	public void isCandidateGetAll(){
-		
+	public void isCandidateGetAll() {
 		Candidate candidate2 = new Candidate();
 		candidate2.setName("Mupa");
 		candidate2.setLastName("Mupkina");
@@ -121,8 +108,9 @@ public class CandidateServiceTest {
 		listCandidats.add(candidateService.save(candidate));
 		listCandidats.add(candidateService.save(candidate2));
 		List<Candidate> listFindedCandidats = candidateService.getAll();
-		assertTrue(listCandidats.containsAll(listFindedCandidats));
-		
+		for (Candidate candidate : listCandidats) {
+			assertTrue(listFindedCandidats.contains(candidate));
+		}
 	}
-	
+
 }

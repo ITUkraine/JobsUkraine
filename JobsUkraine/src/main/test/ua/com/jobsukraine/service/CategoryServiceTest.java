@@ -34,9 +34,8 @@ public class CategoryServiceTest {
 		assertNull(category.getId());
 
 		Category addedCategory = categoryService.save(category);
-		assertNotNull(category.getId());
-		assertEquals(category, addedCategory);
-		
+		assertEquals(categoryService.findByName(category.getName()), addedCategory);
+
 		Category addedSameCategoryOneMoreTime = categoryService.save(category);
 		assertEquals(addedCategory, addedSameCategoryOneMoreTime);
 	}
@@ -49,7 +48,9 @@ public class CategoryServiceTest {
 
 		List<Category> categories = categoryService.getAll();
 
-		assertTrue(addedCategories.containsAll(categories));
+		for (Category category : addedCategories) {
+			assertTrue(categories.contains(category));
+		}
 	}
 
 	@Test
