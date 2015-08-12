@@ -1,5 +1,6 @@
 package ua.com.jobsukraine.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -44,12 +45,12 @@ public class Candidate extends Person implements Comparable<Candidate> {
 
 	@NotNull(message = "This field is mandatory")
 	@Column(name = "date_of_birth")
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
 	@Column(name = "date_start_work")
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dateStartToWork;
 
@@ -62,7 +63,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@Column(name = "experience")
 	private String experience;
 
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "candidat_id")
 	private List<Feedback> feedbacks;
 
@@ -136,6 +137,8 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	}
 
 	public List<Feedback> getFeedbacks() {
+		if (feedbacks == null)
+			return new ArrayList<Feedback>();
 		return feedbacks;
 	}
 
