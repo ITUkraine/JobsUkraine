@@ -7,10 +7,8 @@ public interface VacancyService {
 	
 	void delete(int id);
 	
-	Vacancy save(Vacancy vacancy);
+	Vacancy save(Employer employer, Vacancy vacancy);
 	
 	Vacancy find(int id);
-	
-	Vacancy add(Employer emp, Vacancy obj);
 	
 }

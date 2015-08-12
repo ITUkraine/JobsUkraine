@@ -20,7 +20,8 @@ public class VacancyServiceImpl implements VacancyService {
 	private CategoryService categoryService;
 
 	@Override
-	public Vacancy save(Vacancy vacancy) {
+	public Vacancy save(Employer employer, Vacancy vacancy) {
+		vacancy.setEmployer(employer);
 		vacancy.setCategory(categoryService.findByName(vacancy.getCategory().getName()));
 		return vacancyRepository.saveAndFlush(vacancy);
 	}
@@ -28,13 +29,6 @@ public class VacancyServiceImpl implements VacancyService {
 	@Override
 	public Vacancy find(int id) {
 		return vacancyRepository.findOne(id);
-	}
-
-	@Override
-	public Vacancy add(Employer employer, Vacancy vacancy) {
-		vacancy.setEmployer(employer);
-		vacancy.setCategory(categoryService.findByName(vacancy.getCategory().getName()));
-		return vacancyRepository.saveAndFlush(vacancy);
 	}
 
 	@Override

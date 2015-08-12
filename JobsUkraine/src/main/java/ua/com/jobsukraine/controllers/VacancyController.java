@@ -58,7 +58,7 @@ public class VacancyController {
 	@RequestMapping(value = "/empOffice/addVacancy", method = RequestMethod.POST)
 	public String goAddVacancy(@ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult,
 			Principal principal) {
-		vacancyService.add(employerService.findByLogin(principal.getName()), vacancy);
+		vacancyService.save(employerService.findByLogin(principal.getName()), vacancy);
 		return "redirect:/empOffice/addVacancy";
 	}
 
