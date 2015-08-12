@@ -46,9 +46,11 @@
 					<p>Dream job: ${candidate.dreamJob}</p>
 					<p>Education: ${candidate.education}</p>
 					<p>Experience: ${candidate.experience}</p>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<p><strong>Contacts:</strong></p>
 					<p>Email: ${candidate.email}</p>
 					<p>Mobile phone: ${candidate.mobileNumber}</p>
+					</sec:authorize>
 				</div>
 			</div>
 			<sec:authorize access="hasRole('ROLE_EMPLOYER')">

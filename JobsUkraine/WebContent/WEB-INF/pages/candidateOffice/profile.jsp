@@ -17,11 +17,11 @@
 		<div class="col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading col-lg-12">
-					<div class="col-lg-9">
+					<div class="col-lg-8">
 						<strong style="font-size: 24px;">${candidate.lastName}
 							${candidate.name} </strong>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-4">
 						<h4 align="right">Rating: ${candidate.rating}</h4>
 					</div>
 
