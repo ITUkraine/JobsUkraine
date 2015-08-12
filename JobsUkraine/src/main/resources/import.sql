@@ -1,0 +1,10 @@
+INSERT INTO category VALUES (1, 'Java'),(2, 'HTML'),(3, 'CSS'),(4, 'Pyton'),(5, 'Spring');
+INSERT INTO role VALUES (1, 'ROLE_ADMIN'),(2, 'ROLE_EMPLOYER'),(3, 'ROLE_CANDIDATE');
+INSERT INTO logininfo VALUES (1, 'employer', '$2a$10$oGRxrSk3UTvlC38ZWBaC0.Nx1JM.dMIFooeUsUClkAB7BgUEInjhy', 2),(2, 'candidate', '$2a$10$xnPq34bvpKMxSkgmPTlUw.3Ygbmfwn/JiHUOrbXwiH0ZIWz.5VrF2', 3),(3, 'candidate2', '$2a$10$ZeX84ViB53G1xHFZPogcSukaKSXXj.DPncp.F4hu25SNCm7iOxi2u', 3),(4, 'empl', '$2a$10$WhgMSgJVC//.xqIdBhWvde4NAkJ8eSCDWx5b.6.htsxWocYgyKVau', 2);
+INSERT INTO employer VALUES (1, 'Lviv', 'Recruit company with best of the best IT department', 'jobs@mail.ua', 'JobsUkraine', '093615945632', NULL, 'http://www.jobsukraine.com.ua/', 1), (2, 'dv', 'dvdv', 'e@mail', 'name', '45', NULL, 'dfvdf', 4);
+INSERT INTO person VALUES (2, 1, 'dytyniak@gmail.com', 'Dytyniak', '0639631909', 'Vadym', 'male', 2),(2, 2, 'knight@gmail.com', 'Knight', '0639631922', 'Trevor', 'male', 3);
+INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1),('Lviv', 'Lviv', NULL, '1970-06-15', '2015-08-20', 'Topcoder', 'NULP', 'Logica', 'Investment', 10, 2);
+INSERT INTO category_candidate VALUES (1, 1),(1, 2),(1, 5),(2, 1);
+INSERT INTO category_employer VALUES (1, 1),(1, 5),(2, 2);
+INSERT INTO feedback VALUES (1, 'Security man', '2015-08-12 09:06:34', '10', 5, 1, 1),(2, 'Good one)', '2015-08-12 10:13:31', '10', 1, 1, 2),(3, 'Niiiiiice)', '2015-08-12 15:26:55', '10', 1, 1, 2),(4, 'Goood', '2015-08-12 15:36:36', '10', 1, 1, 2);
+INSERT INTO vacancy VALUES (1, 'Full-stack Junior Java developer', 'Junior Java Developer', 400, 1, 1);
