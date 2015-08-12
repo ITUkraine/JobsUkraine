@@ -49,26 +49,25 @@ public class CandidateController {
 		return "regcandidate/RegCandidateOne";
 	}
 
-	
-
 	@RequestMapping(value = "/addCandidateInfo", method = RequestMethod.POST)
 	public String addCandidateInfo(@Valid @ModelAttribute("infoForm") LoginInfo loginInfo, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
 			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
-				model.addAttribute("msg", "Passwords must be identical");} 
-				return "regcandidate/RegCandidateOne";
+				model.addAttribute("msg", "Passwords must be identical");
+			}
+			return "regcandidate/RegCandidateOne";
 
 		} else {
-			/*if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
+			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
 				model.addAttribute("msg", "Passwords must be identical");
 				return "regcandidate/RegCandidateOne";
-				
-			} else {*/
+
+			} else {
 				model.addAttribute("candidate", new Candidate());
 				return "regcandidate/RegCandidateTwo";
-		/*	}*/
-			
+			}
+
 		}
 
 	}
@@ -83,26 +82,29 @@ public class CandidateController {
 		}
 
 	}
+
 	@RequestMapping(value = "/addCandidateCategory", method = RequestMethod.POST)
 	public String addCandidateCategory(@ModelAttribute("candidate") Candidate candidate, Model model) {
 		model.addAttribute("listCat", categoryService.getAll());
 		return "regcandidate/regCandidateAddCategory";
 
 	}
+
 	@RequestMapping(value = "regCandidateNew", method = RequestMethod.POST)
 	public String doAutoLogin(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate, Model model)
-					throws IOException {
-		if (candidate.getCategories()==null) {
+			@ModelAttribute("infoForm") LoginInfo loginInfo, @ModelAttribute("candidate") Candidate candidate,
+			Model model) throws IOException {
+		if (candidate.getCategories() == null) {
 			model.addAttribute("msg", "Please, select at least one category");
 			model.addAttribute("listCat", categoryService.getAll());
 			return "regcandidate/regCandidateAddCategory";
 		} else {
-		String password = loginInfo.getPassword();
-		securityService.encodePassword(loginInfo);
-		candidateService.register(candidate, loginInfo);
-		securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
-		return null;}
+			String password = loginInfo.getPassword();
+			securityService.encodePassword(loginInfo);
+			candidateService.register(candidate, loginInfo);
+			securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
+			return null;
+		}
 	}
 
 	@RequestMapping(value = "/candidateOffice", method = RequestMethod.GET)
@@ -124,13 +126,13 @@ public class CandidateController {
 		modelAndView.addObject("list", categoryService.getAll());
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/candidate/addFeedBack", method = RequestMethod.POST)
 	public String addFeedback(@ModelAttribute("feedback") Feedback feedback,
 			@ModelAttribute("candidate") Candidate candidate, Principal principal) {
 		feedbackService.add(candidate, feedback, principal);
 		candidateService.updateGlobalRating(candidate);
-		return "redirect:/candidate/"+candidate.getId();
+		return "redirect:/candidate/" + candidate.getId();
 	}
 
 }

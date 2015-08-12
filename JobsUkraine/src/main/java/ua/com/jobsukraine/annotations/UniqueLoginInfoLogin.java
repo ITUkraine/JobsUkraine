@@ -10,13 +10,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target({FIELD})
+@Target({ FIELD })
 @Retention(RUNTIME)
-@Constraint(validatedBy = {UniqueLoginInfoLoginValidator.class})
-public @interface UniqueLoginInfoLogin  {
-String message();
+@Constraint(validatedBy = { UniqueLoginInfoLoginValidator.class })
+public @interface UniqueLoginInfoLogin {
 	
-	Class<?>[] groups() default { };
-	
-	Class<? extends Payload>[] payload() default { };
+	String message();
+
+	Class<?>[]groups() default {};
+
+	Class<? extends Payload>[]payload() default {};
 }
