@@ -56,7 +56,6 @@ public class CategoryServiceTest {
 	public void isCategoryFindedByName() {
 		try{
 			jdbcTemplate.execute("INSERT INTO category VALUES (1, 'Java')");
-			categoryService.findByName("Java");
 			assertEquals("Java", categoryService.findByName("Java").getName());
 		}finally{
 			jdbcTemplate.execute("DELETE FROM category");
