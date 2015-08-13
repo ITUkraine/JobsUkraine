@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CandidateService;
+import ua.com.jobsukraine.service.VacancyService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
 	private CandidateService candidateService;
+	@Autowired
+	private VacancyService vacancyService;
 
 	@RequestMapping(value = "/")
 	public String goHome() {
@@ -28,8 +32,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/vacancies")
-	public String goEmployers() {
-		return "vacancies";
+	public ModelAndView goEmployers() {
+		ModelAndView modelAndView = new ModelAndView("vacancies");
+		List<Vacancy> vacancies = vacancyService.getAll();
+		Collections.reverse(vacancies);
+		modelAndView.addObject("vacancies", vacancies);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/candidates")
