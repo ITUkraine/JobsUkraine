@@ -28,23 +28,10 @@ public class VacancyController {
 	private CategoryService categoryService;
 	@Autowired
 	private EmployerService employerService;
-
-	private Vacancy vacancy;
 	@Autowired
 	private VacancyService vacancyService;
 	@Autowired
 	private LoginInfoService loginInfoService;
-
-	public VacancyController() {
-	}
-
-	public VacancyController(VacancyService vacancyService, CategoryService categoryService,
-			EmployerService employerService, Vacancy vacancy) {
-		this.vacancyService = vacancyService;
-		this.categoryService = categoryService;
-		this.employerService = employerService;
-		this.vacancy = vacancy;
-	}
 
 	@RequestMapping(value = "/vacancy/delete")
 	public String deleteVacancy(@RequestParam("id") int id, Principal principal) {
@@ -76,7 +63,7 @@ public class VacancyController {
 	@RequestMapping(value = "/vacancy/{id}")
 	public ModelAndView showVacancyInfoPage(@PathVariable(value = "id") int id, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView("vacancy");
-		vacancy = vacancyService.find(id);
+		Vacancy vacancy = vacancyService.find(id);
 		if (vacancy == null) {
 			throw new CustomMessageException("No vacancy founded");
 		}
