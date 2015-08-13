@@ -1,5 +1,7 @@
 package ua.com.jobsukraine.controller;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -29,12 +31,15 @@ import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
+import ua.com.jobsukraine.service.SecurityService;
 import ua.com.jobsukraine.utils.PrincipalGenerator;
 
 public class CandidateControllerTest {
 	@InjectMocks
 	private CandidateController candidateController;
-
+	
+	@Mock
+	private SecurityService securityService;
 	@Mock
 	private CandidateService candidateService;
 	@Mock
@@ -114,6 +119,31 @@ public class CandidateControllerTest {
 				.andExpect(view().name("regcandidate/RegCandidateTwo"));
 	}
 
+	@Test
+	public void testDoAutoLogin() throws Exception {
+		try {
+			Candidate candidate = new Candidate();
+			LoginInfo loginInfo = new LoginInfo();
+			session.setAttribute("infoForm", loginInfo);
+			session.setAttribute("candidate", candidate);
+
+			// if employer hasn't got any categories
+			when(categoryService.getAll()).thenReturn(new ArrayList<>());
+			mockMvc.perform(post("/regCandidateNew").session(session))
+					.andExpect(view().name("regcandidate/regCandidateAddCategory"));
+
+			// if employer has any categories
+			candidate.setCategories(new ArrayList<>());
+			when(candidateService.register(candidate, loginInfo)).thenReturn(new Candidate());
+			doNothing().when(securityService).encodePassword(new LoginInfo());
+			doNothing().when(securityService).autoLoginAfterRegistration(null, null, null, null);
+			mockMvc.perform(post("/regCandidateNew").session(session))
+					.andExpect(view().name(""));
+		} finally {
+			SecurityContextHolder.clearContext();
+		}
+	}
+	
 	@Test
 	public void isGoLogin() throws Exception {
 		try {

@@ -103,7 +103,7 @@ public class CandidateController {
 			securityService.encodePassword(loginInfo);
 			candidateService.register(candidate, loginInfo);
 			securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
-			return null;
+			return "";
 		}
 	}
 
