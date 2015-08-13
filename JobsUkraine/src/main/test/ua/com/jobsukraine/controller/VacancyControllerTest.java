@@ -15,11 +15,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.View;
@@ -35,6 +31,7 @@ import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.LoginInfoService;
 import ua.com.jobsukraine.service.VacancyService;
+import ua.com.jobsukraine.utils.PrincipalGenerator;
 
 @EnableWebMvc
 public class VacancyControllerTest {
@@ -61,13 +58,6 @@ public class VacancyControllerTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(vacancyController).setSingleView(mockView).build();
 	}
 
-	private Authentication getPrincipal(String login, String pass, String[] roles) {
-		User user = new User(login, pass, AuthorityUtils.createAuthorityList(roles));
-		Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
-		SecurityContextHolder.getContext().setAuthentication(auth);
-		return auth;
-	}
-
 	@Test
 	public void testDeleteVacancy() throws Exception {
 		try {
@@ -79,7 +69,7 @@ public class VacancyControllerTest {
 			when(loginInfoService.findByLogin("login")).thenReturn(loginInfo);
 
 			mockMvc.perform(get("/vacancy/delete").param("id", "1")
-					.principal(getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
 					.andExpect(view().name("redirect:/vacancies")).andExpect(status().isOk());
 
 			// if users
@@ -88,7 +78,7 @@ public class VacancyControllerTest {
 			when(loginInfoService.findByLogin("login")).thenReturn(loginInfo2);
 
 			mockMvc.perform(get("/vacancy/delete").param("id", "1")
-					.principal(getPrincipal("login", "", new String[] { "ROLE_CANDIDATE" })))
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_CANDIDATE" })))
 					.andExpect(view().name("redirect:/empOffice/addVacancy")).andExpect(status().isOk());
 		} finally {
 			SecurityContextHolder.clearContext();
@@ -99,8 +89,8 @@ public class VacancyControllerTest {
 	public void testGoToAddVacancy() throws Exception {
 		try {
 			when(vacancyService.save(new Employer(), new Vacancy())).thenReturn(new Vacancy());
-			mockMvc.perform(
-					post("/empOffice/addVacancy").principal(getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+			mockMvc.perform(post("/empOffice/addVacancy")
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
 					.andExpect(view().name("redirect:/empOffice/addVacancy")).andExpect(status().isOk());
 		} finally {
 			SecurityContextHolder.clearContext();
@@ -112,8 +102,8 @@ public class VacancyControllerTest {
 		try {
 			when(employerService.getVacancies(new Employer())).thenReturn(new ArrayList<>());
 			when(categoryService.getAll()).thenReturn(new ArrayList<>());
-			mockMvc.perform(
-					get("/empOffice/addVacancy").principal(getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+			mockMvc.perform(get("/empOffice/addVacancy")
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
 					.andExpect(view().name("empOffice/addVacancy")).andExpect(status().isOk());
 		} finally {
 			SecurityContextHolder.clearContext();
@@ -126,14 +116,14 @@ public class VacancyControllerTest {
 			// if vacancy exist
 			when(vacancyService.find(1)).thenReturn(new Vacancy());
 			mockMvc.perform(get("/vacancy/1").param("id", "1")
-					.principal(getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
 					.andExpect(view().name("vacancy")).andExpect(model().attributeExists("vacancy"))
 					.andExpect(status().isOk());
 
 			// if vacancy doesn't exist
 			when(vacancyService.find(1)).thenReturn(null);
 			mockMvc.perform(get("/vacancy/1").param("id", "1")
-					.principal(getPrincipal("login", "", new String[] { "ROLE_ADMIN" })));
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })));
 		} finally {
 			SecurityContextHolder.clearContext();
 		}
