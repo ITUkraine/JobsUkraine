@@ -48,15 +48,17 @@ public class EmployerController {
 			Model model) {
 		if (bindingResult.hasErrors()) {
 			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
-				model.addAttribute("msg", "Passwords must be identical");}
-				return "regemp/RegEmpOne";
+				model.addAttribute("msg", "Passwords must be identical");
+			}
+			return "regemp/RegEmpOne";
 		} else {
 			if (!loginInfo.getPassword().equals(loginInfo.getConfirmPassword())) {
 				model.addAttribute("msg", "Passwords must be identical");
-				return "regemp/RegEmpOne";}
-			else{
+				return "regemp/RegEmpOne";
+			} else {
 				model.addAttribute("empForm", new Employer());
-				return "regemp/RegEmpTwo";}
+				return "regemp/RegEmpTwo";
+			}
 		}
 	}
 
@@ -84,7 +86,7 @@ public class EmployerController {
 			securityService.encodePassword(loginInfo);
 			employerService.register(employer, loginInfo);
 			securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
-			return null;
+			return "";
 		}
 	}
 

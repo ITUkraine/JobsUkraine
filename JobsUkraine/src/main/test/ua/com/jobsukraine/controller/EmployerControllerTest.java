@@ -1,5 +1,7 @@
 package ua.com.jobsukraine.controller;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -8,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -16,15 +17,19 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.View;
+import org.springframework.web.util.NestedServletException;
 
 import ua.com.jobsukraine.controllers.EmployerController;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
+import ua.com.jobsukraine.service.SecurityService;
+import ua.com.jobsukraine.utils.PrincipalGenerator;
 
 public class EmployerControllerTest {
 
@@ -35,6 +40,12 @@ public class EmployerControllerTest {
 	private CategoryService categoryService;
 	@Mock
 	private EmployerService employerService;
+	@Mock
+	private SecurityService securityService;
+	@Mock
+	private Employer employerMock;
+	@Mock
+	private LoginInfo loginInfoMock;
 	@Mock
 	private View mockView;
 
@@ -105,18 +116,52 @@ public class EmployerControllerTest {
 		mockMvc.perform(get("/addVacancy")).andExpect(view().name("empOffice/addVacancy"));
 	}
 
-	@Test
+	@Test(expected = NestedServletException.class)
 	public void testShowEmployerInfoPage() throws Exception {
 		// if employer not null
 		Mockito.when(employerService.find(1)).thenReturn(new Employer());
 		mockMvc.perform(get("/employer/1")).andExpect(view().name("employer"));
 
 		// if employer == null
+		Mockito.when(employerService.find(1)).thenReturn(null);
+		mockMvc.perform(get("/employer/1")).andExpect(view().name("employer"));
+	}
+
+	@Test
+	public void testDoAutoLogin() throws Exception {
 		try {
-			Mockito.when(employerService.find(1)).thenReturn(null);
-			mockMvc.perform(get("/employer/1")).andExpect(view().name("employer"));
-		} catch (Exception e) {
-			Assert.assertTrue(e.getMessage().contains("No employer founded"));
+			Employer employer = new Employer();
+			LoginInfo loginInfo = new LoginInfo();
+			session.setAttribute("infoForm", loginInfo);
+			session.setAttribute("empForm", employer);
+
+			// if employer hasn't got any categories
+			when(categoryService.getAll()).thenReturn(new ArrayList<>());
+			mockMvc.perform(post("/regEmployerNew").session(session))
+					.andExpect(view().name("regemp/regEmpAddCategory"));
+
+			// if employer has any categories
+			employer.setCategories(new ArrayList<>());
+			when(employerService.register(employer, loginInfo)).thenReturn(new Employer());
+			doNothing().when(securityService).encodePassword(new LoginInfo());
+			doNothing().when(securityService).autoLoginAfterRegistration(null, null, null, null);
+			mockMvc.perform(post("/regEmployerNew").session(session))
+					.andExpect(view().name(""));
+		} finally {
+			SecurityContextHolder.clearContext();
+		}
+	}
+
+	@Test
+	public void testGoLogin() throws Exception {
+		try {
+			when(employerService.findByLogin("login")).thenReturn(new Employer());
+			when(employerService.getAvailableCandidates(new Employer(), 10)).thenReturn(new ArrayList<>());
+			mockMvc.perform(get("/employerOffice")
+					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+					.andExpect(view().name("empOffice/profile"));
+		} finally {
+			SecurityContextHolder.clearContext();
 		}
 	}
 
