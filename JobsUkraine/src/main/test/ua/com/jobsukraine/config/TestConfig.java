@@ -1,6 +1,10 @@
 package ua.com.jobsukraine.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
@@ -19,6 +23,14 @@ import ua.com.jobsukraine.service.impl.VacancyServiceImpl;
 
 public class TestConfig {
 
+	@Autowired
+	private DataSource dataSource;
+	
+	@Bean
+	public JdbcTemplate jdbcTemplate(){
+		return new JdbcTemplate(dataSource);
+	}
+	
 	@Bean
 	public RoleService roleService() {
 		return new RoleServiceImpl();
