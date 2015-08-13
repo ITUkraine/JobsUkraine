@@ -1,14 +1,12 @@
 package ua.com.jobsukraine.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import javax.transaction.Transactional;
 
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -24,36 +22,34 @@ public class LoginInfoServiceTest {
 	@Autowired
 	private LoginInfoService loginInfoService;
 	@Autowired
-	private RoleService roleService;
-    
-	private LoginInfo loginInfo;
-
-	@Before
-	public void init() {
-		loginInfo = new LoginInfo();
-		loginInfo.setLogin("login");
-		loginInfo.setRole(roleService.findByName("ROLE_ADMIN"));
-		loginInfo.setPassword("123123123");
-		loginInfo.setConfirmPassword("123123123");
-	}
+	private JdbcTemplate jdbcTemplate;
 
 	@Test
 	public void isLoginInfoSaved() {
-		LoginInfo addedLoginInfo = loginInfoService.save(loginInfo);
-		assertNotNull(loginInfo.getId());
+		try {
+			Assert.assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM logininfo", Integer.class) == 0);
 
-		assertEquals(loginInfo.getLogin(), addedLoginInfo.getLogin());
+			LoginInfo loginInfo = new LoginInfo();
+			loginInfo.setLogin("login");
+			loginInfo.setPassword("123123123");
+			loginInfo.setConfirmPassword("123123123");
 
-		LoginInfo addedSameLoginInfoOneMoreTime = loginInfoService.save(loginInfo);
-		assertEquals(addedLoginInfo.getId(), addedSameLoginInfoOneMoreTime.getId());
+			loginInfoService.save(loginInfo);
+			Assert.assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM logininfo", Integer.class) == 1);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM logininfo");
+		}
 	}
 
 	@Test
 	public void isLoginInfoFindedByLogin() {
-		LoginInfo addedLoginInfo = loginInfoService.save(loginInfo);
-		assertNotNull(addedLoginInfo.getId());
-
-		assertEquals(addedLoginInfo, loginInfoService.findByLogin(addedLoginInfo.getLogin()));
+		try {
+			String login = "employer";
+			jdbcTemplate.execute("INSERT INTO logininfo VALUES (1, '" + login + "', 'password', null)");
+			Assert.assertEquals(login, loginInfoService.findByLogin(login).getLogin());
+		} finally {
+			jdbcTemplate.execute("DELETE FROM logininfo");
+		}
 	}
 
 }
