@@ -15,7 +15,21 @@
 		<div class="col-lg-8">
 			<div class="panel panel-default">
 				<div class="panel-heading">Vacancies</div>
-				<div class="panel-body"></div>
+				<div class="panel-body">
+					<c:forEach var="vacancy" items="${vacancies}">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<a style="font-size: 20px;"
+									href="/JobsUkraine/vacancy/${vacancy.id}">${vacancy.name} </a>
+							</div>
+							<div class="panel-body">
+								<p>Category: ${vacancy.category.name}</p>
+								<p>Salary: ${vacancy.salary}</p>
+								<p>Description: ${vacancy.description}</p>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-2"></div>
