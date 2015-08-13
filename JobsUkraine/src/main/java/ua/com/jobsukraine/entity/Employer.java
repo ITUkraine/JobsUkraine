@@ -34,8 +34,9 @@ public class Employer extends AbstractPersistable<Integer> {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
-	
-	@Lob @Basic(fetch=FetchType.LAZY)
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	@NotNull(message = "This field is mandatory")
 	@NotEmpty(message = "This field is mandatory")
 	private String description;
@@ -106,6 +107,10 @@ public class Employer extends AbstractPersistable<Integer> {
 		return pictureURL;
 	}
 
+	public List<Vacancy> getVacancy() {
+		return vacancy;
+	}
+
 	public String getWebsite() {
 		return website;
 	}
@@ -144,6 +149,10 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	public void setPictureURL(String pictureURL) {
 		this.pictureURL = pictureURL;
+	}
+
+	public void setVacancy(List<Vacancy> vacancy) {
+		this.vacancy = vacancy;
 	}
 
 	public void setWebsite(String website) {
