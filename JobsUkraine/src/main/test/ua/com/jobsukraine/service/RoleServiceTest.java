@@ -1,17 +1,12 @@
 package ua.com.jobsukraine.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import javax.transaction.Transactional;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,35 +21,46 @@ public class RoleServiceTest {
 
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Test
 	public void isRoleAdded() {
-		Role role = new Role("ROLE_ADMIN");
-		assertNull(role.getId());
+		try {
+			Assert.assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ROLE", Integer.class) == 0);
 
-		Role addedRole = roleService.save(role);
-		assertEquals(role.getName(), addedRole.getName());
+			Role role = new Role("ROLE_ADMIN");
+			roleService.save(role);
+			Assert.assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ROLE", Integer.class) == 1);
 
-		Role addedSameRoleOneMoreTime = roleService.save(role);
-		assertEquals(addedRole.getId(), addedSameRoleOneMoreTime.getId());
+			roleService.save(role);
+			Assert.assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ROLE", Integer.class) == 1);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM ROLE");
+		}
 	}
 
 	@Test
 	public void isAllRolesGetted() {
-		Role roleOne = roleService.save(new Role("ROLE_ADMIN"));
-		Role roleTwo = roleService.save(new Role("ROLE_CANDIDATE"));
+		try {
+			jdbcTemplate.execute("INSERT INTO role VALUES (1, 'ROLE_ADMIN'),(2, 'ROLE_CANDIDATE')");
+			Assert.assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ROLE", Integer.class) == 2);
 
-		List<Role> roles = roleService.getAll();
-
-		assertTrue(roles.contains(roleOne) && roles.contains(roleTwo));
+			Assert.assertTrue(roleService.getAll().size() == 2);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM ROLE");
+		}
 	}
 
 	@Test
 	public void isRoleFindedByName() {
-		Role addedRole = roleService.save(new Role("ROLE_ADMIN"));
-		assertNotNull(addedRole.getId());
-
-		assertEquals(addedRole, roleService.findByName(addedRole.getName()));
+		try {
+			String roleName = "ROLE_ADMIN";
+			jdbcTemplate.execute("INSERT INTO role VALUES (1, '" + roleName + "')");
+			Assert.assertEquals(roleName, roleService.findByName(roleName).getName());
+		} finally {
+			jdbcTemplate.execute("DELETE FROM ROLE");
+		}
 	}
 
 }
