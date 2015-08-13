@@ -18,7 +18,9 @@ import org.springframework.web.servlet.View;
 
 import ua.com.jobsukraine.controllers.HomeController;
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CandidateService;
+import ua.com.jobsukraine.service.VacancyService;
 
 public class HomeControllerTest {
 
@@ -27,7 +29,8 @@ public class HomeControllerTest {
 
 	@Mock
 	private CandidateService candidateService;
-
+	@Mock
+	private VacancyService vacancyService;
 	@Mock
 	private View mockView;
 
@@ -51,17 +54,20 @@ public class HomeControllerTest {
 	public void goToHomePage() throws Exception {
 		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("home"));
 	}
-	
+
 	@Test
 	public void goToContactsPage() throws Exception {
 		mockMvc.perform(get("/contacts")).andExpect(status().isOk()).andExpect(view().name("contacts"));
 	}
-	
+
 	@Test
 	public void goToVacanciesPage() throws Exception {
-		mockMvc.perform(get("/vacancies")).andExpect(status().isOk()).andExpect(view().name("vacancies"));
+		List<Vacancy> expectedVacancies = new ArrayList<>();
+		when(vacancyService.getAll()).thenReturn(expectedVacancies);
+		mockMvc.perform(get("/vacancies")).andExpect(status().isOk())
+				.andExpect(model().attribute("vacancies", expectedVacancies)).andExpect(view().name("vacancies"));
 	}
-	
+
 	@Test
 	public void goToAboutUsPage() throws Exception {
 		mockMvc.perform(get("/aboutUs")).andExpect(status().isOk()).andExpect(view().name("aboutUs"));
