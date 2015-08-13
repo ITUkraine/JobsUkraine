@@ -1,22 +1,20 @@
 package ua.com.jobsukraine.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.security.Principal;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.com.jobsukraine.config.HSQLTestConfig;
 import ua.com.jobsukraine.config.TestConfig;
-import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Feedback;
 
@@ -28,52 +26,41 @@ public class FeedbackServiceTest {
 	@Autowired
 	private FeedbackService feedbackService;
 	@Autowired
-	private CategoryService categoryService;
-	@Autowired
 	private CandidateService candidateService;
-
-	private Feedback feedback;
-
-	private Category category;
-
-	private Candidate candidate;
-
-	private Feedback feedbackInDB;
-
-	private Principal principal;
-
-	@Before
-	public void init() {
-		feedback = new Feedback();
-		category = new Category("Java");
-		principal = new Principal() {
-
-			@Override
-			public String getName() {
-				return "employer";
-			}
-		};
-		categoryService.save(category);
-		candidate = new Candidate();
-		candidate.setName("Vasa");
-		candidate.setLastName("Pupkin");
-		candidate.setDateOfBirth(new Date(0));
-		candidate.setEmail("pupa@i.ua");
-		candidate.setMobileNumber("0631825988");
-		candidate.setSex("male");
-		candidate.setCityWhereLookingForWork("Lviv");
-		candidateService.save(candidate);
-		feedback.setComment("Good one!");
-		feedback.setDate(new Date());
-		feedback.setMark("10");
-		feedback.setCategory(category);
-
-	}
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Test
-	public void isVacancySaved() {
-		feedbackInDB = feedbackService.add(candidate, feedback, principal);
-		assertEquals(feedbackInDB, feedback);
+	public void isVacancyAdded() {
+		try {
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM category", Integer.class) == 0);
+			Principal principal = new Principal() {
+				@Override
+				public String getName() {
+					return "employer";
+				}
+			};
+			jdbcTemplate.execute(
+					"INSERT INTO logininfo VALUES (1, 'employer', '$2a$10$oGRxrSk3UTvlC38ZWBaC0.Nx1JM.dMIFooeUsUClkAB7BgUEInjhy', NULL),(2, 'candidate', '$2a$10$xnPq34bvpKMxSkgmPTlUw.3Ygbmfwn/JiHUOrbXwiH0ZIWz.5VrF2', NULL)");
+			jdbcTemplate.execute(
+					"INSERT INTO person VALUES (2, 1, 'dytyniak@gmail.com', 'Dytyniak', '0639631909', 'Vadym', 'male', 2)");
+			jdbcTemplate.execute(
+					"INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1)");
+			jdbcTemplate.execute(
+					"INSERT INTO employer VALUES (1, 'Lviv', 'Recruit company with best of the best IT department', 'jobs@mail.ua', 'JobsUkraine', '093615945632', NULL, 'http://www.jobsukraine.com.ua/', 1)");
+			jdbcTemplate.execute("INSERT INTO category VALUES (1, 'Java')");
+			Feedback feedback = new Feedback();
+			feedback.setCategory(new Category("Java"));
+			feedbackService.add(candidateService.findByLogin("candidate"), feedback, principal);
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM category", Integer.class) == 1);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM feedback");
+			jdbcTemplate.execute("DELETE FROM category");
+			jdbcTemplate.execute("DELETE FROM employer");
+			jdbcTemplate.execute("DELETE FROM candidate");
+			jdbcTemplate.execute("DELETE FROM person");
+			jdbcTemplate.execute("DELETE FROM logininfo");
+		}
 	}
 
 }
