@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.exceptions.CustomMessageException;
+import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.SecurityService;
@@ -36,7 +37,9 @@ public class EmployerController {
 	private EmployerService employerService;
 	@Autowired
 	private SecurityService securityService;
-
+	@Autowired
+	private CandidateService candidateService;
+	
 	@RequestMapping(value = "/regEmployer", method = RequestMethod.GET)
 	public String addEmployerLogin(Model model) {
 		model.addAttribute("infoForm", new LoginInfo());
@@ -99,6 +102,7 @@ public class EmployerController {
 	public String goLogin(Principal principal, Model model) {
 		Employer employer = employerService.findByLogin(principal.getName());
 		model.addAttribute("employer", employer);
+		model.addAttribute("candidateService", candidateService);
 		model.addAttribute("candidates", employerService.getAvailableCandidates(employer, 10));
 		return "empOffice/profile";
 	}

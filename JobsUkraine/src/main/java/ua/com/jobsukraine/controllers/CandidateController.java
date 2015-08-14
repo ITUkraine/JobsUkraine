@@ -121,6 +121,7 @@ public class CandidateController {
 		ModelAndView modelAndView = new ModelAndView("candidate");
 		Candidate candidate = candidateService.find(id);
 		modelAndView.addObject("candidate", candidate);
+		modelAndView.addObject("age", candidateService.getAge(candidate));
 		Collections.sort(candidate.getFeedbacks());
 		modelAndView.addObject("feedback", new Feedback());
 		modelAndView.addObject("list", categoryService.getAll());
