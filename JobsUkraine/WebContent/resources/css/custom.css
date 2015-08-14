@@ -100,3 +100,8 @@ body {
 div {
 	word-wrap: break-word;
 }
+
+.checkbox li{
+	width: 300px;
+	display: inline-block;
+}
