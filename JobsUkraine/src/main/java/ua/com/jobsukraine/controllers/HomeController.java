@@ -46,6 +46,8 @@ public class HomeController {
 		List<Candidate> candidates = candidateService.getAll();
 		Collections.sort(candidates);
 		modelAndView.addObject("candidates", candidates);
+		
+		modelAndView.addObject("candidateService", candidateService);
 		return modelAndView;
 	}
 

@@ -26,7 +26,7 @@
 					</div>
 					<div class="panel-body">
 						<br>
-						<p>Age: ${candidate.dateOfBirth}</p>
+						<p>Age: ${candidateService.getAge(candidate)}</p>
 						<p>
 							Categories:
 							<c:forEach var="category" items="${candidate.categories}">

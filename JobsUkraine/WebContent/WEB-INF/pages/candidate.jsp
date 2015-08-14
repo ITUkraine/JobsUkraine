@@ -29,11 +29,8 @@
 					<br>
 					<p>City: ${candidate.cityWhereLookingForWork}</p>
 					<p>Gender: ${candidate.sex}</p>
-					<p>
-						Date of birth:
-						<fmt:formatDate value="${candidate.dateOfBirth}"
-							pattern="dd/MM/yyyy" />
-					</p>
+					<p>Age: ${age} years</p>
+					
 					<p>
 						Categories:
 						<c:forEach var="category" items="${candidate.categories}">
