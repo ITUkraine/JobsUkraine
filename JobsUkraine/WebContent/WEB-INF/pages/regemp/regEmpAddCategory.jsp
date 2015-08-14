@@ -12,30 +12,39 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container">
-		<h4 align="center">Add categories which include the activities of
-			your company:</h4>
 		<div class="raw">
-			<div class="col-md-4"></div>
-			<div class="form-group col-md-4">
-				<form:form commandName="empForm" method="POST" action="regEmployerNew">
-                     <div class="valid-error"><p>${msg}</p></div>
-					<form:checkboxes path="categories" items="${listCat}"
-						itemLabel="name" itemValue="name" element="div"/>
-					<br>
-					<br>
-					<p>Put website of your company:</p>
-					<form:input class="form-control" path="website" size="40" />
+			<div class="col-md-2"></div>
+			<div class="panel panel-default col-md-8">
+				<div class="panel-heading">
+					<h3 align="center">Add categories which include the activities
+						of your company:</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-md-1"></div>
+					<div class="col-md-11">
+						<form:form commandName="empForm" method="POST"
+							action="regEmployerNew">
+							<br>
+							<div class="valid-error">
+								<strong>${msg}</strong>
+							</div>
+							<br>
+							<div class="checkbox">
+								<form:checkboxes path="categories" items="${listCat}"
+									itemLabel="name" itemValue="name" element="li" />
+							</div>
+							<br>
+							<br>
+							<div align="right">
+								<button type="submit" class="btn btn-default"
+									style="width: 120px;">Next</button>
+							</div>
 
-					<div align="right">
-						<button type="submit" class="btn btn-default"
-							style="width: 120px;">Next</button>
+
+						</form:form>
 					</div>
-
-
-				</form:form>
-
+				</div>
 			</div>
-			<div class="col-md-4"></div>
 		</div>
 	</div>
 

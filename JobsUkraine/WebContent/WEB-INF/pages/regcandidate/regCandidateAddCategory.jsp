@@ -13,27 +13,38 @@
 	<%@ include file="../header.jsp"%>
 
 	<div class="container">
-		<h4 align="center">Add categories which include the activities of
-			your company:</h4>
-		<div class="raw">
-			<div class="col-md-4"></div>
-			<div class="form-group col-md-4">
-				<form:form commandName="candidate" method="POST"
-					action="regCandidateNew">
-                     <div class="valid-error"><p>${msg}</p></div>
-					<form:checkboxes path="categories" items="${listCat}"
-						itemLabel="name" itemValue="name" element="div"/>
-					<br>
-
-					<div align="right">
-						<button type="submit" class="btn btn-default"
-							style="width: 120px;">Next</button>
+		<div>
+			<div class="raw">
+				<div class="col-md-2"></div>
+				<div class="panel panel-default col-md-8">
+					<div class="panel-heading">
+						<h3 align="center">Add categories in which you are looking
+							for a job :</h3>
 					</div>
+					<div class="panel-body">
+						<div class="col-md-1"></div>
+						<div class="col-md-11">
+							<form:form commandName="candidate" method="POST"
+								action="regCandidateNew">
+								<div class="valid-error">
+									<p>${msg}</p>
+								</div>
+								<div class="checkbox">
+									<form:checkboxes path="categories" items="${listCat}"
+										itemLabel="name" itemValue="name" element="li" />
+								</div>
+								<br>
 
-				</form:form>
+								<div align="right">
+									<button type="submit" class="btn btn-default"
+										style="width: 120px;">Next</button>
+								</div>
 
+							</form:form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-4"></div>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
