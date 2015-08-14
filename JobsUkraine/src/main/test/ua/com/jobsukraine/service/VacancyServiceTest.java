@@ -55,4 +55,18 @@ public class VacancyServiceTest {
 		}
 	}
 
+	@Test
+	public void isVacancyDeleted() {
+		try {
+			jdbcTemplate.execute(
+					"INSERT INTO vacancy VALUES (1, 'Full-stack Junior Java developer', 'Junior Java Developer', 3000, NULL, NULL)");
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM vacancy", Integer.class) == 1);
+			vacancyService.delete(1);
+			assertTrue(vacancyService.find(1)==null);
+			
+		} finally {
+			jdbcTemplate.execute("DELETE FROM vacancy");
+		}
+	}
+
 }
