@@ -52,7 +52,7 @@ public class VacancyController {
 	@RequestMapping(value = "/empOffice/addVacancy")
 	public String goAddVacancyPage(Model model, Principal principal) {
 		model.addAttribute("vacancy", new Vacancy());
-		model.addAttribute("vacancies", employerService.getVacancies(employerService.findByLogin(principal.getName())));
+		model.addAttribute("vacancies", employerService.findByLogin(principal.getName()).getVacancy());
 		model.addAttribute("list", categoryService.getAll());
 		model.addAttribute("category", new Category());
 

@@ -15,7 +15,6 @@ import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
-import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.EmployerRepository;
 import ua.com.jobsukraine.repository.LoginInfoRepository;
 import ua.com.jobsukraine.service.CategoryService;
@@ -50,12 +49,11 @@ public class EmployerServiceImpl implements EmployerService {
 	public Employer findByLogin(String login) {
 		return employerRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
 	}
-	
+
 	@Override
 	public Employer findByEmail(String email) {
 		return employerRepository.findByEmail(email);
 	}
-
 
 	@Override
 	public List<Candidate> getAvailableCandidates(Employer employer, int top) {
@@ -83,11 +81,6 @@ public class EmployerServiceImpl implements EmployerService {
 			return allCandidates.subList(0, top);
 		else
 			return allCandidates;
-	}
-
-	public List<Vacancy> getVacancies(Employer employer) {
-		return employerRepository.getVacancies(employer);
-
 	}
 
 	@Override

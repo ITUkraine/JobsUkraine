@@ -48,6 +48,8 @@ public class VacancyControllerTest {
 	@Mock
 	private CategoryService categoryService;
 	@Mock
+	private Employer employer;
+	@Mock
 	private View mockView;
 
 	private MockMvc mockMvc;
@@ -100,7 +102,7 @@ public class VacancyControllerTest {
 	@Test
 	public void testGoAddVacancyPage() throws Exception {
 		try {
-			when(employerService.getVacancies(new Employer())).thenReturn(new ArrayList<>());
+			when(employerService.findByLogin("login")).thenReturn(new Employer());
 			when(categoryService.getAll()).thenReturn(new ArrayList<>());
 			mockMvc.perform(get("/empOffice/addVacancy")
 					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
