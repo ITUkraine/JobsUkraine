@@ -23,44 +23,62 @@
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-4"></div>
-			<div class="form-group col-md-4">
-				<form:form modelAttribute="candidate" action="addCandidateInfo2"
-					method="POST">
-					<fieldset>
+			<div class="panel panel-default col-md-4">
+				<div class="panel-heading">
+					<i style="font-size: 20px; font-family:">Step 2</i>
+				</div>
+				<div class="panel-body">
+					<form:form modelAttribute="candidate" action="addCandidateInfo2"
+						method="POST">
+						<fieldset>
+							<p>Last name:</p>
+							<form:input class="form-control" path="lastName" size="40" />
+							<div class="valid-error">
+								<form:errors path="lastName" />
+							</div>
+							<p>Name:</p>
+							<form:input class="form-control" path="name" size="40" />
+							<div class="valid-error">
+								<form:errors path="name" />
+							</div>
+							<p>Gender:</p>
+							<form:select path="sex" class="form-control" id="sel1">
+								<option>male</option>
+								<option>female</option>
+							</form:select>
 
-						<p>Last name:</p>
-						<form:input class="form-control" path="lastName" size="40" />
-                        <div class="valid-error"><form:errors path="lastName"/></div>
-						<p>Name:</p>
-						<form:input class="form-control" path="name" size="40" />
-                        <div class="valid-error"><form:errors path="name"/></div>
-						<p>Gender:</p>
-						<form:select path="sex" class="form-control" id="sel1">
-							<option>male</option>
-							<option>female</option>
-						</form:select>
-						
-						<p>Birthday:</p>
-						<form:input id="datepicker" class="form-control" path="dateOfBirth" size="40" />
-					    <div class="valid-error"><form:errors path="dateOfBirth"/></div>                      
-						<p>E-mail:</p>
-						<form:input class="form-control" path="email" size="40" />
-                        <div class="valid-error"><form:errors path="email"/></div>
-                        <p>City where you looking for work:</p>
-						<form:input class="form-control" path="cityWhereLookingForWork" size="40" />
-						<div class="valid-error"><form:errors path="cityWhereLookingForWork"/></div>	
-						<p>Mobile phone</p>
-						<form:input class="form-control" path="mobileNumber" size="40" />
-						<div class="valid-error"><form:errors path="mobileNumber"/></div>
-						<br>
-						<div align="right">
-							<button type="submit" class="btn btn-default"
-								style="width: 120px;">Next</button>
-						</div>
-					</fieldset>
-				</form:form>
+							<p>Birthday:</p>
+							<form:input id="datepicker" class="form-control"
+								path="dateOfBirth" size="40" />
+							<div class="valid-error">
+								<form:errors path="dateOfBirth" />
+							</div>
+							<p>E-mail:</p>
+							<form:input class="form-control" path="email" size="40" />
+							<div class="valid-error">
+								<form:errors path="email" />
+							</div>
+							<p>City where you looking for work:</p>
+							<form:input class="form-control" path="cityWhereLookingForWork"
+								size="40" />
+							<div class="valid-error">
+								<form:errors path="cityWhereLookingForWork" />
+							</div>
+							<p>Mobile phone</p>
+							<form:input class="form-control" path="mobileNumber" size="40" />
+							<div class="valid-error">
+								<form:errors path="mobileNumber" />
+							</div>
+							<br>
+							<div align="right">
+								<button type="submit" class="btn btn-default"
+									style="width: 120px;">Next</button>
+							</div>
+						</fieldset>
+					</form:form>
+				</div>
+				<div class="col-md-4"></div>
 			</div>
-			<div class="col-md-4"></div>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>

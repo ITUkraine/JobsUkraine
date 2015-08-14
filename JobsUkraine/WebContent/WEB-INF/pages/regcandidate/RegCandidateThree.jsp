@@ -26,42 +26,47 @@
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-4"></div>
-			<div class="form-group col-md-4">
-				<form:form id="bootstrapTagsInputForm" modelAttribute="candidate"
-					action="addCandidateCategory" method="POST">
-					<fieldset>
-						<p>Education:</p>
-						<form:input class="form-control" path="education" size="40" />
+			<div class="panel panel-default col-md-4">
+				<div class="panel-heading">
+					<i style="font-size: 20px; font-family:">Step 3</i>
+				</div>
+				<div class="panel-body">
+					<form:form id="bootstrapTagsInputForm" modelAttribute="candidate"
+						action="addCandidateCategory" method="POST">
+						<fieldset>
+							<p>Education:</p>
+							<form:input class="form-control" path="education" size="40" />
 
-						<p>Experience:</p>
-						<form:input class="form-control" path="experience" size="40" />
+							<p>Experience:</p>
+							<form:input class="form-control" path="experience" size="40" />
 
-						<p>Your address:</p>
-						<form:input class="form-control" path="address" size="40" />
+							<p>Your address:</p>
+							<form:input class="form-control" path="address" size="40" />
 
-						<p>Start date</p>
-						<form:input id="datepicker" class="form-control"
-							path="dateStartToWork" size="40" />
+							<p>Start date</p>
+							<form:input id="datepicker" class="form-control"
+								path="dateStartToWork" size="40" />
 
-						<p>Dream job:</p>
-						<form:input class="form-control" path="dreamJob" size="40" />
+							<p>Dream job:</p>
+							<form:input class="form-control" path="dreamJob" size="40" />
 
-						<p>Primary skills:</p>
+							<p>Primary skills:</p>
 
-						<form:input size="50" path="primarySkills" class="form-control"
-							data-role="tagsinput" />
+							<form:input size="50" path="primarySkills" class="form-control"
+								data-role="tagsinput" />
 
-						<br>
-						<div align="right">
-							<button type="submit" class="btn btn-default"
-								style="width: 120px;">Next</button>
-						    <button type="submit" class="btn btn-default"
-								style="width: 120px;">Skip</button>
-						</div>
-					</fieldset>
-				</form:form>
+							<br> <br>
+							<div align="right">
+								<button type="submit" class="btn btn-default"
+									style="width: 120px;">Next</button>
+								<button type="submit" class="btn btn-default"
+									style="width: 120px;">Skip</button>
+							</div>
+						</fieldset>
+					</form:form>
+				</div>
+				<div class="col-md-4"></div>
 			</div>
-			<div class="col-md-4"></div>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
