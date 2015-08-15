@@ -77,7 +77,10 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	private Set<Skill> skills;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "candidates")
-	private Set<Vacancy> vacancies;
+	private List<Vacancy> vacancies;
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "candidates")
+	private List<Employer> employers;
 
 	public Candidate() {
 
@@ -154,7 +157,7 @@ public class Candidate extends Person implements Comparable<Candidate> {
 		return skills;
 	}
 
-	public Set<Vacancy> getVacancies() {
+	public List<Vacancy> getVacancies() {
 		return vacancies;
 	}
 
@@ -210,8 +213,16 @@ public class Candidate extends Person implements Comparable<Candidate> {
 		this.skills = skills;
 	}
 
-	public void setVacancies(Set<Vacancy> vacancies) {
+	public void setVacancies(List<Vacancy> vacancies) {
 		this.vacancies = vacancies;
+	}
+
+	public List<Employer> getEmployers() {
+		return employers;
+	}
+
+	public void setEmployers(List<Employer> employers) {
+		this.employers = employers;
 	}
 
 	@Override
