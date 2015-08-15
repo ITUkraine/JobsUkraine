@@ -1,6 +1,6 @@
 package ua.com.jobsukraine.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,7 +20,7 @@ public class Vacancy extends AbstractPersistable<Integer> {
 	@JoinTable(name = "vacancy_candidate", 
 		joinColumns = @JoinColumn(name = "vacancy_id", referencedColumnName = "id") , 
 		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
-	private Set<Candidate> candidates;
+	private List<Candidate> candidates;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -51,7 +51,7 @@ public class Vacancy extends AbstractPersistable<Integer> {
 		this.salary = salary;
 	}
 
-	public Set<Candidate> getCandidates() {
+	public List<Candidate> getCandidates() {
 		return candidates;
 	}
 
@@ -75,7 +75,7 @@ public class Vacancy extends AbstractPersistable<Integer> {
 		return salary;
 	}
 
-	public void setCandidates(Set<Candidate> candidates) {
+	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
 	}
 
