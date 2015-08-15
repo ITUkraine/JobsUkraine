@@ -8,10 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Log In</title>
 </head>
-<body background="http://blog.placeit.net/wp-content/uploads/2014/10/3796bf864f1a4ab7adfa09b9c886079a.jpg">
+<body
+	background="http://blog.placeit.net/wp-content/uploads/2014/10/3796bf864f1a4ab7adfa09b9c886079a.jpg">
 	<%@ include file="header.jsp"%>
-	<br>
-	<br>
 	<div class="container">
 		<div class="col-md-4"></div>
 		<div
@@ -19,23 +18,28 @@
 			<c:url value="/j_spring_security_check" var="loginUrl" />
 			<form action="${loginUrl}" class="form-signin" role="form"
 				method="post">
+				<img src="<c:url value="/resources/css/images/logo.png" />"
+					style="margin: 10px;" />
 				<c:if test="${param.error != null}">
 					<div class="alert alert-danger">Invalid login or password</div>
 
 				</c:if>
 				<c:if test="${param.logout != null}">
 					<div class="alert alert-success text-center">Logout</div>
-
 				</c:if>
-				<img src="<c:url value="/resources/css/images/logo.png" />"
-					style="margin: 30px;" /> <input type="text" id="j_username"
-					name="j_username" class="form-control" placeholder="Login" required
-					autofocus /> <br> <input type="password" id="j_password"
-					name="j_password" class="form-control" placeholder="Password"
-					required /> <input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" /> <br>
+				<input type="text" id="j_username" name="j_username"
+					class="form-control" placeholder="Login" required autofocus /> <br>
+				<input type="password" id="j_password" name="j_password"
+					class="form-control" placeholder="Password" required /> <input
+					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<br>
 				<div align="center">
 					<button class="btn btn-default" type="submit">Sign In</button>
+				</div>
+				<div align="center" style="margin-top: 10px;">
+					<p>
+						Not yet registered?<a href="join">Join us!</a>
+					</p>
 				</div>
 			</form>
 		</div>
