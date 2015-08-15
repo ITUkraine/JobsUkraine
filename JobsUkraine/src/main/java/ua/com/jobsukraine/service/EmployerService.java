@@ -19,4 +19,6 @@ public interface EmployerService{
 	List<Candidate> getAvailableCandidates(Employer employer, int top);
 	
 	Employer register(Employer emp, LoginInfo info);
+	
+	List<Employer> getAll();
 }

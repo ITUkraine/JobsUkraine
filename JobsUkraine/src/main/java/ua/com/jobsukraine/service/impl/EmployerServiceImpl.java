@@ -97,4 +97,9 @@ public class EmployerServiceImpl implements EmployerService {
 
 	}
 
+	@Override
+	public List<Employer> getAll() {
+		return employerRepository.findAll();
+	}
+
 }
