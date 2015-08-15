@@ -72,5 +72,10 @@ public class HomeControllerTest {
 	public void goToAboutUsPage() throws Exception {
 		mockMvc.perform(get("/aboutUs")).andExpect(status().isOk()).andExpect(view().name("aboutUs"));
 	}
+	
+	@Test
+	public void goToJoin() throws Exception {
+		mockMvc.perform(get("/join")).andExpect(status().isOk()).andExpect(view().name("registration"));
+	}
 
 }

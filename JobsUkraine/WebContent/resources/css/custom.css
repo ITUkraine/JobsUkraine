@@ -119,11 +119,21 @@ div {
 }
 
 .panel-center {
-	position: absolute;
-	margin: auto;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width:350px;
+}
+
+/* registration button */
+.btn-register {
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	font-size: 35px;
+	color: #ffffff;
+	margin: 5px;
 	width: 400px;
-	height: 300px;}
+	height: 200px;
+}

@@ -55,5 +55,10 @@ public class HomeController {
 	public String goAboutUs() {
 		return "aboutUs";
 	}
+	
+	@RequestMapping(value = "/join")
+	public String goJoin() {
+		return "registration";
+	}
 
 }
