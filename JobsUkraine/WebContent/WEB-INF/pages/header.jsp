@@ -33,6 +33,9 @@
 				<li><a href="/JobsUkraine/candidates">CANDIDATES</a></li>
 				<li><a href="/JobsUkraine/aboutUs">ABOUT US</a></li>
 				<li><a href="/JobsUkraine/contacts">CONTACTS</a></li>
+				<sec:authorize access="!isAuthenticated()">
+					<li><a href="/JobsUkraine/join">JOIN</a></li>
+				</sec:authorize>
 				<sec:authorize
 					access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
 					<li><a href="/JobsUkraine/candidateOffice">OFFICE</a></li>
@@ -40,6 +43,9 @@
 				<sec:authorize
 					access="isAuthenticated() && hasRole('ROLE_EMPLOYER')">
 					<li><a href="/JobsUkraine/employerOffice">OFFICE</a></li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated() && hasRole('ROLE_ADMIN')">
+					<li><a href="/JobsUkraine/admin">OFFICE</a></li>
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<li><a href="/JobsUkraine/login">LOG IN</a></li>
