@@ -71,18 +71,10 @@
 					certain job vacancies. Employee candidates can get into many
 					different working contracts through us. We try to offer the best
 					and most flexible solutions.</p>
-				<sec:authorize access="!isAuthenticated()">
-					<div>
-						<h1 align="center">Registration</h1>
-					</div>
-					<div align="center">
-						<button type="button" onclick="location.href='regEmployer'"
-							class="btn btn-primary btn-custom btn-arrow-left">Employer</button>
-						<button type="button" disabled class="btn-circle">YOU</button>
-						<button type="button" onclick="location.href='regCandidate'"
-							class="btn btn-warning btn-custom btn-arrow-right">Candidate</button>
-					</div>
-				</sec:authorize>
+			</div>
+			<div class="panel-footer" align="center">
+				<button class="btn btn-primary" style="width: 350px;" type="button"
+					onclick="location.href='join'">Join us</button>
 			</div>
 		</div>
 		<div class="col-lg-1"></div>
