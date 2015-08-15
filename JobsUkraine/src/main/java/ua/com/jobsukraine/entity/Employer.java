@@ -35,6 +35,10 @@ public class Employer extends AbstractPersistable<Integer> {
 	@JoinTable(name = "Category_Employer", joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id") )
 	private List<Category> categories;
 
+	@ManyToMany
+	@JoinTable(name = "employer_candidate", joinColumns = @JoinColumn(name = "employer_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+	private List<Candidate> candidates;
+
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@NotNull(message = "This field is mandatory")
@@ -157,6 +161,14 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+
+	public List<Candidate> getCandidates() {
+		return candidates;
+	}
+
+	public void setCandidates(List<Candidate> candidates) {
+		this.candidates = candidates;
 	}
 
 	@Override
