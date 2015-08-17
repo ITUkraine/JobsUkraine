@@ -1,3 +1,5 @@
+@import url("btn-register.css");
+
 body {
 	/* The fixed navbar will overlay your other content, 
 	unless you add padding to the top of the <body>. 
@@ -123,24 +125,11 @@ div {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width:350px;
-}
-
-/* registration button */
-.btn-register {
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	font-size: 35px;
-	border: none;
-	color: #ffffff;
-	margin: 5px;
-	width: 400px;
-	height: 200px;
+	width: 350px;
 }
 
 .btn-black {
-	background-color: #3b3b3b; 
+	background-color: #3b3b3b;
 	width: 180px;
 	color: white;
 }

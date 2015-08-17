@@ -1,0 +1,29 @@
+.btn-register {
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	font-size: 35px;
+	border: none;
+	color: #ffffff;
+	margin: 5px;
+	width: 400px;
+	height: 200px;
+}
+
+.btn-register-yellow {
+	background-color: rgba(254, 211, 29, 0.7);
+}
+
+.btn-register-blue {
+	background-color: rgba(3, 210, 255, 0.7);
+}
+
+.btn-register-yellow:hover {
+	background-color: rgba(254, 211, 29, 0.8);
+	color: white;
+}
+
+.btn-register-blue:hover {
+	background-color: rgba(3, 210, 255, 0.8);
+	color: white;
+}

@@ -13,8 +13,7 @@
 		style="width: 100%; margin-top: -20px;" />
 	<div class="container" style="margin-top: -350px;">
 		<div align="center" class="col-lg-6">
-			<button class="btn-register" type="button"
-				style="background-color: rgba(254, 211, 29, 0.7)"
+			<button class="btn btn-register btn-register-yellow" type="button"
 				onclick="location.href='regCandidate'">
 				<img src="/JobsUkraine/resources/css/images/registration/ic1.png"
 					style="width: 70px; height: 70px; margin-bottom: 10px;">
@@ -22,8 +21,7 @@
 			</button>
 		</div>
 		<div align="center" class="col-lg-6">
-			<button class="btn-register" type="button"
-				style="background-color: rgba(3, 210, 255, 0.7)"
+			<button class="btn btn-register btn-register-blue" type="button"
 				onclick="location.href='regEmployer'">
 				<img src="/JobsUkraine/resources/css/images/registration/ic2.png"
 					style="width: 70px; height: 70px; margin-bottom: 10px;">
