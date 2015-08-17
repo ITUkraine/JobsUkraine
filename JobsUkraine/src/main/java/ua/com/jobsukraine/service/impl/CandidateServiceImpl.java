@@ -23,7 +23,7 @@ import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.RoleService;
 
 @Service
-@ComponentScan(basePackages ="ua.com.jobsukraine.security")
+@ComponentScan(basePackages = "ua.com.jobsukraine.security")
 @Transactional
 public class CandidateServiceImpl implements CandidateService {
 
@@ -36,10 +36,10 @@ public class CandidateServiceImpl implements CandidateService {
 	private LoginInfoRepository loginInfoRepository;
 	@Autowired
 	private RoleService roleService;
-     
+
 	@Override
-	public Candidate save(Candidate candidate) {	
-		return candidateRepository.save(candidate);
+	public Candidate save(Candidate candidate) {
+		return candidateRepository.saveAndFlush(candidate);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class CandidateServiceImpl implements CandidateService {
 	public Candidate findByLogin(String login) {
 		return candidateRepository.findByLoginInfo(loginInfoRepository.findByLogin(login));
 	}
-	
+
 	@Override
 	public Candidate findByEmail(String email) {
 		return candidateRepository.findByEmail(email);
@@ -109,6 +109,13 @@ public class CandidateServiceImpl implements CandidateService {
 		candidate.setRating(candidateRepository.getGlobalRating(candidate));
 		return candidateRepository.saveAndFlush(candidate);
 	}
-	
-	
+
+	@Override
+	public void acceptVacancy(Candidate candidate, Vacancy vacancy) {
+		if (!candidate.getVacancies().contains(vacancy)) {
+			candidate.getVacancies().add(vacancy);
+			save(candidate);
+		}
+	}
+
 }
