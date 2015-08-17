@@ -138,3 +138,14 @@ div {
 	width: 400px;
 	height: 200px;
 }
+
+.btn-black {
+	background-color: #3b3b3b; 
+	width: 180px;
+	color: white;
+}
+
+.btn-black:hover {
+	background-color: #4d4d4d;
+	color: white;
+}
