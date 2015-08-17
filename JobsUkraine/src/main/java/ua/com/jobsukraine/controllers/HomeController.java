@@ -21,9 +21,20 @@ public class HomeController {
 	@Autowired
 	private VacancyService vacancyService;
 
-	@RequestMapping(value = "/")
-	public String goHome() {
-		return "home";
+	@RequestMapping(value = "/aboutUs")
+	public String goAboutUs() {
+		return "aboutUs";
+	}
+
+	@RequestMapping(value = "/candidates")
+	public ModelAndView goCandidates() {
+		ModelAndView modelAndView = new ModelAndView("candidates");
+		List<Candidate> candidates = candidateService.getAll();
+		Collections.sort(candidates);
+		modelAndView.addObject("candidates", candidates);
+		
+		modelAndView.addObject("candidateService", candidateService);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/contacts")
@@ -40,20 +51,9 @@ public class HomeController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/candidates")
-	public ModelAndView goCandidates() {
-		ModelAndView modelAndView = new ModelAndView("candidates");
-		List<Candidate> candidates = candidateService.getAll();
-		Collections.sort(candidates);
-		modelAndView.addObject("candidates", candidates);
-		
-		modelAndView.addObject("candidateService", candidateService);
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/aboutUs")
-	public String goAboutUs() {
-		return "aboutUs";
+	@RequestMapping(value = "/")
+	public String goHome() {
+		return "home";
 	}
 	
 	@RequestMapping(value = "/join")
