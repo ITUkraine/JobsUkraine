@@ -37,7 +37,7 @@
 							<sec:authorize
 								access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
 								<button class="btn btn-black" type="button"
-									onclick="location.href='<c:url value="/acceptVacancy?id=${vacancy.id}" />'">Accept</button>
+									onclick="location.href='<c:url value="/acceptVacancy?id=${vacancy.id}" />'">Apply</button>
 							</sec:authorize>
 						</div>
 

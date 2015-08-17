@@ -55,7 +55,7 @@
 					<sec:authorize access="hasRole('ROLE_EMPLOYER')">
 						<div align="right">
 							<button class="btn btn-black"
-								onclick="location.href='<c:url value="/connectEmployerCandidate?id=${candidate.id}" />'">Interested</button>
+								onclick="location.href='<c:url value="/connectEmployerCandidate?id=${candidate.id}" />'">Interesting candidate</button>
 						</div>
 					</sec:authorize>
 				</div>

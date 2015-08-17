@@ -29,7 +29,7 @@
 							<div class="panel-body" align="right">
 								<button class="btn btn-black"
 									style="width: 100px; height: 35px;" type="button"
-									onclick="location.href='<c:url value="/acceptVacancy?id=${vacancy.id}" />'">Accept</button>
+									onclick="location.href='<c:url value="/acceptVacancy?id=${vacancy.id}" />'">Apply</button>
 							</div>
 						</div>
 					</div>
