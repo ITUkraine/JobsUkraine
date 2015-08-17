@@ -76,7 +76,10 @@ public class Candidate extends Person implements Comparable<Candidate> {
 	@JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id") )
 	private Set<Skill> skills;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "candidates")
+	@ManyToMany
+	@JoinTable(name = "candidate_vacancy", 
+	joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") , 
+	inverseJoinColumns = @JoinColumn(name = "vacancy_id", referencedColumnName = "id"))
 	private List<Vacancy> vacancies;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "candidates")
