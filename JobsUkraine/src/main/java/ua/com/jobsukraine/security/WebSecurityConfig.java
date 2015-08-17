@@ -28,13 +28,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(customAuthenticationProvider);
-	}
+	} 
 	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		
 		httpSecurity.authorizeRequests().
-		antMatchers("/login").anonymous().
+		antMatchers("/login","/join","/regCandidate","/regEmployer").anonymous().
 		antMatchers("/admin").hasRole("ADMIN").
 		antMatchers("/empOffice/*","/employerOffice").hasRole("EMPLOYER").
 		antMatchers("/candidateOffice/*","/candidateOffice").hasRole("CANDIDATE").
