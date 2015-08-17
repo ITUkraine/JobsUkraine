@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +28,7 @@ import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.FeedbackService;
 import ua.com.jobsukraine.service.SecurityService;
+import ua.com.jobsukraine.service.VacancyService;
 
 @Controller
 @ComponentScan(basePackages = { "ua.com.jobsukraine.service.impl", "ua.com.jobsukraine.security.handler",
@@ -42,6 +44,8 @@ public class CandidateController {
 	private SecurityService securityService;
 	@Autowired
 	private FeedbackService feedbackService;
+	@Autowired
+	private VacancyService vacancyService;
 
 	@RequestMapping(value = "/regCandidate", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
@@ -134,6 +138,12 @@ public class CandidateController {
 		feedbackService.add(candidate, feedback, principal);
 		candidateService.updateGlobalRating(candidate);
 		return "redirect:/candidate/" + candidate.getId();
+	}
+	
+	@RequestMapping(value = "/acceptVacancy")
+	public String connectEmployerCandidate(@RequestParam("id") int id, Principal principal) {
+		candidateService.acceptVacancy(candidateService.findByLogin(principal.getName()), vacancyService.find(id));
+		return "redirect:vacancy/"+id;
 	}
 
 }
