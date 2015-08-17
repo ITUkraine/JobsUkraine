@@ -1,6 +1,7 @@
 package ua.com.jobsukraine.service;
 
 import java.util.List;
+import java.util.Set;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Employer;
@@ -16,7 +17,7 @@ public interface EmployerService{
 	
 	Employer findByLogin(String login);
 	
-	List<Candidate> getAvailableCandidates(Employer employer, int top);
+	Set<Candidate> getAvailableCandidates(Employer employer, int top);
 	
 	Employer register(Employer emp, LoginInfo info);
 	

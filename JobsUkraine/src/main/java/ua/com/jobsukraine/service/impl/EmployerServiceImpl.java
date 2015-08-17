@@ -1,10 +1,9 @@
 package ua.com.jobsukraine.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -56,31 +55,16 @@ public class EmployerServiceImpl implements EmployerService {
 	}
 
 	@Override
-	public List<Candidate> getAvailableCandidates(Employer employer, int top) {
-		List<Candidate> allCandidates = new ArrayList<>();
+	public Set<Candidate> getAvailableCandidates(Employer employer, int top) {
+		Set<Candidate> sortedCandidates = new TreeSet<>();
 		for (Category category : employer.getCategories()) {
-			// get candidate+his rating->set rating->add to list as one object
+			// get candidate+his rating->set rating->add to set as one object
 			for (Object o[] : employerRepository.getAvailableCandidates(category)) {
 				((Candidate) o[0]).setRating((Double) o[1]);
-				allCandidates.add((Candidate) o[0]);
+				sortedCandidates.add((Candidate) o[0]);
 			}
 		}
-
-		// remove duplicates by id
-		Map<Integer, Candidate> map = new HashMap<>();
-		for (Candidate ays : allCandidates) {
-			map.put(ays.getId(), ays);
-		}
-		allCandidates.clear();
-		allCandidates.addAll(map.values());
-
-		// sort by rating
-		Collections.sort(allCandidates);
-
-		if (allCandidates.size() > top)
-			return allCandidates.subList(0, top);
-		else
-			return allCandidates;
+		return sortedCandidates;
 	}
 
 	@Override
