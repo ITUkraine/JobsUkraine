@@ -17,9 +17,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading col-lg-12">
 					<div class="col-lg-9">
-						<img alt="avatar" width="100px" height="100px" style="margin-right: 20px;"
-							src="<c:url value="/resources/pictures/avatar.png" />"></img> 
-							<strong style="font-size: 24px;">${candidate.lastName} ${candidate.name} </strong>
+						<img alt="avatar" width="100px" height="100px"
+							style="margin-right: 20px;"
+							src="<c:url value="/resources/pictures/avatar.png" />"></img> <strong
+							style="font-size: 24px;">${candidate.lastName}
+							${candidate.name} </strong>
 					</div>
 					<div class="col-lg-3">
 						<h4 align="right">Rating: ${candidate.rating}</h4>
@@ -30,10 +32,10 @@
 					<p>City: ${candidate.cityWhereLookingForWork}</p>
 					<p>Gender: ${candidate.sex}</p>
 					<p>Age: ${age} years</p>
-					
+
 					<p>
 						Categories:
-						<c:forEach var="category" items="${candidate.categories}">
+						<c:forEach var="category" items="${candidate.categories}" varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 						</c:forEach>
 					</p>
@@ -44,9 +46,17 @@
 					<p>Education: ${candidate.education}</p>
 					<p>Experience: ${candidate.experience}</p>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<p><strong>Contacts:</strong></p>
-					<p>Email: ${candidate.email}</p>
-					<p>Mobile phone: ${candidate.mobileNumber}</p>
+						<p>
+							<strong>Contacts:</strong>
+						</p>
+						<p>Email: ${candidate.email}</p>
+						<p>Mobile phone: ${candidate.mobileNumber}</p>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_EMPLOYER')">
+						<div align="right">
+							<button class="btn btn-black"
+								onclick="location.href='<c:url value="/connectEmployerCandidate?id=${candidate.id}" />'">Interested</button>
+						</div>
 					</sec:authorize>
 				</div>
 			</div>
@@ -76,8 +86,7 @@
 							<form:textarea rows="7" class="form-control" path="comment" />
 							<br>
 							<div align="right">
-								<button type="submit" class="btn btn-default"
-									style="width: 120px;">Add</button>
+								<button type="submit" class="btn btn-black">Add</button>
 							</div>
 						</form:form>
 					</div>
@@ -102,9 +111,9 @@
 							</div>
 							<div class="panel-heading"></div>
 							<div class="panel-heading">
-									<br>
-									<p>Category: ${feedback.category.name}</p>
-									<p>Mark: ${feedback.mark}</p>
+								<br>
+								<p>Category: ${feedback.category.name}</p>
+								<p>Mark: ${feedback.mark}</p>
 							</div>
 							<div class="panel-body">${feedback.comment}</div>
 						</div>
