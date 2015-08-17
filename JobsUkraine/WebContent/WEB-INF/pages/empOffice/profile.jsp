@@ -15,17 +15,35 @@
 			<%@ include file="sidebar.jsp"%>
 		</div>
 		<div class="col-lg-6">
-			<div class=" col-lg-12 panel panel-default">
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3>${employer.name }</h3>
+					<strong style="font-size: 24px;">${employer.name }</strong>
 				</div>
 
+				<div class="panel-body">
+					<p>
+						<strong>Contacts:</strong>
+					</p>
+					<p>Email: ${employer.email }</p>
+					<p>Phone: ${employer.phone }</p>
+					<p>
+						Website: <a href="${employer.website} ">${employer.website}</a>
+					</p>
+					<p>Address: ${employer.address }</p>
+					<p>
+						<strong>Categories:</strong>
+					</p>
+					<p>
+						<c:forEach var="category" items="${employer.categories}"
+							varStatus="loop">
+									${category.name}<c:if test="${!loop.last}">, </c:if>
+						</c:forEach>
+					</p>
+				</div>
+			</div>
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>
-						${employer.email } <br> ${employer.phone } <br> <a
-							href="${employer.website} ">${employer.website}</a> <br>
-						${employer.address }
-					</h4>
+					<h3>Description</h3>
 				</div>
 				<div class="panel-body">
 					<p>${employer.description}</p>
@@ -36,7 +54,6 @@
 			<%@ include file="potentialCandidates.jsp"%>
 		</div>
 	</div>
-
 	<%@ include file="../footer.jsp"%>
 </body>
 </html>
