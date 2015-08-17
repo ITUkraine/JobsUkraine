@@ -120,5 +120,20 @@ public class EmployerServiceTest {
 			jdbcTemplate.execute("DELETE FROM person");
 			jdbcTemplate.execute("DELETE FROM logininfo");
 		}
-	}	
+	}
+	
+	@Test
+	public void isEmployerGetAll() {
+		try {
+			jdbcTemplate.execute(
+					"INSERT INTO employer VALUES (1, 'Lviv', 'Recruit company with best of the best IT department', 'jobs@mail.ua', 'JobsUkraine', '093615945632', NULL, 'http://www.jobsukraine.com.ua/', NULL),"
+							+ "(2, 'dv', 'dvdv', 'e@mail', 'name', '45', NULL, 'dfvdf', NULL)");
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM employer", Integer.class) == 2);
+			assertTrue(employerService.getAll().size() == 2);
+
+		} finally {
+			jdbcTemplate.execute("DELETE FROM employer");
+		}
+
+	}
 }
