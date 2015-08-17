@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,7 +40,7 @@ public class EmployerController {
 	private SecurityService securityService;
 	@Autowired
 	private CandidateService candidateService;
-	
+
 	@RequestMapping(value = "/regEmployer", method = RequestMethod.GET)
 	public String addEmployerLogin(Model model) {
 		model.addAttribute("infoForm", new LoginInfo());
@@ -89,8 +90,8 @@ public class EmployerController {
 			securityService.encodePassword(loginInfo);
 			employerService.register(employer, loginInfo);
 			securityService.autoLoginAfterRegistration(request, response, loginInfo.getLogin(), password);
-			return "";
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/addVacancy", method = RequestMethod.GET)
@@ -116,5 +117,11 @@ public class EmployerController {
 		}
 		modelAndView.addObject("employer", employer);
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/connectEmployerCandidate")
+	public String connectEmployerCandidate(@RequestParam("id") int id, Principal principal) {
+		employerService.connectWithCandidate(candidateService.find(id), employerService.findByLogin(principal.getName()));
+		return "redirect:candidate/"+id;
 	}
 }

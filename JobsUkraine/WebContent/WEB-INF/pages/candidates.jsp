@@ -40,7 +40,7 @@
 					
 								<p>
 									Categories:
-									<c:forEach var="category"  items="${candidate.categories}">
+									<c:forEach var="category"  items="${candidate.categories}" varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 								</c:forEach>
 								</p>

@@ -2,9 +2,11 @@ package ua.com.jobsukraine.entity;
 
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -16,16 +18,15 @@ public class Vacancy extends AbstractPersistable<Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToMany
-	@JoinTable(name = "vacancy_candidate", 
-		joinColumns = @JoinColumn(name = "vacancy_id", referencedColumnName = "id") , 
-		inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id") )
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "vacancies")
 	private List<Candidate> candidates;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	@NotNull
 	private String description;
 

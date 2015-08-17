@@ -22,4 +22,6 @@ public interface EmployerService{
 	Employer register(Employer emp, LoginInfo info);
 	
 	List<Employer> getAll();
+	
+	void connectWithCandidate(Candidate candidate, Employer employer);
 }

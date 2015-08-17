@@ -18,31 +18,29 @@
 			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h1 class="panel-title">Vacancy "${vacancy.name}"</h1>
+					<strong style="font-size: 24px;">${vacancy.name} </strong>
 				</div>
 				<div class="panel-body">
-					<h3 class="panel-title">Category: ${vacancy.category.name}</h3>
-					<h3 class="panel-title">Salary: ${vacancy.salary}</h3>
-					<h4 class="panel-title">Description:</h4>
-					<p>${vacancy.description}</p>
-
+					<p>Category: ${vacancy.category.name}</p>
+					<p>Salary: ${vacancy.salary}</p>
+					<p>Description: ${vacancy.description}</p>
+					<br>
 					<div class="row">
-						<sec:authorize
-							access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
-							<div class="col-lg-3">
-								<input class="form-control" type="button"
-									value="Accept (dont work)">
-							</div>
-						</sec:authorize>
-
-						<sec:authorize access="isAuthenticated() && hasRole('ROLE_ADMIN')">
-							<div class="col-lg-8"></div>
-							<div class="col-lg-4">
-								<input class="form-control" type="button"
+						<div class="col-lg-8"></div>
+						<div class="col-lg-4">
+							<sec:authorize
+								access="isAuthenticated() && hasRole('ROLE_ADMIN')">
+								<input class="btn btn-black" type="button"
 									onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
 									value="Delete">
-							</div>
-						</sec:authorize>
+							</sec:authorize>
+							<sec:authorize
+								access="isAuthenticated() && hasRole('ROLE_CANDIDATE')">
+								<button class="btn btn-black" type="button"
+									onclick="location.href='<c:url value="/acceptVacancy?id=${vacancy.id}" />'">Accept</button>
+							</sec:authorize>
+						</div>
+
 
 					</div>
 					<br>

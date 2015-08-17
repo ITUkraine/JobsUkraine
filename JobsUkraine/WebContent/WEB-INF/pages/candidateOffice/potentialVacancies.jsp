@@ -24,8 +24,13 @@
 							</h4>
 						</div>
 						<div id="${vacancy.id}" class="panel-collapse collapse">
-							<div class="panel-heading" style="word-wrap: break-word;">
+							<div class="panel-heading">
 								${vacancy.description}</div>
+							<div class="panel-body" align="right">
+								<button class="btn btn-black"
+									style="width: 100px; height: 35px;" type="button"
+									onclick="location.href='<c:url value="/acceptVacancy?id=${vacancy.id}" />'">Accept</button>
+							</div>
 						</div>
 					</div>
 				</c:forEach>

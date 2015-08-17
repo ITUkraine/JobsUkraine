@@ -86,4 +86,12 @@ public class EmployerServiceImpl implements EmployerService {
 		return employerRepository.findAll();
 	}
 
+	@Override
+	public void connectWithCandidate(Candidate candidate, Employer employer) {
+		if (!employer.getCandidates().contains(candidate)) {
+			employer.getCandidates().add(candidate);
+			save(employer);
+		}
+	}
+
 }
