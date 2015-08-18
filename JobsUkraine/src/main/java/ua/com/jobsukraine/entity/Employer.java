@@ -70,7 +70,7 @@ public class Employer extends AbstractPersistable<Integer> {
 
 	private String pictureURL;
 
-	@OneToMany(mappedBy = "employer")
+	@OneToMany(mappedBy = "employer", cascade=CascadeType.ALL)
 	private List<Vacancy> vacancy;
 
 	private String website;
