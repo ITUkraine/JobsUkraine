@@ -29,16 +29,18 @@ import org.springframework.web.servlet.View;
 import ua.com.jobsukraine.controllers.CandidateController;
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.LoginInfo;
+import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.SecurityService;
+import ua.com.jobsukraine.service.VacancyService;
 import ua.com.jobsukraine.utils.PrincipalGenerator;
 
 public class CandidateControllerTest {
 	@InjectMocks
 	private CandidateController candidateController;
-	
+
 	@Mock
 	private SecurityService securityService;
 	@Mock
@@ -48,11 +50,12 @@ public class CandidateControllerTest {
 	@Mock
 	private EmployerService employerService;
 	@Mock
+	private VacancyService vacancyService;
+	@Mock
 	private View mockView;
 	@Mock
 	private Model model;
-	
-	
+
 	private final MockHttpSession session = new MockHttpSession();
 
 	private MockMvc mockMvc;
@@ -86,20 +89,20 @@ public class CandidateControllerTest {
 		loginInfo.setPassword("password");
 		loginInfo.setConfirmPassword("password");
 		session.setAttribute("infoForm", loginInfo);
-		mockMvc.perform(post("/addCandidateInfo").session(session)).andExpect(status().isOk()).andExpect(model().attributeExists("candidate"))
-				.andExpect(view().name("regcandidate/RegCandidateTwo"));
-		
+		mockMvc.perform(post("/addCandidateInfo").session(session)).andExpect(status().isOk())
+				.andExpect(model().attributeExists("candidate")).andExpect(view().name("regcandidate/RegCandidateTwo"));
+
 		// if passwords diff
 		loginInfo.setPassword("passwordDiff");
 		loginInfo.setConfirmPassword("password");
 		session.setAttribute("infoForm", loginInfo);
-		mockMvc.perform(post("/addCandidateInfo").session(session)).andExpect(status().isOk()).andExpect(model().attributeExists("msg"))
-		.andExpect(view().name("regcandidate/RegCandidateOne"));
+		mockMvc.perform(post("/addCandidateInfo").session(session)).andExpect(status().isOk())
+				.andExpect(model().attributeExists("msg")).andExpect(view().name("regcandidate/RegCandidateOne"));
 		// if login validation error
 		loginInfo.setLogin("log");
 		session.setAttribute("infoForm", loginInfo);
-		mockMvc.perform(post("/addCandidateInfo").session(session)).andExpect(status().isOk()).andExpect(model().attributeExists("msg"))
-		.andExpect(view().name("regcandidate/RegCandidateOne"));
+		mockMvc.perform(post("/addCandidateInfo").session(session)).andExpect(status().isOk())
+				.andExpect(model().attributeExists("msg")).andExpect(view().name("regcandidate/RegCandidateOne"));
 	}
 
 	@Test
@@ -130,7 +133,8 @@ public class CandidateControllerTest {
 			LoginInfo loginInfo = new LoginInfo();
 			session.setAttribute("infoForm", loginInfo);
 			session.setAttribute("candidate", candidate);
-			mockMvc.perform(post("/regCandidateNew").session(session)).andExpect(model().attributeExists("msg", "listCat"))
+			mockMvc.perform(post("/regCandidateNew").session(session))
+					.andExpect(model().attributeExists("msg", "listCat"))
 					.andExpect(view().name("regcandidate/regCandidateAddCategory"));
 			verify(categoryService, times(1)).getAll();
 
@@ -139,27 +143,39 @@ public class CandidateControllerTest {
 			when(candidateService.register(candidate, loginInfo)).thenReturn(new Candidate());
 			doNothing().when(securityService).encodePassword(new LoginInfo());
 			doNothing().when(securityService).autoLoginAfterRegistration(null, null, null, null);
-			mockMvc.perform(post("/regCandidateNew").session(session))
-					.andExpect(view().name(""));
+			mockMvc.perform(post("/regCandidateNew").session(session));
 			verify(securityService, times(1)).encodePassword(loginInfo);
 			verify(candidateService, times(1)).register(candidate, loginInfo);
-			
+
 		} finally {
 			SecurityContextHolder.clearContext();
 		}
 	}
-	
+
 	@Test
 	public void isGoLogin() throws Exception {
 		try {
 			Mockito.when(candidateService.findByLogin("login")).thenReturn(new Candidate());
 			mockMvc.perform(get("/candidateOffice")
 					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
-					.andExpect(view().name("candidateOffice/profile")).andExpect(status().isOk()).andExpect(model().attributeExists("candidate", "vacancies"));
+					.andExpect(view().name("candidateOffice/profile")).andExpect(status().isOk())
+					.andExpect(model().attributeExists("candidate", "vacancies"));
 			verify(candidateService, times(1)).findByLogin("login");
 		} finally {
 			SecurityContextHolder.clearContext();
 		}
+	}
+
+	@Test
+	public void testAcceptVacancy() throws Exception {
+		Candidate candidate = new Candidate();
+		Vacancy vacancy = new Vacancy();
+		Mockito.when(candidateService.findByLogin("login")).thenReturn(candidate);
+		Mockito.when(vacancyService.find(1)).thenReturn(vacancy);
+		mockMvc.perform(get("/acceptVacancy").param("id", "1")
+				.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+				.andExpect(status().isOk()).andExpect(view().name("redirect:vacancy/1")).andExpect(model().size(0));
+		verify(candidateService, times(1)).acceptVacancy(candidate, vacancy);
 	}
 
 }
