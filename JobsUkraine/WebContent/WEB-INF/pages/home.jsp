@@ -58,7 +58,7 @@
 		<div class="col-lg-10 panel panel-default transparent"
 			style="font-size: 17px; margin-top: -70px;">
 			<div class="panel-body">
-				<h3>Whatever you're looking for, we've got it.</h3>
+				<h2>Whatever you're looking for, we've got it.</h2>
 				<p>JobsUkraine is a temporary work / recruitment agency located
 					in Lviv, Ukraine, founded by two people from the Netherlands. We
 					try to find the best people to fill a large variety of job
@@ -72,10 +72,12 @@
 					different working contracts through us. We try to offer the best
 					and most flexible solutions.</p>
 			</div>
+			<sec:authorize access="!isAuthenticated()">
 			<div class="panel-footer" align="center">
-				<button class="btn btn-primary" style="width: 350px;" type="button"
+				<button class="btn btn-primary" style="width: 350px; font-size: 20px; font-weight: bold;" type="button"
 					onclick="location.href='join'">Join us</button>
 			</div>
+			</sec:authorize>
 		</div>
 		<div class="col-lg-1"></div>
 	</div>
