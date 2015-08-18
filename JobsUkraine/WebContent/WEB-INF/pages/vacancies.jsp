@@ -23,9 +23,20 @@
 									href="/JobsUkraine/vacancy/${vacancy.id}">${vacancy.name} </a>
 							</div>
 							<div class="panel-body">
-								<p>Category: ${vacancy.category.name}</p>
-								<p>Salary: ${vacancy.salary}</p>
-								<p>Description: ${vacancy.description}</p>
+								<p>
+									<strong>Category:</strong> ${vacancy.category.name}
+								</p>
+								<p>
+									<strong>Salary:</strong> ${vacancy.salary}$
+								</p>
+								<strong>Description:</strong>
+								<c:if test="${vacancy.description.length()<555}">
+								${vacancy.description}
+							</c:if>
+
+								<c:if test="${vacancy.description.length()>=555}">
+								${vacancy.description.substring(0,555)}...
+							</c:if>
 							</div>
 						</div>
 					</c:forEach>

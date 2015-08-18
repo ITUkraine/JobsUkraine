@@ -21,9 +21,9 @@
 					<strong style="font-size: 24px;">${vacancy.name} </strong>
 				</div>
 				<div class="panel-body">
-					<p>Category: ${vacancy.category.name}</p>
-					<p>Salary: ${vacancy.salary}</p>
-					<p>Description: ${vacancy.description}</p>
+					<p><strong>Category:</strong> ${vacancy.category.name}</p>
+					<p><strong>Salary:</strong> ${vacancy.salary}$</p>
+					<strong>Description:</strong> ${vacancy.description}
 					<br>
 					<div class="row">
 						<div class="col-lg-8"></div>

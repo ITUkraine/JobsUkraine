@@ -29,28 +29,28 @@
 				</div>
 				<div class="panel-body">
 					<br>
-					<p>City: ${candidate.cityWhereLookingForWork}</p>
-					<p>Gender: ${candidate.sex}</p>
-					<p>Age: ${age} years</p>
+					<p><strong>City:</strong> ${candidate.cityWhereLookingForWork}</p>
+					<p><strong>Gender:</strong> ${candidate.sex}</p>
+					<p><strong>Age:</strong> ${age} years</p>
 
 					<p>
-						Categories:
+						<strong>Categories:</strong>
 						<c:forEach var="category" items="${candidate.categories}" varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 						</c:forEach>
 					</p>
-					<p>Skills: ${candidate.primarySkills}</p>
-					<p>Address: ${candidate.address}</p>
-					<p>Date start work: ${candidate.dateStartToWork}</p>
-					<p>Dream job: ${candidate.dreamJob}</p>
-					<p>Education: ${candidate.education}</p>
-					<p>Experience: ${candidate.experience}</p>
+					<p><strong>Skills:</strong> ${candidate.primarySkills}</p>
+					<p><strong>Address:</strong> ${candidate.address}</p>
+					<p><strong>Date start work:</strong> ${candidate.dateStartToWork}</p>
+					<p><strong>Dream job:</strong> ${candidate.dreamJob}</p>
+					<p><strong>Education:</strong> ${candidate.education}</p>
+					<p><strong>Experience:</strong> ${candidate.experience}</p>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<p>
 							<strong>Contacts:</strong>
 						</p>
-						<p>Email: ${candidate.email}</p>
-						<p>Mobile phone: ${candidate.mobileNumber}</p>
+						<p><strong>Email:</strong> ${candidate.email}</p>
+						<p><strong>Mobile phone:</strong> ${candidate.mobileNumber}</p>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_EMPLOYER')">
 						<div align="right">
@@ -68,21 +68,21 @@
 					<div class="panel-body">
 						<form:form class="form-group" action="addFeedBack"
 							commandName="feedback" method="POST">
-							<p>Category</p>
+							<p><strong>Category</strong></p>
 							<form:select class="form-control" id="sel1" path="category">
 								<c:forEach var="category" items="${list}">
 									<option value="${category.name}">${category.name}</option>
 								</c:forEach>
 							</form:select>
 							<br>
-							<p>Mark</p>
+							<p><strong>Mark</strong></p>
 							<form:select class="form-control" path="mark">
 								<c:forEach begin="1" end="10" var="i">
 									<form:option value="${11-i}">${11-i}</form:option>
 								</c:forEach>
 							</form:select>
 							<br>
-							<p>Comment</p>
+							<p><strong>Comment</strong></p>
 							<form:textarea rows="7" class="form-control" path="comment" />
 							<br>
 							<div align="right">
@@ -95,14 +95,14 @@
 			</sec:authorize>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h1 class="panel-title">All feedbacks</h1>
+					<h1 class="panel-title"><strong>All feedbacks</strong></h1>
 				</div>
 				<div class="panel-body">
 					<c:forEach var="feedback" items="${candidate.feedbacks}">
 						<div class="panel panel-default">
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-6">
-									Author: <a href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a>
+									<strong>Author: <a style="text-decoration: none;" href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a></strong>
 								</div>
 								<div class="col-lg-6" align="right">
 									<fmt:formatDate value="${feedback.date}"
@@ -112,8 +112,8 @@
 							<div class="panel-heading"></div>
 							<div class="panel-heading">
 								<br>
-								<p>Category: ${feedback.category.name}</p>
-								<p>Mark: ${feedback.mark}</p>
+								<p><strong>Category:</strong> ${feedback.category.name}</p>
+								<p><strong>Mark:</strong> ${feedback.mark}</p>
 							</div>
 							<div class="panel-body">${feedback.comment}</div>
 						</div>

@@ -34,17 +34,17 @@
 							</div>
 							<div class="panel-body">
 								<br>
-								<p>City: ${candidate.cityWhereLookingForWork}</p>
+								<p><strong>City:</strong> ${candidate.cityWhereLookingForWork}</p>
 								<p>
-								<p>Age: ${candidateService.getAge(candidate)} years</p>
+								<p><strong>Age:</strong> ${candidateService.getAge(candidate)} years</p>
 					
 								<p>
-									Categories:
+									<strong>Categories:</strong>
 									<c:forEach var="category"  items="${candidate.categories}" varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 								</c:forEach>
 								</p>
-								<p>Skills: ${candidate.primarySkills}</p>
+								<p><strong>Skills:</strong> ${candidate.primarySkills}</p>
 							</div>
 						</div>
 
