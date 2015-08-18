@@ -125,4 +125,13 @@ public class EmployerController {
 				employerService.findByLogin(principal.getName()));
 		return "redirect:candidate/" + id;
 	}
+	
+	@RequestMapping(value="/myCandidates")
+	public ModelAndView myCandidates(Principal principal){
+		Employer employer = employerService.findByLogin(principal.getName());
+		ModelAndView modelAndView = new ModelAndView("empOffice/myCandidates");
+		modelAndView.addObject("candidates", candidateService.getTopCandidates(5));
+		modelAndView.addObject("myCandidates", employer.getCandidates());
+		return modelAndView;
+	}
 }
