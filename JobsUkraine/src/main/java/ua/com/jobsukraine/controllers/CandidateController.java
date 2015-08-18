@@ -141,9 +141,17 @@ public class CandidateController {
 	}
 	
 	@RequestMapping(value = "/acceptVacancy")
-	public String connectEmployerCandidate(@RequestParam("id") int id, Principal principal) {
+	public String acceptVacancy(@RequestParam("id") int id, Principal principal) {
 		candidateService.acceptVacancy(candidateService.findByLogin(principal.getName()), vacancyService.find(id));
 		return "redirect:vacancy/"+id;
 	}
 
+	@RequestMapping(value="/myVacancies")
+	public ModelAndView myVacancies(Principal principal){
+		Candidate candidate = candidateService.findByLogin(principal.getName());
+		ModelAndView modelAndView = new ModelAndView("candidateOffice/myVacancies");
+		modelAndView.addObject("vacancies", candidateService.getAvailableVacancies(candidate));
+		modelAndView.addObject("myVacancies", candidate.getVacancies());
+		return modelAndView;
+	}
 }
