@@ -1,7 +1,6 @@
 package ua.com.jobsukraine.controller;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -26,6 +25,7 @@ import org.springframework.web.util.NestedServletException;
 import ua.com.jobsukraine.controllers.EmployerController;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
+import ua.com.jobsukraine.service.CandidateService;
 import ua.com.jobsukraine.service.CategoryService;
 import ua.com.jobsukraine.service.EmployerService;
 import ua.com.jobsukraine.service.SecurityService;
@@ -42,6 +42,8 @@ public class EmployerControllerTest {
 	private EmployerService employerService;
 	@Mock
 	private SecurityService securityService;
+	@Mock
+	private CandidateService candidateService;
 	@Mock
 	private Employer employerMock;
 	@Mock
@@ -145,8 +147,7 @@ public class EmployerControllerTest {
 			when(employerService.register(employer, loginInfo)).thenReturn(new Employer());
 			doNothing().when(securityService).encodePassword(new LoginInfo());
 			doNothing().when(securityService).autoLoginAfterRegistration(null, null, null, null);
-			mockMvc.perform(post("/regEmployerNew").session(session))
-					.andExpect(view().name(""));
+			mockMvc.perform(post("/regEmployerNew").session(session));
 		} finally {
 			SecurityContextHolder.clearContext();
 		}
@@ -156,10 +157,13 @@ public class EmployerControllerTest {
 	public void testGoLogin() throws Exception {
 		try {
 			when(employerService.findByLogin("login")).thenReturn(new Employer());
-			when(employerService.getAvailableCandidates(new Employer(), 10)).thenReturn(new ArrayList<>());
+			when(candidateService.getTopCandidates(5)).thenReturn(new ArrayList<>());
 			mockMvc.perform(get("/employerOffice")
 					.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
-					.andExpect(view().name("empOffice/profile"));
+					.andExpect(model().attributeExists("employer", "candidateService", "candidates"))
+					.andExpect(model().size(3)).andExpect(view().name("empOffice/profile"));
+			verify(employerService, times(1)).findByLogin("login");
+			verify(candidateService, times(1)).getTopCandidates(5);
 		} finally {
 			SecurityContextHolder.clearContext();
 		}

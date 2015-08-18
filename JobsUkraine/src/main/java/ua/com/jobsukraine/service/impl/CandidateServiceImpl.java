@@ -2,6 +2,7 @@ package ua.com.jobsukraine.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -116,6 +117,14 @@ public class CandidateServiceImpl implements CandidateService {
 			candidate.getVacancies().add(vacancy);
 			save(candidate);
 		}
+	}
+
+	@Override
+	public List<Candidate> getTopCandidates(int amount) {
+		List<Candidate> candidates = candidateRepository.findAll();
+		Collections.sort(candidates);
+		int amountOfCandidates = candidates.size();
+		return candidates.subList(0, amountOfCandidates < amount ? amountOfCandidates : amount);
 	}
 
 }

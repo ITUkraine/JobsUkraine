@@ -27,4 +27,6 @@ public interface CandidateService {
 	Candidate updateGlobalRating(Candidate candidate);
 	
 	void acceptVacancy(Candidate candidate, Vacancy vacancy);
+	
+	List<Candidate> getTopCandidates(int amount);
 }

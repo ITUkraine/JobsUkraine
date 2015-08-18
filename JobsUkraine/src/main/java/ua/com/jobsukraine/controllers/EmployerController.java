@@ -104,7 +104,7 @@ public class EmployerController {
 		Employer employer = employerService.findByLogin(principal.getName());
 		model.addAttribute("employer", employer);
 		model.addAttribute("candidateService", candidateService);
-		model.addAttribute("candidates", employerService.getAvailableCandidates(employer, 10));
+		model.addAttribute("candidates", candidateService.getTopCandidates(5));
 		return "empOffice/profile";
 	}
 
@@ -121,7 +121,8 @@ public class EmployerController {
 
 	@RequestMapping(value = "/connectEmployerCandidate")
 	public String connectEmployerCandidate(@RequestParam("id") int id, Principal principal) {
-		employerService.connectWithCandidate(candidateService.find(id), employerService.findByLogin(principal.getName()));
-		return "redirect:candidate/"+id;
+		employerService.connectWithCandidate(candidateService.find(id),
+				employerService.findByLogin(principal.getName()));
+		return "redirect:candidate/" + id;
 	}
 }

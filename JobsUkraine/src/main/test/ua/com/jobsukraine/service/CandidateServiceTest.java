@@ -173,29 +173,29 @@ public class CandidateServiceTest {
 		}
 	}
 
-
 	@Test
-	public void isCandidateUpdateGlobalRating(){
+	public void isCandidateUpdateGlobalRating() {
 		try {
 			jdbcTemplate.execute("INSERT INTO logininfo VALUES(1, 'candidate', 'pass', NULL)");
 			jdbcTemplate.execute(
 					"INSERT INTO person VALUES (2, 1, 'dytyniak@gmail.com', 'Dytyniak', '0639631909', 'Vadym', 'male', 1)");
 			jdbcTemplate.execute(
 					"INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1)");
-			jdbcTemplate.execute("INSERT INTO feedback VALUES (1, 'Security man', '2015-08-12 09:06:34', '10', NULL, NULL, 1)");
-			
+			jdbcTemplate.execute(
+					"INSERT INTO feedback VALUES (1, 'Security man', '2015-08-12 09:06:34', '10', NULL, NULL, 1)");
+
 			Candidate candidate = candidateService.findByLogin("candidate");
-			assertTrue(candidateService.updateGlobalRating(candidate).getRating()==10.0);
+			assertTrue(candidateService.updateGlobalRating(candidate).getRating() == 10.0);
 		} finally {
 			jdbcTemplate.execute("DELETE FROM feedback");
 			jdbcTemplate.execute("DELETE FROM candidate");
 			jdbcTemplate.execute("DELETE FROM person");
 			jdbcTemplate.execute("DELETE FROM logininfo");
 		}
-	} 
-	
+	}
+
 	@Test
-	public void isCandidateGetAvailableVacancies(){
+	public void isCandidateGetAvailableVacancies() {
 		try {
 
 			jdbcTemplate.execute(
@@ -204,9 +204,11 @@ public class CandidateServiceTest {
 					"INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1)");
 			jdbcTemplate.execute("INSERT INTO category VALUES (1, 'Java')");
 			jdbcTemplate.execute("INSERT INTO category_candidate VALUES (1, 1)");
-			jdbcTemplate.execute("INSERT INTO vacancy VALUES (1, 'Full-stack Junior Java developer', 'Junior Java Developer', 400, 1, NULL)");
+			jdbcTemplate.execute(
+					"INSERT INTO vacancy VALUES (1, 'Full-stack Junior Java developer', 'Junior Java Developer', 400, 1, NULL)");
 			List<Vacancy> availableVacancies = candidateService.getAvailableVacancies(candidateService.find(1));
-			assertEquals(availableVacancies.get(0).getCategory().getName(), candidateService.find(1).getCategories().get(0).getName());
+			assertEquals(availableVacancies.get(0).getCategory().getName(),
+					candidateService.find(1).getCategories().get(0).getName());
 		} finally {
 			jdbcTemplate.execute("DELETE FROM vacancy");
 			jdbcTemplate.execute("DELETE FROM category_candidate");
@@ -214,7 +216,33 @@ public class CandidateServiceTest {
 			jdbcTemplate.execute("DELETE FROM person");
 			jdbcTemplate.execute("DELETE FROM category");
 		}
-		
+
 	}
-	
+
+	@Test
+	public void isCandidateGetTopCandidates() {
+		try {
+			jdbcTemplate.execute(
+					"INSERT INTO person VALUES (2, 1, 'dytyniak@gmail.com', 'Dytyniak', '0639631909', 'Vadym', 'male', NULL)");
+			jdbcTemplate.execute(
+					"INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1)");
+			jdbcTemplate.execute("INSERT INTO category VALUES (1, 'Java')");
+			jdbcTemplate.execute("INSERT INTO category_candidate VALUES (1, 1)");
+			jdbcTemplate.execute(
+					"INSERT INTO vacancy VALUES (1, 'Full-stack Junior Java developer', 'Junior Java Developer', 400, 1, NULL)");
+
+			List<Candidate> topCandidates1 = candidateService.getTopCandidates(1);
+			assertEquals(topCandidates1.get(0).getId(), candidateService.find(1).getId());
+			assertTrue(topCandidates1.size() <= 1);
+
+			assertTrue(candidateService.getTopCandidates(5).size() <= 5);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM vacancy");
+			jdbcTemplate.execute("DELETE FROM category_candidate");
+			jdbcTemplate.execute("DELETE FROM candidate");
+			jdbcTemplate.execute("DELETE FROM person");
+			jdbcTemplate.execute("DELETE FROM category");
+		}
+	}
+
 }
