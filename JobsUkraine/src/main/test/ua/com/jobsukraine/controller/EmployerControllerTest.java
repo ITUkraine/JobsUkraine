@@ -1,6 +1,9 @@
 package ua.com.jobsukraine.controller;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -23,6 +26,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.util.NestedServletException;
 
 import ua.com.jobsukraine.controllers.EmployerController;
+import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.service.CandidateService;
@@ -169,4 +173,15 @@ public class EmployerControllerTest {
 		}
 	}
 
+	@Test
+	public void testConnectEmployerCandidate() throws Exception {
+		Candidate candidate = new Candidate();
+		Employer employer = new Employer();
+		Mockito.when(employerService.findByLogin("login")).thenReturn(employer);
+		Mockito.when(candidateService.find(1)).thenReturn(candidate);
+		mockMvc.perform(get("/connectEmployerCandidate").param("id", "1")
+				.principal(PrincipalGenerator.getPrincipal("login", "", new String[] { "ROLE_ADMIN" })))
+				.andExpect(status().isOk()).andExpect(view().name("redirect:candidate/1")).andExpect(model().size(0));
+		verify(employerService, times(1)).connectWithCandidate(candidate, employer);
+	}
 }
