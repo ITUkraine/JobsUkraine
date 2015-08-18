@@ -32,6 +32,8 @@ public class CandidateServiceTest {
 	@Autowired
 	private CandidateService candidateService;
 	@Autowired
+	private VacancyService vacancyService;
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private Candidate candidate;
 	private LoginInfo loginInfo;
@@ -217,6 +219,30 @@ public class CandidateServiceTest {
 			jdbcTemplate.execute("DELETE FROM category");
 		}
 
+	}
+
+	@Test
+	public void isCandidateAcceptVacancy() {
+		try {
+			jdbcTemplate.execute(
+					"INSERT INTO logininfo VALUES (1, 'employer', '$2a$10$oGRxrSk3UTvlC38ZWBaC0.Nx1JM.dMIFooeUsUClkAB7BgUEInjhy', NULL),(2, 'candidate', '$2a$10$xnPq34bvpKMxSkgmPTlUw.3Ygbmfwn/JiHUOrbXwiH0ZIWz.5VrF2', NULL)");
+			jdbcTemplate.execute(
+					"INSERT INTO person VALUES (2, 1, 'dytyniak@gmail.com', 'Dytyniak', '0639631909', 'Vadym', 'male', 2)");
+			jdbcTemplate.execute(
+					"INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1)");
+			jdbcTemplate.execute(
+					"INSERT INTO vacancy VALUES (1, 'Full-stack Junior Java developer', 'Junior Java Developer', 400, NULL, NULL);");
+			candidateService.acceptVacancy(candidateService.find(1), vacancyService.find(1));
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM candidate_vacancy", Integer.class) == 1);
+			candidateService.acceptVacancy(candidateService.find(1), vacancyService.find(1));
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM candidate_vacancy", Integer.class) == 1);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM candidate_vacancy");
+			jdbcTemplate.execute("DELETE FROM candidate");
+			jdbcTemplate.execute("DELETE FROM person");
+			jdbcTemplate.execute("DELETE FROM logininfo");
+			jdbcTemplate.execute("DELETE FROM vacancy");
+		}
 	}
 
 	@Test
