@@ -12,6 +12,7 @@
 				src="<c:url value="/resources/pictures/icon.png" />"></img></li>
 			<li><a href="/JobsUkraine/employerOffice">Profile</a></li>
 			<li><a href="/JobsUkraine/empOffice/addVacancy">My vacancies</a></li>
+			<li><a href="/JobsUkraine/myCandidates">My candidates</a></li>
 		</ul>
 	</div>
 </body>
