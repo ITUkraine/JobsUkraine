@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.com.jobsukraine.config.HSQLTestConfig;
 import ua.com.jobsukraine.config.TestConfig;
+import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
@@ -29,10 +30,12 @@ public class EmployerServiceTest {
 
 	@Autowired
 	private EmployerService employerService;
-
+	@Autowired
+	private CandidateService candidateService;
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	Employer employer = new Employer();
+	Candidate candidate = new Candidate();
 	LoginInfo loginInfo = new LoginInfo();
 
 	@Before
@@ -121,7 +124,7 @@ public class EmployerServiceTest {
 			jdbcTemplate.execute("DELETE FROM logininfo");
 		}
 	}
-	
+
 	@Test
 	public void isEmployerGetAll() {
 		try {
@@ -134,6 +137,25 @@ public class EmployerServiceTest {
 		} finally {
 			jdbcTemplate.execute("DELETE FROM employer");
 		}
+	}
 
+	@Test
+	public void isConnectWithCandidate() {
+		try {
+			jdbcTemplate.execute("INSERT INTO logininfo VALUES (1, 'employer', '$2a$10$oGRxrSk3UTvlC38ZWBaC0.Nx1JM.dMIFooeUsUClkAB7BgUEInjhy', NULL),(2, 'candidate', '$2a$10$xnPq34bvpKMxSkgmPTlUw.3Ygbmfwn/JiHUOrbXwiH0ZIWz.5VrF2', NULL)");
+			jdbcTemplate.execute("INSERT INTO person VALUES (2, 1, 'dytyniak@gmail.com', 'Dytyniak', '0639631909', 'Vadym', 'male', 2)");
+			jdbcTemplate.execute("INSERT INTO candidate VALUES ('Lviv', 'Lviv', NULL, '1996-06-15', '2015-08-13', 'Topcoder', 'NULP', 'JobsUkraine', 'Java,JPA,Spring', 10, 1)");
+			jdbcTemplate.execute("INSERT INTO employer VALUES (1, 'Lviv', 'Recruit company with best of the best IT department', 'jobs@mail.ua', 'JobsUkraine', '093615945632', NULL, 'http://www.jobsukraine.com.ua/', 1)");
+			employerService.connectWithCandidate(candidateService.find(1), employerService.find(1));
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM employer_candidate", Integer.class) == 1);
+			employerService.connectWithCandidate(candidateService.find(1), employerService.find(1));
+			assertTrue(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM employer_candidate", Integer.class) == 1);
+		} finally {
+			jdbcTemplate.execute("DELETE FROM employer_candidate");
+			jdbcTemplate.execute("DELETE FROM candidate");
+			jdbcTemplate.execute("DELETE FROM employer");
+			jdbcTemplate.execute("DELETE FROM person");
+			jdbcTemplate.execute("DELETE FROM logininfo");
+		}
 	}
 }
