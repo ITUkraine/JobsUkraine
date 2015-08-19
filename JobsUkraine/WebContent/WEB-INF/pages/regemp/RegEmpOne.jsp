@@ -9,13 +9,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Register</title>
 </head>
-<body>
+<body background="/JobsUkraine/resources/pictures/coffee-notebook.png">
 	<%@ include file="../header.jsp"%>
 
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-4"></div>
-			<div class="panel panel-default col-md-4">
+			<div class="panel panel-default col-md-4 panel-center" style="opacity:0.95;">
 				<div class="panel-heading"><i style="font-size: 20px; font-family: ">Step 1</i></div>
 				<div class="panel-body">
 					<form:form modelAttribute="infoForm" action="addEmployerInfo"

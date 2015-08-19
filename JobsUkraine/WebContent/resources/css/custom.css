@@ -7,6 +7,10 @@ body {
 	Tip: By default, the navbar is 50px high.  */
 	padding-bottom: 70px;
 	background-color: #ecffff;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .navbar-default {

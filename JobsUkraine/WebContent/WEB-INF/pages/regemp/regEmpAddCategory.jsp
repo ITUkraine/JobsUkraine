@@ -9,12 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Register</title>
 </head>
-<body>
+<body background="/JobsUkraine/resources/pictures/coffee-notebook.png">
 	<%@ include file="../header.jsp"%>
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-2"></div>
-			<div class="panel panel-default col-md-8">
+			<div class="panel panel-default col-md-8" style="opacity:0.95;">
 				<div class="panel-heading">
 					<h3 align="center">Add categories which include the activities
 						of your company:</h3>
