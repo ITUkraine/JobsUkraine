@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Office | Profile</title>
 </head>
-<body background= "http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg">
+<body background= "http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg"  style="background-attachment: fixed; background-repeat: no-repeat;">
 
 	<%@ include file="../header.jsp"%>
 
