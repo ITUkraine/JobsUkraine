@@ -28,14 +28,10 @@
 										<div class="panel-title row">
 											<div class="col-lg-10">
 												<a style="text-decoration: none;" data-toggle="collapse"
-													data-target="#e${employer.id}" href="#"><c:if
-														test="${employer.pictureURL == null}">
-														<img alt="avatar" width="60px" height="60px"
-															src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
-													</c:if> <c:if test="${employer.pictureURL != null}">
-														<img alt="avatar" width="60px" height="60px"
-															src="<c:url value="${employer.pictureURL}" />"></img>
-													</c:if> <strong style="margin-left: 10px;">${employer.name}</strong>
+													data-target="#e${employer.id}" href="#"> <img
+													alt="avatar" width="60px" height="60px"
+													src="<c:url value="${employer.pictureURL}" />"></img> <strong
+													style="margin-left: 10px;">${employer.name}</strong>
 												</a>
 											</div>
 											<div align="right" class="col-lg-2">
@@ -50,17 +46,11 @@
 											<c:forEach items="${employer.candidates}" var="candidate">
 												<div class="panel panel-default">
 													<div class="panel-heading">
-														<c:if test="${candidate.pictureURL == null}">
-															<img alt="avatar" width="40px" height="40px"
-																style="margin-right: 20px;"
-																src="<c:url value="/resources/pictures/avatar.png" />"></img>
-														</c:if>
-														<c:if test="${candidate.pictureURL != null}">
-															<img alt="avatar" width="40px" height="40px"
-																style="margin-right: 20px;"
-																src="<c:url value="${candidate.pictureURL}" />"></img>
-														</c:if>
-														<a style="font-size: 14px;"
+
+														<img alt="avatar" width="40px" height="40px"
+															style="margin-right: 20px;"
+															src="<c:url value="${candidate.pictureURL}" />"></img> <a
+															style="font-size: 14px;"
 															href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
 															${candidate.name} </a>
 													</div>
@@ -89,16 +79,11 @@
 										<div class="panel-title row">
 											<div class="col-lg-10">
 												<a style="text-decoration: none;" data-toggle="collapse"
-													data-target="#c${candidate.id}" href="#"> <c:if
-														test="${candidate.pictureURL == null}">
-														<img alt="avatar" width="60px" height="60px"
-															style="margin-right: 20px;"
-															src="<c:url value="/resources/pictures/avatar.png" />"></img>
-													</c:if> <c:if test="${candidate.pictureURL != null}">
-														<img alt="avatar" width="60px" height="60px"
-															style="margin-right: 20px;"
-															src="<c:url value="${candidate.pictureURL}" />"></img>
-													</c:if> <strong style="margin-left: 10px;">${candidate.lastName}
+													data-target="#c${candidate.id}" href="#"> <img
+													alt="avatar" width="60px" height="60px"
+													style="margin-right: 20px;"
+													src="<c:url value="${candidate.pictureURL}" />"></img> <strong
+													style="margin-left: 10px;">${candidate.lastName}
 														${candidate.name}</strong>
 												</a>
 											</div>
@@ -114,14 +99,10 @@
 											<c:forEach items="${candidate.vacancies}" var="vacancy">
 												<div class="panel panel-default">
 													<div class="panel-heading">
-														<c:if test="${vacancy.employer.pictureURL == null}">
-															<img alt="avatar" width="40px" height="40px"
-																src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
-														</c:if>
-														<c:if test="${vacancy.employer.pictureURL != null}">
-															<img alt="avatar" width="40px" height="40px"
-																src="<c:url value="${vacancy.employer.pictureURL}" />"></img>
-														</c:if>
+
+														<img alt="avatar" width="40px" height="40px"
+															src="<c:url value="${vacancy.employer.pictureURL}" />"></img>
+
 														<a style="font-size: 14px; margin-left: 10px;"
 															href="/JobsUkraine/employer/${vacancy.employer.id}">${vacancy.employer.name}</a>
 														<a style="font-size: 14px; margin-left: 10px;"

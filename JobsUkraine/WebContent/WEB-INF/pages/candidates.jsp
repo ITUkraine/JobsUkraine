@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Candidates</title>
 </head>
-<body  background="/JobsUkraine/resources/pictures/cand.png"   style="background-attachment: fixed; background-repeat: no-repeat;">
+<body background="/JobsUkraine/resources/pictures/cand.png"
+	style="background-attachment: fixed; background-repeat: no-repeat;">
 	<%@ include file="header.jsp"%>
 
 	<div class="container">
@@ -18,17 +19,11 @@
 					<div class="panel panel-default">
 						<div class="panel-heading col-lg-12">
 							<div class="col-lg-6">
-								<c:if test="${candidate.pictureURL == null}">
-									<img alt="avatar" width="70px" height="70px"
-										style="margin-right: 20px;"
-										src="<c:url value="/resources/pictures/avatar.png" />"></img>
-								</c:if>
-								<c:if test="${candidate.pictureURL != null}">
-									<img alt="avatar" width="70px" height="70px"
-										style="margin-right: 20px;"
-										src="<c:url value="${candidate.pictureURL}" />"></img>
-								</c:if>
-								<a style="font-size: 20px;"
+
+								<img alt="avatar" width="70px" height="70px"
+									style="margin-right: 20px;"
+									src="<c:url value="${candidate.pictureURL}" />"></img> <a
+									style="font-size: 20px;"
 									href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
 									${candidate.name} </a>
 							</div>

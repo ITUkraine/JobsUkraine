@@ -24,17 +24,11 @@
 						</div>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<div class="col-lg-4">
-								<c:if test="${employer.pictureURL == null}">
-									<img alt="avatar" width="40px" height="40px"
-										style="margin-right: 10px;"
-										src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
-								</c:if>
-								<c:if test="${employer.pictureURL != null}">
-									<img alt="avatar" width="40px" height="40px"
-										style="margin-right: 10px;"
-										src="<c:url value="${vacancy.employer.pictureURL}" />"></img>
-								</c:if>
-								<a style="text-decoration: none;"
+
+								<img alt="avatar" width="40px" height="40px"
+									style="margin-right: 10px;"
+									src="<c:url value="${vacancy.employer.pictureURL}" />"></img> <a
+									style="text-decoration: none;"
 									href="/JobsUkraine/employer/${vacancy.employer.id}">${vacancy.employer.name}</a>
 							</div>
 						</sec:authorize>

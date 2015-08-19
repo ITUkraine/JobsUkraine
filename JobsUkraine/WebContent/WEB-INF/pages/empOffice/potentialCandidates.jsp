@@ -16,19 +16,18 @@
 				<div class="panel panel-default">
 					<div class="panel-heading col-lg-12">
 						<div class="col-lg-4">
-							<c:if test="${candidate.pictureURL == null}">
-								<img alt="avatar" width="60px" height="60px"
-									style="margin-right: 20px;"
-									src="<c:url value="/resources/pictures/avatar.png" />"></img>
-							</c:if>
-							<c:if test="${candidate.pictureURL != null}">
-								<img alt="avatar" width="60px" height="60px"
-									style="margin-right: 20px;"
-									src="<c:url value="${candidate.pictureURL}" />"></img>
-							</c:if>
+
+							<img alt="avatar" width="60px" height="60px"
+								style="margin-right: 20px;"
+								src="<c:url value="${candidate.pictureURL}" />"></img>
 						</div>
 						<div class="col-lg-8">
-							<h5 align="right">Rating: ${candidate.rating}</h5>
+							<h5 align="right">
+								<img alt="avatar" width="20px" height="20px"
+									style="margin-right: 2px; margin-top: -5px;"
+									src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img>
+								${candidate.rating}
+							</h5>
 							<a style="font-size: 16px;"
 								href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
 								${candidate.name} </a>
@@ -36,15 +35,19 @@
 					</div>
 					<div class="panel-body">
 						<br>
-						<p>Age: ${candidateService.getAge(candidate)}</p>
 						<p>
-							Categories:
+							<strong>Age:</strong> ${candidateService.getAge(candidate)} years
+						</p>
+						<p>
+							<strong>Categories:</strong>
 							<c:forEach var="category" items="${candidate.categories}"
 								varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 							</c:forEach>
 						</p>
-						<p>Skills: ${candidate.primarySkills}</p>
+						<p>
+							<strong>Skills:</strong> ${candidate.primarySkills}
+						</p>
 					</div>
 				</div>
 			</c:forEach>

@@ -15,29 +15,23 @@
 			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<c:if test="${employer.pictureURL == null}">
-						<img alt="avatar" width="100px" height="100px"
-							style="margin-right: 20px;"
-							src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
-					</c:if>
-					<c:if test="${employer.pictureURL != null}">
-						<img alt="avatar" width="100px" height="100px"
-							style="margin-right: 20px;"
-							src="<c:url value="${employer.pictureURL}" />"></img>
-					</c:if>
-					<strong style="font-size: 24px;">${employer.name}</strong>
+
+					<img alt="avatar" width="100px" height="100px"
+						style="margin-right: 20px;"
+						src="<c:url value="${employer.pictureURL}" />"></img> <strong
+						style="font-size: 24px;">${employer.name}</strong>
 				</div>
 
 				<div class="panel-body">
 					<p>
 						<strong>Contacts:</strong>
 					</p>
-					<p>Email: ${employer.email }</p>
-					<p>Phone: ${employer.phone }</p>
+					<p><strong>Email:</strong> ${employer.email }</p>
+					<p><strong>Phone:</strong> ${employer.phone }</p>
 					<p>
-						Website: <a href="${employer.website} ">${employer.website}</a>
+						<strong>Website:</strong> <a href="${employer.website} ">${employer.website}</a>
 					</p>
-					<p>Address: ${employer.address }</p>
+					<p><strong>Address:</strong> ${employer.address }</p>
 					<p>
 						<br> <strong>Categories:</strong>
 					</p>

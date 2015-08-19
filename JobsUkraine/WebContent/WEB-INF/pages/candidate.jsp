@@ -17,21 +17,17 @@
 			<div class="panel panel-default">
 				<div class="panel-heading col-lg-12">
 					<div class="col-lg-9">
-						<c:if test="${candidate.pictureURL == null}">
-							<img alt="avatar" width="100px" height="100px"
-								style="margin-right: 20px;"
-								src="<c:url value="/resources/pictures/avatar.png" />"></img>
-						</c:if>
-						<c:if test="${candidate.pictureURL != null}">
-							<img alt="avatar" width="100px" height="100px"
-								style="margin-right: 20px;"
-								src="<c:url value="${candidate.pictureURL}" />"></img>
-						</c:if>
-						<strong style="font-size: 24px;">${candidate.lastName}
+
+						<img alt="avatar" width="100px" height="100px"
+							style="margin-right: 20px;"
+							src="<c:url value="${candidate.pictureURL}" />"></img> <strong
+							style="font-size: 24px;">${candidate.lastName}
 							${candidate.name} </strong>
 					</div>
 					<div class="col-lg-3">
-						<h4 align="right">Rating: ${candidate.rating}</h4>
+						<h4 align="right"><img alt="avatar" width="23px" height="23px"
+										style="margin-right: 2px; margin-top: -5px;"
+										src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img> ${candidate.rating}</h4>
 					</div>
 				</div>
 				<div class="panel-body">
@@ -141,8 +137,9 @@
 						<div class="panel panel-default">
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-6">
-									<strong>Author: <a style="text-decoration: none;"
+									<sec:authorize access="!hasRole('ROLE_CANDIDATE')"><strong>Author: <a style="text-decoration: none;"
 										href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a></strong>
+										</sec:authorize>
 								</div>
 								<div class="col-lg-6" align="right">
 									<fmt:formatDate value="${feedback.date}"

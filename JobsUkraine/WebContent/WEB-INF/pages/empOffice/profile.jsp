@@ -25,12 +25,12 @@
 					<p>
 						<strong>Contacts:</strong>
 					</p>
-					<p>Email: ${employer.email }</p>
-					<p>Phone: ${employer.phone }</p>
+					<p><strong>Email:</strong> ${employer.email }</p>
+					<p><strong>Phone:</strong> ${employer.phone }</p>
 					<p>
-						Website: <a href="${employer.website} ">${employer.website}</a>
+						<strong>Website:</strong> <a href="${employer.website} ">${employer.website}</a>
 					</p>
-					<p>Address: ${employer.address }</p>
+					<p><strong>Address:</strong> ${employer.address }</p>
 					<p>
 						<strong>Categories:</strong>
 					</p>
