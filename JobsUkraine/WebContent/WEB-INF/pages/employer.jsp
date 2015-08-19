@@ -15,7 +15,17 @@
 			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong style="font-size: 24px;">${employer.name }</strong>
+					<c:if test="${employer.pictureURL == null}">
+						<img alt="avatar" width="100px" height="100px"
+							style="margin-right: 20px;"
+							src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
+					</c:if>
+					<c:if test="${employer.pictureURL != null}">
+						<img alt="avatar" width="100px" height="100px"
+							style="margin-right: 20px;"
+							src="<c:url value="${employer.pictureURL}" />"></img>
+					</c:if>
+					<strong style="font-size: 24px;">${employer.name}</strong>
 				</div>
 
 				<div class="panel-body">
