@@ -143,7 +143,7 @@ public class CandidateController {
 	@RequestMapping(value = "/acceptVacancy")
 	public String acceptVacancy(@RequestParam("id") int id, Principal principal) {
 		candidateService.acceptVacancy(candidateService.findByLogin(principal.getName()), vacancyService.find(id));
-		return "redirect:vacancy/"+id;
+		return "redirect:myVacancies";
 	}
 
 	@RequestMapping(value="/myVacancies")
