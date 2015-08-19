@@ -23,5 +23,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 
 	Candidate findByEmail(String email);
 	
-	List<Candidate> findByRatingGreaterThan(int value);
+	List<Candidate> findByRatingGreaterThan(double value);
 }

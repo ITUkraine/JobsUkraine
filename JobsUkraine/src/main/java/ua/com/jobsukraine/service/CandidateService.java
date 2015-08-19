@@ -28,5 +28,5 @@ public interface CandidateService {
 	
 	void acceptVacancy(Candidate candidate, Vacancy vacancy);
 	
-	List<Candidate> getRandomBestCandidates(int amount, int minRating);
+	List<Candidate> getRandomBestCandidates(int amount, double minRating);
 }

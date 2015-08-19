@@ -120,7 +120,7 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List<Candidate> getRandomBestCandidates(int amount, int minRating) {
+	public List<Candidate> getRandomBestCandidates(int amount, double minRating) {
 		List<Candidate> candidates = candidateRepository.findByRatingGreaterThan(minRating);
 		Collections.shuffle(candidates);
 		int amountOfCandidates = candidates.size();
