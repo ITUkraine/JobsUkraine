@@ -62,6 +62,8 @@ public class Candidate extends Person implements Comparable<Candidate> {
 
 	@Column(name = "experience")
 	private String experience;
+	
+	private String pictureURL;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "candidat_id")
@@ -234,6 +236,14 @@ public class Candidate extends Person implements Comparable<Candidate> {
 				+ primarySkills + ", sityWhereLookingForWork=" + cityWhereLookingForWork + ", dateStartToWork="
 				+ dateStartToWork + ", experience=" + experience + ", cv=" + cv + ", dreamJob=" + dreamJob
 				+ ", Education=" + education + ", Rating=" + rating + "]\n";
+	}
+
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
 	}
 
 }
