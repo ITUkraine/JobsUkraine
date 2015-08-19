@@ -17,10 +17,17 @@
 			<div class="panel panel-default">
 				<div class="panel-heading col-lg-12">
 					<div class="col-lg-9">
-						<img alt="avatar" width="100px" height="100px"
-							style="margin-right: 20px;"
-							src="<c:url value="/resources/pictures/avatar.png" />"></img> <strong
-							style="font-size: 24px;">${candidate.lastName}
+						<c:if test="${candidate.pictureURL == null}">
+							<img alt="avatar" width="100px" height="100px"
+								style="margin-right: 20px;"
+								src="<c:url value="/resources/pictures/avatar.png" />"></img>
+						</c:if>
+						<c:if test="${candidate.pictureURL != null}">
+							<img alt="avatar" width="100px" height="100px"
+								style="margin-right: 20px;"
+								src="<c:url value="${candidate.pictureURL}" />"></img>
+						</c:if>
+						<strong style="font-size: 24px;">${candidate.lastName}
 							${candidate.name} </strong>
 					</div>
 					<div class="col-lg-3">
@@ -29,33 +36,57 @@
 				</div>
 				<div class="panel-body">
 					<br>
-					<p><strong>City:</strong> ${candidate.cityWhereLookingForWork}</p>
-					<p><strong>Gender:</strong> ${candidate.sex}</p>
-					<p><strong>Age:</strong> ${age} years</p>
+					<p>
+						<strong>City:</strong> ${candidate.cityWhereLookingForWork}
+					</p>
+					<p>
+						<strong>Gender:</strong> ${candidate.sex}
+					</p>
+					<p>
+						<strong>Age:</strong> ${age} years
+					</p>
 
 					<p>
 						<strong>Categories:</strong>
-						<c:forEach var="category" items="${candidate.categories}" varStatus="loop">
+						<c:forEach var="category" items="${candidate.categories}"
+							varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 						</c:forEach>
 					</p>
-					<p><strong>Skills:</strong> ${candidate.primarySkills}</p>
-					<p><strong>Address:</strong> ${candidate.address}</p>
-					<p><strong>Date start work:</strong> ${candidate.dateStartToWork}</p>
-					<p><strong>Dream job:</strong> ${candidate.dreamJob}</p>
-					<p><strong>Education:</strong> ${candidate.education}</p>
-					<p><strong>Experience:</strong> ${candidate.experience}</p>
+					<p>
+						<strong>Skills:</strong> ${candidate.primarySkills}
+					</p>
+					<p>
+						<strong>Address:</strong> ${candidate.address}
+					</p>
+					<p>
+						<strong>Date start work:</strong> ${candidate.dateStartToWork}
+					</p>
+					<p>
+						<strong>Dream job:</strong> ${candidate.dreamJob}
+					</p>
+					<p>
+						<strong>Education:</strong> ${candidate.education}
+					</p>
+					<p>
+						<strong>Experience:</strong> ${candidate.experience}
+					</p>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<p>
 							<strong>Contacts:</strong>
 						</p>
-						<p><strong>Email:</strong> ${candidate.email}</p>
-						<p><strong>Mobile phone:</strong> ${candidate.mobileNumber}</p>
+						<p>
+							<strong>Email:</strong> ${candidate.email}
+						</p>
+						<p>
+							<strong>Mobile phone:</strong> ${candidate.mobileNumber}
+						</p>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_EMPLOYER')">
 						<div align="right">
 							<button class="btn btn-black"
-								onclick="location.href='<c:url value="/connectEmployerCandidate?id=${candidate.id}" />'">Interesting candidate</button>
+								onclick="location.href='<c:url value="/connectEmployerCandidate?id=${candidate.id}" />'">Interesting
+								candidate</button>
 						</div>
 					</sec:authorize>
 				</div>
@@ -68,21 +99,27 @@
 					<div class="panel-body">
 						<form:form class="form-group" action="addFeedBack"
 							commandName="feedback" method="POST">
-							<p><strong>Category</strong></p>
+							<p>
+								<strong>Category</strong>
+							</p>
 							<form:select class="form-control" id="sel1" path="category">
 								<c:forEach var="category" items="${list}">
 									<option value="${category.name}">${category.name}</option>
 								</c:forEach>
 							</form:select>
 							<br>
-							<p><strong>Mark</strong></p>
+							<p>
+								<strong>Mark</strong>
+							</p>
 							<form:select class="form-control" path="mark">
 								<c:forEach begin="1" end="10" var="i">
 									<form:option value="${11-i}">${11-i}</form:option>
 								</c:forEach>
 							</form:select>
 							<br>
-							<p><strong>Comment</strong></p>
+							<p>
+								<strong>Comment</strong>
+							</p>
 							<form:textarea rows="7" class="form-control" path="comment" />
 							<br>
 							<div align="right">
@@ -95,14 +132,17 @@
 			</sec:authorize>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h1 class="panel-title"><strong>All feedbacks</strong></h1>
+					<h1 class="panel-title">
+						<strong>All feedbacks</strong>
+					</h1>
 				</div>
 				<div class="panel-body">
 					<c:forEach var="feedback" items="${candidate.feedbacks}">
 						<div class="panel panel-default">
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-6">
-									<strong>Author: <a style="text-decoration: none;" href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a></strong>
+									<strong>Author: <a style="text-decoration: none;"
+										href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a></strong>
 								</div>
 								<div class="col-lg-6" align="right">
 									<fmt:formatDate value="${feedback.date}"
@@ -112,8 +152,12 @@
 							<div class="panel-heading"></div>
 							<div class="panel-heading">
 								<br>
-								<p><strong>Category:</strong> ${feedback.category.name}</p>
-								<p><strong>Mark:</strong> ${feedback.mark}</p>
+								<p>
+									<strong>Category:</strong> ${feedback.category.name}
+								</p>
+								<p>
+									<strong>Mark:</strong> ${feedback.mark}
+								</p>
 							</div>
 							<div class="panel-body">${feedback.comment}</div>
 						</div>

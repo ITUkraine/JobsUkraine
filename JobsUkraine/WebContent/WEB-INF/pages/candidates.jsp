@@ -22,8 +22,16 @@
 						<div class="panel panel-default">
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-6">
-									<img alt="avatar" width="70px" height="70px"
-										src="<c:url value="/resources/pictures/avatar.png" />"></img>
+									<c:if test="${candidate.pictureURL == null}">
+										<img alt="avatar" width="100px" height="100px"
+											style="margin-right: 20px;"
+											src="<c:url value="/resources/pictures/avatar.png" />"></img>
+									</c:if>
+									<c:if test="${candidate.pictureURL != null}">
+										<img alt="avatar" width="100px" height="100px"
+											style="margin-right: 20px;"
+											src="<c:url value="${candidate.pictureURL}" />"></img>
+									</c:if>
 									<a style="font-size: 20px;"
 										href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
 										${candidate.name} </a>
@@ -34,17 +42,25 @@
 							</div>
 							<div class="panel-body">
 								<br>
-								<p><strong>City:</strong> ${candidate.cityWhereLookingForWork}</p>
 								<p>
-								<p><strong>Age:</strong> ${candidateService.getAge(candidate)} years</p>
-					
+									<strong>City:</strong> ${candidate.cityWhereLookingForWork}
+								</p>
+								<p>
+								<p>
+									<strong>Age:</strong> ${candidateService.getAge(candidate)}
+									years
+								</p>
+
 								<p>
 									<strong>Categories:</strong>
-									<c:forEach var="category"  items="${candidate.categories}" varStatus="loop">
+									<c:forEach var="category" items="${candidate.categories}"
+										varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
-								</c:forEach>
+									</c:forEach>
 								</p>
-								<p><strong>Skills:</strong> ${candidate.primarySkills}</p>
+								<p>
+									<strong>Skills:</strong> ${candidate.primarySkills}
+								</p>
 							</div>
 						</div>
 
