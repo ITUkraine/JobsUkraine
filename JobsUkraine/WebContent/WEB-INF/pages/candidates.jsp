@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Candidates</title>
 </head>
-<body>
+<body  background="/JobsUkraine/resources/pictures/cand.png"   style="background-attachment: fixed; background-repeat: no-repeat;">
 	<%@ include file="header.jsp"%>
 
 	<div class="container">
