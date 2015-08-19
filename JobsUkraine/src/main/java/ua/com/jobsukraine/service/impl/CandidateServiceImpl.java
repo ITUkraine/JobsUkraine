@@ -98,6 +98,8 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 		candidate.setCategories(listcat);
 		candidate.setInfo(info);
+		if(candidate.getPictureURL().equals(""))
+			candidate.setPictureURL("/resources/pictures/avatar.png");
 		return candidateRepository.save(candidate);
 	}
 

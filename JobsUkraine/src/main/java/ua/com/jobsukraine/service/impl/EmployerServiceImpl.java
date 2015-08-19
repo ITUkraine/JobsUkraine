@@ -77,6 +77,8 @@ public class EmployerServiceImpl implements EmployerService {
 		}
 		employer.setCategories(listcat);
 		employer.setInfo(info);
+		if(employer.getPictureURL().equals(""))
+			employer.setPictureURL("https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png");
 		return employerRepository.save(employer);
 
 	}
