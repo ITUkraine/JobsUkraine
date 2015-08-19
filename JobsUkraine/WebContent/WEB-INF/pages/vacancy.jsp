@@ -9,7 +9,8 @@
 <title>Vacancy</title>
 <link>
 </head>
-<body>
+<body  background="/JobsUkraine/resources/pictures/hands.png"   style="background-attachment: fixed; background-repeat: no-repeat;">
+
 	<%@ include file="header.jsp"%>
 
 	<div class="container">
