@@ -26,7 +26,8 @@
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-4"></div>
-			<div class="panel panel-default col-md-4 panel-center" style="opacity:0.95;">
+			<div class="panel panel-default col-md-4 panel-center"
+				style="opacity: 0.95;">
 				<div class="panel-heading">
 					<i style="font-size: 20px; font-family:">Step 3</i>
 				</div>
@@ -53,6 +54,11 @@
 							<p>Primary skills:</p>
 
 							<form:input size="50" path="primarySkills" class="form-control"
+								data-role="tagsinput" />
+
+							<p>Avatar URL:</p>
+
+							<form:input size="255" path="pictureURL" class="form-control"
 								data-role="tagsinput" />
 
 							<br> <br>

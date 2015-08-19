@@ -14,7 +14,8 @@
 	<div class="container">
 		<div class="raw">
 			<div class="col-md-4"></div>
-			<div class="panel panel-default col-md-4 panel-center" style="opacity:0.95;">
+			<div class="panel panel-default col-md-4 panel-center"
+				style="opacity: 0.95;">
 				<div class="panel-heading">
 					<i style="font-size: 20px; font-family:">Step 2</i>
 				</div>
@@ -55,6 +56,11 @@
 
 							<p>Web-site</p>
 							<form:input class="form-control" path="website" value="http://" />
+
+							<p>Company logo URL:</p>
+
+							<form:input size="255" path="pictureURL" class="form-control"
+								data-role="tagsinput" />
 
 							<br>
 							<div align="right">
