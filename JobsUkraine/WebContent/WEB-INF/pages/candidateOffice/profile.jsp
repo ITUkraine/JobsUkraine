@@ -61,16 +61,10 @@
 				<div class="panel-body">
 					<c:forEach var="feedback" items="${candidate.feedbacks}">
 						<div class="panel panel-default">
-							<div class="panel-heading col-lg-12">
-								<div class="col-lg-6">
-									Author: <a href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a>
-								</div>
-								<div class="col-lg-6" align="right">
+							<div class="panel-heading" align="right">
 									<fmt:formatDate value="${feedback.date}"
 										pattern="dd/MM/yyyy HH:mm:ss" />
-								</div>
 							</div>
-							<div class="panel-heading"></div>
 							<div class="panel-heading">
 									<br>
 									<p>Category: ${feedback.category.name}</p>

@@ -23,12 +23,12 @@
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-6">
 									<c:if test="${candidate.pictureURL == null}">
-										<img alt="avatar" width="100px" height="100px"
+										<img alt="avatar" width="70px" height="70px"
 											style="margin-right: 20px;"
 											src="<c:url value="/resources/pictures/avatar.png" />"></img>
 									</c:if>
 									<c:if test="${candidate.pictureURL != null}">
-										<img alt="avatar" width="100px" height="100px"
+										<img alt="avatar" width="70px" height="70px"
 											style="margin-right: 20px;"
 											src="<c:url value="${candidate.pictureURL}" />"></img>
 									</c:if>

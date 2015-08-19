@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Candidate</title>
+<title>Vacancies</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -14,13 +14,36 @@
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8">
 			<div class="panel panel-default">
-				<div class="panel-heading">Vacancies</div>
+				<div class="panel-heading">
+					<h3>Vacancies</h3>
+				</div>
 				<div class="panel-body">
 					<c:forEach var="vacancy" items="${vacancies}">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<a style="font-size: 20px;"
-									href="/JobsUkraine/vacancy/${vacancy.id}">${vacancy.name} </a>
+								<div class="row">
+									<div class="col-lg-8">
+										<a style="font-size: 20px;"
+											href="/JobsUkraine/vacancy/${vacancy.id}">${vacancy.name}
+										</a>
+									</div>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<div class="col-lg-4">
+											<c:if test="${employer.pictureURL == null}">
+												<img alt="avatar" width="40px" height="40px"
+													style="margin-right: 10px;"
+													src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
+											</c:if>
+											<c:if test="${employer.pictureURL != null}">
+												<img alt="avatar" width="40px" height="40px"
+													style="margin-right: 10px;"
+													src="<c:url value="${vacancy.employer.pictureURL}" />"></img>
+											</c:if>
+											<a style="text-decoration: none;"
+												href="/JobsUkraine/employer/${vacancy.employer.id}">${vacancy.employer.name}</a>
+										</div>
+									</sec:authorize>
+								</div>
 							</div>
 							<div class="panel-body">
 								<p>
