@@ -124,7 +124,7 @@ public class EmployerController {
 	public String connectEmployerCandidate(@RequestParam("id") int id, Principal principal) {
 		employerService.connectWithCandidate(candidateService.find(id),
 				employerService.findByLogin(principal.getName()));
-		return "redirect:candidate/" + id;
+		return "redirect:myCandidates";
 	}
 
 	@RequestMapping(value = "/myCandidates")
