@@ -7,7 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Office | Profile</title>
 </head>
-<body background= "http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg"  style="background-attachment: fixed; background-repeat: no-repeat;">
+<body
+	background="http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg"
+	style="background-attachment: fixed; background-repeat: no-repeat;">
 
 	<%@ include file="../header.jsp"%>
 
@@ -26,13 +28,19 @@
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-8">
 									<img alt="avatar" width="70px" height="70px"
-										src="<c:url value="/resources/pictures/avatar.png" />"></img>
-									<a style="font-size: 20px;"
+										style="margin-right: 10px;"
+										src="<c:url value="${candidate.pictureURL}" />"></img> <a
+										style="font-size: 20px;"
 										href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
 										${candidate.name} </a>
 								</div>
 								<div class="col-lg-4">
-									<h4 align="right">Rating: ${candidate.rating}</h4>
+									<h4 align="right">
+										<img alt="avatar" width="20px" height="20px"
+											style="margin-right: 2px; margin-top: -5px;"
+											src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img>
+										${candidate.rating}
+									</h4>
 								</div>
 							</div>
 							<div class="panel-body">
