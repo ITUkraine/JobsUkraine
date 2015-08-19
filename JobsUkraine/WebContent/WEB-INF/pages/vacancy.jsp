@@ -18,13 +18,36 @@
 			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong style="font-size: 24px;">${vacancy.name} </strong>
+					<div class="row">
+						<div class="col-lg-8">
+							<strong style="font-size: 24px;">${vacancy.name} </strong>
+						</div>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<div class="col-lg-4">
+								<c:if test="${employer.pictureURL == null}">
+									<img alt="avatar" width="40px" height="40px"
+										style="margin-right: 10px;"
+										src="https://cdn3.iconfinder.com/data/icons/business-office-2/512/businessman_tie-512.png"></img>
+								</c:if>
+								<c:if test="${employer.pictureURL != null}">
+									<img alt="avatar" width="40px" height="40px"
+										style="margin-right: 10px;"
+										src="<c:url value="${vacancy.employer.pictureURL}" />"></img>
+								</c:if>
+								<a style="text-decoration: none;"
+									href="/JobsUkraine/employer/${vacancy.employer.id}">${vacancy.employer.name}</a>
+							</div>
+						</sec:authorize>
+					</div>
 				</div>
 				<div class="panel-body">
-					<p><strong>Category:</strong> ${vacancy.category.name}</p>
-					<p><strong>Salary:</strong> ${vacancy.salary}$</p>
-					<strong>Description:</strong> ${vacancy.description}
-					<br>
+					<p>
+						<strong>Category:</strong> ${vacancy.category.name}
+					</p>
+					<p>
+						<strong>Salary:</strong> ${vacancy.salary}$
+					</p>
+					<strong>Description:</strong> ${vacancy.description} <br>
 					<div class="row">
 						<div class="col-lg-8"></div>
 						<div class="col-lg-4">

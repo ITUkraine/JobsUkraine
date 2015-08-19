@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Office | Profile</title>
 </head>
-<body background= "http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg">
+<body
+	background="http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg">
 
 	<%@ include file="../header.jsp"%>
 
@@ -18,7 +19,7 @@
 		<div class="col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong style="font-size: 24px;">${employer.name }</strong>
+					<strong style="font-size: 26px;">${employer.name }</strong>
 				</div>
 
 				<div class="panel-body">
@@ -44,7 +45,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3>Description</h3>
+					<strong style="font-size: 20px;">Description</strong>
 				</div>
 				<div class="panel-body">
 					<p>${employer.description}</p>

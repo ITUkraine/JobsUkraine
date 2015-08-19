@@ -8,7 +8,9 @@
 </head>
 <body>
 	<div class="panel panel-default">
-		<div class="panel-heading">Potential candidates</div>
+		<div class="panel-heading">
+			<strong style="font-size: 20px;">Potential candidates</strong>
+		</div>
 		<div class="panel-body">
 			<c:forEach items="${candidates}" var="candidate">
 				<div class="panel panel-default">
@@ -37,7 +39,8 @@
 						<p>Age: ${candidateService.getAge(candidate)}</p>
 						<p>
 							Categories:
-							<c:forEach var="category" items="${candidate.categories}">
+							<c:forEach var="category" items="${candidate.categories}"
+								varStatus="loop">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 							</c:forEach>
 						</p>
