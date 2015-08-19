@@ -26,9 +26,12 @@
 							${candidate.name} </strong>
 					</div>
 					<div class="col-lg-3">
-						<h4 align="right"><img alt="avatar" width="23px" height="23px"
-										style="margin-right: 2px; margin-top: -5px;"
-										src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img> ${candidate.rating}</h4>
+						<h4 align="right">
+							<img alt="avatar" width="23px" height="23px"
+								style="margin-right: 2px; margin-top: -5px;"
+								src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img>
+							${candidate.rating}
+						</h4>
 					</div>
 				</div>
 				<div class="panel-body">
@@ -138,9 +141,14 @@
 						<div class="panel panel-default">
 							<div class="panel-heading col-lg-12">
 								<div class="col-lg-6">
-									<sec:authorize access="!hasRole('ROLE_CANDIDATE')"><strong>Author: <a style="text-decoration: none;"
-										href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a></strong>
-										</sec:authorize>
+									<sec:authorize
+										access="hasRole('ROLE_ADMIN') || hasRole('ROLE_EMPLOYER')">
+										<strong> <img
+											style="margin-left: -13px; margin-right: 10px;" alt="avatar"
+											width="30px" height="30px"
+											src="<c:url value="${feedback.employer.pictureURL}" />"></img><a
+											href="/JobsUkraine/employer/${feedback.employer.id}">${feedback.employer.name}</a></strong>
+									</sec:authorize>
 								</div>
 								<div class="col-lg-6" align="right">
 									<fmt:formatDate value="${feedback.date}"

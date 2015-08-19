@@ -87,9 +87,17 @@
 				<div class="panel-body">
 					<c:forEach var="feedback" items="${candidate.feedbacks}">
 						<div class="panel panel-default">
-							<div class="panel-heading" align="right">
-								<fmt:formatDate value="${feedback.date}"
-									pattern="dd/MM/yyyy HH:mm:ss" />
+							<div class="panel-heading col-lg-12">
+								<div class="col-lg-6">
+									<strong> <img
+										style="margin-left: -13px; margin-right: 10px;" alt="avatar"
+										width="30px" height="30px"
+										src="<c:url value="${feedback.employer.pictureURL}" />"></img>${feedback.employer.name}</strong>
+								</div>
+								<div class="col-lg-6" align="right">
+									<fmt:formatDate value="${feedback.date}"
+										pattern="dd/MM/yyyy HH:mm:ss" />
+								</div>
 							</div>
 							<div class="panel-heading">
 								<br>
