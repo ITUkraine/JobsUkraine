@@ -18,21 +18,37 @@
 				<c:forEach items="${vacancies}" var="vacancy">
 					<div class="panel panel-default" id="panel1">
 						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-target="#collapse${vacancy.id}"
-									href="#collapse${vacancy.id}"> ${vacancy.name},
-									${vacancy.category.name}, ${vacancy.salary } </a>
-							</h4>
-
-						</div>
-						<div id="collapse${vacancy.id}" class="panel-collapse collapse">
-							<div class="panel-heading">
-								${vacancy.description}
-								<div align="right">
-									<input class="form-control" type="button"
-										onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />';"
-										value="Delete">
+							<div class="panel-title row">
+								<div class="col-lg-8">
+									<a style="text-decoration: none;" data-toggle="collapse"
+										data-target="#${vacancy.id}" href="#"> ${vacancy.name}</a>
 								</div>
+								<div class="col-lg-4">
+									<p align="right">${vacancy.salary}$</p>
+								</div>
+							</div>
+						</div>
+						<div id="${vacancy.id}" class="panel-collapse collapse">
+							<div class="panel-heading">
+								<p>
+									<strong>Category:</strong> ${vacancy.category.name}
+								</p>
+								<strong>Description:</strong>
+								<c:if test="${vacancy.description.length()<300}">
+								${vacancy.description}
+							</c:if>
+
+								<c:if test="${vacancy.description.length()>=300}">
+								${vacancy.description.substring(0,300)}...
+							</c:if>
+							</div>
+							<div class="panel-body" align="right">
+								<button class="btn btn-black"
+									style="width: 100px; height: 35px;" type="button"
+									onclick="location.href='<c:url value="/vacancy/delete?id=${vacancy.id}" />'">Delete</button>
+								<button class="btn btn-black"
+									style="width: 100px; height: 35px;" type="button"
+									onclick="location.href='<c:url value="/vacancy/${vacancy.id}" />'">More</button>
 							</div>
 						</div>
 					</div>
