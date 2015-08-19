@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Office | Profile</title>
 </head>
-<body>
+<body background= "http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg">
+
 	<%@ include file="../header.jsp"%>
 
 	<div class="container">

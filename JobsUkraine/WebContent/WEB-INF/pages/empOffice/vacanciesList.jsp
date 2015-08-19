@@ -10,7 +10,8 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body background= "http://thehomesitter.com/wp-content/uploads/2013/09/business-office-furniture-62.jpg">
+
 	<div class="panel panel-default">
 		<div class="panel-heading">My vacancies</div>
 		<div class="panel-body">
