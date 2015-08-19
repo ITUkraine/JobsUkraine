@@ -101,10 +101,11 @@ public class EmployerController {
 
 	@RequestMapping(value = "/employerOffice", method = RequestMethod.GET)
 	public String goLogin(Principal principal, Model model) {
-		Employer employer = employerService.findByLogin(principal.getName());
-		model.addAttribute("employer", employer);
+		model.addAttribute("employer", employerService.findByLogin(principal.getName()));
 		model.addAttribute("candidateService", candidateService);
-		model.addAttribute("candidates", candidateService.getRandomBestCandidates(3, 6));
+		System.err.println(candidateService.findByLogin(principal.getName()));
+		model.addAttribute("candidates",
+				candidateService.getRandomBestCandidates(employerService.findByLogin(principal.getName()), 3, 6));
 		return "empOffice/profile";
 	}
 
@@ -130,7 +131,8 @@ public class EmployerController {
 	public ModelAndView myCandidates(Principal principal) {
 		Employer employer = employerService.findByLogin(principal.getName());
 		ModelAndView modelAndView = new ModelAndView("empOffice/myCandidates");
-		modelAndView.addObject("candidates", candidateService.getRandomBestCandidates(3, 6));
+		modelAndView.addObject("candidates",
+				candidateService.getRandomBestCandidates(employerService.findByLogin(principal.getName()), 3, 6));
 		modelAndView.addObject("myCandidates", employer.getCandidates());
 		return modelAndView;
 	}

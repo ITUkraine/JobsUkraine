@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.jobsukraine.entity.Candidate;
 import ua.com.jobsukraine.entity.Category;
+import ua.com.jobsukraine.entity.Employer;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 import ua.com.jobsukraine.repository.CandidateRepository;
@@ -120,8 +121,10 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List<Candidate> getRandomBestCandidates(int amount, double minRating) {
-		List<Candidate> candidates = candidateRepository.findByRatingGreaterThan(minRating);
+	public List<Candidate> getRandomBestCandidates(Employer employer, int amount, double minRating) {
+		List<Candidate> candidates = new ArrayList<>();
+		for (Category category : employer.getCategories())
+			candidates.addAll(candidateRepository.findByRatingGreaterThan(category, minRating));
 		Collections.shuffle(candidates);
 		int amountOfCandidates = candidates.size();
 		candidates = candidates.subList(0, amountOfCandidates < amount ? amountOfCandidates : amount);

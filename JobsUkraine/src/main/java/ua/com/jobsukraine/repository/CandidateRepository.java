@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import ua.com.jobsukraine.entity.Candidate;
+import ua.com.jobsukraine.entity.Category;
 import ua.com.jobsukraine.entity.LoginInfo;
 import ua.com.jobsukraine.entity.Vacancy;
 
@@ -23,5 +24,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 
 	Candidate findByEmail(String email);
 	
-	List<Candidate> findByRatingGreaterThan(double value);
+	@Query("SELECT DISTINCT c FROM Candidate c JOIN c.categories ctgr WHERE ctgr = ?1 AND c.rating>=?2")
+	List<Candidate> findByRatingGreaterThan(Category category, double value);
 }
