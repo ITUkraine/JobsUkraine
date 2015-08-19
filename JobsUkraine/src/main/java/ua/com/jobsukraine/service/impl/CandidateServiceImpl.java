@@ -120,11 +120,13 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List<Candidate> getTopCandidates(int amount) {
-		List<Candidate> candidates = candidateRepository.findAll();
-		Collections.sort(candidates);
+	public List<Candidate> getRandomBestCandidates(int amount, int minRating) {
+		List<Candidate> candidates = candidateRepository.findByRatingGreaterThan(minRating);
+		Collections.shuffle(candidates);
 		int amountOfCandidates = candidates.size();
-		return candidates.subList(0, amountOfCandidates < amount ? amountOfCandidates : amount);
+		candidates = candidates.subList(0, amountOfCandidates < amount ? amountOfCandidates : amount);
+		Collections.sort(candidates);
+		return candidates;
 	}
 
 }

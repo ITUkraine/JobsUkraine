@@ -104,7 +104,7 @@ public class EmployerController {
 		Employer employer = employerService.findByLogin(principal.getName());
 		model.addAttribute("employer", employer);
 		model.addAttribute("candidateService", candidateService);
-		model.addAttribute("candidates", candidateService.getTopCandidates(5));
+		model.addAttribute("candidates", candidateService.getRandomBestCandidates(3, 6));
 		return "empOffice/profile";
 	}
 
@@ -125,12 +125,12 @@ public class EmployerController {
 				employerService.findByLogin(principal.getName()));
 		return "redirect:candidate/" + id;
 	}
-	
-	@RequestMapping(value="/myCandidates")
-	public ModelAndView myCandidates(Principal principal){
+
+	@RequestMapping(value = "/myCandidates")
+	public ModelAndView myCandidates(Principal principal) {
 		Employer employer = employerService.findByLogin(principal.getName());
 		ModelAndView modelAndView = new ModelAndView("empOffice/myCandidates");
-		modelAndView.addObject("candidates", candidateService.getTopCandidates(5));
+		modelAndView.addObject("candidates", candidateService.getRandomBestCandidates(3, 6));
 		modelAndView.addObject("myCandidates", employer.getCandidates());
 		return modelAndView;
 	}
