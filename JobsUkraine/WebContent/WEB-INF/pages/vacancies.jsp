@@ -8,17 +8,11 @@
 <title>Vacancies</title>
 </head>
 <body background="/JobsUkraine/resources/pictures/vaca.png"   style="background-attachment: fixed; background-repeat: no-repeat;">
-
 	<%@ include file="header.jsp"%>
 
 	<div class="container">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3>Vacancies</h3>
-				</div>
-				<div class="panel-body">
 					<c:forEach var="vacancy" items="${vacancies}">
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -66,9 +60,8 @@
 					</c:forEach>
 				</div>
 			</div>
-		</div>
 		<div class="col-lg-2"></div>
-	</div>
+
 
 	<%@ include file="footer.jsp"%>
 </body>

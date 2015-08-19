@@ -22,53 +22,82 @@
 							${candidate.name} </strong>
 					</div>
 					<div class="col-lg-4">
-						<h4 align="right">Rating: ${candidate.rating}</h4>
+						<h4 align="right">
+							<img alt="avatar" width="23px" height="23px"
+								style="margin-right: 2px; margin-top: -5px;"
+								src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img>
+							${candidate.rating}
+						</h4>
 					</div>
 
 				</div>
 				<div class="panel-body">
 					<br>
-					<p>City: ${candidate.cityWhereLookingForWork}</p>
-					<p>Gender: ${candidate.sex}</p>
 					<p>
-						Date of birth:
+						<strong>City:</strong> ${candidate.cityWhereLookingForWork}
+					</p>
+					<p>
+						<strong>Gender:</strong> ${candidate.sex}
+					</p>
+					<p>
+						<strong>Date of birth:</strong>
 						<fmt:formatDate value="${candidate.dateOfBirth}"
 							pattern="dd/MM/yyyy" />
 					</p>
 					<p>
-						Categories:
+						<strong>Categories:</strong>
 						<c:forEach var="category" items="${candidate.categories}">
 									${category.name}<c:if test="${!loop.last}">, </c:if>
 						</c:forEach>
 					</p>
-					<p>Skills: ${candidate.primarySkills}</p>
-					<p>Address: ${candidate.address}</p>
-					<p>Date start work: ${candidate.dateStartToWork}</p>
-					<p>Dream job: ${candidate.dreamJob}</p>
-					<p>Education: ${candidate.education}</p>
-					<p>Experience: ${candidate.experience}</p>
+					<p>
+						<strong>Skills:</strong> ${candidate.primarySkills}
+					</p>
+					<p>
+						<strong>Address:</strong> ${candidate.address}
+					</p>
+					<p>
+						<strong>Date start work:</strong> ${candidate.dateStartToWork}
+					</p>
+					<p>
+						<strong>Dream job:</strong> ${candidate.dreamJob}
+					</p>
+					<p>
+						<strong>Education:</strong> ${candidate.education}
+					</p>
+					<p>
+						<strong>Experience:</strong> ${candidate.experience}
+					</p>
 					<p>
 						<strong>Contacts:</strong>
 					</p>
-					<p>Email: ${candidate.email}</p>
-					<p>Mobile phone: ${candidate.mobileNumber}</p>
+					<p>
+						<strong>Email:</strong> ${candidate.email}
+					</p>
+					<p>
+						<strong>Mobile phone:</strong> ${candidate.mobileNumber}
+					</p>
 				</div>
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3>Feedbacks</h3>
+					<strong style="font-size: 20px;">Feedbacks</strong>
 				</div>
 				<div class="panel-body">
 					<c:forEach var="feedback" items="${candidate.feedbacks}">
 						<div class="panel panel-default">
 							<div class="panel-heading" align="right">
-									<fmt:formatDate value="${feedback.date}"
-										pattern="dd/MM/yyyy HH:mm:ss" />
+								<fmt:formatDate value="${feedback.date}"
+									pattern="dd/MM/yyyy HH:mm:ss" />
 							</div>
 							<div class="panel-heading">
-									<br>
-									<p>Category: ${feedback.category.name}</p>
-									<p>Mark: ${feedback.mark}</p>
+								<br>
+								<p>
+									<strong>Category:</strong> ${feedback.category.name}
+								</p>
+								<p>
+									<strong>Mark:</strong> ${feedback.mark}
+								</p>
 							</div>
 							<div class="panel-body">${feedback.comment}</div>
 						</div>

@@ -12,7 +12,9 @@
 </head>
 <body>
 	<div class="panel panel-default">
-		<div class="panel-heading">Potential vacancies</div>
+		<div class="panel-heading">
+			<strong style="font-size: 20px;">Potential vacancies</strong>
+		</div>
 		<div class="panel-body">
 			<div class="panel-group" id="accordion">
 				<c:forEach items="${vacancies}" var="vacancy">
@@ -30,7 +32,9 @@
 						</div>
 						<div id="${vacancy.id}" class="panel-collapse collapse">
 							<div class="panel-heading">
-								<p><strong>Category:</strong> ${vacancy.category.name}</p>
+								<p>
+									<strong>Category:</strong> ${vacancy.category.name}
+								</p>
 								<strong>Description:</strong>
 								<c:if test="${vacancy.description.length()<300}">
 								${vacancy.description}
