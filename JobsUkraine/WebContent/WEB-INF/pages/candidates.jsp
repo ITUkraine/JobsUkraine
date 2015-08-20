@@ -32,7 +32,7 @@
 									<img alt="avatar" width="23px" height="23px"
 										style="margin-right: 2px; margin-top: -5px;"
 										src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img>
-									${candidate.rating}
+									<fmt:formatNumber maxFractionDigits="1" value="${candidate.rating}" />
 								</h4>
 							</div>
 						</div>

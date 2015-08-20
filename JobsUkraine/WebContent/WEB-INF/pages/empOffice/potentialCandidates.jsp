@@ -26,7 +26,7 @@
 								<img alt="avatar" width="20px" height="20px"
 									style="margin-right: 2px; margin-top: -5px;"
 									src="http://icons.iconarchive.com/icons/icojam/blue-bits/256/star-rating-icon.png"></img>
-								${candidate.rating}
+								<fmt:formatNumber maxFractionDigits="1" value="${candidate.rating}" />
 							</h5>
 							<a style="font-size: 16px;"
 								href="/JobsUkraine/candidate/${candidate.id}">${candidate.lastName}
