@@ -58,8 +58,7 @@
 
 							<p>Avatar URL:</p>
 
-							<form:input size="255" path="pictureURL" class="form-control"
-								data-role="tagsinput" />
+							<form:input size="40" path="pictureURL" class="form-control" />
 
 							<br> <br>
 							<div align="right">
